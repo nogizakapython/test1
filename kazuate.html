@@ -1,0 +1,89 @@
+<!-- 数当てゲーム-->
+<!-- 新規作成 2021/04/29 -->
+<!-- 修正 2021/06/30 外れの場合に表示される文言を変更-->
+<!-- author Takao Hattori -->
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>数当てゲーム</title>
+<style>
+    h1 {
+        color:plum;
+        font-size:100px;
+    }
+    h2 {
+        color:#4f7911;
+        font-size:50px;
+    }
+    body {
+        background-color:whitesmoke;
+    }
+</style>
+</head>
+<body id = "test">
+<header>
+<div class="container">
+<h1>数当てゲーム</h1>
+<h2>数を当ててみよう</h2>
+</div><!-- /.container -->
+</header>
+<main>
+<div class="container">
+<section>
+    
+</section>
+</div><!-- /.container -->
+</main>
+<footer>
+<div class="container">
+</div><!-- /.container -->
+</footer>
+<script>
+'use strict';
+let message;
+let count = 1;
+let flag = 0;
+//乱数を発生させる。0~49まで数字がランダムに表示されるので1を足す。
+const number = Math.floor(Math.random() * 50) + 1;
+//window.prompt(number);
+//数当てゲームは5回挑戦できるようにする。
+while (count <=5){ 
+    const answer = parseInt(window.prompt('数当てゲーム。1〜50の数字を入力してね。5回まで挑戦できます'));
+    window.alert(count + "回目です。")
+    //正解、数が小さい、数が大きい、1から50以外の数字が入った時の条件式
+    if(answer === number) {
+        message = 'あたり！';
+        window.prompt(count + "回目で正解しました。おめでとうございます!");
+        if (count ===1){
+            document.querySelector("h1").innerHTML = "<h1>一発で正解です!</h1>";
+            document.querySelector("h2").innerHTML = "<h2>エスパーですか！?</h2>";    
+        }　else {
+            document.querySelector("h1").innerHTML = "<h1>数当てゲーム、正解です!</h1>";
+            document.querySelector("h2").innerHTML = "<h2>おめでとうございます！</h2>";
+        }    
+        flag = 1;
+        break;
+    } else if((answer < number) && (answer >= 1)) {
+        message = '残念でした！もっと大きい';
+    } else if((answer > number) && (answer <=50)) {
+        message = '残念でした！もっと小さい';
+    } else {
+        message = '1〜50の数字を入力してね。';
+    }
+    //入力した数字に応じてメッセージを出力する。
+    window.alert(message);
+    //
+    count = count + 1;
+}
+//3回挑戦して不正解だったら正解をアラートで表示する
+if (flag === 0){
+    window.alert("正解は" + number + "です");
+    document.querySelector("h1").innerHTML = "<h1>残念でした</h1>";
+    document.querySelector("h2").innerHTML = "<h2>また挑戦してください！</h2>";
+}         
+</script>
+</body>
+</html>
+

@@ -1,0 +1,36 @@
+/*ichiran.css(ひきこもり支援悪徳業者一覧アプリのCSS)
+作成日付  2021/07/22   新規作成
+
+作成者　　乃木坂好きのITエンジニア
+*/
+
+@charset "utf-8";
+body 
+{
+    background-color:whitesmoke;
+}
+h1 { 
+    color: black;
+}
+h2 {
+    color:black;
+}
+.hattori
+{
+    font-size: 10px;
+    color: red;
+        
+}
+a{
+    display:inline-block;
+    padding:10px 20px 10px 20px;
+    color:white;
+    background-color:darkorchid;
+    font-size:18px;
+    font-weight: bold;
+    border:solid 3px pink;
+    border-radius:8px;
+}
+a:hover {
+    background-color:mediumaquamarine;
+}

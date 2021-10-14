@@ -1,0 +1,133 @@
+/*bukken.css(賃貸物件WebシステムのCSS)
+作成日付  2021/08/09   新規作成
+
+作成者　　乃木坂好きのITエンジニア
+*/
+
+@charset "utf-8";
+body 
+{
+    background-color:#55FFFF;
+}
+h1 { 
+    color:black; 
+}
+h2 {
+    color:black;
+}
+#entry
+{
+    background-color :chartreuse;
+    border-top: 0;
+    border:2px solid #ddd;
+    
+}
+#entry dl dt {
+    width:16px;
+    float:left;
+    clear:both;
+    font-weight: bold;
+}
+#entry dl dd {
+    margin-left:16px;
+    border-left:1px solid #ddd;
+    
+}
+#entry #name {
+    margin-left:16px;
+    border-left:1px solid #ddd;
+    width:50em;
+    
+}
+
+#entry #address {
+    margin-left:16px;
+    border-left:1px solid #ddd;
+    width:50em;
+    
+}
+
+#entry #station {
+    margin-left:16px;
+    border-left:1px solid #ddd;
+    width:30em;
+    
+}
+
+#entry #cost {
+    margin-left:16px;
+    border-left:1px solid #ddd;
+    width:20em;
+    
+}
+
+.bukken_ichiran {
+    background-color:#11AA51;
+    color:#220041;
+    font-size: 16px;
+    padding: 16px 32px;
+    
+}
+
+
+
+.must {
+    color: #22FF11; 
+}
+
+#entry #submit
+{
+    background-color:fuchsia;
+    border: 1px solid #b7a077;
+    margin-left: 48px;
+    padding: 16px 72px;
+    font-size: 16px
+}
+
+.hattori
+{
+    font-size: 12px;
+    color: red;
+        
+}
+.delete
+{
+    background-color:darkorange;
+    border: 1px solid #13bb99;
+    padding: 10px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+
+}
+.delete:hover
+{
+    background-color: deeppink;
+}
+.menu{
+    display:inline-block;
+    padding:10px 20px 10px 20px;
+    color:white;
+    background-color:darkorange;
+    font-size:18px;
+    font-weight: bold;
+    border:solid 3px pink;
+    border-radius:8px;
+}
+.menu:hover {
+    background-color:dodgerblue;
+}
+
+.ichi{
+    display:inline-block;
+    padding:10px 20px 10px 20px;
+    color:white;
+    background-color:chartreuse;
+    font-size:18px;
+    font-weight: bold;
+    border:solid 3px pink;
+    border-radius:8px;
+}
+.ichi:hover {
+    background-color:dodgerblue;
+}

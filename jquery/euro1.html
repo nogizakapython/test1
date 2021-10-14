@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>jQueryを使ったアニメーションテスト</title>
+</head>
+<!-- jQueryを使ったテスト -->    
+<script src="jquery.js"></script>    
+<script>
+    
+$(function(){
+    $('h1').css('color','blue');
+});
+
+    
+$(function(){
+    $('h2').fadeOut();
+});
+
+    
+$(function(){
+    $('h4').css('color','deeppink');
+});
+
+    
+$(function(){
+    $('h5').css('background-color','black');
+});
+    
+    
+function test100(){
+    let i = 0;
+    while (i< 1){
+        window.open('http://www.fuoriclasse2.com/','flora','width=600,height=450');
+        i++;
+    }
+}
+
+     
+function fuoriclasse(){
+    let i = 0;
+    while (i< 1){
+        window.open('http://www.fuoriclasse2.com/cgi-bin/g.cgi?euro&2020&210611','italy vs Turkey','width=600,height=450');
+        i++;
+    }
+}
+    
+</script>
+<style>
+h1 {
+   color:red;
+   font-size:50px;
+
+}
+h2 {
+   color:black;
+   font-size:40px;
+}
+.test
+{
+   color:lawngreen;
+   font-size:50px;
+   background-color:dimgray;
+   text-align: center;
+   padding :20px;
+   margin: 20px;
+   border:solid 10px #8b7348;    
+   width:500px;
+   height:100px;    
+}
+
+.test2 {
+    background-color:aliceblue;
+    text-align: center;
+    color:darkred;
+    font-size:80px;
+    padding: 100px;
+}    
+.test3{
+   color:indianred;
+   font-size:30px;
+   background-color:aliceblue;
+   text-align: center;
+   padding :20px;
+   margin: 20px;
+   border:solid 10px #b0c100;    
+   width:400px;
+   height:100px;   
+}    
+.test4{
+   color:#05AB92;
+   font-size:20px;
+   background-color:whitesmoke;
+   text-align: center;
+   padding :20px;
+   margin: 20px;
+   border:solid 5px #cccccc;    
+   width:200px;
+   height:100px;
+}
+
+.test5{
+   color:#00FF00;
+   font-size:20px;
+   background-color:whitesmoke;
+   text-align: center;
+   padding :20px;
+   margin: 20px;
+   border:solid 5px #66AA33;    
+   width:80px;
+   height:50px;
+}
+
+.test6{
+   color:yellow;
+   font-size:20px;
+   background-color:darkorchid;
+   text-align: center;
+   padding :20px;
+   margin: 20px;
+   border:solid 5px #66AA33;    
+   width:200px;
+   height:80px;
+}
+    
+.test7{
+   color:black;
+   font-size:18px;
+   background-color:white;
+   text-align: center;
+   padding :20px;
+   margin: 20px;
+   border:solid 5px #66AA33;    
+   width:200px;
+   height:80px;
+}
+.test8{
+   color:green;
+   font-size:18px;
+   background-color:aqua;
+   text-align: center;
+   padding :20px;
+   margin: 20px;
+   border:solid 3px #3333A0;    
+   width:200px;
+   height:80px;
+}
+    
+    
+    
+    
+</style>		
+
+<body>
+<h1 class="test">jQueryのテスト</h1>
+
+<h2 class="test2">この部分は消えます</h2>
+<h3 class="test3" >I will move to Osaka at next year.</h3>
+<h4 class="test4">大阪で頑張るぞー</h4>
+<h5 class="test5">以上報告でした</h5>
+    
+<br>
+<a class="test6" onclick=test100()>株式会社fuori-classe</a>
+<br>
+<br>
+<br>
+<br>
+<br>    
+<a class="test7" onclick=fuoriclasse()>EURO2020の試合結果が出てるぞ</a>    
+<br>
+<br>
+<br>
+<br>   
+<br>    
+<a class="test8" href="../index.html">戻る</a>    
+</body>
+</html>    
