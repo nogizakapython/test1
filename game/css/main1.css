@@ -1,0 +1,27 @@
+@charset "utf8";
+body { 
+		background-color:lightpink; 
+	 }
+p    {
+		font-size:30px;
+		color:green;
+	}
+p:hover {
+		color:blue;
+}
+#enter #name {
+		width:25em;
+		padding:3px;
+}
+#enter #submit {
+		background: lightblue;
+		color: green;
+		padding:10px;
+		border :1px solid #b7a788;
+		border-radius: 5px;
+		text-decoration: none;
+}
+.return {
+		color: black;
+		padding:5px;
+}	

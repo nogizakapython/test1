@@ -1,0 +1,9 @@
+/* フォームのCSS　(form.css) */
+/* 新規作成 2021/12/27   */
+/* 作成者　　乃木坂好きのITエンジニア */　
+@charset "utf8";
+#entry #dl {
+	background: yellow;
+	border: 1px solid #aaa;
+	border-top: 0;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="このページの説明">
+  <title>スフィアンマスターズモンスターデータ入力</title>
+  <link rel="stylesheet" href="css/form.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+</head>
+<body>
+<h1 class="hyodai"> スフィアンマスターズモンスターデータ入力フォーム</h1>	
+<div id="post_page">
+
+  <form id="entry" method="post" action="process_post.php">
+    <dl>
+    <div><dt>id <span class="must">*</span></dt>
+    <dd><input type="text" name="id" id="id" size="30" required></dd></div>
+    <div><dt>名前 <span class="must">*</span></dt>
+    <dd><input type="text" name="name" id="name" size="30" required></dd></div>
+    <div><dt>配合</dt>
+    <dd><textarea name="haigou" cols="30" rows="5"></textarea></dd></div>
+    <div><input type="submit" name="submit" value="投稿" class="button"></div>
+	</dl>
+  </form>
+</div>
+<br>
+<br>
+<a href="ichiran.php" id="return">一覧表示</a>
+<br>
+<a href="../index.html">戻る</a>
+</body>
+</html>
