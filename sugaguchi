@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名鉄須ヶ口駅を撮影しました</title>
+    <link rel="stylesheet" href="./css/test2.css">
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <h1>名鉄須ヶ口駅の構内です</h1>
+            <ul>
+                <li><a class="list1" href="#introduce">撮影した人の自己紹介</a></li>
+                <li><a class="list2" href="#paint">撮影画像</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="intro1">
+                <h2 id="introduce">自己紹介</h2>
+                <p>私の名前は<span class="name">服部隆央</span>です。あさもくサロンのメンバーです。好きなアイドルグループは<span class="group">乃木坂46</span>です。</p>
+            </div>
+            <div class="gazou">
+                <h2 id="paint">画像</h2>
+            </div>
+            <div class="pic1">    
+                <div class="detail1">
+                    <img src="./gazou/20220514_142032_HDR.jpg">
+                    <p>名鉄須ヶ口駅の画像</p>
+                </div>
+                <div class="detail2">    
+                    <img src="./gazou/20220619_094504.jpg">
+                    <p>名鉄須ヶ口駅の時刻表</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="author">
+            <h3>&copy Takao hattori</h3>
+            <ul>
+                <li><a href="#">先頭へ戻る</a></li>
+            </ul>
+        </div>    
+    </footer>
+
+    
+</body>
+</html>
