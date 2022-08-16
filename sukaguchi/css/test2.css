@@ -1,0 +1,276 @@
+@charset 'utf-8';
+
+body {
+    width:100%;
+}
+
+header {
+    width:100%;
+    height:120px;
+}
+
+.menu {
+    width:90%;
+    margin-top:20px;
+    background-color:#06067F;
+    position:fixed;
+    
+}
+
+header .menu h1 {
+    margin-top:20px;
+    margin-left:70px;
+    padding:10px;
+    width:700px;
+    font-size:40px;
+    float:left;
+    color:#FEE;
+}
+
+header ul {
+    list-style:none;
+    
+}
+
+header ul li .list1 {
+    margin-top:20px;
+    margin-left:50px;
+    padding:10px;
+    width:100px;
+    float:left;
+    color:#FEE;
+    font-size:20px;
+    text-decoration: none;
+}
+
+header ul li .list2 {
+    margin-top:20px;
+    margin-left:50px;
+    padding:10px;
+    width:100px;
+    float:left;
+    color:#FEE;
+    font-size:20px;
+    text-decoration:none;
+}
+main {
+    margin-top:100px;
+}
+main .container {
+    width:1080px;
+    margin:auto;
+}
+
+main .intro1 {
+    margin-top:20px;
+    width:90%;
+    margin:auto;
+    text-align: center;
+}
+
+main .intro1 h2 {
+    color:#0613E0;
+    font-size:40px;
+}
+
+main .intro1 p {
+    font-size:20px;
+    color:#D60;
+}
+
+main .gazou {
+    margin-top:20px;
+    width:90%;
+    margin:auto;
+    text-align:center;
+}
+
+main .gazou h2 {
+    font-size:40px;
+    color:#9400d3;
+}
+
+main .pic1 {
+    width:100%;
+    display:flex;
+    margin:auto;
+}
+
+main .pic1 .detail1 {
+    width:40%;
+    margin:auto;
+}
+
+main .pic1 .detail1 img {
+    width:100%;
+}
+
+main .detail1 p {
+    text-align:center;
+    color:#F0F;
+}
+
+main .pic1 .detail2 {
+    width:40%;
+    margin:auto;
+}
+
+main .pic1 .detail2 img {
+    width:100%;
+    
+}
+
+main  .detail2 p {
+    text-align:center;
+    color:#F0F;
+}
+
+
+
+
+
+footer {
+    margin-top:30px;
+    width:90%;
+    height:200px;
+    background-color: #e0ffff;
+}
+footer .author {
+    width:90%;
+    margin-top:20px;
+    margin:auto;
+    display:flex;
+}
+
+footer .author h3 {
+    margin-left:200px;
+    padding:20px;
+    width:30%;
+    color:#078;
+    font-size:20px;
+}
+
+footer .author ul{
+    list-style:none;
+}
+
+footer .author ul li {
+    margin-top:25px;
+    margin-left:100px;
+    
+}
+
+footer .author ul li a {
+    text-decoration: none;
+    width:25%;
+    font-size:20px;
+    color:#000;
+    margin:auto;
+}
+
+@media screen and (max-width:480px){
+    
+    body {
+        max-width:450px;
+    }
+    
+    header {
+        max-width:100%;
+    }
+
+    header .menu {
+        max-width:90%;
+        margin:auto;
+    }
+    
+    header h1 {
+        margin:auto;
+        max-width:70%;
+     }
+
+     header ul {
+        float:none;
+        
+     }
+     header ul li {
+        max-width:60%;
+        margin:auto;
+        
+    }
+
+    main {
+        margin-top:300px;
+        max-width:100%;
+        
+    }
+    
+    main .container {
+        max-width:80%;
+        margin-top:70px;
+        margin:auto;
+    }
+    
+    main .gazou {
+        margin:auto 0;
+    }
+
+    main .gazou h2 {
+        padding-top:20px;
+        margin:auto;
+    }
+
+    main .gazou p {
+        max-width:75%;
+        margin:auto;
+    }
+
+    main .pic1 {
+        margin:auto;
+        display:block;   
+    }
+
+    main .pic1 .detail1 {
+        max-width:90%;
+        margin:auto;
+    }
+
+    main .pic1 .detail1 img {
+        display:block;
+        width:100%;
+        height:100%;
+    }
+
+    main .pic1 .detail2 {
+        max-width:90%;
+        text-align:center;
+    }
+
+    main .pic1 .detail2 img {
+        max-width:90%;
+        text-align:center;
+    }
+    
+    footer {
+        max-width:100%;
+        max-height:200px;
+    }
+
+    footer .author {
+        max-width:85%;
+        display:block;
+    }
+
+    footer .author h3 {
+        max-width:100%;
+        max-height:100px;
+        margin:auto;
+    }
+
+    footer .author ul li {
+        max-width:100%;
+        max-height:100px;
+        padding-left:70px;
+        margin:auto;
+    }
+    
+}
