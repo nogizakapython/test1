@@ -62,7 +62,7 @@ main .container {
 }
 
 main .intro1 {
-    margin-top:20px;
+    margin-top:200px;
     width:90%;
     margin:auto;
     text-align: center;
@@ -71,6 +71,8 @@ main .intro1 {
 main .intro1 h2 {
     color:#0613E0;
     font-size:40px;
+    margin-top:-200px;
+    padding-top:200px;
 }
 
 main .intro1 p {
@@ -79,7 +81,7 @@ main .intro1 p {
 }
 
 main .gazou {
-    margin-top:20px;
+    margin-top:180px;
     width:90%;
     margin:auto;
     text-align:center;
@@ -88,6 +90,8 @@ main .gazou {
 main .gazou h2 {
     font-size:40px;
     color:#9400d3;
+    margin-top:-180px;
+    padding-top:180px;
 }
 
 main .pic1 {
@@ -210,12 +214,25 @@ footer .author ul li a {
         margin:auto;
     }
     
+    main .intro1{
+        margin-top:350px;
+    }
+
+    main .intro1 h2 {
+        margin-top:-350px;
+        padding-top:350px;
+
+    }
+
+
     main .gazou {
         margin:auto 0;
+        margin-top:350px;
     }
 
     main .gazou h2 {
-        padding-top:20px;
+        margin-top:350px;
+        padding-top:350px;
         margin:auto;
     }
 
