@@ -1,0 +1,415 @@
+@charset 'utf-8';
+
+body {
+    width:100%;
+    margin:0;
+    
+}
+
+header {
+    width:100%;
+    height:80px;
+}
+
+.menu {
+    width:100%;
+    margin:margin 0;
+    background-color:#06067F;
+    position:fixed;
+    margin-right:50px;
+    -webkit-text-size-adjust: 100%;
+    
+}
+
+header .menu h1 {
+    margin-top:20px;
+    margin-left:70px;
+    padding:10px;
+    width:56%;
+    font-size:30px;
+    float:left;
+    color:#FEE;
+}
+
+header ul {
+    list-style:none;
+    
+    
+}
+
+header ul li .list1 {
+    margin-top:20px;
+    padding-right:30px;
+    height:30px;
+    width:12%;
+    padding-top:5px;
+    padding-bottom:5px;
+    float:left;
+    color:#FEE;
+    font-size:20px;
+    text-decoration: none;
+}
+
+header ul li .list2 {
+    margin-top:20px;
+    height:30px;
+    padding-top:5px;
+    padding-bottom:5px;
+    width:12%;
+    float:left;
+    color:#FEE;
+    font-size:20px;
+    text-decoration:none;
+}
+
+header ul li .list3 {
+    margin-top:20px;
+    height:30px;
+    padding-top:5px;
+    padding-bottom:5px;
+    width:12%;
+    float:left;
+    color:#FEE;
+    font-size:20px;
+    text-decoration:none;
+}
+
+header .clear {
+    float:left;
+}
+
+main {
+    width:100%;
+}
+main .container {
+    width:1080px;
+    margin:auto;
+    
+}
+
+main .intro1 {
+    margin-top:80px;
+    width:100%;
+    text-align: center;
+}
+
+main .intro1 h2 {
+    color:#0613E0;
+    padding-top:130px;
+    font-size:40px;
+    text-align:center;
+}
+
+main .intro1 p {
+    font-size:20px;
+    color:#D60;
+}
+
+main .gazou {
+    padding-top:80px;
+    width:100%;
+    
+}
+
+main .gazou h2 {
+    font-size:28px;
+    padding-top:130px;
+    color:#9400d3;
+    text-align:center;
+}
+
+main .pic1 {
+    width:100%;
+    display:flex;
+    margin:auto;
+}
+
+main .pic1 .detail1 {
+    width:40%;
+    margin:auto;
+}
+
+main .pic1 .detail1 img {
+    width:100%;
+}
+
+main .detail1 p {
+    text-align:center;
+    color:#F0F;
+    font-size:18px;
+}
+
+main .pic1 .detail2 {
+    width:40%;
+    margin:auto;
+}
+
+main .pic1 .detail2 img {
+    width:100%;
+    
+}
+
+main  .detail2 p {
+    text-align:center;
+    color:#F0F;
+    font-size:18px;
+}
+
+main .head1 {
+    margin-top:20px;
+    text-align: center;
+}
+
+main .head1 a {
+    width:40%;
+    height: 30px;
+    background: #004079 0% 0% no-repeat padding-box;
+    border-radius: 1px;
+    color:#ffffff;
+    font-size:24px;
+    padding:2px;
+    text-decoration: none;
+}
+main .head1 a:hover {
+    
+    background-color: #00A8F9;
+    
+}
+
+main .access {
+    width:100%;
+    padding-top:120px;
+    text-align: center;
+}
+
+main .access h4 {
+    width:20%;
+    height:30px;
+    border-radius: 2px;
+    font-size:22px;
+    color:#FF8727;
+    background-color: #02198C;
+    margin:auto;
+}
+main .access iframe {
+    margin:auto;
+    padding-top:30px;
+}
+
+
+footer {
+    margin-top:30px;
+    width:100%;
+    height:200px;
+    background-color: #e0ffff;
+}
+footer .author {
+    width:100%;
+    margin:auto 0;
+    display:flex;
+}
+
+footer .author h3 {
+    text-align: center;
+    padding-top:20px;
+    width:100%;
+    color:#078;
+    font-size:20px;
+}
+
+
+
+@media screen and (max-width:720px){
+    
+    body {
+        width:100%;
+    }
+    
+    header {
+        width:100%;
+    }
+
+    header .menu {
+        width:100%;
+        margin:auto;
+        position:fixed;
+    }
+    
+    header .menu h1 {
+        width:100%;
+        max-width:100%;
+        margin:auto;
+        text-align:left;
+        
+     }
+
+     header .menu ul {
+        float:none;
+        display:none;
+        
+     }
+     header ul li {
+        display:none;
+     }
+
+     header ul li a {
+        display:none;
+     }
+
+    main {
+        margin-top:300px;
+        max-width:100%;
+        
+    }
+    
+    main .container {
+        max-width:80%;
+        margin-top:70px;
+        margin:auto;
+    }
+    
+    main .gazou {
+        margin:auto 0;
+    }
+
+    main .gazou h2 {
+        padding-top:20px;
+        margin:auto;
+    }
+
+    main .gazou p {
+        max-width:75%;
+        margin:auto;
+    }
+
+    main .pic1 {
+        margin:auto;
+        display:block;   
+    }
+
+    main .pic1 .detail1 {
+        max-width:90%;
+        margin:auto;
+    }
+
+    main .pic1 .detail1 img {
+        display:block;
+        width:100%;
+        height:100%;
+    }
+
+    main .pic1 .detail2 {
+        max-width:90%;
+        text-align:center;
+    }
+
+    main .pic1 .detail2 img {
+        max-width:90%;
+        text-align:center;
+    }
+
+    main .head1 {
+        text-align: center;
+        text-u
+        display:block;
+    }
+
+    main .head1 a {
+        height: 30px;
+        background: #02198C 0% 0% no-repeat padding-box;
+        border-radius: 1px;
+        opacity: 1;
+        color:#ffffff;
+        font-size:20px;
+        padding-left:6px;
+        padding-right:6px;
+        padding-top:5px;
+        padding-bottom:5px;
+        text-decoration: none;
+    }
+    
+    footer {
+        max-width:100%;
+        max-height:200px;
+    }
+
+    footer .author {
+        max-width:85%;
+        display:block;
+    }
+
+    footer .author h3 {
+        max-width:100%;
+        max-height:100px;
+        margin:auto;
+    }
+
+    
+    
+}
+/* スマートフォン対応CSS */
+@media screen and (max-width:768px) {
+
+    body{
+         max-width:768px;
+         margin:auto;
+        -webkit-text-size-adjust: 100%;
+        
+        
+    }
+
+    /* ヘッダー部分のＣＳＳ */
+
+    header {
+        height:48px;
+        width:100%;
+        max-width:100%;
+        height:100vh;
+        
+        
+    }
+
+        
+    /* ヘッダーメニュー */
+
+    header .header-menu { 
+        display:block;
+        width:100%;
+        max-width:100%;
+        height:48px;
+        -webkit-text-size-adjust: 100%;
+        /* ヘッダー固定の設定 */
+        position:fixed;
+        z-index:10; 
+        box-sizing:content-box;
+        
+    }
+    header .header-menu .title {
+        display:block;
+        width:100%;
+        margin:5px;
+        height:30px;
+        font: normal normal bold 20px/33px Noto Sans JP;
+       
+        
+    }
+
+    header .menu h1 {
+        width:100%;
+        font-size:20px;
+        opacity: 0.8;
+        padding-left:20px;
+        
+        
+        
+    }
+
+    /* ヘッダーのページ内リンクＣＳＳ */
+    header .menu .list1 {
+        display:none;
+    }
+    header .menu .list2 {
+        display:none;
+    }
+
+}
