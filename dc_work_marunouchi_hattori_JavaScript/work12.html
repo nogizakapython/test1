@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- 配列プログラム -->
+<!-- 新規作成 2022/11/9 -->
+<!-- 連想配列を2つ作成し、odaとsugawaraの点数を比較し、点数の高い方を出力する。連想配列1と連想配列2の平均点を出力する。-->
+<!-- code name work12.html -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK12</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        //名前配列1の定義
+        const name1 = ["tokugawa","oda","toyotomi","takeda"];
+        //連想配列1の定義
+        let class01 = new Array();
+
+        //名前配列2の定義
+        const name2 = ["minamoto","taira","sugawara","fujiwara"];
+        //連想配列2の定義
+        let class02 = new Array();
+
+        //配列の長さを4で設定する。
+        let len = 4;
+
+            
+        
+        //ループを使って連想配列1の要素を4つ入れる
+        for(let i=0;i<len;i++){
+            let names1 = name1[i];
+            let score1 = Math.floor(Math.random() * 100 + 1);
+            class01[names1] = score1;
+            
+            
+        }
+        console.log(class01);
+
+        //ループを使って連想配列2の要素を4つ入れる
+        for(let i=0;i<len;i++){
+            let names2 = name2[i];
+            let score2 = Math.floor(Math.random() * 100 + 1);
+            class02[names2] = score2;
+            
+        }
+
+        console.log(class02);
+       
+        // odaさんの得点を取得する
+        const oda_score = class01["oda"];
+             
+       
+        // sugawaraさんの得点を取得する
+        const sugawara_score = class02["sugawara"];
+        
+
+        if (oda_score > sugawara_score){
+            document.write(`<p>odaさんの得点が高い</p>`);
+        } else if (oda_score < sugawara_score){
+            document.write(`<p>sugawaraさんの得点が高い</p>`);
+        } else {
+            document.write(`<p>同点です</p>`);
+
+        }    
+        
+
+
+       
+
+    </script>
+</body>
+</html>

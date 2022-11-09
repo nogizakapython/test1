@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- FizzBuzz -->
+<!-- 新規作成  2022/11/8 -->
+<!-- 1～100までの整数のうち、3の倍数と4の倍数を判定する -->
+<!-- 3の倍数は「Fizz」、4の倍数は「Buzz」、3の倍数かつ4の倍数は「FizzBuzz」、それ以外は整数を表示 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK08</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        //データの個数の定義
+        const num = 100;
+        //メッセージの変数定義
+        const msg1 = "FizzBuzz";
+        const msg2 = "Fizz";
+        const msg3 = "Buzz";
+        //倍数判定
+        for(let i=1;i<=num;i++){
+            //3の倍数かつ4の倍数「
+            if ((i % 3 == 0) && (i % 4 == 0)){
+                document.write(`<p>${msg1}</p>`);
+            //3の倍数判定  
+            } else if ( i % 3 == 0){
+                document.write(`<p>${msg2}</p>`);
+            //4の倍数判定    
+            } else if ( i % 4 == 0){
+                document.write(`<p>${msg3}</p>`);
+            //それ以外    
+            } else {
+                document.write(`<p>${i}</p>`);
+            }
+        }
+    </script>
+</body>
+</html>

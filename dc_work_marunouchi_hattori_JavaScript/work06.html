@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/7 -->
+<!--  倍数判定プログラムの作成-->
+<!-- code name work06.html -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3の倍数、6の倍数判定</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+   <script>
+        // 乱数を作成して定数に格納する
+        const number = Math.floor(Math.random()*100 + 1);
+        //判定結果メッセージの出力
+        let ans = "";
+        //3の倍数かつ6の倍数判定
+        if ((number % 3 ==0) && (number % 6 == 0)){
+            ans = "3と6の倍数です";
+        // 3の倍数であるが6の倍数ではない判定   
+        } else if ((number % 3 == 0) && (number % 6 != 0)){
+            ans = "3の倍数で、6の倍数ではありません";
+        // 3の倍数ではない判定    
+        } else if (number % 3 != 0) {
+            ans = "倍数ではありません";
+        }
+        //デバッグ（乱数の条件確認のための処理
+        //document.write(`<p>${number}</p>`);
+        //乱数の結果をブラウザーに出力する
+        document.write(`<p> ${ans} </p>`);
+   </script> 
+</body>
+</html>

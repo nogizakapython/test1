@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- 配列プログラム -->
+<!-- 新規作成 2022/11/8 -->
+<!-- 配列の要素を全てブラウザーに表示する -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY15</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        //配列の定義
+        const numbers = [10,20,30,40];
+        //配列を１つずつ要素をブラウザーに出力し、全ての要素を改行して表示する。
+        for(let i=0;i<numbers.length;i++){
+            document.write("配列の" + (i + 1) + "番目の要素は「" + numbers[i] + "」です。<br>");
+        }    
+    </script>
+</body>
+</html>

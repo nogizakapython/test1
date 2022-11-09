@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- インド式九九計算プログラム -->
+<!-- 新規作成  2022/11/8 -->
+<!-- 1x1から20x20までの九九を表示する -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インド式九九表作成プログラム</title>
+    <style>
+        h1 {
+            font-size:30px;
+            color:#FF21F7;
+            background-color:#06A4FF;
+            width:60%;
+            margin:auto;
+        }
+        h3  {
+            font-size:20px;
+            color:#FFD3FD;
+            background-color:#080623;
+            width:60%;
+            margin:auto;
+        }
+        p {
+            font-size:16px;
+            color:#00B478;
+            background-color:#F9F8C1;
+            width:60%;
+            margin:auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>インド式九九表示プログラム</h1>
+    <br>
+    <script>
+        //段の変数定義
+        const line = 20;
+        //かける数の変数定義
+        const row = 20;
+        //答えの変数定義
+        let ans = 0;
+        
+        for(let i=1;i<=line;i++){
+            document.write(`<h3> ${i}の段を表示します</h3>`);
+            for(let j=1;j<=row;j++){
+                ans = i * j;
+                document.write(`<p> ${i} * ${j} = ${ans} </p>`);
+            }
+            document.write(`<br>`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- 新規作成  2022/11/7 -->
+<!-- ソース名 try04advance.html -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY04Advance</title>
+    
+</head>
+<body>
+    <script>
+        // output関数
+        // flag ・・・beforeは「変更前」
+        //      ・・・afterは「変更後」
+        // height ・・・身長
+        // weight ・・・体重
+    
+        function output1(flag,height,weight){
+            let flag1 = flag;
+            let height1 = height;
+            let weight1 = weight;
+            if (flag == "before"){
+                flag1 = "前";
+            } else if (flag == "after"){
+                flag1 = "後";
+            }
+            document.write("<p>変更" + flag1 + "：身長" + height1 + "cm 体重" + weight1 + "kg </p>");    
+        }
+
+        //身長の変数定義
+        let height = 170;
+        
+        //体重の変数定義
+        let weight = 60;
+        //ブラウザー上に出力する
+        output1("before",height,weight);
+        
+        //身長、体重の変数を変更する
+        height = 155;
+        weight = 50;
+        //ブラウザー上に出力する
+        output1("after",height,weight);
+
+
+    </script>
+</body>
+</html>

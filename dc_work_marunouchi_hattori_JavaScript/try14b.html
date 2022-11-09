@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配列の要素を最後に追加する。</title>
+    <style>
+        p {
+            color:#00F;
+            background-color:#C108D3;
+            width:50%;
+            margin:auto;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        //配列を定義する
+        let num = new Array();
+        num[0] = 10;
+        num[1] = 20;
+        num[2] = 30;
+        num.push(40);
+        num.forEach(number => { document.write(`<p>${number}</p>`); });
+    </script>
+    
+</body>
+</html>

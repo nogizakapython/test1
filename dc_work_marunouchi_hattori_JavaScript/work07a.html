@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- Switch文を使った1～100までの数のうち、3の倍数と6の倍数の判定を行う -->
+<!-- 新規作成 2022/11/7 -->
+<!-- code name work07a.html -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK07</title>
+</head>
+<body>
+    <script>
+        //乱数の変数格納
+        const random = Math.floor(Math.random()*100 + 1);
+        //document.write(`<p>${random}</p>`);
+        //メッセージ出力定義
+        const msg1 = "3と6の倍数です";
+        const msg2 = "3の倍数で、6の倍数ではありません";
+        const msg3 = "倍数ではありません";
+        //Switch文
+        //①6の倍数で割り切る。
+        //②6で割った余りが3の時、3で割り切れる。
+        //③それ以外
+        switch (random % 6){
+            case 0:
+                document.write(`<p>${msg1}</p>`);
+                break;
+            case 3:
+                document.write(`<p>${msg2}</p>`);  
+                break;
+            default:
+                document.write(`<p>${msg3}</p>`);  
+                break;    
+        }
+        
+        
+    </script>
+</body>
+</html>

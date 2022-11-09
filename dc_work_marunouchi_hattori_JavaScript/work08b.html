@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- 九九プログラム -->
+<!-- 新規作成  2022/11/8 -->
+<!-- 九九の1の段から9の段まで表示 -->
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK08</title>
+</head>
+<body>
+    <!--　JavaScript部分  -->
+    <script>
+        //段の最大値9の変数定義
+        const level = 9;
+        //かけ合わせる数の変数定義
+        const target = 9;
+        for(let i=1;i<=level;i++){
+            
+            for(let j=1;j<=target;j++){
+                let ans = i * j;
+                document.write(`<p> ${i} * ${j} = ${ans} </p>`);
+            }
+            
+        }
+    </script>
+</body>
+</html>

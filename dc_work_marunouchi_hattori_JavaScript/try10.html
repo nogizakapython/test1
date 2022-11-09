@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- Switch文の例題プログラム -->
+<!-- code name try10.html -->
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        // 0～4までの範囲の乱数を生成し、定数constに格納する
+        const random = Math.floor(Math.random()*5);
+        document.write(`<p>random:${random}</p>`);
+
+        switch(random){
+            case 1:
+                document.write(`<p>変数randomの値は1です。</p>`);
+                break;
+            case 2:
+                document.write(`<p>変数randomの値は2です。</p>`);
+                break;
+            default:
+                document.write(`<p>変数randomの値は1,2ではありません。 </p>`);     
+        }
+    </script>    
+</body>
+</html>

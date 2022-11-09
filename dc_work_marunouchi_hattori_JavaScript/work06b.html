@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/7 -->
+<!-- code name work06b.html -->
+<!-- 1～10までの乱数から2つの乱数を生成し、大小比較と3の倍数の個数からブラウザーにメッセージを出力する。 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK06</title>
+</head>
+<body>
+    <script>
+        //random01の定数を1～10から1つ乱数を発生して格納する。
+        const random01 = Math.floor(Math.random()*10 + 1);
+        //random02の定数を1～10から1つ乱数を発生して格納する。
+        const random02 = Math.floor(Math.random()*10 + 1);
+        //大小比較の結果メッセージを格納する変数
+        let result01  = "";
+        //3の倍数の個数を格納する変数
+        let three_count = 0;
+        //3の倍数の個数のメッセージの変数
+        let result02 = "";
+        //大小比較
+        if (random01 > random02){
+            result01 = "random01の方が大きいです";
+        } else if (random01 == random02){
+            result01 = "2つは同じ数です";
+        } else {
+            result01 = "random02の方が大きいです";
+        }     
+
+        //3の倍数の個数比較
+        const array1 = [random01,random02];
+        //配列の個数の定義
+        const count = array1.length;
+        for(let i=0;i<count;i++){
+            if (array1[i] % 3 == 0){
+                three_count += 1;
+            }
+        }
+        //3の倍数の個数チェック処理
+        if (three_count == 0){
+            result02 = "3の倍数となる数はありません。";
+        } else if (three_count == 1){
+            result02 = "3の倍数となる数字は1つです。";
+        } else {
+            result02 = "3の倍数となる数字は2つです。";
+        } 
+        //ブラウザーに出力する処理   
+        document.write(`<p>「random01 = ${random01},random02 = ${random02}です。${result01}。2つの数字のうち、${result02}」</p>`);
+        
+
+    </script>
+</body>
+</html>

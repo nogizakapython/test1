@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- 配列プログラム -->
+<!-- 新規作成 2022/11/9 -->
+<!-- 配列に5つの乱数を格納し、配列の要素で偶数、奇数判定し、Webページに結果を表示する。-->
+<!-- code name work11a.html -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK15</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        
+        //配列の定義
+        let numbers = [];
+        //配列の長さを5で設定する。
+        let len = 5;
+        //偶数のメッセージ
+        const even = "偶数";
+        //奇数のメッセージ
+        const odd = "奇数";
+        //変数の定義
+        let data = 0;
+        
+        //ループを使って配列の要素を5つ入れる
+        for(let i=0;i<len;i++){
+            data = Math.floor(Math.random() * 100 + 1);
+            numbers.push(data);
+        }
+        
+        //ループを使って配列の要素が偶数か奇数か判定する。
+        for(let j=0;j<len;j++){
+            if(numbers[j] % 2 == 0){
+                document.write("<p> ｢" + numbers[j] + "(" + even + ")」</p>");
+            } else {
+                document.write("<p> ｢" + numbers[j] + "(" + odd + ")」</p>");
+            }    
+        }
+
+    </script>
+</body>
+</html>

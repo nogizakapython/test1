@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- 「*」と「!」のプログラム -->
+<!-- 新規作成  2022/11/8 -->
+<!-- 奇数列は「*」で奇数列ごとに「*」を増やす。偶数列は「!」のみ表示 -->
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK08</title>
+</head>
+<body>
+    <!--　JavaScript部分  -->
+    <script>
+        //列数の定義
+        const row = 30;
+        //奇数列の「*」の出力変数の定義
+        let odd_msg = "";
+        //奇数列のメッセージ
+        const odd_str = "*"; 
+        //偶数列の「!」の出力変数の定義
+        const even_str = "!";
+        for(let i=1;i<=row;i++){
+            
+            if (i % 2 == 1){
+                odd_msg = odd_msg + odd_str;
+                console.log(odd_msg);
+            } else {
+                console.log(even_str);
+            }
+            
+            
+        }
+    </script>
+</body>
+</html>
