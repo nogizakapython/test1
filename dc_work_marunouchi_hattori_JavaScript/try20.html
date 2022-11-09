@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- クラスの作成 -->
+<!-- 新規作成 2022/11/9 -->
+<!-- code name try20.html -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY20</title>
+</head>
+<body>
+    <script>
+        //クラスを定義する
+        //(Productクラス。引数に商品名と在庫数を渡し、Webブラウザに出力する。)
+        class Product {
+            //コンストラクタ
+            constructor(name,stock){
+                //名前を渡す
+                this.name = name;
+                //在庫数を渡す
+                this.stock = stock;
+                //無名関数（ブラウザに商品名と在庫数を表示する
+                this.stock_conf = function(){
+                    document.write(`<p>${this.name}の在庫は${this.stock}箱あります</p>`);
+                }
+            }
+        }
+        //マスクのインスタンスの生成と処理
+        let mask = new Product("マスク",30);
+        //オブジェクトに渡した商品名をブラウザに出力する
+        document.write(mask.name);
+        //オブジェクトから無名関数を呼び出し、商品名と在庫数をWebブラウザに出力する。
+        mask.stock_conf();
+        //えんぴつのインスタンスの生成と処理
+        let pencil = new Product("えんぴつ",200);
+        //オブジェクトに渡した商品名をブラウザに出力する
+        document.write(pencil.name);
+        //オブジェクトから無名関数を呼び出し、商品名と在庫数をWebブラウザに出力する。
+        pencil.stock_conf();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/9 -->
+<!-- code name  try17.html -->
+<!-- 関数を無名関数(const 変数 = function(引数))で表す -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY17</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        //無名関数（引数なし。リターンコードなし)
+        const output_function = function(){
+            document.write(`<p>引数：なし、返り値：なしの関数</p>`);
+        }
+        //無名関数(引数あり。リターンコードなし)
+        const output_function_num = function(num){
+            document.write(`<p>引数：${num}、返り値：なしの関数</p>`);
+        }
+        //無名関数(引数あり。リターンコードあり)
+        const make_function_num = function(num){
+            document.write(`<p>引数：${num}、返り値：ありの関数</p>`);
+            return string;
+        }
+        output_function();
+        output_function_num(10);
+        let function_num = make_function_num(10);
+        document.write(function_num);
+
+    </script>
+</body>
+</html>

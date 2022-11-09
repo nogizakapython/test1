@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/9 -->
+<!-- code name work16.html -->
+<!-- Humanクラスに名前と年齢プロパティがあり、インスタンスを生成する際
+名前と年齢を引数として渡す。calc_ageメソッドを作成して、成人してから何年
+経っているかをブラウザに表示する -->
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK16</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        class Human {
+            //コンストラクタ(名前を年齢を引数にする)
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+                this.calc_age = function(){
+                    if (this.age >= 20){
+                        const adult_age = this.age - 20;
+                        document.write(`<p> 「${this.name}さんは成人してから${adult_age}年経っています」</p>`);
+                    }
+                }
+            }
+        }
+        
+
+        let taro = new Human("太郎",28);
+        document.write(`<p> ${taro.name} </p>`);
+        document.write(`<p> ${taro.age} </p>`);
+        taro.calc_age();
+
+        let jiro = new Human("次郎",22);
+        document.write(`<p> ${jiro.name} </p>`);
+        document.write(`<p> ${jiro.age} </p>`);
+        jiro.calc_age();
+
+        
+    </script>
+    
+</body>
+</html>

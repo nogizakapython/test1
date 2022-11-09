@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK17</title>
+</head>
+<body>
+    <script>
+        // Dateオブジェクト作成
+        let date = new Date();
+        //誕生日を取得する
+        let birthday = new Date(1975,10,14);
+
+        //現在の日から誕生日を引いて生まれてから何日経っているか計算する。
+        const result1 = parseInt((date - birthday) / (1000 * 60 * 60 * 24));
+        //日数を表示する
+        document.write(`<p>${result1}</p>`);
+
+    </script>
+</body>
+</html>

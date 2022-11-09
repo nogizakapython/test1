@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY21</title>
+</head>
+<body>
+    <script>
+        // Dateオブジェクト作成
+        let date = new Date();
+        //本日の日付を出力する。
+        document.write(`<p>${date}</p>`);
+
+        //dateオブジェクトから日付をday変数に取り出す
+        let day = date.getDate();
+        //本日の日を出力する。
+        document.write(`<p>${day}</p>`);
+
+        //明日の日付を計算してWebブラウザに表示する
+        date.setDate(day + 1);
+        //明日の日付を出力する。
+        document.write(`<p>${date}</p>`);
+
+    </script>
+</body>
+</html>

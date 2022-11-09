@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- 関数呼び出しプログラム -->
+<!-- 新規作成 2022/11/8 -->
+<!-- 偶数だったら10倍、奇数なら100倍する -->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>WORK14</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script> 
+        //関数calc(引数)。引数が偶数なら10倍、引数が奇数なら100倍して結果を返す。
+        // 今回は無名関数を使う
+        const calc = function(number){
+            if (number % 2 == 0){
+                number *= 10;
+            } else {
+                number *= 100;
+            }
+            return number;
+        }
+        //主処理
+        const rand_number = Math.floor(Math.random() * 10 + 1);
+        //関数を呼び出し、返り値を変数に代入する
+        let result = calc(rand_number);
+        //ブラウザーに出力する
+        document.write(`<p> ${result} </p>`);
+    </script> 
+</body>
+</html>
