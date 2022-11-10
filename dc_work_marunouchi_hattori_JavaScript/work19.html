@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/10 -->
+<!-- 文字列を連結する、文字列の一部を削除する、文字列の一部を取り出す、文字列を大文字にする、文字列を小文字にして返す -->
+<!-- code name work19.html -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK19</title>
+</head>
+<body>
+    <script>
+        //文字列1の定義
+        const str1 = "JavaScript";
+        //文字列2の定義
+        const str2 = "MySQL";
+        //文字列の連結、文字列の一部を取り出す関数
+        function change_str(msg1,msg2){
+            //文字列を連結する
+            let ans_concat = msg1.concat(msg2);
+            //文字列の一部を削除する
+            let ans_slice = msg1.slice(0,4);
+            return ans_concat + ":" + ans_slice;
+        }
+
+        //文字列を大文字、小文字に変換する。
+        function str_low_upper(msg3){
+            let upper_str = msg3.toUpperCase();
+            let lower_str = msg3.toLowerCase();
+            return upper_str + ":" + lower_str;
+        }
+
+        
+
+        //文字列の連結、一部を削除する関数を「str1」と「str2」変数を引数に呼び出し、結果をdata1変数に取り出す
+        const data1 = change_str(str1,str2);
+        //返り値を区切り文字「：」で区切って文字列を配列に格納する
+        const array1 = data1.split(":");
+        //結果を配列から取り出す
+        const concat_str = array1[0];
+        const slice_str = array1[1];
+        //Webブラウザに出力する。
+        document.write(`<p> ${str1}と${str2}の文字列を連結すると ${concat_str}です。</p>` );
+        document.write(`<p> ${str1}の最初から4番目を除いて削除すると ${slice_str}です。</p>` );
+
+        //文字列を大文字、小文字に変換する。
+        const data2 = str_low_upper(str2);
+        //返り値を区切り文字「：」で区切って文字列を配列に格納する
+        const array2 = data2.split(":");
+        //結果を配列から取り出す
+        const u_str = array2[0];
+        const l_str = array2[1];
+        //Webブラウザに出力する。
+        document.write(`<p> ${str2}の文字列を全て大文字に変換すると ${u_str}です。</p>` );
+        document.write(`<p> ${str2}の文字列を全て小文字に変換すると ${l_str}です。</p>` );
+
+    </script>
+</body>
+</html>

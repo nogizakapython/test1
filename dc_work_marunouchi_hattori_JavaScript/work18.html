@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/10 -->
+<!-- code name work18.html -->
+<!-- 半径の値を引数として、円の面積と直径を戻り値とする関数
+を作成して、円の面積と直径を出力する。 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK18</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        //円周率の定義
+        const pi = Math.PI;
+        //円の半径
+        const r = 4;
+        //円の面積を計算する関数
+        function area(distance){
+            const area = Math.pow(distance,2) * pi;
+            return area; 
+        }
+        //円の直径を計算する関数
+        function diameter(distance){
+            const diameter = distance * 2;
+            return diameter; 
+        }
+        
+        //円の面積をブラウザに出力する
+        const ans_area = area(r);
+        document.write(`<p>半径${r}の円の面積は${ans_area}です</p>`);
+
+        //円の直径をブラウザに出力する
+        const ans_diameter = diameter(r);
+        document.write(`<p>半径${r}の円の直径は${ans_diameter}です</p>`);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/10 -->
+<!-- code name work18advance.html -->
+<!-- 半径の値を引数として、円の面積、円の直径の長さ、円の周の長さを戻り値とする関数
+を作成して、円の面積、円の直径、円の周の長さを出力する。 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK18</title>
+    <style>
+        .parag1 {
+            width:40%;
+            color:#F00;
+            font-size:16px;
+            text-align:center;
+            background-color:#00F;
+        }
+        .parag2 {
+            width:40%;
+            color:#0F0;
+            font-size:16px;
+            text-align:center;
+            background-color:#929;
+        }
+        .parag3 {
+            width:40%;
+            color:#00F;
+            font-size:16px;
+            text-align:center;
+            background-color:#F00;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        //円周率の定義
+        const pi = Math.PI;
+        //円の半径
+        const r = 4;
+        //円の面積を計算する関数
+        function area(distance){
+            const area = Math.pow(distance,2) * pi;
+            return area; 
+        }
+        //円の直径を計算する関数
+        function diameter(distance){
+            const diameter = distance * 2;
+            return diameter; 
+        }
+        //円周の長さを計算する関数
+        function circumference(distance){
+            const circumference = 2 * distance * pi;
+            return circumference;
+        }
+        
+        //円の面積をブラウザに出力する
+        const ans_area = area(r);
+        document.write(`<p class="parag1">半径${r}の円の面積は${ans_area}です</p>`);
+
+        //円の直径をブラウザに出力する
+        const ans_diameter = diameter(r);
+        document.write(`<p class="parag2">半径${r}の円の直径は${ans_diameter}です</p>`);
+
+        //円周の長さをブラウザに出力する
+        const ans_circumference = circumference(r);
+        document.write(`<p class="parag3">半径${r}の円周の長さは${ans_circumference}です</p>`);
+
+    </script>
+</body>
+</html>
