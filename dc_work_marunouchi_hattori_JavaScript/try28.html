@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/11 -->
+<!-- code name try27.html -->
+<!-- documentオブジェクトを使用して、idとclassの要素を取得する -->
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY28</title>
+</head>
+<body>
+    <p id="id">id指定</p>
+    <p class="class_name">class指定:1行目</p>
+    <p class="class_name">class指定:2行目</p>
+    
+
+    <!-- JavaScript実行部分 -->
+    <script>
+        // idを取得
+        const id = document.getElementById('id');
+        //idの要素の色を赤に変更します。
+        id.style.color = '#ff0000';
+
+       //classを指定して要素を取得
+       const class_name = document.getElementsByClassName('class_name');
+       //class指定の1番目のテキストを変更する
+       class_name[0].textContent = 'テキストを変更';
+       //class指定の2番目のテキストを変更する
+       class_name[1].style.fontSize = 18 + "px";
+    </script>
+</body>
+</html>

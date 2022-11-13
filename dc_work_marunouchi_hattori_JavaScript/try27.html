@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/11 -->
+<!-- code name try27.html -->
+<!-- documentオブジェクトを使用して、idとclassの要素を取得する -->
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY27</title>
+</head>
+<body>
+    <p id="id">id指定</p>
+    <p class="class_name">class指定:1行目</p>
+    <p class="class_name">class指定:2行目</p>
+    <p>==== JavaScriptの要素取得・出力はここから ====</p>
+
+    <!-- JavaScript実行部分 -->
+    <script>
+        // idを取得
+        const id = document.getElementById(`id`);
+        //idを指定して要素を取得
+        document.write(`<p>${id.textContent }</p>`);
+        //classを取得
+        const class_name = document.getElementsByClassName(`class_name`);
+        //classを指定して要素を取得
+        document.write(`<p>${class_name[0].textContent }</p>`);
+        //classを指定して要素を取得
+        document.write(`<p>${class_name[1].textContent }</p>`);
+    </script>
+</body>
+</html>

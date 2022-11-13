@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/11 -->
+<!-- code name try26.html -->
+<!-- documentオブジェクトを使用して、タブのタイトル名を出力する。 -->
+<!-- documentオブジェクトのtitleプロパティを使用する。 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY26</title>
+    <style>
+        p {
+            width:30%;
+            margin-left:30px;
+            padding-left:20px;
+            font-size:22px;
+            color:red;
+            background-color:#C2A708;
+            text-align:left;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        //Webページのタイトルを変更し、Webブラウザに表示する。
+        let msg = "nogizakapython";
+        document.title = msg;
+        //タイトルの表示は
+        document.write(`<p>${document.title} </title>`);
+    </script>
+</body>
+</html>

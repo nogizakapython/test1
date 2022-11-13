@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/11 -->
+<!-- code name work20.html -->
+<!-- ローカル変数、グローバル変数動作検証 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK20</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        //変数を出力する
+        //ローカル変数の検証
+        function scope_in_function(){
+            let num = 20;
+            document.write(`<p> num:${num} </P>`);
+        }
+        
+
+        scope_in_function();
+        document.write(`<p> num:${num} </P>`);
+
+    </script>
+</body>
+</html>

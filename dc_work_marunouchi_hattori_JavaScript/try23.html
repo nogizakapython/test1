@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- code name 2022/11/11 -->
+<!-- ローカル変数の定義 -->
+<!-- 新規作成 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY23</title>
+</head>
+<body>
+    <!-- JavaScript部分 -->
+    <script>
+        //」ローカル関数出力関数
+        function scope_in_function(){
+            //ローカル変数を定義する
+            const str = 'local';
+            //typeofメソッドでデータ型をブラウザーに出力する
+            document.write(`<p>関数内:${typeof(str)} </p>`);
+        }
+        //関数の呼び出し
+        scope_in_function();
+        documemt.write(`<p>関数外:${typeof(str)} </p>`);
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/11 -->
+<!-- code name try24.html -->
+<!-- グローバル関数の動作検証 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY24</title>
+</head>
+<body>
+    <script>
+        let str = 'global';
+        function scope_in_function(){
+            document.write(`<p>関数内:${typeof(str)} </p>`);
+        }
+        scope_in_function();
+        document.write(`<p>関数外:${typeof(str)} </p>`);
+    </script>
+</body>
+</html>

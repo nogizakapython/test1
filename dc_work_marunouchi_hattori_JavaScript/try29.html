@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/11 -->
+<!-- code  name try29.html -->
+<!-- ブロックの要素にインライン要素のp要素を追加する。 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY29</title>
+</head>
+<body>
+    <div id="textbox">
+        <p id="id">要素1</p>
+        <p class="class_name">要素2</p>
+        <p class="class_name">要素3</p>
+    </div>
+    <script>
+        //idの要素の内容を取得する。
+        const textbox = document.getElementById('textbox');
+        //pタグを追加する。
+        let new_element1 = document.createElement('p');
+        //pタグの要素をtextContentプロパティを使って指定する。
+        new_element1.textContent = '指定要素の中の末尾に追加';
+        // new_element1変数にpタグとpタグの要素を追加する。
+        textbox.appendChild(new_element1);
+
+        //classを指定して要素を取得
+        const class_name = document.getElementsByClassName('class_name');
+        let new_element2 = document.createElement('p');
+        new_element2.textContent = '指定要素の後に追加';
+        //指定要素の後(この場合は要素1の後)に追加する。
+        class_name[0].after(new_element2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/11 -->
+<!-- code name work23.html -->
+<!-- 1 要素1のテキストを「変更後テキスト」に変更する -->
+<!-- 2 id="textbox"の背景色を「#ffff00」に変更する-->
+<!-- 3 要素1の直後に「追加テキスト」を挿入。文字色は「#ff0000」、文字サイズは30px -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK23</title>
+</head>
+<body>
+    <!-- 要素を入れるブロック -->
+    <div id="textbox">
+        <p id="element_1">要素1</p>
+    </div>
+    <!-- JavaScript部分 -->
+    <script>
+        //idを指定して要素を取得する
+        const element_id_name = document.getElementById('element_1');
+        //pタグのテキスト要素を定義する
+        element_id_name.textContent = '変更後テキスト';
+
+        //背景色を「#ffff00」に変更する
+        const textbox = document.getElementById('textbox');
+        textbox.style.backgroundColor = "#ffff00";
+
+        // 新しいpタグの要素を定義する
+        let new_element = document.createElement('p');
+        //要素のテキストを定義する
+        new_element.textContent = "追加テキスト";
+        //新しいpタグのid名を定義する
+        new_element.id = 'element_2';
+        //要素の一番最後に追加する。
+        textbox.appendChild(new_element);
+                
+        //追加したpタグの文字色を変更する
+        element_2.style.color = "#ff0000";
+        //追加してpタグの文字の大きさを変更する
+        element_2.style.fontSize = 30 + "px";
+
+    </script>
+</body>
+</html>
