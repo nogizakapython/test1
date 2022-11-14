@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name try37.html -->
+<!--  マウスがボタンのエリア内に入ったとき、外に出たときの処理-->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY33</title>
+</head>
+<body>
+    <!-- CSSの定義 -->
+    <style>
+        #button {
+            background-color:#fff;
+        }
+    </style>
+    <input type="button" value="ボタン" id="button">
+    <!-- JavaScript部分 -->
+    <script>
+        //ボタンオブジェクトを変数に定義する
+        const button = document.getElementById('button');
+        //マウスがボタンのエリア内に入ったときのイベント処理
+        function mouseover_event (){
+            button.style.background = '#ffa500';
+        }
+        //マウスがボタンのエリア内から外に出た時のイベント処理
+        function mouseout_event (){
+            button.style.background = '#ffffff';
+        }
+        //マウスがボタンエリア内に入ったときのリスナー呼び出し
+        button.addEventListener('mouseover',mouseover_event);
+        //マウスがボタンエリアの外に出たときのリスナー呼び出し
+        button.addEventListener('mouseout',mouseout_event);
+
+    </script>
+</body>
+</html>

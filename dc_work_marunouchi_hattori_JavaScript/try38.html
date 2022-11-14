@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name try38.html -->
+<!-- チェックボックスにチェックを入れる、外すときの処理 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY38</title>
+</head>
+<body>
+    <!-- 文言テキスト -->
+    <div id="check_value">チェックしていません</div>
+    <!-- ラベルの定義 -->
+    <lavel for="check">
+        <!-- チェックボックスの定義 -->
+        <input type="checkbox" id="check" />チェックボックス
+    </lavel>
+    <!-- JavaScript部分 -->
+    <script>
+        //idを指定して要素を取得
+        const check = document.getElementById('check');
+        //チェックを入れる、外すイベント発生時の処理
+        function change_event(){
+            //文言テキストのidの定義
+            const checkbox_value = document.getElementById('check_value');
+            if(check.checked){
+                check_value.textContent = 'チェックしました';
+            } else {
+                check_value.textContent = 'チェックしていません'
+            }
+        }
+        check.addEventListener('change',change_event);    
+    </script>
+</body>
+</html>

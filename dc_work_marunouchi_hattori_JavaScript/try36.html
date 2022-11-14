@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name try36.html -->
+<!-- マウススクロールした時の縦のピクセルを表示する -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY36</title>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="scroll">scroll:0</div>
+    <!-- CSSの定義 -->
+    <style>
+        #container {
+            height:1200px;
+        }
+        #scroll {
+            position: fixed;
+            top:10px;
+            left:10px;
+        }
+    </style>
+    <!-- JavaScript部分 -->
+    <script>
+        const scroll = document.getElementById('scroll');
+        function scroll_event(){
+            let scroll_val = window.scrollY;
+            scroll.textContent = `scroll:${scroll_val}`;
+        }
+        window.addEventListener('scroll',scroll_event);
+    </script>
+    
+</body>
+</html>

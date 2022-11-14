@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name work25p.html -->
+<!-- 0秒からスタートして止める。 -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイムウォッチPre</title>
+    <style>
+        .watch1 {
+            width:400px;
+            height:360px;
+            background-color:#0F0;
+            margin-top:30px;
+            margin-left:30px;
+            padding-top:10px;
+
+        }
+        .watch1 .output1  {
+            padding-top:20px;
+            padding-left:40px;
+            padding-right:40px;
+            height:120px;
+            width:250px;
+            font-size:40px;
+            border-radius:10px;
+            background-color:#000;
+            margin:auto;
+        }
+        h1{
+
+            width:95%;
+            text-align: center;
+            color:#FFF;
+            font-size:30px;
+        }
+        .button1 {
+            display:flex;
+            padding-top:30px;
+            width:300px;
+            padding-left:50px;
+            padding-right:50px;
+            height:80px;
+            margin:auto;
+        }
+        #start {
+            height:60px;
+            width:40%;
+            padding-left:10px;
+            background-color:#000;
+            border-radius:5px #0F0;
+            color:#FF0;
+            font-size:20px;
+        }
+
+        #stop {
+            height:60px;
+            width:40%;
+            margin-left:10px;
+            padding-left:10px;
+            background-color:#000;
+            border-radius:5px #0F0;
+            color:#FF0;
+            font-size:20px;
+        }
+
+
+        
+
+
+    </style>
+</head>
+<body>
+    <div class="watch1">
+        <div class="output1">
+            <h1 id="count_up">00:00.00</h1>
+        </div>    
+        <div class="button1">
+            <input type="button" id="start" value="start" >
+            <input type="button" id="stop" value="stop" disabled />
+        </div>    
+    </div>
+    
+    <script>
+        let timer;
+        
+        //処理を記述する。
+        let start = document.getElementById('start');
+        function count_start(){
+            timer = setInterval("count_up()",10);
+        }
+        function count_up(){
+            const count_up = document.getElementById('count_up');
+            //表示されているテキストを取得
+            let mili = count_up.textContent;
+            //表示されているテキストの区切りを「：」にする
+            mili = mili.replace('.',':');
+            let array1 = mili.split(":");
+            let M = array1[0];
+            let S = array1[1];
+            let MS = array1[2];
+            if (MS < 10){
+                MS = "0" + MS;
+            }
+            if (MS >= 100){
+                S += 1;
+                MS = 0;
+            }
+            if ( S < 10){
+                S = "0" + S;
+            }
+            
+            
+            
+            mili++;
+            if (sec <= 0){
+                alert('時間です');
+                count_down.textContent = 20;
+                clearInterval(timer);
+            } else {
+                count_down.textContent = sec;
+            }    
+        }
+        start.addEventListener('click',count_start);
+    </script>
+</body>
+</html>

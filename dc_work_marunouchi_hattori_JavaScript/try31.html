@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name try31.html -->
+<!-- マウスをクリックしたときに実行するイベント -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY31</title>
+    <style>
+        /* ボタンのカラーを設定する。 */
+        #button {
+            background-color: #7360D3;
+            color:#0F1;
+            border-radius: 1px #000;
+            width:200px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- ボタンオブジェクトの配置 -->
+    <input type="button" value="ボタン" id="button">
+    <!-- Javascript部分 -->
+    <script>
+        let button = document.getElementById('button');
+        button.onclick = function(){
+            alert('ボタンがクリックされました');
+        }
+    </script>
+    
+</body>
+</html>

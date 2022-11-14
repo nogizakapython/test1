@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name try32.html -->
+<!-- スクロールイベント -->
+<!-- マウスをスクロールしたときにスクロールした高さを表示する -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY32</title>
+</head>
+<body>
+    <!-- コンテナの定義 -->
+    <div id="container"></div>
+    <!-- スクロールエリアの定義 -->
+    <div id="scroll_area">scroll:0</div>
+    <!-- CSSの定義 -->
+    <style>
+        #container {
+            height:1200px;
+        }
+        #scroll_area {
+            position:fixed;
+            top:10px;
+            left:10px;
+        }
+    </style>
+    <!-- javaScript部分 -->
+    <script>
+        //scrollされた高さの変数を定義する。
+        const scroll_area = document.getElementById('scroll_area');
+        //マウスでスクロールした時の処理（イベント処理)
+        window.onscroll = function() {
+            let scroll_val = window.scrollY;
+            scroll_area.textContent = `scroll:${scroll_val}`;
+        }
+    </script>
+</body>
+</html>

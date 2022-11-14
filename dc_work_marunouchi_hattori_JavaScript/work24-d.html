@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name work24-d.html -->
+<!-- 画像の読み込み後にonloadを行う -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="id1">テストします</div>
+    <!-- javaScript部分 -->
+    <script>
+        // 画像を全て読み込んでから実行する。
+        window.onload = function(){
+            const img = document.getElementById('img1');
+            img.onload;
+            const text = document.getElementById('id1');
+            text .textContent = "テスト成功";
+        }
+        
+    </script>
+    <img src="./img/test1.jpeg" alt="テスト画像" id="img1">
+    
+</body>
+</html>

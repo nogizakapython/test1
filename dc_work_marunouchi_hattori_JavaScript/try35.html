@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name try35.html -->
+<!-- ボタンがクリックされたら、イベントリスナーを実行する -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRY35</title>
+</head>
+<body>
+    <!-- ボタンの配置 -->
+    <input type="button" value="ボタン" id="button">
+    <!-- JavaScript実行部分 -->
+    <script>
+        // ボタンをクリックされたときの処理
+        function click_button(){
+            alert('ボタンがクリックされました');
+        }
+        //ボタンのIDを取得
+        let button = document.getElementById('button');
+        //ボタンがクリックされたときの関数を呼び出す。
+        button.addEventListener('click',click_button);
+
+    </script>
+</body>
+</html>
