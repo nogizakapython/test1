@@ -112,7 +112,7 @@
             //実行中のミリ秒
             work_time += 10;
             //分への変換
-            let minutes = Math.floor(work_time / (1000*60));
+            let minutes = Math.floor((work_time / (1000*60)) % 60);
             //数値型を文字列型に変換して0埋めする。
             let m = minutes.toString().padStart(2,'0');
             
