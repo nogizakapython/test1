@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopwatch</title>
+    <style>
+        html, body {
+            font-family: 'Roboto mono';
+            font-size: 16px;
+            background-color: #1e90ff;
+        }
+    
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            font-size: 2rem;
+            margin: 3rem;
+        }   
+    
+        #container {
+            background-color: #ffffff;
+            width: 540px;
+            border-radius: 1rem;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+    
+        #time {
+            color: #1e90ff;
+            font-size: 3rem;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0,139,253,0.25);
+            margin: .5rem;
+        }
+    
+        #buttons {
+            font-size: 3rem;
+            text-align: center;
+        }
+    
+        #start, #stop, #reset {
+            font-size: 1.5rem;
+            border-radius: .3rem;
+            box-shadow: 0 0 20px rgba(77, 78, 79, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <body>
+        <h1>Stopwatch</h1>
+        <div id="container">
+          <div id="time">00:00.00</div>
+          <div id="buttons">
+            <input id="start" type="button" value="start">
+            <input id="stop" type="button" value="stop">
+            <input id="reset" type="button" value="reset">
+          </div>
+        </div>  
+        <script>
+          const time = document.getElementById('time');
+          const startButton = document.getElementById('start');
+          const stopButton = document.getElementById('stop');
+          const resetButton = document.getElementById('reset');
+      
+          // 開始時間
+          let startTime;
+          // 停止時間
+          let stopTime = 0;
+          // タイムアウトID
+          let timeoutID;
+          //初期の設定
+          startButton.disabled = false;
+          stopButton.disabled = true;
+          resetButton.disabled = true;  
+          // 時間を表示する関数
+          function displayTime() {
+                const currentTime = new Date(Date.now() - startTime + stopTime);
+      
+                const m = String(currentTime.getMinutes()).padStart(2, '0');
+                const s = String(currentTime.getSeconds()).padStart(2, '0');
+                const ms = String(currentTime.getMilliseconds()).padStart(2, '0');
+      
+                time.textContent = `${m}:${s}.${ms}`;
+                timeoutID = setTimeout(displayTime, 10);
+          }
+      
+          // スタートボタンがクリックされたら時間を進める
+          startButton.addEventListener('click', () => {
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                resetButton.disabled = true;
+                startTime = Date.now();
+                displayTime();
+          });
+      
+          // ストップボタンがクリックされたら時間を止める
+          stopButton.addEventListener('click', function() {
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                resetButton.disabled = false;
+                clearTimeout(timeoutID);
+                stopTime += (Date.now() - startTime);
+          });
+      
+          // リセットボタンがクリックされたら時間を0に戻す
+          resetButton.addEventListener('click', function() {
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                resetButton.disabled = true;
+                time.textContent = '00:00.00';
+                stopTime = 0;
+          });
+          </script>
+      </body>
+      </html>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK26</title>
+    <style>
+        /* ストップウォッチ全体のCSS定義 */
+        .watcharea {
+            width:500px;
+            height:250px;
+            background-color:#0F0;
+            margin-top:30px;
+            margin-left:30px;
+            padding-top:10px;
+
+        }
+        /* 時間表示エリアのCSS定義 */
+        .watcharea .timearea  {
+            padding-top:20px;
+            padding-left:40px;
+            padding-right:40px;
+            height:120px;
+            width:390px;
+            font-size:40px;
+            border-radius:10px;
+            background-color:#000;
+            margin:0 auto;
+        }
+        /* 時間表示テキストのCSS定義 */
+        .watcharea .timearea h1{
+            width:100%;
+            text-align: center;
+            color:#FFF;
+            font-size:40px;
+        }
+        /* ボタンエリアのCSS定義 */
+        .buttonarea {
+            width:470px;
+            height:80px;
+            display:flex;
+            background-color:#0F0;
+            margin:auto;
+        }
+        
+        /* それぞれのボタンのCSS定義 */
+        .buttonarea .button1 {
+            width:150px;
+            font-size: 20px;
+            color:#FFF;
+            background-color:#000;
+            border-radius: 5px;
+            margin-top:10px;
+            margin-left:10px;
+            margin-right:10px;
+            
+        }
+
+        .buttonarea .button1:disabled {
+            background-color:#0F0;
+        }    
+        
+    </style>
+</head>
+<body>
+    <!-- ストップウォッチ全体 -->
+    <div class="watcharea">
+        <!-- 経過時間のテキスト定義 -->
+        <div class="timearea">
+            <h1 id="time">00:00.00</h1>
+        </div>
+        <!-- ボタンエリアの定義 -->
+        <div class="buttonarea">
+            <!--スタートボタン-  -->
+          <input id="start" type="button" value="start" class="button1">
+          <!-- ストップボタン -->
+          <input id="stop" type="button" value="stop" class="button1">
+          <!-- リセットボタン -->
+          <input id="reset" type="button" value="reset" class="button1">
+        </div>
+    </div>
+    <script>
+          //time表示テキストの変数定義
+          const time = document.getElementById('time');
+          //スタートボタンの変数定義
+          const start_B = document.getElementById('start');
+          //ストップボタンの変数定義   
+          const stop_B = document.getElementById('stop');
+          //リセットボタンの変数定義   
+          const reset_B = document.getElementById('reset');
+          //初期のボタン設定 ボタンを有効化にする場合は「false」、無効化にする場合は「true」にする
+          start_B.disabled = false;
+          stop_B.disabled = true;
+          reset_B.disabled = true; 
+          //Timer変数(globalで定義し、setInterval、clearIntervalで利用する)
+          let timer;
+          //タイムウォッチ実行中のミリ秒表示変数
+          let work_time = 0;
+          
+          //「START」ボタンをクリックした時にボタンの有効、無効化とミリ秒計算関数を呼び出す
+          function count_start(){
+            start_B.disabled = true;
+            stop_B.disabled = false;
+            reset_B.disabled = true; 
+            timer = setInterval("count_up()",10);
+          }
+          function count_up(){
+            //実行中のミリ秒
+            work_time += 10;
+            //分への変換
+            let minutes = Math.floor(work_time / (1000*60));
+            let m = "";
+            if (minutes < 10){
+                m = "0" + minutes.toString();
+            } else {
+                m = minutes.toString();
+            }
+            
+            //秒への変換
+            let seconds = Math.floor((work_time % (10000*60) / 1000) % 60);
+            let s = "";
+            if (seconds < 10){
+                s = "0" + seconds.toString();
+            } else {
+                s = seconds.toString();
+            }
+            
+
+            //10ミリ秒以上を表示
+            let miliseconds = Math.floor(work_time % 1000 / 10);
+            let ms = "";
+            if (miliseconds < 10){
+                ms = "0" + miliseconds.toString();
+            } else {
+                ms = miliseconds.toString();
+            }
+            
+
+            //テキストに表示する
+            time.textContent = `${m}:${s}.${ms}`;
+
+          }
+          // 「stop」ボタンをクリックしたときに、ボタンの有効、無効化とカウンターを停止する   
+          function count_stop(){
+            start_B.disabled = false;
+            stop_B.disabled = true;
+            reset_B.disabled = false; 
+            clearInterval(timer);
+          }
+
+          // 「reset」ボタンをクリックしたときに、ボタンの有効、無効化とTimeを「00:00.00」にする。   
+          function reset_stop(){
+            start_B.disabled = false;
+            stop_B.disabled = true;
+            reset_B.disabled = true; 
+            // work_timeを0に初期化する
+            work_time = 0;
+            // テキストの時刻をリセットする。
+            time.textContent = "00:00.00";
+          }
+
+          
+          //「start」ボタンをクリックしたときのイベントリスナー処理
+          start_B.addEventListener('click',count_start);
+
+          //「stop」ボタンをクリックしたときのイベントリスナー処理
+          stop_B.addEventListener('click',count_stop);
+
+          //「reset」ボタンをクリックしたときのイベントリスナー処理
+          reset_B.addEventListener('click',reset_stop);
+
+    </script>  
+</body>
+</html>
