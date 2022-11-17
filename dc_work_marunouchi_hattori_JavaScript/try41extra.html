@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/16 -->
+<!-- モーダルウィンドウの表示、非表示 -->
+<!-- code name try41extra.html -->
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- タブタイトル -->
+    <title>TRY41</title>
+    <!-- jQueryの読み込み -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <style>
+        /* ボディ部分のCSS定義 */
+        body {
+            margin: 0;
+        }
+        
+        /* 背景のCSS定義  */
+        #back_layer {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background-color: #000;
+            opacity: 0.6;
+            z-index: 998;
+            display:none;
+        }
+        
+        /* モーダルウィンドウのCSS定義 */
+        #modal {
+            position: absolute;
+            min-width: 50%;
+            min-height: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #d7d7b1;
+            text-align: center;
+            z-index: 999;
+            display:none;
+        }
+
+    </style>
+    <div id="modai">
+        <p>モーダルウィンドウの表示</p>
+        <button id="close">閉じる</button>
+    </div>
+    <div id="back_layer"></div>
+    <button id="button">ボタン</button>
+    <script>
+        $('#button').click(function(){
+            $('#back_layer,#modal').fadeIn();
+            // pタグの要素を赤色にする
+            $('p').css("color","#F00");
+        });
+
+        $('#close').click(function(){
+            $('#back_layer,#modal').fadeOut();
+            // pタグの要素を黒色にする
+            $('p').css("color","#000");
+        });
+        
+
+    </script>
+</body>
+</html>

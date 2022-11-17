@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/16 -->
+<!-- code name try40.html -->
+<!-- 内容：jQueryでチェックボックスにチェックを入れると「チェックしました」と表示され、
+          チェックを外すと「チェックしていません」と表示される。 -->
+<html lang="ja">
+<!-- ヘッダー部分 -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- タブのタイトル -->
+    <title>TRY40</title>
+    <!-- jQueryライブラリの読み込み -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<!-- ボディ部分 -->
+<body>
+    <div id="checkbox_value">チェックしていません</div>
+    <label for="checkbox">
+        <input type="checkbox" id="checkbox" />チェックボックス
+    </label>
+    <script>
+        function change_event (){
+            // チェックボックスにチェックを入れているか判断する
+            if ($('#checkbox').prop("checked")){
+                $('#checkbox_value').html('チェックしました');
+            } else {
+                $('#checkbox_value').html('チェックしていません');
+            }
+        }
+        $('#checkbox').change(change_event);
+    </script>
+</body>
+</html>

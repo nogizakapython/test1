@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/14 -->
+<!-- code name: work28.html -->
+<!-- 20秒からカウントダウンして0秒なったら終了する
+     この処理をjQueryを用いてプログラム作成する -->
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORK28</title>
+    <!-- jQueryのライブラリの読み込み -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="count_down">20</div>
+    <input type="button" id="start" value="スタート">
+    <script>
+        let timer;
+        
+        //1秒ごとにカウントダウン処理を開始する処理
+        function count_start(){
+            timer = setInterval("count_down()",1000);
+        }
+
+        // タイマーのカウントダウン処理関数
+        function count_down(){
+            
+            //表示されているテキストを取得
+            let sec = $('#count_down').text();
+            sec--;
+            if (sec <= 0){
+                alert('時間です');
+                $('#count_down').text(20);
+                clearInterval(timer);
+            } else {
+                $('#count_down').text(sec);
+            }    
+        }
+        $('#start').click(count_start);
+    </script>
+</body>
+</html>
