@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample2</title>
+</head>
+<body>
+  <div>
+    <button onclick="stop()">停止</button>
+    <button onclick="play()">再生</button>
+    <button onclick="loop_true()">ループ再生ON</button>
+    <button onclick="loop_false()">ループ再生OFF</button>
+    <button onclick="currentTime_start()">最初へ</button>
+    <button onclick="ended()">再生終了確認</button>
+</div>
+
+<div>
+    <button onclick="volume_down()">-</button>
+    <button onclick="volume_up()">+</button>
+    <button onclick="mute_true()">消音</button>
+    <button onclick="mute_false()">消音解除</button>
+</div>
+
+<script language="javascript" type="text/javascript">
+    var music = new Audio(); //変数作成
+    
+    music.src = "./sound/test1.mp3"; //音声ファイル指定
+    music.volume = 0.5; //音量の初期値(50%)
+    
+    function play() { //再生
+    music.play();
+    }
+    
+    function stop() { //一時停止
+        music.pause();
+    }
+    
+    function volume_down() { //音量ダウン
+        music.volume = music.volume - 0.1; //音量の値を0.1(10%)ずつダウン
+    }
+    
+    function volume_up() { //音量アップ
+        music.volume = music.volume + 0.1; //音量の値を0.1(10%)ずつアップ
+    }
+    
+    function mute_true() { //消音
+        music.muted = true;
+    }
+    
+    function mute_false() { //消音解除
+        music.muted = false;
+    }
+    
+    function loop_true() { //ループ再生ON
+        music.loop = true;
+    }
+    
+    function loop_false(){ //ループ再生OFF
+        music.loop = false;
+    }
+    
+    function currentTime_start(){ //初期位置(0秒)へ移動
+        music.currentTime = 0;
+    }
+    
+    function ended(){ //再生終了しているか
+        if(music.ended){
+            alert("再生終了しています");
+        }else{
+            alert("再生前、もしくは再生中です");
+        }
+    }
+</script>
+</body>
+</html>
+</body>
+</html>

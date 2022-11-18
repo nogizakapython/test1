@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRY43</title>
+</head>
+<body>
+  <input type="button" value="ボタン" id="button">
+  <div class="ajax_result"></div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+
+  </script>
+  <script>
+    function get_data() {
+      // Ajax処理
+      function get_data() {
+            // Ajax処理
+            $.ajax({
+                type: "GET",		// リクエストタイプ
+                url: 'sample.txt',		// リクエスト送信先URLの設定
+                async: true,		// 非同期通信フラグ
+            }).done(function(data, textStatus, jqXHR) {
+                // 成功時処理
+                $('.ajax_result').text($('.ajax_result').text() + data);
+             }).fail(function(jqXHR, textStatus, errorThrown) {
+                // エラー時処理
+                $('.ajax_result').text("エラーが発生しました。ステータス：" + jqXHR.status);
+            });
+        }
+
+        $('#button').click(function(){
+            get_data();
+        });
+
+    }
+  </script>
+</body>
+</html>

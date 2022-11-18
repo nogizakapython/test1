@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/18 -->
+<!-- 作成者 T.HATTORI -->
+<!-- 簡易ピアノアプリ -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample3</title>
+  <style>
+    .pianokey {
+
+      border: 1px solid #999;
+
+      cursor: pointer;
+
+      display: inline-block;
+
+      height: 200px;
+
+      width: calc(100% / 7 - 2px);
+
+      width: -webkit-calc(100% / 7 - 2px);
+
+    }
+
+
+
+    .sharp {
+
+      background-color: black;
+
+      height: 120px;
+
+      margin-left: -4%;
+
+      position: absolute;
+
+      width: 8%;
+
+    }
+
+
+
+    #piano {
+
+      margin: 50px auto;
+
+      max-width: 420px;
+
+      position: relative;
+
+    }
+  </style>
+
+</head>
+<body>
+  <div id="piano">
+
+    <span class="pianokey"></span>
+
+    <span class="pianokey sharp"></span>
+
+    <span class="pianokey"></span>
+
+    <span class="pianokey sharp"></span>
+
+    <span class="pianokey"></span>
+
+    <span class="pianokey"></span>
+
+    <span class="pianokey sharp"></span>
+
+    <span class="pianokey"></span>
+
+    <span class="pianokey sharp"></span>
+
+    <span class="pianokey"></span>
+
+    <span class="pianokey sharp"></span>
+
+    <span class="pianokey"></span>
+
+   
+
+  </div>
+  <script>
+    window.AudioContext = window.AudioContext || window.webkitAudioContext; //クロスブラウザ対応
+
+    var audioCtx = new AudioContext();
+
+ 
+
+    //引数のヘルツの高さの音を出す関数
+
+    function play(hz) {
+
+ 
+
+      //正弦波の音を作成
+
+      var osciillator = audioCtx.createOscillator();
+
+ 
+
+      //ヘルツ（周波数）指定
+
+      osciillator.frequency.value = hz;
+
+ 
+
+      //音の出力先
+
+      var audioDestination = audioCtx.destination;
+
+ 
+
+      //出力先のスピーカーに接続
+
+      osciillator.connect(audioDestination);
+
+ 
+
+      //音を出す
+
+      osciillator.start = osciillator.start || osciillator.noteOn; //クロスブラウザ対応
+
+      osciillator.start();
+
+ 
+
+      //音を1秒後にストップ
+
+      setTimeout(function() {
+
+        osciillator.stop();
+
+      }, 1000);
+
+    }
+
+ 
+
+    //ピアノの鍵盤を取得
+
+    var pianoKey = document.getElementsByClassName("pianokey");
+
+    var pianoKeyL = pianoKey.length;
+
+    for (i = 0; i < pianoKeyL; i++) {
+
+ 
+
+      //クロージャ
+
+      (function(i) {
+
+        pianoKey[i].addEventListener("click", function() {
+
+ 
+
+            //鍵盤の位置で周波数を計算
+
+            var h = 442 * Math.pow(2, (1 / 12) * (i - 9));
+
+            play(h);
+
+        }, false)
+
+      })(i)
+
+    }
+  </script>
+</body>  
+</html>  
