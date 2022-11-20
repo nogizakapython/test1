@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!-- 新規作成 2022/11/20 -->
+<!-- music Pot -->
+<!-- お気に入りの曲を流すWebアプリ -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自作PodcastWebアプリケーション</title>
+  <style>
+        #display_title {
+            width:500px;
+            background-color:#E0A0FF;
+            color:#075500;
+            font-size:40px;
+
+        }
+
+        #display_musician {
+            width:500px;
+            background-color:#E0A0FF;
+            color:#4759F0;
+            font-size:40px;
+        }
+
+  </style>
+  <!-- jQueryライブラリの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="display_title">曲のタイトル</div>
+    <div id="display_musician">歌手名</div> 
+
+    <div>
+        <input type="button" id="stop" name="stop" class="button1" value="一時停止" >
+        <input type="button" id="play" name="play" class="button1" value="再生">
+        <input type="button" id="first" name="first" class="button1" value="最初へ">
+        <input type="button" id="all_stop" name="all_stop" class="button1" value="停止">
+        <input type="button" id="select" name="select" class="button1" value="選曲">
+    </div>
+
+    <div>
+        <button onclick="volume_down()">-</button>
+        <button onclick="volume_up()">+</button>
+        <button onclick="mute_true()">消音</button>
+        <button onclick="mute_false()">消音解除</button>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+        var music = new Audio(); //変数作成
+        // 曲リスト配列
+        const array1 = ['like @ Angel/黒夢/like@angel.mp3','Secret Night/WANDS/Secret.mp3','なぜ/Hysteric Blue/naze.mp3','Out Of The Blue/乃木坂46/Out of the blue.mp3','Last Love Song/GARNET CROW/lastlovesong.mp3','クリスタルゲージ/GARNET CROW/クリスタルゲージ.mp3','能動的３分間/東京事変/能動的三分間.mp3','タマシイレボリューション/Superfly/タマシイレボリューション.mp3','二人セゾン/欅坂46/二人セゾン.mp3','Miss Moonlight/黒夢/Miss MOONLIGHT.mp3','SURREAL/浜崎あゆみ/SURREAL.mp3'];
+        // 配列の長さ
+        const num = array1.length;
+        let secret_number = 0;
+        let array2 = array1[secret_number].split('/');
+        let play_title = array2[0];
+        let musician = array2[1];
+        let file = array2[2];
+        
+        const stop = document.getElementById('stop');
+        const play = document.getElementById('play');
+        const first = document.getElementById('first');
+        const all_stop = document.getElementById('all_stop');
+        const select = document.getElementById('select');
+        const display_title = document.getElementById('display_title');
+        const display_musician = document.getElementById('display_musician');
+        
+
+
+        music.src = `./sound/${file}`; //音声ファイル指定
+        music.volume = 0.5; //音量の初期値(50%)
+
+        
+    
+        // 再生
+        function music_play() { 
+        
+            music.play();
+            display_title.textContent = `曲名:${play_title}`;
+            display_musician.textContent = `歌手名:${musician}`;
+            stop.disabled = false;
+            play.disabled = true;
+            first.disabled = false;
+            all_stop.disabled = false;
+            select.disabled = true;
+        }
+    
+        // 一時停止 
+        function music_stop() { 
+            music.pause();
+            stop.disabled = true;
+            play.disabled = false;
+            first.disabled = false;
+            all_stop.disabled = false;
+            select.disabled = false;
+        }
+
+        // 最初へ戻る
+        function first_time() {
+            music.currentTime = 0;
+            stop.disabled = true;
+            play.disabled = false;
+            first.disabled = true;
+            all_stop.disabled = true;
+            select.disabled = true;
+        }
+
+        //停止
+        function all_stop2() {
+            music.pause();
+            music.currentTime = 0;
+            stop.disabled = true;
+            play.disabled = false;
+            first.disabled = true;
+            all_stop.disabled = true;
+            select.disabled = false;
+        }
+
+        // 選曲
+        function select_tune(){
+            all_stop2();
+            secret_number = Math.floor(Math.random() * num);
+            array2 = array1[secret_number].split('/');
+            play_title = array2[0];
+            musician = array2[1];
+            file = array2[2];
+            //音声ファイル指定
+            music.src = `./sound/${file}`; 
+            stop.disabled = true;
+            play.disabled = false;
+            first.disabled = true;
+            all_stop.disabled = true;
+            select.disabled = false;
+        }
+    
+        function volume_down() { //音量ダウン
+            music.volume = music.volume - 0.1; //音量の値を0.1(10%)ずつダウン
+        }
+    
+        function volume_up() { //音量アップ
+            music.volume = music.volume + 0.1; //音量の値を0.1(10%)ずつアップ
+        }
+    
+        function mute_true() { //消音
+            music.muted = true;
+         }
+    
+        function mute_false() { //消音解除
+            music.muted = false;
+        }
+    
+        function loop_true() { //ループ再生ON
+            music.loop = true;
+        }
+    
+        function loop_false(){ //ループ再生OFF
+            music.loop = false;
+        }
+    
+        
+    
+        function ended(){ //再生終了しているか
+            if(music.ended){
+                alert("再生終了しています");
+            }else{
+                alert("再生前、もしくは再生中です");
+            }
+        }
+    
+        stop.disabled = true;
+        play.disabled = true;
+        first.disabled = true;
+        all_stop.disabled = true;
+        select.disabled = false;
+
+        // 一時停止ボタンをクリックしたときに発生するイベントリスナー
+        stop.addEventListener('click',music_stop);
+        // 再生ボタンをクリックしたときに発生するイベントリスナー
+        play.addEventListener('click',music_play);
+        // 最初に戻るボタンをクリックした時に発生するイベントリスナー
+        first.addEventListener('click',first_time);
+        // 停止ボタンをクリックしたときに発生するイベントリスナー
+        all_stop.addEventListener('click',all_stop2);
+        // 選曲ボタンをクリックした時に発生するイベントリスナー
+        select.addEventListener('click',select_tune);
+
+    
+
+
+</script>
+</body>
+</html>
+</body>
+</html>
