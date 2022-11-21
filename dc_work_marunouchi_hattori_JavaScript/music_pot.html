@@ -9,6 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>自作PodcastWebアプリケーション</title>
   <style>
+
+
         #display_title {
             width:500px;
             background-color:#E0A0FF;
@@ -24,6 +26,27 @@
             font-size:40px;
         }
 
+        .music1 {
+            width:280px;
+            font-size:16px;
+            background-color:#FFFFAC;
+            color:#00F;
+            margin:auto;
+            margin-left:100px;
+        }
+
+        .music_on {
+            width:500px;
+            margin-top:10px;
+        }
+        .button1 {
+            width:90px;
+            height:50px;
+            background-color:#7FF1D6;
+            color:#F0F;
+        }
+        
+
   </style>
   <!-- jQueryライブラリの読み込み -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -31,8 +54,8 @@
 <body>
     <div id="display_title">曲のタイトル</div>
     <div id="display_musician">歌手名</div> 
-
-    <div>
+    <p class="music1">再生、一時停止、停止、選曲ボタン</p>
+    <div class="music_on">
         <input type="button" id="stop" name="stop" class="button1" value="一時停止" >
         <input type="button" id="play" name="play" class="button1" value="再生">
         <input type="button" id="first" name="first" class="button1" value="最初へ">
@@ -40,23 +63,30 @@
         <input type="button" id="select" name="select" class="button1" value="選曲">
     </div>
 
+    <!--  改善ポイント
     <div>
         <button onclick="volume_down()">-</button>
         <button onclick="volume_up()">+</button>
         <button onclick="mute_true()">消音</button>
         <button onclick="mute_false()">消音解除</button>
     </div>
+    -->
 
     <script language="javascript" type="text/javascript">
-        var music = new Audio(); //変数作成
+        const music = new Audio(); //変数作成
         // 曲リスト配列
-        const array1 = ['like @ Angel/黒夢/like@angel.mp3','Secret Night/WANDS/Secret.mp3','なぜ/Hysteric Blue/naze.mp3','Out Of The Blue/乃木坂46/Out of the blue.mp3','Last Love Song/GARNET CROW/lastlovesong.mp3','クリスタルゲージ/GARNET CROW/クリスタルゲージ.mp3','能動的３分間/東京事変/能動的三分間.mp3','タマシイレボリューション/Superfly/タマシイレボリューション.mp3','二人セゾン/欅坂46/二人セゾン.mp3','Miss Moonlight/黒夢/Miss MOONLIGHT.mp3','SURREAL/浜崎あゆみ/SURREAL.mp3'];
+        const array1 = ['like @ Angel/黒夢/like@angel.mp3','なぜ/Hysteric Blue/naze.mp3','Out Of The Blue/乃木坂46/Out of the blue.mp3','Last Love Song/GARNET CROW/lastlovesong.mp3','クリスタルゲージ/GARNET CROW/クリスタルゲージ.mp3','能動的３分間/東京事変/能動的三分間.mp3','タマシイレボリューション/Superfly/タマシイレボリューション.mp3','二人セゾン/欅坂46/二人セゾン.mp3','Miss Moonlight/黒夢/Miss MOONLIGHT.mp3','SURREAL/浜崎あゆみ/SURREAL.mp3','Last smile/LOVE PSYCHEDELICO/Last Smile.mp4','忘却の空/SADS/忘却の空.mp4','M/浜崎あゆみ/M.mp4','lost Angel/day after tomorrow/lost angel.mp3','futurity/day after tomorrow/futurity.mp3','SLOW LOVE/ICE/slow love.mp3','Love Makes Me Run/ICE/Love Makes Me Run.mp3','GET DOWN GET DOWN GET DOWN/ICE/GET DOWN.mp3','flo jack/m-flo/flo jack.mp4','Springtime kiss/COSA NOSTRA/Springtime Kiss.mp3','Jolie/COSA NOSTRA/JOLIE.mp3','come again/m-flo/come again.mp4','YAY/moumoon/YAY.mp3','柊/Do As Infinity/Hiiragi.mp3','蛍火/RYTHEM/Hotarubi.mp3','Colourful/NIKIIE/Colourful.mp3','BAD COMUNICATION/B\'z/BAD COMMUNICATION.mp3','My faith/day after tomorrow/My faith.mp3','カナリア/NIKIIE/カナリア.mp3','Living For Tomorrow/COSA NOSTRA/Living For Tomorrow.mp3','Share Your Love/COSA NOSTRA/Share Your Love.mp3'];
         // 配列の長さ
         const num = array1.length;
+        // 乱数の定義
         let secret_number = 0;
+        // 配列2の定義
         let array2 = array1[secret_number].split('/');
+        // 曲名の定義
         let play_title = array2[0];
+        // ミュージシャンの定義
         let musician = array2[1];
+        // 音楽ファイルの変数定義
         let file = array2[2];
         
         const stop = document.getElementById('stop');
@@ -85,6 +115,8 @@
             first.disabled = false;
             all_stop.disabled = false;
             select.disabled = true;
+            colorB();
+            
         }
     
         // 一時停止 
@@ -95,6 +127,7 @@
             first.disabled = false;
             all_stop.disabled = false;
             select.disabled = false;
+            colorA();
         }
 
         // 最初へ戻る
@@ -105,6 +138,7 @@
             first.disabled = true;
             all_stop.disabled = true;
             select.disabled = true;
+            colorB();
         }
 
         //停止
@@ -116,6 +150,9 @@
             first.disabled = true;
             all_stop.disabled = true;
             select.disabled = false;
+            $('#display_title').text('曲のタイトル');
+            $('#display_musician').text('歌手名');
+            colorB();
         }
 
         // 選曲
@@ -133,7 +170,22 @@
             first.disabled = true;
             all_stop.disabled = true;
             select.disabled = false;
+            colorB();
         }
+
+        function colorA(){
+            $('#display_title').css('color','#000');
+            $('#display_title').css('background-color','#FF0');
+            $('#display_musician').css('color','#0F0');
+            $('#display_musician').css('background-color','#00F');
+        }
+        function colorB(){
+            $('#display_title').css('color','#075500');
+            $('#display_title').css('background-color','#E0A0FF');
+            $('#display_musician').css('color','#4759F0');
+            $('#display_musician').css('background-color','#E0A0FF');
+        }
+
     
         function volume_down() { //音量ダウン
             music.volume = music.volume - 0.1; //音量の値を0.1(10%)ずつダウン
@@ -186,11 +238,6 @@
         // 選曲ボタンをクリックした時に発生するイベントリスナー
         select.addEventListener('click',select_tune);
 
-    
-
-
-</script>
-</body>
-</html>
+    </script>
 </body>
 </html>

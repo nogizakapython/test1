@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web簡易ピアノ</title>
+  
+</head>
+<body>
+  <!-- 簡易ピアノ -->
+  <div class="piano">
+    <!-- 音名表示 -->
+    <div class="music">
+      <h1 id="display"></h1>
+    </div>
+    <!-- キーボード表示 -->
+    <div id="autostart">自動演奏</div>
+      <script>
+        const autostart = document.getElementById('autostart');
+        // AudioContext オブジェクトを新しく作成
+        let audioCtx;
+        let timer;
+        let flag;
+
+        function check(){
+          if(flag == false){
+            flag = true;
+            autostart.textContent = "演奏停止";
+          } else {
+            flag = false;
+            autostart.textContent = "自動演奏";
+          }
+          test1(flag);
+          
+        }
+
+
+        function test1(flag){
+            audioCtx = new AudioContext();
+            let oscillator = audioCtx.createOscillator();
+            oscillator.type = 'square';
+            oscillator.frequency.setValueAtTime(280, audioCtx.currentTime); 
+            oscillator.connect(audioCtx.destination);
+            if ( flag == false){
+              setTimeout(function () {
+                oscillator.stop();
+                clearInterval(timer);
+              },0);  
+            } else {
+              timer = setInterval(oscillator.start(),100);
+              setTimeout(function () {
+                oscillator.stop();
+                clearInterval(timer);
+              },1000);  
+            }
+        }
+        
+               
+        
+            
+          
+        autostart.addEventListener('click',check);
+      </script>
+    </div>
+  </div>  
+</body>
+</html>
