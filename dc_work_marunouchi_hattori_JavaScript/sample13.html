@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <title>CodePen - Mario BGM-fix</title>
+  
+  
+  
+  
+<style>
+h1, p {
+  text-align: center;
+}
+
+#btn {
+  display: flex;
+  justify-content: center;
+}
+
+#btn div {
+  font-size: 25px;
+  line-height: 1em;
+  background: #eee;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  width: 90px;
+  padding: 30px 0;
+  display: block;
+  margin: 0 10px;
+ 
+}
+
+#btn div:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+</style>
+
+  
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <h1>マリオBGM</h1>
+<div id="btn">
+   <div id="play">Play</div>
+   <div id="stop">Stop</div>
+</div>
+
+<p>※注：音が出ます！</p>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/tone/13.1.25/Tone.js'></script>
+      <script id="rendered-js" >
+//DOM
+const btn = document.getElementById("btn");
+const play = document.getElementById("play");
+const stop = document.getElementById("stop");
+
+//STOPボタン非表示
+stop.style.display = "none";
+
+//メロディ
+//イントロ
+const intro = [
+'E5', 'E5', null, 'E5',
+null, 'C5', 'E5', null,
+'G5', null, null, null,
+'G4', null, null, null];
+
+
+//Aメロ
+const A1 = [
+'c5', null, null, 'G4',
+null, null, 'E4', null,
+null, 'A4', null, 'B4',
+null, 'A#4', 'A4', null];
+
+const A2 = [
+'G4', 'C5', 'E5', 'A5',
+null, 'F5', null, 'G5',
+null, 'E5', null, 'C5',
+'D5', 'B4', null, null];
+
+
+//Bメロ
+const B1 = [
+null, null, 'G5', 'F#5',
+'F5', 'D5#', null, 'E5',
+null, 'G4', 'A4', 'C5',
+null, 'A4', 'C5', 'D5'];
+
+const B2 = [
+null, null, 'G5', 'F#5',
+'F5', 'D5', null, 'E5',
+null, 'C6', null, 'C6',
+'C6', null, null, null];
+
+const B3 = [
+null, null, 'D#5', null,
+null, 'D5', null, null,
+'C5', null, null, null,
+null, null, null, null];
+
+
+//Cメロ
+const C1 = [
+'C5', 'C5', null, 'C5',
+null, 'C5', 'D5', null,
+'E5', 'C5', null, 'A4',
+'G4', null, null, null];
+
+const C2 = [
+'C5', 'C5', null, 'C5',
+null, 'C5', 'D5', 'E5',
+null, null, null, null,
+null, null, null, null];
+
+
+//Dメロ
+const D1 = [
+'E5', 'C5', null, 'G4',
+null, null, 'G#4', null,
+'A4', 'F5', null, 'F5',
+'A4', null, null, null];
+
+const D2 = [
+'B4', 'A5', null, 'A5',
+'A5', 'G5', null, 'F5',
+'E5', 'C5', null, 'A4',
+'G4', null, null, null];
+
+const D3 = [
+'B4', 'F5', null, 'F5',
+'F5', 'E5', null, 'D5',
+'C5', null, null, null,
+null, null, null, null];
+
+
+//曲構成
+var melodyLine =
+//イントロ  
+intro.concat(
+//Aメロ
+A1, A2, A1, A2,
+//Bメロ
+B1, B2, B1, B3,
+B1, B2, B1, B3,
+//Cメロ
+C1, C2, C1, intro,
+//Aメロ
+A1, A2, A1, A2,
+//Dメロ
+D1, D2, D1, D3,
+D1, D2, D1, D3,
+//Cメロ
+C1, C2, C1);
+
+
+//音源オプション
+const option = {
+  envelope: {
+    attack: 0.05,
+    decay: 0.05,
+    sustain: 0.5,
+    release: 3 },
+
+  portamento: 0.1,
+  volume: -20 };
+
+
+// エフェクト（リバーブ）
+const reverb = new Tone.Freeverb(0.8, 500).toMaster();
+
+
+//再生ボタン
+play.addEventListener("click", function () {
+
+  //ボタン表示切替
+  play.style.display = "none";
+  stop.style.display = "block";
+
+  //音源
+  const synth = new Tone.MonoSynth(option).toMaster();
+
+  // シンセとエフェクトを接続
+  synth.connect(reverb);
+
+  //8分音符で再生
+  function setPlay(time, note) {synth.triggerAttackRelease(note, '8n', time);
+  }
+
+
+  //メロディをセット  
+  const melody = new Tone.Sequence(setPlay, melodyLine);
+
+  //メロディ再生
+  melody.start();
+
+  //ループ回数
+  melody.loop = 1;
+
+  //テンポ
+  Tone.Transport.bpm.value = 400;
+
+  //再生実行
+  Tone.Transport.start();
+
+}, false);
+
+
+//停止ボタン
+stop.addEventListener("click", function () {
+
+  //ボタン表示切替
+  stop.style.display = "none";
+  play.style.display = "block";
+
+  //停止実行
+  Tone.Transport.stop();
+  //イベントクリア
+  Tone.Transport.cancel();
+
+}, false);
+//# sourceURL=pen.js
+    </script>
+
+  
+
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-550eae0ce567d3d9182e33cee4e187761056020161aa87e3ef74dc467972c555.js"></script>
+</body>
+
+</html>

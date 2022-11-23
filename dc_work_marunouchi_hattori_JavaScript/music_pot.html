@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <!-- 新規作成 2022/11/20 -->
+<!-- 機能追加 2022/11/23(音量の調節機能) -->
+<!-- 再生終了ボタンを追加 2022/11/23 -->
 <!-- music Pot -->
 <!-- お気に入りの曲を流すWebアプリ -->
 <html lang="ja">
@@ -7,7 +9,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>自作PodcastWebアプリケーション</title>
+  <title>自作Webオーディオアプリ</title>
   <style>
 
 
@@ -31,8 +33,8 @@
             font-size:16px;
             background-color:#FFFFAC;
             color:#00F;
-            margin:auto;
-            margin-left:100px;
+            margin-top:10px;
+            margin-left:80px;
         }
 
         .music_on {
@@ -44,6 +46,52 @@
             height:50px;
             background-color:#7FF1D6;
             color:#F0F;
+        }
+
+        .music2 {
+            width:320px;
+            font-size:16px;
+            background-color:#EEAF90;
+            color:#70F;
+            margin-top:10px;
+            margin-left:80px;
+        }
+
+        .sound_on {
+            width:500px;
+            margin-top:10px;
+            margin-left:30px;
+        }
+        .button2 {
+            width:90px;
+            height:50px;
+            background-color:#0A5;
+            color:#FF0;
+        }
+
+        .music3 {
+            width:180px;
+            font-size:16px;
+            background-color:#FF91FF;
+            color:#05C;
+            margin-top:10px;
+            margin-left:80px;
+           
+        }
+
+        .sound_end {
+            width:120px;
+            height:60px;
+            margin-top:20px;
+            margin-left:100px;
+        }
+        .sound_end .button3 {
+            width:90%;
+            height:50px;
+            padding:10px 10px 10px 10px;
+            background-color:#F2F;
+            color:#417826;
+            font-size:14px;
         }
         
 
@@ -63,19 +111,24 @@
         <input type="button" id="select" name="select" class="button1" value="選曲">
     </div>
 
-    <!--  改善ポイント
-    <div>
-        <button onclick="volume_down()">-</button>
-        <button onclick="volume_up()">+</button>
-        <button onclick="mute_true()">消音</button>
-        <button onclick="mute_false()">消音解除</button>
+    <p class="music2">音量の上げ下げ、ミュート、ミュート解除</p>
+    
+    <div class="sound_on">
+        <input type="button" id="up" name="up" class="button2" value="+" >
+        <input type="button" id="down" name="down" class="button2" value="-" >
+        <input type="button" id="mute" name="mute" class="button2" value="消音" >
+        <input type="button" id="s_mute" name="s_mute" class="button2" value="消音解除" >
     </div>
-    -->
+    <p class="music3">再生終了確認</p>
+    <div class="sound_end">
+        <input type="button" id="musicend" name="musicend" class="button3" value="再生終了確認" >
+    </div>
+    
 
     <script language="javascript" type="text/javascript">
         const music = new Audio(); //変数作成
         // 曲リスト配列
-        const array1 = ['like @ Angel/黒夢/like@angel.mp3','なぜ/Hysteric Blue/naze.mp3','Out Of The Blue/乃木坂46/Out of the blue.mp3','Last Love Song/GARNET CROW/lastlovesong.mp3','クリスタルゲージ/GARNET CROW/クリスタルゲージ.mp3','能動的３分間/東京事変/能動的三分間.mp3','タマシイレボリューション/Superfly/タマシイレボリューション.mp3','二人セゾン/欅坂46/二人セゾン.mp3','Miss Moonlight/黒夢/Miss MOONLIGHT.mp3','SURREAL/浜崎あゆみ/SURREAL.mp3','Last smile/LOVE PSYCHEDELICO/Last Smile.mp4','忘却の空/SADS/忘却の空.mp4','M/浜崎あゆみ/M.mp4','lost Angel/day after tomorrow/lost angel.mp3','futurity/day after tomorrow/futurity.mp3','SLOW LOVE/ICE/slow love.mp3','Love Makes Me Run/ICE/Love Makes Me Run.mp3','GET DOWN GET DOWN GET DOWN/ICE/GET DOWN.mp3','flo jack/m-flo/flo jack.mp4','Springtime kiss/COSA NOSTRA/Springtime Kiss.mp3','Jolie/COSA NOSTRA/JOLIE.mp3','come again/m-flo/come again.mp4','YAY/moumoon/YAY.mp3','柊/Do As Infinity/Hiiragi.mp3','蛍火/RYTHEM/Hotarubi.mp3','Colourful/NIKIIE/Colourful.mp3','BAD COMUNICATION/B\'z/BAD COMMUNICATION.mp3','My faith/day after tomorrow/My faith.mp3','カナリア/NIKIIE/カナリア.mp3','Living For Tomorrow/COSA NOSTRA/Living For Tomorrow.mp3','Share Your Love/COSA NOSTRA/Share Your Love.mp3'];
+        const array1 = ['like @ Angel/黒夢/like@angel.mp3','なぜ/Hysteric Blue/naze.mp3','Out Of The Blue/乃木坂46/Out of the blue.mp3','Last Love Song/GARNET CROW/lastlovesong.mp3','クリスタルゲージ/GARNET CROW/クリスタルゲージ.mp3','能動的３分間/東京事変/能動的三分間.mp3','タマシイレボリューション/Superfly/タマシイレボリューション.mp3','二人セゾン/欅坂46/二人セゾン.mp3','Miss Moonlight/黒夢/Miss MOONLIGHT.mp3','SURREAL/浜崎あゆみ/SURREAL.mp3','Last smile/LOVE PSYCHEDELICO/Last Smile.mp4','忘却の空/SADS/忘却の空.mp4','M/浜崎あゆみ/M.mp4','lost Angel/day after tomorrow/lost angel.mp3','futurity/day after tomorrow/futurity.mp3','SLOW LOVE/ICE/slow love.mp3','Love Makes Me Run/ICE/Love Makes Me Run.mp3','GET DOWN GET DOWN GET DOWN/ICE/GET DOWN.mp3','flo jack/m-flo/flo jack.mp4','Springtime kiss/COSA NOSTRA/Springtime Kiss.mp3','Jolie/COSA NOSTRA/JOLIE.mp3','come again/m-flo/come again.mp4','YAY/moumoon/YAY.mp3','柊/Do As Infinity/Hiiragi.mp3','蛍火/RYTHEM/Hotarubi.mp3','Colourful/NIKIIE/Colourful.mp3','BAD COMUNICATION/B\'z/BAD COMMUNICATION.mp3','My faith/day after tomorrow/My faith.mp3','カナリア/NIKIIE/カナリア.mp3','Living For Tomorrow/COSA NOSTRA/Living For Tomorrow.mp3','Share Your Love/COSA NOSTRA/Share Your Love.mp3','DAYS/FLOW/DAYS.mp4','キライでも好き アイシテル/BRIGHT/キライでも好き アイシテル.mp3','Nostalgia/浜田麻里/Nostalgia.mp3'];
         // 配列の長さ
         const num = array1.length;
         // 乱数の定義
@@ -88,6 +141,8 @@
         let musician = array2[1];
         // 音楽ファイルの変数定義
         let file = array2[2];
+        // timer変数
+        let timer;
         
         const stop = document.getElementById('stop');
         const play = document.getElementById('play');
@@ -96,11 +151,15 @@
         const select = document.getElementById('select');
         const display_title = document.getElementById('display_title');
         const display_musician = document.getElementById('display_musician');
-        
+        const up = document.getElementById('up');
+        const down = document.getElementById('down');
+        const mute = document.getElementById('mute');
+        const s_mute = document.getElementById('s_mute');
+        const musicend = document.querySelector('#musicend');
 
 
         music.src = `./sound/${file}`; //音声ファイル指定
-        music.volume = 0.5; //音量の初期値(50%)
+        music.volume = 0.4; //音量の初期値(50%)
 
         
     
@@ -116,6 +175,7 @@
             all_stop.disabled = false;
             select.disabled = true;
             colorB();
+          
             
         }
     
@@ -153,6 +213,7 @@
             $('#display_title').text('曲のタイトル');
             $('#display_musician').text('歌手名');
             colorB();
+            music.ended = true;
         }
 
         // 選曲
@@ -187,20 +248,26 @@
         }
 
     
-        function volume_down() { //音量ダウン
+        function music_up() { //音量アップ
+            music.volume = music.volume + 0.1; //音量の値を0.1(10%)ずつアップ
+        }
+        
+        function music_down() { //音量ダウン
             music.volume = music.volume - 0.1; //音量の値を0.1(10%)ずつダウン
         }
     
-        function volume_up() { //音量アップ
-            music.volume = music.volume + 0.1; //音量の値を0.1(10%)ずつアップ
-        }
+        
     
-        function mute_true() { //消音
+        function mute1() { //消音
             music.muted = true;
+            mute.disabled = true;
+            s_mute.disabled = false;
          }
     
-        function mute_false() { //消音解除
+        function mute2() { //消音解除
             music.muted = false;
+            mute.disabled = false;
+            s_mute.disabled = true;
         }
     
         function loop_true() { //ループ再生ON
@@ -216,7 +283,13 @@
         function ended(){ //再生終了しているか
             if(music.ended){
                 alert("再生終了しています");
-            }else{
+                stop.disabled = true;
+                play.disabled = true;
+                first.disabled = true;
+                all_stop.disabled = true;
+                select.disabled = false;
+                
+            } else {
                 alert("再生前、もしくは再生中です");
             }
         }
@@ -226,6 +299,7 @@
         first.disabled = true;
         all_stop.disabled = true;
         select.disabled = false;
+        s_mute.disabled = true;
 
         // 一時停止ボタンをクリックしたときに発生するイベントリスナー
         stop.addEventListener('click',music_stop);
@@ -237,6 +311,16 @@
         all_stop.addEventListener('click',all_stop2);
         // 選曲ボタンをクリックした時に発生するイベントリスナー
         select.addEventListener('click',select_tune);
+        // 音量UPボタンをクリックした時に発生するイベントリスナー
+        up.addEventListener('click',music_up);
+        // 音量downボタンをクリックした時に発生するイベントリスナー
+        down.addEventListener('click',music_down);
+        // ミュートボタンをクリックした時に発生するイベントリスナー
+        mute.addEventListener('click',mute1);
+        // ミュート解除ボタンをクリックした時に発生するイベントリスナー
+        s_mute.addEventListener('click',mute2);
+        // 再生終了確認ボタンをクリックした時に発生するイベントリスナー
+        musicend.addEventListener('click',ended)        
 
     </script>
 </body>

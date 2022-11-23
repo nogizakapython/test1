@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <title>Sound test1</title>
+  
+  
+  
+  
+<style>
+h1, p {
+  text-align: center;
+}
+
+#btn {
+  display: flex;
+  justify-content: center;
+}
+
+#btn div {
+  font-size: 25px;
+  line-height: 1em;
+  background: #eee;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  width: 90px;
+  padding: 30px 0;
+  display: block;
+  margin: 0 10px;
+ 
+}
+
+#btn div:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+</style>
+
+  
+  
+  
+</head>
+
+<body translate="no" >
+  <h1>テストBGM</h1>
+<div id="btn">
+   <div id="play">Play</div>
+   <div id="stop">Stop</div>
+</div>
+
+<p>※注：音が出ます！</p>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/tone/13.1.25/Tone.js'></script>
+  <script id="rendered-js" >
+    //DOM
+  const btn = document.getElementById("btn");
+  const play = document.getElementById("play");
+  const stop = document.getElementById("stop");
+
+  
+  // メロディラインの定義
+  var melodyLine = ""; 
+  //STOPボタン非表示
+  stop.style.display = "none";
+
+  //ドレミの歌のメロディ
+  const tune1_1 = ['C4',null,'C4',null,'G4',null,'G4',null,
+                 'A4',null,'A4',null,'G4','F4',null,'F4',null,'E4',null,'E4',null,'D4',null,
+                  'D4',null,'C4'];
+  const tune1_2 = ['G4',null,'G4',null,'F4',null,'F4',null,
+                  'E4',null,'E4',null,'D4','G4',null,'G4',null,'F4',null,'F4',null,
+                  'E4',null,'E4',null,'D4'];
+
+  const tune1_3 = ['C4',null,'C4',null,'G4',null,'G4',null,
+                    'A4',null,'A4',null,'G4','F4',null,'F4',null,'E4',null,'E4',null,
+                    'D4',null,'D4',null,'C4'];
+
+  //きらきら星の歌のメロディ
+  const tune2_1 = ['C4','D4','E4','C4','D4','E4',
+                    'G4','E4','D4','C4','D4','E4','D4'];
+  const tune2_2 = [ 'C4','D4','E4','C4','D4','E4','G4','E4','D4','C4','D4','E4','C4',
+                    'G4',null,'G4',null,'E4',null,'G4',null];
+  const tune2_3 = ['A4',null,'A4',null,'G4','E4',null,'E4',null,'D4',null,'D4',null,'C4']; 
+
+  //曲構成(ドレミの歌)
+  let doremi = tune1_1.concat(tune1_2,tune1_3);
+
+  //曲構成
+  let kirakira = tune2_1.concat(tune2_2,tune2_3);
+
+  
+  
+//音源オプション
+const option = {
+  envelope: {
+    attack: 0.05,
+    decay: 0.05,
+    sustain: 0.5,
+    release: 3 },
+
+  portamento: 0.1,
+  volume: -20 };
+
+
+// エフェクト（リバーブ）
+const reverb = new Tone.Freeverb(1, 300).toMaster();
+
+
+//再生ボタン
+play.addEventListener("click", function () {
+
+  //ボタン表示切替
+  play.style.display = "none";
+  stop.style.display = "block";
+
+  // 乱数
+  const num = Math.floor(Math.random() * 2);
+
+  if ( num == 0){
+      melodyLine = doremi;
+  } else {
+      melodyLine = kirakira;
+  }
+
+  //音源
+  const synth = new Tone.MonoSynth(option).toMaster();
+
+  // シンセとエフェクトを接続
+  synth.connect(reverb);
+
+  //8分音符で再生
+  function setPlay(time, note) {synth.triggerAttackRelease(note, '4n', time);
+  }
+
+
+  //メロディをセット  
+  const melody = new Tone.Sequence(setPlay, melodyLine);
+
+  //メロディ再生
+  melody.start();
+
+  //ループ回数
+  melody.loop = 0;
+
+  //テンポ
+  Tone.Transport.bpm.value = 300;
+
+  //再生実行
+  Tone.Transport.start();
+
+}, false);
+
+
+//停止ボタン
+stop.addEventListener("click", function () {
+
+  //ボタン表示切替
+  stop.style.display = "none";
+  play.style.display = "block";
+
+  //停止実行
+  Tone.Transport.stop();
+  //イベントクリア
+  Tone.Transport.cancel();
+
+}, false);
+
+    </script>
+
+  
+
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-550eae0ce567d3d9182e33cee4e187761056020161aa87e3ef74dc467972c555.js"></script>
+</body>
+
+</html>

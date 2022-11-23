@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web簡易ピアノ</title>
+  <style>
+    
+    .piano {
+      width: 600px;
+      height:300px;
+      margin-top:20px;
+      background-color:#FFF;
+      padding-top:20px;
+      
+    }
+
+    .piano .music {
+      width:400px;
+      height:100px;
+      background-color: #F799FF;
+      padding-top:30px;
+      margin-top:20px;
+      margin:auto;
+    }
+
+    .music #display {
+      width:95%;
+      text-align:center;
+      font-size:40px;
+      color:#0031FF;
+    }
+
+    .keyboard {
+      width:490px;
+      height:80px;
+      background-color:#FFF;
+      margin:20px auto;
+      display:flex;
+    }
+    .keyboard .key {
+      width:calc(100% / 7 - 10px);
+      height:40px;
+      padding-top:10px;
+      margin-left:5px;
+      margin-right:5px;
+      border-radius:2px #00F;
+      background-color:#FAA;
+      text-align: center;
+      font-size:18px;
+      
+      
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 簡易ピアノ -->
+  <div class="piano">
+    <!-- 音名表示 -->
+    <div class="music">
+      <h1 id="display"></h1>
+    </div>
+    <!-- キーボード表示 -->
+    <div class="keyboard">
+      <div id="C4" class="key">ド</div>
+      <div id="D4" class="key">レ</div>
+      <div id="E4" class="key">ミ</div>
+      <div id="F4" class="key">ファ</div>
+      <div id="G4" class="key">ソ</div>
+      <div id="A4" class="key">ラ</div>
+      <div id="B4" class="key">シ</div>
+    </div>  
+      <script>
+          // AudioContext オブジェクトを新しく作成
+          let audioCtx;
+          // ド(C4)～シ(B4)までのIDからオブジェクトを取得する
+          const C4 = document.getElementById('C4');
+          const D4 = document.getElementById('D4');
+          const E4 = document.getElementById('E4');
+          const F4 = document.getElementById('F4');
+          const G4 = document.getElementById('G4');
+          const A4 = document.getElementById('A4');
+          const B4 = document.getElementById('B4');
+          // 音階を格納する配列を定義する
+          const sound_array = ['ド','レ','ミ','ファ','ソ','ラ','シ'];
+          // 周波数を格納する配列を定義する
+          const hz_array = [261,293,329,349,392,440,493];
+          // 音階表示エリアのオブジェクトを定義する
+          const display = document.getElementById('display');
+          // タイマー変数の定義
+          let timer;
+          // 作動時間の制御
+          let work_time = 0;
+          // 音を鳴らす時間の設定
+          let playing_seconds = 1500;
+          // 音階を表示する時間
+          let display_seconds = 1000;
+          
+         
+          function play(music1,hz){
+            audioCtx = new AudioContext();
+            // 正弦波の音を作成
+            let osc = audioCtx.createOscillator();   
+            //ヘルツ（周波数）指定
+            osc.frequency.value = parseInt(hz);
+            //音の出力先
+            var audioDestination = audioCtx.destination;
+            //出力先のスピーカーに接続
+            osc.connect(audioDestination);
+            
+            timer = setInterval(osc.start(),10);
+            
+            display.textContent = music1;
+            setTimeout(function() {
+                    display.textContent = "";
+                    
+            },display_seconds);
+            setTimeout(function()  {
+                    osc.stop();
+                    clearInterval(timer)
+            },playing_seconds);
+            
+             
+          }  
+
+             
+
+          // ピアノの音階をクリック
+          C4.addEventListener('click',function() {
+            const d = sound_array[0];
+            const h = hz_array[0];
+            play(d,h);
+          },false);
+
+          D4.addEventListener('click',function() {
+            const d = sound_array[1];
+            const h = hz_array[1];
+            play(d,h);
+          },false);
+          
+          E4.addEventListener('click',function() {
+            const d = sound_array[2];
+            const h = hz_array[2];
+            play(d,h);
+          },false);
+          
+          F4.addEventListener('click',function() {
+            const d = sound_array[3];
+            const h = hz_array[3];
+            play(d,h);
+          },false);
+          
+          G4.addEventListener('click',function() {
+            const d = sound_array[4];
+            const h = hz_array[4];
+            play(d,h);
+          },false);
+          
+          A4.addEventListener('click',function() {
+            const d = sound_array[5];
+            const h = hz_array[5];
+            play(d,h);
+          },false);
+          
+          B4.addEventListener('click',function() {
+            const d = sound_array[6];
+            const h = hz_array[6];
+            play(d,h);
+          },false);
+          
+          
+
+
+
+          
+
+
+      </script>
+    </div>
+  </div>  
+</body>
+</html>

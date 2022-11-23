@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="Tone.js Melody">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://unpkg.com"></script>
+  <title>TEST</title>
+</head>
+<body>
+ <button id="play" onClick="play_music();">Play!</button>
+ <script>
+  var synth = new Tone.Synth().toMaster();
+  var melody_data = [
+    'E5', 'C5', 'G4', 'C5', 'D5', 'G5', null, 'G4',
+    'D5', 'E5', 'D5', 'G4', 'C5', null, null, null
+  ];
+  function addMelody(time, note) {
+    synth.triggerAttackRelease(note, '8n', time);
+  }
+  var melody = new Tone.Sequence(addMelody, melody_data).start();
+  Tone.Transport.bpm.value = 140
+
+  function play_music() {
+    Tone.Transport.start();
+  }
+ </script>
+</body>
+</html>

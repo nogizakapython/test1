@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tone.js利用テスト</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.8.25/Tone.js"></script>
+</head>
+<body>
+  <!-- 簡易ピアノ -->
+  <div class="piano">
+    <!-- 音名表示 -->
+    <div class="music">
+      <h1 id="display"></h1>
+    </div>
+    <!-- キーボード表示 -->
+    <div class="keyboard">
+      <div id="C4" class="key">ド</div>
+      <div id="D4" class="key">レ</div>
+      <div id="E4" class="key">ミ</div>
+      <div id="F4" class="key">ファ</div>
+      <div id="G4" class="key">ソ</div>
+      <div id="A4" class="key">ラ</div>
+      <div id="B4" class="key">シ</div>
+    </div>
+  </div>
+  <div class="auto">    
+    <input type="button" id="autoplay" name="autoplay" value="自動演奏">
+  </div>
+  <script>
+      // Tone.jsのオブジェクトを宣言し、インスタンスを呼び出す
+      const synth = new Tone.Synth().toMaster();
+      // ド(C4)～シ(B4)までのIDから要素を取得する
+      const C4 = document.getElementById('C4');
+      const D4 = document.getElementById('D4');
+      const E4 = document.getElementById('E4');
+      const F4 = document.getElementById('F4');
+      const G4 = document.getElementById('G4');
+      const A4 = document.getElementById('A4');
+      const B4 = document.getElementById('B4');
+      // 自動演奏ボタンの要素を取得する
+      const autoplay = document.querySelector('#autoplay');
+      // 音階表示エリアのオブジェクトを定義する
+      const display = document.documentElement('display');
+      // タイマー変数の定義
+      let timer;
+      // 音を鳴らす時間の設定
+      let playing_seconds = 1500;
+      // 音階を表示する時間
+      let display_seconds = 1000;
+  </script>  
+</body>
+</html>

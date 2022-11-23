@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自動演奏テスト</title>
+  <style>
+    #auto1 {
+      width:200px;
+      color:#808008;
+      background-color:#FFFF00;
+    }
+  </style>
+  <!-- Tone.jsを下記のURLサイトから読み込む -->
+	
+</head>
+<body>
+  <div id="auto1">自動演奏</div>
+  <script>
+    import Tone from "tone";
+
+    const synth = new Tone.Synth().toMaster();
+
+    // note:ドレミなどの音階を指定
+    // dur:「4n」->「♩」(四分音符)、「8n」->「♪」(八分音符)
+    // nullだと休符
+    const data = [
+      { note: "E4", dur: 1 },
+      { note: "F4", dur: 0.5 },
+      { note: "G4", dur: 1 },
+      { note: "G4", dur: 0.25 },
+      { note: null, dur: 0.5},
+      { note: "E4", dur: 0.5 },
+      { note: "G4", dur: 0.5 },
+      { note: "C5", dur: 1 },
+      { note: null,  dur:0.5 },
+      { note: "E5", dur: "8n" },
+      { note: "E5", dur: "8n" },
+      { note: "D5", dur: "2n" }
+    ];
+
+    const seq = new Tone.Sequence((time, { note, dur }) => {
+      synth.triggerAttackRelease(note, dur, time);
+      }, data, "4n").start(0);
+      seq.loop = false;
+      Tone.Transport.bpm.value = 150; // テンポ
+
+    document.querySelector('#auto1').addEventListener("click", e => {
+      synth.triggerAttackRelease("C4", "8n");
+    });
+    
+  </script>
+</body>
+</html>
