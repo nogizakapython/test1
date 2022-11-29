@@ -94,7 +94,7 @@
       <div id="G4" class="key">ソ</div>
       <div id="A4" class="key">ラ</div>
       <div id="B4" class="key">シ</div>
-      <div id="C5" class="key">ド</div>
+      <!-- <div id="C5" class="key">ド</div> -->
     </div>  
     <div class="button1">
       <input type="button" id="autoplay" name="autoplay" class="but1" value="自動演奏">
@@ -112,16 +112,16 @@
       const G4 = document.getElementById('G4');
       const A4 = document.getElementById('A4');
       const B4 = document.getElementById('B4');
-      const C5 = document.getElementById('C5');
+      // const C5 = document.getElementById('C5');
       // 自動演奏ボタンの定義
       const autoplay = document.getElementById('autoplay');
       // 演奏中止ボタンのオブジェクトを取得する
       const autostop = document.getElementById('autostop');
       autostop.style.display = 'none';
       // 音階を格納する配列を定義する
-      const sound_array = ['ド','レ','ミ','ファ','ソ','ラ','シ','ド(高音)'];
+      const sound_array = ['ド','レ','ミ','ファ','ソ','ラ','シ',''];
       // 周波数を格納する配列を定義する
-      const hz_array = [261,293,329,349,392,440,493,523];
+      const hz_array = [261,293,329,349,392,440,493,1];
       // 音階表示エリアのオブジェクトを定義する
       const display = document.getElementById('display');
       // タイマー変数の定義
@@ -134,16 +134,33 @@
       let display_seconds = 1000;
           
          
-      function play(music1,hz){
+      function play(music1){
             audioCtx = new AudioContext();
             // 正弦波の音を作成
-            let osc = audioCtx.createOscillator();   
-            //ヘルツ（周波数）指定
-            osc.frequency.value = parseInt(hz);
+            var osc = audioCtx.createOscillator();   
+            
             //音の出力先
             var audioDestination = audioCtx.destination;
             //出力先のスピーカーに接続
             osc.connect(audioDestination);
+
+            if (music1 == "ド"){
+              osc.frequency.value = hz_array[0];
+            } else if (music1 == "レ"){
+              osc.frequency.value = hz_array[1];
+            } else if (music1 == "ミ"){
+              osc.frequency.value = hz_array[2];
+            } else if (music1 == "ファ"){
+              osc.frequency.value = hz_array[3];
+            } else if (music1 == "ソ"){
+              osc.frequency.value = hz_array[4];
+            } else if (music1 == "ラ"){
+              osc.frequency.value = hz_array[5]; 
+            } else if (music1 == "シ"){
+              osc.frequency.value = hz_array[6];  
+            }
+
+
             
             timer = setInterval(osc.start(),250);
             
@@ -166,52 +183,38 @@
 
       // ピアノの音階をクリック
       C4.addEventListener('click',function() {
-          const d = sound_array[0];
-          const h = hz_array[0];
-          play(d,h);
+         play(sound_array[0]);
       },false);
 
       D4.addEventListener('click',function() {
-        const d = sound_array[1];
-        const h = hz_array[1];
-        play(d,h);
+         play(sound_array[1]);
       },false);
           
       E4.addEventListener('click',function() {
-        const d = sound_array[2];
-        const h = hz_array[2];
-        play(d,h);
+        play(sound_array[2]);
+        
       },false);
           
       F4.addEventListener('click',function() {
-        const d = sound_array[3];
-        const h = hz_array[3];
-        play(d,h);
+        play(sound_array[3]);
       },false);
           
       G4.addEventListener('click',function() {
-        const d = sound_array[4];
-        const h = hz_array[4];
-        play(d,h);
+        play(sound_array[4]);
+        
       },false);
           
       A4.addEventListener('click',function() {
-        const d = sound_array[5];
-        const h = hz_array[5];
-        play(d,h);
+        play(sound_array[5]);
+        
       },false);
           
       B4.addEventListener('click',function() {
-        const d = sound_array[6];
-        const h = hz_array[6];
-        play(d,h);
+        play(sound_array[6]);
+        
       },false);
           
-      C5.addEventListener('click',function() {
-        const d = sound_array[7];
-        const h = hz_array[7];
-        play(d,h);
-      },false);
+      
           
       autoplay.addEventListener('click',function() {
         C4.style.visibility = 'hidden';
@@ -226,7 +229,7 @@
       },false);    
 
       function autoplay1() {
-        const array3 = [0,2,4,7,7,4,2,0];
+        const array3 = [0,2,4,7];
         
         for(let j=0;j<array3.length;j++){
             if (array3[j] == 99){

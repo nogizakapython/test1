@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web簡易ピアノ</title>
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Tone.jsを下記のURLサイトから読み込む -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.1.25/Tone.js"></script>
+  <!-- CSSファイルの定義 -->
+  <style>
+    
+    .piano {
+      width: 500px;
+      height:200px;
+      margin-top:20px;
+      background-color:#FFF;
+      padding-top:20px;
+      
+    }
+
+    .piano .music {
+      width:400px;
+      height:100px;
+      background-color: #F799FF;
+      padding-top:30px;
+      margin-top:20px;
+      margin:auto;
+    }
+
+    .music #display {
+      width:95%;
+      text-align:center;
+      font-size:40px;
+      color:#0031FF;
+    }
+
+    .keyboard {
+      width:490px;
+      height:70px;
+      background-color:#FFF;
+      margin:20px auto;
+      display:flex;
+    }
+
+    .keyboard .key {
+      width:calc(100% / 7 - 10px);
+      height:40px;
+      padding-top:10px;
+      margin-left:5px;
+      margin-right:5px;
+      border-radius:2px #00F;
+      background-color:#FAA;
+      text-align: center;
+      font-size:18px;
+    }
+
+    .autobutton {
+      margin-top:20px;
+      display:flex;
+      justify-content: center;
+    }
+
+    .autobutton .button1  {
+      width:150px;
+      height:35px;
+      padding-top:8px;
+      padding-left:8px;
+      margin-left:5px;
+      margin-right:5px;
+      border-color :2px #000;
+      background-color:#0AA;
+      color:#80F;
+      text-align: center;
+      font-size:15px;
+      display:block;
+    }
+    .disable-div {
+      pointer-events: none;
+    }
+  </style>
+	</head>
+	<body>
+		<!-- 簡易ピアノ -->
+    <div class="piano">
+      <!-- 音名表示 -->
+      <div class="music">
+        <h1 id="display"></h1>
+      </div>
+      <!-- キーボード表示 -->
+      <div class="keyboard">
+        <div id="C4" class="key">ド</div>
+        <div id="D4" class="key">レ</div>
+        <div id="E4" class="key">ミ</div>
+        <div id="F4" class="key">ファ</div>
+        <div id="G4" class="key">ソ</div>
+        <div id="A4" class="key">ラ</div>
+        <div id="B4" class="key">シ</div>
+      </div>
+      <div class="autobutton">    
+		    <input type="button" id="autoplay1" name="autoplay" class="button1" value="自動演奏">
+        <input type="button" id="autostop1" name="autostop" class="button1" value="演奏中止">
+      </div>
+    </div>    
+    <script>
+      
+      
+      // AudioContext オブジェクトを新しく作成
+      var synth = new Tone.FMSynth().toMaster();;
+      // ド(C4)～シ(B4)までのIDから要素を取得する
+      const C4 = document.getElementById('C4');
+      const D4 = document.getElementById('D4');
+      const E4 = document.getElementById('E4');
+      const F4 = document.getElementById('F4');
+      const G4 = document.getElementById('G4');
+      const A4 = document.getElementById('A4');
+      const B4 = document.getElementById('B4');
+      // 自動演奏ボタンの要素を取得する
+      const autoplay1 = document.querySelector('#autoplay1');
+      // 自動演奏ストップボタンの要素を取得する
+      const autostop1 = document.querySelector('#autostop1');
+      // 音階表示エリアのオブジェクトを定義する
+      const display = document.getElementById('display');
+      // タイマー変数の定義
+      let timer;
+      // 音を鳴らす時間の設定
+      let playing_seconds = 1.5;
+      // 音階を表示する時間
+      let display_seconds = 1000;
+      // 音を鳴らしている時間
+      let work_time;
+      // 初期ロード時、演奏中止ボタンを非表示にする
+      autostop1.style.visibility = "hidden";
+      
+      function play(msg){
+        // 音階の定義
+        var w_music_deg;
+        var music_deg;
+        // リズムの定義
+        var music_rm;
+        // メッセージの定義
+        var message = null;
+        // 作業用配列
+        var array1 = [];
+        // 自動演奏用タイム変数
+        var work_time;
+         
+               
+        array1 = msg.split('/');
+        w_music_deg = array1[0];
+        music_rm = array1[1];
+        if (w_music_deg == "ド"){
+          music_reg = "C4";
+        } else if (w_music_deg == "レ"){
+          music_reg = "D4";
+        } else if (w_music_deg == "ミ"){
+          music_reg = "E4";
+        } else if (w_music_deg == "ファ"){
+          music_reg = "F4";
+        } else if (w_music_deg == "ソ"){
+          music_reg = "G4";
+        } else if (w_music_deg == "ラ"){
+          music_reg = "A4";
+        } else if (w_music_deg == "シ"){
+          music_reg = "B4";
+        } else if (w_music_deg == null){
+          music_reg = null;
+        }    
+          
+        if (w_music_deg == null ){
+          display.textContent = null;  
+        } else {
+          display.textContent = w_music_deg;
+        }  
+
+               
+        setTimeout(function() {
+            display.textContent = null;
+        },display_seconds);
+
+        //再生実行
+        timer = setInterval(synth.triggerAttackRelease(music_reg,music_rm),50);
+        
+        
+        // 処理待機処理
+        let sleep_time = music_rm * 1000;       
+        sleep(sleep_time);
+        
+        setTimeout(function() {
+          clearInterval(timer);
+        },music_rm);
+        
+        
+              
+      }
+      
+      // スリープ関数
+      function sleep(wait_time){
+        const start_time = new Date();
+        while(true){
+          let now_time = new Date();
+          if (now_time - start_time >= wait_time ){
+            break;
+          } 
+        }  
+      }
+          
+      // 演奏終了関数
+      function music_stop(){
+        $(document).ready(function() {
+            $(".keyboard").removeClass("disable-div");
+        });
+        Tone.Transport.stop();
+        autoplay1.style.visibility = "visible";
+        autostop1.style.visibility = "hidden";
+      }  
+
+     // ピアノの音階をクリック
+      C4.addEventListener('click',function() {
+          play(`ド/${playing_seconds}`);
+      },false);
+
+      D4.addEventListener('click',function() {
+          play(`レ/${playing_seconds}`);
+      },false);
+          
+      E4.addEventListener('click',function() {
+          play(`ミ/${playing_seconds}`);
+            
+      },false);
+          
+      F4.addEventListener('click',function() {
+          play(`ファ/${playing_seconds}`);
+      },false);
+          
+      G4.addEventListener('click',function() {
+          play(`ソ/${playing_seconds}`);
+      },false);
+          
+      A4.addEventListener('click',function() {
+          play(`ラ/${playing_seconds}`);
+          
+      },false);
+          
+      B4.addEventListener('click',function() {
+          play(`シ/${playing_seconds}`);
+      },false);
+          
+      
+      autoplay1.addEventListener('click',async function(){
+        $(document).ready(function() {
+            $(".keyboard").addClass("disable-div");
+        });
+        autoplay1.style.visibility = "hidden";
+        autostop1.style.visibility = "visible";
+        // 乱数の定義
+        const random = Math.floor(Math.random() * 2);
+        if (random == 0){
+          play('ド/0.5');
+          play('null/0.5');
+          play('ド/0.5');
+          play('null/0.5');
+          play('ソ/0.5');
+          play('null/0.5');
+          play('ソ/0.5');
+          play('null/0.5');
+          play('ラ/0.5');
+          play('null/0.5');
+          play('ラ/0.5');
+          play('null/0.5');
+          play('ソ/2');
+          play('ファ/0.5');
+          play('null/0.5');
+          play('ファ/0.5');
+          play('null/0.5');
+          play('ミ/0.5');
+          play('null/0.5');
+          play('ミ/0.5');
+          play('null/0.5');
+          play('レ/0.5');
+          play('null/0.5');
+          play('レ/0.5');
+          play('null/0.5')
+          play('ド/2');
+          play('ソ/0.5');
+          play('null/0.5');
+          play('ソ/0.5');
+          play('null/0.5');
+          play('ファ/0.5');
+          play('null/0.5');
+          play('ファ/0.5');
+          play('null/0.5');
+          play('ミ/0.5');
+          play('null/0.5');
+          play('ミ/0.5');
+          play('null/0.5');
+          play('レ/2');
+          play('ソ/0.5');
+          play('null/0.5');
+          play('ソ/0.5');
+          play('null/0.5');
+          play('ファ/0.5');
+          play('null/0.5');
+          play('ファ/0.5');
+          play('null/0.5');
+          play('ミ/0.5');
+          play('null/0.5');
+          play('ミ/0.5');
+          play('null/0.5');
+          play('レ/2');
+          play('ド/0.5');
+          play('null/0.5');
+          play('ド/0.5');
+          play('null/0.5');
+          play('ソ/0.5');
+          play('null/0.5');
+          play('ソ/0.5');
+          play('null/0.5');
+          play('ラ/0.5');
+          play('null/0.5');
+          play('ラ/0.5');
+          play('null/0.5');
+          play('ソ/2');
+          play('ファ/0.5');
+          play('null/0.5');
+          play('ファ/0.5');
+          play('null/0.5');
+          play('ミ/0.5');
+          play('null/0.5');
+          play('ミ/0.5');
+          play('null/0.5');
+          play('レ/0.5');
+          play('null/0.5');
+          play('レ/0.5');
+          play('null/0.5')
+          play('ド/4');
+
+        } else if (random == 1) {
+          play('ド/0.5');
+          play('レ/0.5');
+          play('ミ/1');
+          play('ド/0.5');
+          play('レ/0.5');
+          play('ミ/1');
+          play('ソ/0.5');
+          play('ミ/0.5');
+          play('レ/0.5');
+          play('ド/0.5');
+          play('レ/0.5');
+          play('ミ/0.5');
+          play('レ/1');
+          play('ド/0.5');
+          play('レ/0.5');
+          play('ミ/1');
+          play('ド/0.5');
+          play('レ/0.5');
+          play('ミ/1');
+          play('ソ/0.5');
+          play('ミ/0.5');
+          play('レ/0.5');
+          play('ド/0.5');
+          play('レ/0.5');
+          play('ミ/0.5');
+          play('ド/1');
+          play('ソ/0.25');
+          play('null/0.25');
+          play('ソ/0.25');
+          play('null/0.25');
+          play('ミ/0.25');
+          play('null/0.25');
+          play('ソ/0.25');
+          play('null/0.25');
+          play('ラ/0.25');
+          play('null/0.25');
+          play('ラ/0.25');
+          play('null/0.25');
+          play('ソ/1');
+          play('ミ/0.25');
+          play('null/0.25');
+          play('ミ/0.25');
+          play('null/0.25');
+          play('レ/0.25');
+          play('null/0.25');
+          play('レ/0.25');
+          play('null/0.25');
+          play('ド/4');
+        }
+        music_stop();
+        
+      });
+      
+      autostop1.addEventListener('click',function(){
+        music_stop();
+      });
+  </script>
+	</body>
+</html>

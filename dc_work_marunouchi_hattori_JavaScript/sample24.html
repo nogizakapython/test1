@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <title>Test 03</title>
+  
+  
+  
+  
+<style>
+h1, p {
+  text-align: center;
+}
+
+#btn {
+  display: flex;
+  justify-content: center;
+}
+
+#btn div {
+  font-size: 25px;
+  line-height: 1em;
+  background: #eee;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  width: 90px;
+  padding: 30px 0;
+  display: block;
+  margin: 0 10px;
+  
+}
+
+#btn div:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+</style>
+
+  
+  
+  
+
+
+
+
+</head>
+
+<body translate="no" >
+  <h1>Test</h1>
+<div id="btn">
+   <div id="play">Play</div>
+   <div id="stop1">Stop</div>
+</div>
+
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tone/13.1.25/Tone.js'></script>
+      <script id="rendered-js" >
+    const btn = document.getElementById("btn");
+    const play = document.getElementById("play");
+    const stop1 = document.getElementById("stop1");
+
+    //STOPボタン非表示
+    stop1.style.display = "none";
+    // メロディライン
+    var melody;
+
+    //きらきら星
+    const kirakira = [
+                      { 'note': 'C4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'A4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'A4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'F4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'F4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'F4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'F4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'F4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'F4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { 'note': 'C4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'A4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'A4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'F4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'F4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": '', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 }
+    ];
+
+    // チューリップの花
+    const turipu = [
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'G4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'E4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'G4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'A4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'A4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'E4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'D4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'D4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 }
+            ];   
+
+
+//再生ボタン
+play.addEventListener("click", function () {
+
+  //ボタン表示切替
+  play.style.display = "none";
+  stop1.style.display = "block";
+
+  //音源
+  const synth = new Tone.AMSynth().toMaster();
+
+  // 乱数の定義
+  const random = Math.floor(Math.random() * 2);
+  
+  
+  
+  
+
+  //再生設定
+  function setPlay(time, note) {synth.triggerAttackRelease(note.note, note.duration, time);}
+
+  //メロディをセット 
+  if (random == 0){  
+    melody = new Tone.Sequence(setPlay, kirakira);
+  } else {
+    melody = new Tone.Sequence(setPlay, turipu);
+  }  
+
+  //メロディ再生
+  melody.start();
+
+  //ループ（デフォルトでfalse）
+  melody.loop = false;
+  
+
+  
+
+  //再生実行
+  Tone.Transport.start();
+
+  timer = setInterval(function() {
+    if (melody.ended){
+        //ボタン表示切替
+        stop1.style.display = "none";
+        play.style.display = "block";
+        //停止実行
+        Tone.Transport.stop();
+        //イベントクリア
+        Tone.Transport.cancel();
+        // タイマーの終了
+        clearInterval(timer);
+    }
+  },1000);
+   
+
+}, false);
+
+
+//停止ボタン
+stop1.addEventListener("click", function () {
+
+  //ボタン表示切替
+  stop1.style.display = "none";
+  play.style.display = "block";
+
+  //停止実行
+  Tone.Transport.stop();
+  //イベントクリア
+  Tone.Transport.cancel();
+
+}, false);
+//# sourceURL=pen.js
+</script>    
+</body>
+
+</html>
+ 

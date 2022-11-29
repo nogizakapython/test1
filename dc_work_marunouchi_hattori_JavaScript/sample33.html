@@ -44,6 +44,7 @@
       margin:20px auto;
       display:flex;
     }
+
     .keyboard .key {
       width:calc(100% / 7 - 10px);
       height:40px;
@@ -75,14 +76,10 @@
       text-align: center;
       font-size:15px;
       display:block;
-      
-      
     }
     .disable-div {
       pointer-events: none;
     }
-
-
   </style>
 	</head>
 	<body>
@@ -111,7 +108,7 @@
       
       
       // AudioContext オブジェクトを新しく作成
-      var synth;
+      var synth = new Tone.FMSynth().toMaster();
       // ド(C4)～シ(B4)までのIDから要素を取得する
       const C4 = document.getElementById('C4');
       const D4 = document.getElementById('D4');
@@ -132,201 +129,141 @@
       let playing_seconds = 1.5;
       // 音階を表示する時間
       let display_seconds = 1000;
-      // 演奏曲のメロディライン配列
-      var music_note;
-      // プレイリストの変数設定
-      var playlist;
+      // 音を鳴らしている時間
+      let work_time;
       // 初期ロード時、演奏中止ボタンを非表示にする
       autostop1.style.visibility = "hidden";
       
-      // 曲2のメロディ
-      const tune_1 = [  'ド/0.5',
-                        'レ/0.5',
-                        'ミ/0.5',
-                        'ド/0.5',
-                        'レ/0.5',
-                        'ミ/0.5'
-                     ];
-
-      // 曲2のメロディ
-      const tune_2 = [
-                        'ド/0.5',
-                        'ド/0.5',
-                        'ソ/0.5',
-                        'ソ/0.5',
-                        'ラ/0.5',
-                        'ラ/0.5'
-                     ];   
-      function manual_play(){
-
-        // 演奏オブジェクトの取得
-        synth = new Tone.FMSynth().toMaster();
-        
+      function play(msg){
         // 音階の定義
-        let w_music_deg;
-        let music_deg;
+        var w_music_deg;
+        var music_deg;
         // リズムの定義
-        let music_rm;
+        var music_rm;
         // メッセージの定義
-        let message = "";
+        var message = null;
         // 作業用配列
-        let array1 = [];
-        // 自動演奏用タイム変数
-        let work_time = 0;
-
+        var array1 = [];
+        
          
-
-                
-        for(let i=0;i<music_note.length;i++){
-          array1 = music_note[i].split('/');
-          w_music_deg = array1[0];
-          music_rm = array1[1];
-          if (w_music_deg == "ド"){
-              music_reg = "C4";
-          } else if (w_music_deg == "レ"){
-              music_reg = "D4";
-          } else if (w_music_deg == "ミ"){
-              music_reg = "E4";
-          } else if (w_music_deg == "ファ"){
-              music_reg = "F4";
-          } else if (w_music_deg == "ソ"){
-              music_reg = "G4";
-          } else if (w_music_deg == "ラ"){
-              music_reg = "A4";
-          } else if (w_music_deg == "シ"){
-              music_reg = "B4";
-          }   
+               
+        array1 = msg.split('/');
+        w_music_deg = array1[0];
+        music_rm = array1[1];
+        if (w_music_deg == "ド"){
+          music_reg = "C4";
+        } else if (w_music_deg == "レ"){
+          music_reg = "D4";
+        } else if (w_music_deg == "ミ"){
+          music_reg = "E4";
+        } else if (w_music_deg == "ファ"){
+          music_reg = "F4";
+        } else if (w_music_deg == "ソ"){
+          music_reg = "G4";
+        } else if (w_music_deg == "ラ"){
+          music_reg = "A4";
+        } else if (w_music_deg == "シ"){
+          music_reg = "B4";
+        } else if (w_music_deg == null){
+          music_reg = null;
+        }    
           
-          display.textContent = w_music_deg;
-          synth.triggerAttackRelease(music_reg,music_rm);
-
-          setTimeout(function() {
-                    display.textContent = "";
-                    
-            },display_seconds);
-        }  
-      }
-          
-      function auto_play(){
-
-        // 演奏オブジェクトの取得
-        synth = new Tone.FMSynth().toMaster();
-
-        // 乱数の定義
-        const random = Math.floor(Math.random() * 2);
-        // 音階の定義
-        let w_music_deg;
-        let music_deg;
-        // リズムの定義
-        let music_rm;
-        // メッセージの定義
-        let message = "";
-        // 作業用配列
-        let array1 = [];
-        // 自動演奏用タイム変数
-        let work_time = 0;
-
- 
-        if (random == 0){
-          music_note = tune_1;
+        if (w_music_deg == null ){
+          display.textContent = null;  
         } else {
-          music_note = tune_2;
-        }
-        
-        for(let i=0;i<music_note.length;i++){
-            array1 = music_note[i].split('/');
-            w_music_deg = array1[0];
-            music_rm = array1[1];
-            play_time = array1[2];
-            if (w_music_deg == "ド"){
-                music_reg = "C4";
-            } else if (w_music_deg == "レ"){
-                music_reg = "D4";
-            } else if (w_music_deg == "ミ"){
-                music_reg = "E4";
-            } else if (w_music_deg == "ファ"){
-                music_reg = "F4";
-            } else if (w_music_deg == "ソ"){
-                music_reg = "G4";
-            } else if (w_music_deg == "ラ"){
-               music_reg = "A4";
-            } else if (w_music_deg == "シ"){
-              music_reg = "B4";
-            }   
-  
-            display.textContent = w_music_deg;
-            synth.triggerAttackRelease(music_reg,music_rm);
-
-            setTimeout(function() {
-                display.textContent = "";
-            },display_seconds);
-
-            
+          display.textContent = w_music_deg;
         }  
+
+               
+        setTimeout(function() {
+            display.textContent = null;
+        },display_seconds);
+
+        synth.triggerAttackRelease(music_reg,music_rm);
+
+      }  
+
+      function autoplay(){
+        const random = Math.floor(Math.random() * 2);
+        if (random == 0){
+          synth.triggerAttackRelease("C4",0.5);
+
+          synth.triggerAttackRelease(""/0.5);
+          synth.triggerAttackRelease("C4"/0.5);
+          synth.triggerAttackRelease(""/0.5);
+          synth.triggerAttackRelease("G4"/0.5);
+          synth.triggerAttackRelease('null/0.5');
+          synth.triggerAttackRelease("G4"/0.5);
+        } else if (random == 1) {
+          synth.triggerAttackRelease("C4",0.5);
+          synth.triggerAttackRelease("D4",0.5);
+          synth.triggerAttackRelease("E4",1);
+          synth.triggerAttackRelease("C4",0.5);
+          synth.triggerAttackRelease("D4",0.5);
+          synth.triggerAttackRelease("E4",1);
+        }
       }
-        
-            
-
-      // ピアノの音階をクリック
-      C4.addEventListener('click',function() {
-          music_note = [`ド/${playing_seconds}`];
-          manual_play();
-      },false);
-
-      D4.addEventListener('click',function() {
-          music_note = [`レ/${playing_seconds}`];
-          manual_play();
-      },false);
-          
-      E4.addEventListener('click',function() {
-          music_note = [`ミ/${playing_seconds}`];
-          manual_play();
-            
-      },false);
-          
-      F4.addEventListener('click',function() {
-          music_note = [`ファ/${playing_seconds}`];
-          manual_play();
-      },false);
-          
-      G4.addEventListener('click',function() {
-          music_note = [`ソ/${playing_seconds}`];
-          manual_play();
-      },false);
-          
-      A4.addEventListener('click',function() {
-          music_note = [`ラ/${playing_seconds}`];
-          manual_play();
-          
-      },false);
-          
-      B4.addEventListener('click',function() {
-          music_note = [`シ/${playing_seconds}`];
-          manual_play();
-      },false);
-          
       
-
-      autoplay1.addEventListener('click',function(){
-        $(document).ready(function() {
-            $(".keyboard").addClass("disable-div");
-        });
-        autoplay1.style.visibility = "hidden";
-        autostop1.style.visibility = "visible";
-        auto_play();
-      });
       
-      autostop1.addEventListener('click',function(){
+          
+      // 演奏終了関数
+      function music_stop(){
         $(document).ready(function() {
             $(".keyboard").removeClass("disable-div");
         });
         Tone.Transport.stop();
         autoplay1.style.visibility = "visible";
         autostop1.style.visibility = "hidden";
+      }  
+
+     // ピアノの音階をクリック
+      C4.addEventListener('click',function() {
+          play(`ド/${playing_seconds}`);
+      },false);
+
+      D4.addEventListener('click',function() {
+          play(`レ/${playing_seconds}`);
+      },false);
+          
+      E4.addEventListener('click',function() {
+          play(`ミ/${playing_seconds}`);
+            
+      },false);
+          
+      F4.addEventListener('click',function() {
+          play(`ファ/${playing_seconds}`);
+      },false);
+          
+      G4.addEventListener('click',function() {
+          play(`ソ/${playing_seconds}`);
+      },false);
+          
+      A4.addEventListener('click',function() {
+          play(`ラ/${playing_seconds}`);
+          
+      },false);
+          
+      B4.addEventListener('click',function() {
+          play(`シ/${playing_seconds}`);
+      },false);
+          
+      
+      autoplay1.addEventListener('click',async function(){
+        $(document).ready(function() {
+            $(".keyboard").addClass("disable-div");
+        });
+        autoplay1.style.visibility = "hidden";
+        autostop1.style.visibility = "visible";
+        // 乱数の定義
+        autoplay();
+        
+        music_stop();
+        
       });
       
-
-
+      autostop1.addEventListener('click',function(){
+        music_stop();
+      });
   </script>
 	</body>
 </html>
