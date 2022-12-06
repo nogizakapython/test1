@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web簡易ピアノ</title>
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    
+    .piano {
+      width: 600px;
+      height:300px;
+      margin-top:20px;
+      background-color:#FFF;
+      padding-top:20px;
+      
+    }
+
+    .piano .music {
+      width:400px;
+      height:100px;
+      background-color: #F799FF;
+      padding-top:30px;
+      margin-top:20px;
+      margin:auto;
+    }
+
+    .music #display {
+      width:95%;
+      text-align:center;
+      font-size:40px;
+      color:#0031FF;
+    }
+
+    .keyboard {
+      width:490px;
+      height:80px;
+      background-color:#FFF;
+      margin:20px auto;
+      display:flex;
+    }
+    .keyboard .key {
+      width:calc(100% / 7 - 10px);
+      height:40px;
+      padding-top:10px;
+      margin-left:5px;
+      margin-right:5px;
+      border-radius:2px #00F;
+      background-color:#FAA;
+      text-align: center;
+      font-size:18px;
+    }
+
+    .autobutton {
+      margin-top:20px;
+      display:flex;
+      justify-content: center;
+    }
+
+    .autobutton .button1  {
+      width:150px;
+      height:35px;
+      padding-top:8px;
+      padding-left:8px;
+      margin-left:5px;
+      margin-right:5px;
+      border-color :2px #000;
+      background-color:#0AA;
+      color:#80F;
+      text-align: center;
+      font-size:15px;
+      display:block;
+      
+      
+    }
+    .disable-div {
+      pointer-events: none;
+    }
+
+
+  </style>
+</head>
+<body>
+  <!-- 簡易ピアノ -->
+  <div class="piano">
+    <!-- 音名表示 -->
+    <div class="music">
+      <h1 id="display"></h1>
+    </div>
+    <!-- キーボード表示 -->
+    <div class="keyboard">
+      <div id="C4" class="key">ド</div>
+      <div id="D4" class="key">レ</div>
+      <div id="E4" class="key">ミ</div>
+      <div id="F4" class="key">ファ</div>
+      <div id="G4" class="key">ソ</div>
+      <div id="A4" class="key">ラ</div>
+      <div id="B4" class="key">シ</div>
+    </div>
+    <div class="autobutton">    
+      <input type="button" id="autoplay1" name="autoplay" class="button1" value="自動演奏">
+      <input type="button" id="autostop1" name="autostop" class="button1" value="演奏中止">
+    </div>
+  </div>    
+      <script>
+          // AudioContext オブジェクトを新しく作成
+          var audioCtx;
+             
+          // ド(C4)～シ(B4)までのIDからオブジェクトを取得する
+          const C4 = document.getElementById('C4');
+          const D4 = document.getElementById('D4');
+          const E4 = document.getElementById('E4');
+          const F4 = document.getElementById('F4');
+          const G4 = document.getElementById('G4');
+          const A4 = document.getElementById('A4');
+          const B4 = document.getElementById('B4');
+           // 自動演奏ボタンの要素を取得する
+          const autoplay1 = document.querySelector('#autoplay1');
+          // 自動演奏ストップボタンの要素を取得する
+          const autostop1 = document.querySelector('#autostop1');
+          // 音階表示エリアのオブジェクトを定義する
+          const display = document.getElementById('display');
+          // 周波数を格納する配列を定義する
+          const hz_array = [261,293,329,349,392,440,493,10];
+          
+          // タイマー変数の定義
+          var timer;
+          // 作動時間の制御
+          let work_time = 0;
+          // 音を鳴らす時間の設定
+          let playing_seconds = 1500;
+          // 音階を表示する時間
+          let display_seconds = 1000;
+          // 初期ロード時、演奏中止ボタンを非表示にする
+          autostop1.style.visibility = "hidden";
+          
+         
+          function play(agree,play_time){
+            audioCtx = new AudioContext();
+            // 正弦波の音を作成
+            var osc = audioCtx.createOscillator();           
+            //音の出力先
+            var audioDestination = audioCtx.destination;
+            //出力先のスピーカーに接続
+            osc.connect(audioDestination);
+
+            //ヘルツ（周波数）指定
+            if (agree == "ド"){
+               osc.frequency.value = parseInt(hz_array[0]);
+            } else if  (agree == "レ"){
+              osc.frequency.value = parseInt(hz_array[1]);
+            } else if  (agree == "ミ"){
+              osc.frequency.value = parseInt(hz_array[2]);
+            } else if  (agree == "ファ"){
+              osc.frequency.value = parseInt(hz_array[3]);
+            } else if  (agree == "ソ"){
+              osc.frequency.value = parseInt(hz_array[4]);
+            } else if  (agree == "ラ"){
+              osc.frequency.value = parseInt(hz_array[5]);
+            } else if  (agree == "シ"){
+              osc.frequency.value = parseInt(hz_array[6]);
+            } else if (agree == ""){
+              osc.frequency.value = parseInt(hz_array[7]);
+            }
+
+            display.textContent = agree;
+            setTimeout(function() {
+                    display.textContent = "";
+               
+            },display_seconds);
+            
+            timer = setInterval(osc.start(),50);
+            sleep(play_time);
+            
+
+            setTimeout(function() {
+              clearInterval(timer);
+              AudioContext().createOscillator().stop();
+              
+            },play_time);
+          }  
+          
+          
+
+          // スリープ関数
+          function sleep(wait_time){
+              const start_time = new Date();
+              while(true){
+                let now_time = new Date();
+                if (now_time - start_time >= wait_time ){
+                  break;
+                } 
+              }  
+          }
+
+
+
+          function stop_play(){
+            $(document).ready(function() {
+              $(".keyboard").removeClass("disable-div");
+            });
+            AudioContext().createOscillator().stop();
+            autoplay1.style.visibility = "visible";
+            autostop1.style.visibility = "hidden";
+          }  
+            
+
+          // ピアノの音階をクリック
+          C4.addEventListener('click',function() {
+            play("ド",playing_seconds);
+          },false);
+
+          D4.addEventListener('click',function() {
+            play("レ",playing_seconds);
+          },false);
+          
+          E4.addEventListener('click',function() {
+            play("ミ",playing_seconds);
+          },false);
+          
+          F4.addEventListener('click',function() {
+            play("ファ",playing_seconds);
+          },false);
+          
+          G4.addEventListener('click',function() {
+            play("ソ",playing_seconds);
+          },false);
+          
+          A4.addEventListener('click',function() {
+            play("ラ",playing_seconds);
+          },false);
+          
+          B4.addEventListener('click',function() {
+            play("シ",playing_seconds);
+          },false);
+          
+          autoplay1.addEventListener('click',function(){
+            $(document).ready(function() {
+              $(".keyboard").addClass("disable-div");
+            });
+            autoplay1.style.visibility = "hidden";
+            autostop1.style.visibility = "visible";
+            // 乱数の定義
+            const random = Math.floor(Math.random() * 2);
+            if (random == 0){
+              play("ド",500);
+              play("",500);
+              play("ド",500);
+              play("",500);
+              play("ソ",500);
+              play("",500);
+              play("ソ",500);
+              play("",500);
+              play("ラ",500);
+              play("",500);
+              play("ラ",500);
+              play("ソ",2000);
+
+            } else {
+              play("ド",500);
+              play("レ",500);
+              play("ミ",1000);
+              play("ド",500);
+              play("レ",500);
+              play("ミ",1000);
+            }
+            stop_play();
+          });
+      
+          autostop1.addEventListener('click',function(){
+              stop_play();    
+          });
+      
+
+
+
+          
+
+
+      </script>
+    </div>
+  </div>  
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画面テスト</title>
+</head>
+<body>
+  <div id="disp1"> テスト</div>
+  <input type="button" id="test1" value="実行">
+  <script>
+    const test1 = document.getElementById('test1');
+    var disp1 = document.getElementById('test1');
+    test1.addEventListener('mousedown',function() {
+      console.log("秋元真夏");
+      disp1.textContent = "秋元真夏";
+      
+    });
+
+    test1.addEventListener('mouseup',function(){
+      console.log("生田絵梨花");
+      disp1.textContent = "生田絵梨花";
+    });
+
+
+  </script>
+</body>
+</html>

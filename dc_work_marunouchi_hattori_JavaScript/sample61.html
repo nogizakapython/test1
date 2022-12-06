@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <style>
+  #buttons {
+    background-color: #eee;
+    padding: 8px;
+    width: max-content;
+  }
+  #buttons button:hover,
+  #buttons button[id$=p]:hover{
+    background-color: #ddd;
+  }
+  #buttons button {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    color: black;
+    border: 0;
+  }
+  #buttons button[id$=p] {
+    background-color: black;
+    color: white;
+  }
+  #buttons button.noteOn,
+  #buttons button:hover.noteOn {
+    background-color: orange;
+    color: white;
+  }
+  </style>
+</head>
+<body>
+  <div id='buttons'>
+  </div>
+  <br>
+
+  <button id='demo'>demo</button>
+  <button id='demoStop'>stop</button>
+
+  <script>
+  'use strict';
+  const keys = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  for(let o = 7; o >= 2; o--) {
+    for(let k = 0; k < keys.length; k++) {
+      const f = 440 * Math.pow(2, (o * 12 + k - 57) / 12);
+      buttons.insertAdjacentHTML('beforeend',
+        `${k === 0 ? `O${o}&thinsp;` : ''}<button id='${`O${o}${keys[k].replace('#', 'p')}`.toLowerCase()}' data-freq='${f}'>${keys[k]}</button>${keys.length - 1 === k ? '<br>' : ''}`);
+    }
+  }
+
+  buttons.addEventListener('mousedown', e => noteOn(e.target));
+
+  const noteOn = e => {
+    if(demoIds.length) return;
+    const freq = e.dataset.freq;
+    if(!freq) return;
+
+    setAudioContext(e);
+  };
+
+  buttons.addEventListener('mouseup', () => {
+    if(demoIds.length) return;
+    noteOff();
+  });
+
+  buttons.addEventListener('mouseout', () => {
+    if(demoIds.length) return;
+    noteOff();
+  });
+
+  demoStop.addEventListener('click', () => {
+    if(demoIds.length) stopDemo();
+  });
+
+  const noteOff = () => {
+    for(const e in obj) {
+      stop(obj, e);
+    }
+  };
+
+  const obj = {};
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+  const setAudioContext = (e, t) => {
+    const id = e.id;
+    console.log("id:" + id);
+
+    if(obj[id]) return;
+
+    e.classList.add('noteOn');
+
+    obj[id] = {
+      type : 'sawtooth',
+      freq : e.dataset.freq,
+      gain : 0.2,
+      elem : e,
+    };
+    const o = obj[id];
+
+    o.a = {};
+    const a = o.a;
+    console.log(o);
+    console.log(a);
+
+
+    a.context = new AudioContext();
+    a.osc = a.context.createOscillator();
+    a.osc.type = o.type;
+    a.gain = a.context.createGain();
+    a.osc.connect(a.gain);
+    a.gain.connect(a.context.destination);
+    a.osc.frequency.value = o.freq;
+    a.gain.gain.value = o.gain;
+    a.osc.start();
+
+    if(t !== undefined) {
+      setTimeout(stop, t - 40, obj, id);
+    }
+  };
+
+  const stop = (o, id) => {
+    if(!o[id]) return;
+    o[id].elem.classList.remove('noteOn');
+    console.log(o[id]);
+    o[id].a.osc.stop();
+    o[id].a.osc.disconnect();
+    o[id].a.context.close().then(() => delete o[id]);
+  };
+
+  const demoIds = [];
+
+  const stopDemo = () => {
+    while(demoIds.length > 0) {
+      
+      clearTimeout(demoIds.shift());
+    }
+    noteOff();
+  };
+
+  const demoDatas = [
+     `t120 o4
+      c4 c g g a a g2 f4 f e e d d c2
+      g4 g f f e e d2 g4 g f f e e d2
+      c4 c g g a a g2 f4 f e e d d c2`,
+
+    `t160 o5 e8 dp e dp e o4 b o5 d c
+     o4 a4 r8 c e a b4 r8 e gp b o5 c4 r8 o4 e o5 e dp e dp e o4 b o5 d c
+     o4 a4 r8 c e a b4 r8 e o5 c o4 b a4
+    `,
+  ];
+
+  demo.addEventListener('click', () => {
+    stopDemo();
+    const demoData = demoDatas[Math.floor(Math.random() * demoDatas.length)].split(/\s+/g);
+
+    let tempo = 120;
+    let oct = 4;
+    let l = 4;
+    let g = 0;
+    let key;
+    demoData.forEach(e => {
+      if(e.match(/^t\d/)) {
+        tempo = +e.match(/\d+$/);
+      }
+      if(e.match(/^o\d/)) {
+        oct = +e.match(/\d+$/);
+      }
+      if(/^[a-gr]/.test(e)) {
+        key = `${e.match(/^[a-grp]+/)}`;
+        if(/\d+$/.test(e)) {
+          l = +e.match(/\d+$/);
+        }
+        const time = (4 / l / tempo) * 60000;
+        if(!/^r/.test(key)) {
+          demoIds.push(setTimeout(setAudioContext, g, document.getElementById(`o${oct}${key}`), time));
+        }
+        g += time;
+      }
+    });
+    demoIds.push(setTimeout(stopDemo, g + 50));
+  });
+  </script>
+</body>
+</html>

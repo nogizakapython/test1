@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画面テスト</title>
+</head>
+<body>
+  <input type="button" id="test1" value="実行">
+  <script>
+    const test1 = document.getElementById('test1');
+    // AudioContext オブジェクトを新しく作成
+    var audioCtx;
+    // 音階を格納する配列を定義する
+    const sound_array = ['ド','レ','ミ','ファ','ソ','ラ','シ','ド(高音)'];
+    // 周波数を格納する配列を定義する
+    const hz_array = [261,293,329,349,392,440,493,523];
+    // 音階表示エリアのオブジェクトを定義する
+    const display = document.getElementById('display');
+    // タイマー変数の定義
+    let timer;
+    // 音を鳴らす時間の設定
+    let playing_seconds = 1500;
+    // 音階を表示する時間
+    let display_seconds = 1000;
+
+    audioCtx = new AudioContext();
+    // 正弦波の音を作成
+    let osc = audioCtx.createOscillator();   
+    
+    //音の出力先
+    var audioDestination = audioCtx.destination;
+    //出力先のスピーカーに接続
+    osc.connect(audioDestination);
+
+    function play(hz){
+
+            //ヘルツ（周波数）指定
+            osc.frequency.value = parseInt(hz);
+                   
+            timer = setInterval(osc.start(),100);
+            
+            setTimeout(function()  {
+                    osc.stop();
+                    clearInterval(timer);
+            },playing_seconds);
+            
+      }
+
+      function stop(){
+            osc.stop();
+            clearInterval(timer);    
+      }
+          
+
+    test1.addEventListener('click',function() {
+        const h = hz_array[0];
+        play(h);
+    });
+
+    test1.addEventListener('dblclick',function(){
+        stop();
+    });
+
+
+  </script>
+</body>
+</html>

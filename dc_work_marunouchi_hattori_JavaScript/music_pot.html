@@ -2,6 +2,7 @@
 <!-- 新規作成 2022/11/20 -->
 <!-- 機能追加 2022/11/23(音量の調節機能) -->
 <!-- 再生終了ボタンを追加 2022/11/23 -->
+<!-- 再生終了チェック処理を追加 2022/12/2 -->
 <!-- music Pot -->
 <!-- お気に入りの曲を流すWebアプリ -->
 <html lang="ja">
@@ -128,7 +129,7 @@
     <script language="javascript" type="text/javascript">
         const music = new Audio(); //変数作成
         // 曲リスト配列
-        const array1 = ['like @ Angel/黒夢/like@angel.mp3','なぜ/Hysteric Blue/naze.mp3','Out Of The Blue/乃木坂46/Out of the blue.mp3','Last Love Song/GARNET CROW/lastlovesong.mp3','クリスタルゲージ/GARNET CROW/クリスタルゲージ.mp3','能動的３分間/東京事変/能動的三分間.mp3','タマシイレボリューション/Superfly/タマシイレボリューション.mp3','二人セゾン/欅坂46/二人セゾン.mp3','Miss Moonlight/黒夢/Miss MOONLIGHT.mp3','SURREAL/浜崎あゆみ/SURREAL.mp3','Last smile/LOVE PSYCHEDELICO/Last Smile.mp4','忘却の空/SADS/忘却の空.mp4','M/浜崎あゆみ/M.mp4','lost Angel/day after tomorrow/lost angel.mp3','futurity/day after tomorrow/futurity.mp3','SLOW LOVE/ICE/slow love.mp3','Love Makes Me Run/ICE/Love Makes Me Run.mp3','GET DOWN GET DOWN GET DOWN/ICE/GET DOWN.mp3','flo jack/m-flo/flo jack.mp4','Springtime kiss/COSA NOSTRA/Springtime Kiss.mp3','Jolie/COSA NOSTRA/JOLIE.mp3','come again/m-flo/come again.mp4','YAY/moumoon/YAY.mp3','柊/Do As Infinity/Hiiragi.mp3','蛍火/RYTHEM/Hotarubi.mp3','Colourful/NIKIIE/Colourful.mp3','BAD COMUNICATION/B\'z/BAD COMMUNICATION.mp3','My faith/day after tomorrow/My faith.mp3','カナリア/NIKIIE/カナリア.mp3','Living For Tomorrow/COSA NOSTRA/Living For Tomorrow.mp3','Share Your Love/COSA NOSTRA/Share Your Love.mp3','DAYS/FLOW/DAYS.mp4','キライでも好き アイシテル/BRIGHT/キライでも好き アイシテル.mp3','Nostalgia/浜田麻里/Nostalgia.mp3'];
+        const array1 = ['like @ Angel/黒夢/like@angel.mp3','なぜ/Hysteric Blue/naze.mp3','Out Of The Blue/乃木坂46/Out of the blue.mp3','Last Love Song/GARNET CROW/lastlovesong.mp3','クリスタルゲージ/GARNET CROW/クリスタルゲージ.mp3','能動的３分間/東京事変/能動的三分間.mp3','タマシイレボリューション/Superfly/タマシイレボリューション.mp3','二人セゾン/欅坂46/二人セゾン.mp3','Miss Moonlight/黒夢/Miss MOONLIGHT.mp3','SURREAL/浜崎あゆみ/SURREAL.mp3','Last smile/LOVE PSYCHEDELICO/Last Smile.mp4','忘却の空/SADS/忘却の空.mp4','M/浜崎あゆみ/M.mp4','lost Angel/day after tomorrow/lost angel.mp3','futurity/day after tomorrow/futurity.mp3','SLOW LOVE/ICE/slow love.mp3','Love Makes Me Run/ICE/Love Makes Me Run.mp3','GET DOWN GET DOWN GET DOWN/ICE/GET DOWN.mp3','flo jack/m-flo/flo jack.mp4','Springtime kiss/COSA NOSTRA/Springtime Kiss.mp3','Jolie/COSA NOSTRA/JOLIE.mp3','come again/m-flo/come again.mp4','YAY/moumoon/YAY.mp3','柊/Do As Infinity/Hiiragi.mp3','蛍火/RYTHEM/Hotarubi.mp3','Colourful/NIKIIE/Colourful.mp3','BAD COMUNICATION/B\'z/BAD COMMUNICATION.mp3','My faith/day after tomorrow/My faith.mp3','カナリア/NIKIIE/カナリア.mp3','Living For Tomorrow/COSA NOSTRA/Living For Tomorrow.mp3','Share Your Love/COSA NOSTRA/Share Your Love.mp3','DAYS/FLOW/DAYS.mp4','キライでも好き アイシテル/BRIGHT/キライでも好き アイシテル.mp3','Nostalgia/浜田麻里/Nostalgia.mp3','On the right/moumoon/on-the-right.mp3','Sunshine Girl/moumoon/Sunshine Girl.mp3','moonlight/moumoon/moonlight.mp3','Chu Chu/moumoon/Chu Chu.mp3'];
         // 配列の長さ
         const num = array1.length;
         // 乱数の定義
@@ -159,7 +160,7 @@
 
 
         music.src = `./sound/${file}`; //音声ファイル指定
-        music.volume = 0.4; //音量の初期値(50%)
+        music.volume = 0.4; //音量の初期値(40%)
 
         
     
@@ -270,13 +271,13 @@
             s_mute.disabled = true;
         }
     
-        function loop_true() { //ループ再生ON
-            music.loop = true;
-        }
+        // function loop_true() { //ループ再生ON
+            // music.loop = true;
+        // }
     
-        function loop_false(){ //ループ再生OFF
-            music.loop = false;
-        }
+        // function loop_false(){ //ループ再生OFF
+            // music.loop = false;
+        // }
     
         
     
