@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- 1回目提出 2022/12/8-->
+<!-- 修正  2022/12/19 -->
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -27,6 +29,23 @@
       background-color: #F799FF;
       padding-top:30px;
       margin-left:30px;
+      margin-top:30px;
+    }
+
+    .piano .tune_name {
+      width:500px;
+      height:100px;
+      background-color: #FF598F;
+      padding-top:30px;
+      margin-left:30px;
+      
+    }
+
+    .tune_name #tune_display {
+      width:98%;
+      text-align:center;
+      font-size:30px;
+      color:#00FF00;
     }
 
     .music #display {
@@ -34,6 +53,7 @@
       text-align:center;
       font-size:30px;
       color:#0031FF;
+      
     }
 
     .keyboard {
@@ -104,6 +124,10 @@
 	<body>
 		<!-- 簡易ピアノ -->
     <div class="piano">
+      <!-- 曲名表示 -->
+      <div class="tune_name">
+        <h1 id="tune_display"></h1>
+      </div>
       <!-- 音名表示 -->
       <div class="music">
         <h1 id="display"></h1>
@@ -139,9 +163,9 @@
       const B4 = document.getElementById('B4');
 
       // 音階を格納する配列を定義する
-      const sound_array = ['ド','レ','ミ','ファ','ソ','ラ','シ','ド(高音)'];
+      const sound_array = ['ド','レ','ミ','ファ','ソ','ラ','シ'];
       // 周波数を格納する配列を定義する
-      const hz_array = [261,293,329,349,392,440,493,523];
+      const hz_array = [261,293,329,349,392,440,493];
             
       // 自動演奏ボタンの要素を取得する
       const autoplay1 = document.querySelector('#autoplay1');
@@ -149,6 +173,9 @@
       const autostop1 = document.querySelector('#autostop1');
       // 音階表示エリアのオブジェクトを定義する
       const display = document.getElementById('display');
+      // 自動演奏時の曲名表示エリアのオブジェクトを定義する
+      const tune_display = document.getElementById('tune_display');
+
       // タイマー変数の定義
       var timer;
       // 音を鳴らす時間の設定
@@ -345,6 +372,9 @@
     var timeid;
     // 削除オブジェクト変数
     const obj = {};  
+    // 自動演奏用音階表示タイムセット変数
+    var auto_tune_work;
+    
     
     // 手動演奏関数
     function play(music1,hz){
@@ -411,8 +441,23 @@
             stop(obj, e);
         }
       };
-      
+     
+      // マウスクリックアップ時の処理
+     function click_up(e){
+      for(const e in obj) {
+            click_stop(obj, e);
+        }
+     };
+     
+    //  マウスクリックアップ時に音を止める
+     function click_stop(o, id) {
+          clearInterval(timer);
+          o[id].a.osc.stop();
+          o[id].a.osc.disconnect();
+          o[id].a.context.close().then(() => delete o[id]);
+     };
     
+    //  マウスが鍵盤から離れた時に音を停止し、音階を非表示にする
      function stop(o, id) {
           display.textContent = "";
           clearTimeout(one);
@@ -433,7 +478,9 @@
         //ボタン表示切替
         autostop1.style.display = "none";
         autoplay1.style.display = "block";
-        // 曲をとめる
+        // 自動演奏表示を消す
+        tune_display.textContent = "";
+        // 音階表示を消す
         display.textContent = "";
         //停止実行
         Tone.Transport.stop();
@@ -441,6 +488,8 @@
         Tone.Transport.cancel();
         // setTimeoutのクリア
         clearTimeout(timeid);
+        // 音階表示のクリア
+        clearTimeout(display_timer);
     }  
 
     // 演奏時間取得関数(きらきら星とチューリップの曲の演奏時間を取得する)
@@ -464,10 +513,10 @@
     // 自動演奏中の曲名点滅処理(500ミリ秒毎に10回点滅(10秒)させて表示し続ける)
     function auto_display(){
       for(let i=1;i<=10;i++){
-        $('#display').fadeIn(500);
-        $('#display').fadeOut(500);
+        $('#tune_display').fadeIn(500);
+        $('#tune_display').fadeOut(500);
       }
-      $('#display').fadeIn();  
+      $('#tune_display').fadeIn();  
     }
 
     //自動演奏ボタンクリック時の処理 
@@ -503,13 +552,15 @@
         if (random == 0){  
           melody = new Tone.Sequence(setPlay, kirakira);
           playing_time = kirakira_time;
-          display.textContent = "自動演奏中です：きらきら星";
+          tune_display.textContent = "自動演奏中です：きらきら星";
+          auto_kirakira_disp();
         } else {
           melody = new Tone.Sequence(setPlay, turipu);
           playing_time = turipu_time;
-          display.textContent = "自動演奏中です：チューリップの歌";
+          tune_display.textContent = "自動演奏中です：チューリップの歌";
+          auto_turipu_disp();
         } 
-  
+         
         
         //メロディ再生
         melody.start();
@@ -521,7 +572,7 @@
         //再生実行
         Tone.Transport.start();
 
-        auto_display()
+        auto_display();
 
         // 演奏終了したらボタンの表示切替と停止処理を行う
         timeid = setTimeout(function() {
@@ -529,7 +580,945 @@
         },playing_time * 1000);
               
       });
+
+      // 自動演奏用きらきら星音階表示関数
+      function auto_kirakira_disp (){
+        new Promise(resolve => {
+        display_timer = setTimeout(() => {
+          display.textContent = "ド";
+          resolve();
+        },0)
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ド";
+            resolve();
+          },500)
+      });
+      }).then(() =>{
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ラ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ラ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ファ";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ファ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ミ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ミ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "レ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "レ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ド";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ファ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ファ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ミ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ミ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer =  setTimeout(() => {
+            display.textContent = "レ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ファ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ファ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ミ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ミ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "レ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ド";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ド";
+            resolve();
+          },500)
+        });
+      }).then(() =>{
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ラ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ラ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ソ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ファ";
+            resolve();
+          },1000)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ファ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ミ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ミ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "レ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "レ";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+        return new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ド";
+            resolve();
+          },500)
+        });
+      }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },1000)
+          });
+      });
+      }
       
+      // 自動演奏用チューリップ音階表示関数
+      function auto_turipu_disp(){
+        new Promise(resolve => {
+          display_timer = setTimeout(() => {
+            display.textContent = "ド";
+            resolve();
+          },0)
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() =>{
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ド";
+              resolve();
+            },1000)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ソ";
+              resolve();
+            },1000)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ド";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ド";
+              resolve();
+            },1000)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ド";
+              resolve();
+            },1000)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ソ";
+              resolve();
+            },1000)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ド";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ド";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ソ";
+              resolve();
+            },1000)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ソ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ソ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ラ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ラ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ソ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer =  setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },1000)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ミ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "レ";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "ド";
+              resolve();
+            },500)
+          });
+        }).then(() => {
+          return new Promise(resolve => {
+            display_timer = setTimeout(() => {
+              display.textContent = "";
+              resolve();
+            },1000)
+          });
+        });
+      }
+
+    
       // 演奏中止ボタンをクリックしたときのイベントリスナー
       autostop1.addEventListener('click',function(){
         music_stop();
@@ -581,31 +1570,31 @@
       
       // ピアノの音階を停止する(マウスの左クリックが上に上がるとき)
       C4.addEventListener('mouseup',function() {
-        noteOff(C4);
+        click_up(C4);
       },false);
 
       D4.addEventListener('mouseup',function() {
-        noteOff(D4);
+        click_up(D4);
       },false);
           
       E4.addEventListener('mouseup',function() {
-        noteOff(E4);
+        click_up(E4);
       },false);
           
       F4.addEventListener('mouseup',function() {
-        noteOff(F4);
+        click_up(F4);
       },false);
           
       G4.addEventListener('mouseup',function() {
-        noteOff(G4);
+        click_up(G4);
       },false);
           
       A4.addEventListener('mouseup',function() {
-        noteOff(A4);
+        click_up(A4);
       },false);
           
       B4.addEventListener('mouseup',function() {
-        noteOff(B4);
+        click_up(B4);
       },false);
 
       // ピアノの音階を停止する(マウスを要素外に移動したときのイベントリスナー)

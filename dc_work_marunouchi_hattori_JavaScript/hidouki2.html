@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非同期テスト</title>
+  <style>
+    h3 {
+      color:blue;
+    }
+    
+    #test1 {
+      color:red;
+      width:200px;
+      font-size:30px;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>非同期テスト1</h3>
+  <div id="test1"></div>
+  <script>
+    const test1 = document.getElementById('test1');
+    new Promise(resolve => {
+      setTimeout(() => {
+        test1.textContent = 3;
+        resolve();
+      },0)
+    }).then(() => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          test1.textContent = 2;
+          resolve();
+        },1000)
+      });
+    }).then(() => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          test1.textContent = 1;
+          resolve();
+        },1000)
+      });
+    }).then(() =>{
+      return new Promise(resolve => {
+        setTimeout(() => {
+          test1.textContent = 0;
+          resolve();
+        },1000)
+      });
+    }).then(() => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          test1.textContent = "";
+          resolve();
+        },10)
+      });
+    });
+  </script>
+</body>
+</html>
