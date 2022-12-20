@@ -58,25 +58,26 @@
 
   <script>
     const keys = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-    const onkai = ['ド', 'レ', 'ミ', 'ファ', 'ソ', 'ラ', 'シ'];
+    const sound_array = ['ド', 'レ', 'ミ', 'ファ', 'ソ', 'ラ', 'シ'];
     const hz = [261,293,329,349,392,440,493];
     const disp = document.getElementById('disp');
 
     for(let k = 0; k < keys.length; k++) {
         const f = hz[k];
         buttons.insertAdjacentHTML('beforeend',
-          `<button id='{${keys[k]}' data-freq='${hz[k]}'>${onkai[k]}</button>`);
+          `<button id='${keys[k]}' data-freq='${hz[k]}'>${sound_array[k]}</button>`);
     }
   
 
   buttons.addEventListener('mousedown', e => noteOn(e.target));
 
   const noteOn = e => {
+    console.log(e);
     const freq = e.dataset.freq;
     if(!freq) return;
 
     setAudioContext(e);
-    setAudioContext(e);
+    
   };
 
   buttons.addEventListener('mouseup', () => {
@@ -129,19 +130,19 @@
     a.gain.gain.value = o.gain;
     a.osc.start();
     if(o.freq == hz[0]){
-      disp.textContent = onkai[0];
+      disp.textContent = sound_array[0];
     } else if (o.freq == hz[1]){
-      disp.textContent = onkai[1];
+      disp.textContent = sound_array[1];
     } else if (o.freq == hz[2]){
-      disp.textContent = onkai[2];
+      disp.textContent = sound_array[2];
     } else if (o.freq == hz[3]){
-      disp.textContent = onkai[3];
+      disp.textContent = sound_array[3];
     } else if (o.freq == hz[4]){
-      disp.textContent = onkai[4];
+      disp.textContent = sound_array[4];
     } else if (o.freq == hz[5]){
-      disp.textContent = onkai[5];
+      disp.textContent = sound_array[5];
     } else if (o.freq == hz[6]){
-      disp.textContent = onkai[6];
+      disp.textContent = sound_array[6];
     }        
   };
 
