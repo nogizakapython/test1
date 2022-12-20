@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非同期処理テスト6</title>
+  <style>
+    #test1{
+      width:300px;
+      font-size:30px;
+      color:#0E8;
+      background-color:#B0D;
+    }
+  </style>
+</head>
+<body>
+  <div id="test1"></div>
+  
+  <script>
+    
+    // 非同期処理で画面に表示する名前と表示時間設定関数
+    const test1 = document.getElementById('test1');
+    func = async () => {
+      await disp("秋元真夏",0);
+      await disp("白石麻衣",1000);
+      await disp("松村沙友理",700);
+      await disp("生田絵梨花",900);
+      await disp("",700);
+      await disp("齋藤飛鳥",2000);
+      await disp("",1000);
+
+
+    }
+    disp = (name,time) => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          test1.textContent = name;
+          resolve();
+        },time);
+      });
+    }
+
+    func();
+    
+
+  </script>
+</body>
+</html>

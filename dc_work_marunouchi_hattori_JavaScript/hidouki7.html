@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非同期処理テスト7</title>
+</head>
+<body>
+  <div id="test1"></div>
+  <script>
+    const test1 = document.getElementById('test1');
+    func = async () => {
+      await log(3,0);
+      await log(2,1000);
+      await log(1,700);
+      await log(0,900);
+      await log("",100);
+
+    }
+    log = (num,time) => {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          test1.textContent = num;
+          resolve();
+        },time);
+      });
+    }
+
+    func();
+  </script>
+</body>
+</html>

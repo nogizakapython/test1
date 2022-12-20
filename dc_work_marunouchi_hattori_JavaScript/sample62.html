@@ -1,0 +1,163 @@
+<!-- 関数化サンプルプログラム -->
+<!-- 新規作成 2022/12/20 -->
+
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+  <meta charset='utf-8'>
+  <style>
+  .keyboard{
+    width:400px;
+  }  
+  #buttons {
+    background-color: #eee;
+    padding: 8px;
+    width: 400px;
+  }
+  #buttons button:hover,
+  #buttons button[id$=p]:hover{
+    background-color: #ddd;
+  }
+  #buttons button {
+    width: 50px;
+    height: 50px;
+    margin-left:5px;
+    background-color: white;
+    color: black;
+    border: 0;
+  }
+  #buttons button[id$=p] {
+    background-color: black;
+    color: white;
+  }
+  #buttons button.noteOn,
+  #buttons button:hover.noteOn {
+    background-color: orange;
+    color: white;
+  }
+  #onkai {
+    width:400px;
+    height:120px;
+    background-color:aquamarine;
+  }
+  #disp {
+    width:100%;
+    font-size:40px;
+    color:#F00;
+  }
+  </style>
+</head>
+<body>
+  <div class="keyboard">
+    <div id="onkai">
+      <h1 id="disp"></h1>
+    </div>
+    <div id='buttons'></div>
+  </div>  
+  
+
+  <script>
+    const keys = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    const onkai = ['ド', 'レ', 'ミ', 'ファ', 'ソ', 'ラ', 'シ'];
+    const hz = [261,293,329,349,392,440,493];
+    const disp = document.getElementById('disp');
+
+    for(let k = 0; k < keys.length; k++) {
+        const f = hz[k];
+        buttons.insertAdjacentHTML('beforeend',
+          `<button id='{${keys[k]}' data-freq='${hz[k]}'>${onkai[k]}</button>`);
+    }
+  
+
+  buttons.addEventListener('mousedown', e => noteOn(e.target));
+
+  const noteOn = e => {
+    const freq = e.dataset.freq;
+    if(!freq) return;
+
+    setAudioContext(e);
+    setAudioContext(e);
+  };
+
+  buttons.addEventListener('mouseup', () => {
+    noteOff();
+  });
+
+  buttons.addEventListener('mouseout', () => {
+    noteOff();
+  });
+
+  
+  const noteOff = () => {
+    for(const e in obj) {
+      stop(obj, e);
+    }
+  };
+
+  const obj = {};
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+  const setAudioContext = (e, t) => {
+    const id = e.id;
+    console.log("id:" + id);
+
+    if(obj[id]) return;
+
+    e.classList.add('noteOn');
+
+    obj[id] = {
+      type : 'sawtooth',
+      freq : e.dataset.freq,
+      gain : 0.2,
+      elem : e,
+    };
+    const o = obj[id];
+
+    o.a = {};
+    const a = o.a;
+    console.log(o);
+    console.log(a);
+
+
+    a.context = new AudioContext();
+    a.osc = a.context.createOscillator();
+    a.osc.type = o.type;
+    a.gain = a.context.createGain();
+    a.osc.connect(a.gain);
+    a.gain.connect(a.context.destination);
+    a.osc.frequency.value = o.freq;
+    a.gain.gain.value = o.gain;
+    a.osc.start();
+    if(o.freq == hz[0]){
+      disp.textContent = onkai[0];
+    } else if (o.freq == hz[1]){
+      disp.textContent = onkai[1];
+    } else if (o.freq == hz[2]){
+      disp.textContent = onkai[2];
+    } else if (o.freq == hz[3]){
+      disp.textContent = onkai[3];
+    } else if (o.freq == hz[4]){
+      disp.textContent = onkai[4];
+    } else if (o.freq == hz[5]){
+      disp.textContent = onkai[5];
+    } else if (o.freq == hz[6]){
+      disp.textContent = onkai[6];
+    }        
+  };
+
+  const stop = (o, id) => {
+    if(!o[id]) return;
+    o[id].elem.classList.remove('noteOn');
+    console.log(o[id]);
+    o[id].a.osc.stop();
+    o[id].a.osc.disconnect();
+    o[id].a.context.close().then(() => delete o[id]);
+    disp.textContent = "";
+  };
+
+  
+
+  
+  </script>
+</body>
+</html>
