@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!-- 1回目提出 2022/12/8-->
 <!-- 修正  2022/12/19 -->
+<!-- 修正  2022/12/21 非同期処理の関数化とボタン配置の関数化に伴う修正 -->
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -64,23 +65,6 @@
       margin-left:30px;
       display:flex;
     }
-
-    .keyboard .key {
-      width:calc(100% / 7 - 10px);
-      height:40px;
-      padding-top:10px;
-      margin-left:5px;
-      margin-right:5px;
-      border-radius:2px #00F;
-      background-color:#FAA;
-      text-align: center;
-      font-size:18px;
-    }
-
-    .keyboard .key:hover {
-      background-color:#0F9;
-      color:#F0F
-    }  
 
     #btn {
       display: flex;
@@ -662,7 +646,7 @@
       await disp("",500);
       await disp("レ",500);
       await disp("",1000);
-      await disp("ド",0);
+      await disp("ド",500);
       await disp("",500);
       await disp("ド",500);
       await disp("",500);
