@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<!-- 1回目提出 2022/12/8-->
+<!-- 修正  2022/12/19 -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web簡易ピアノ</title>
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Tone.jsを下記のURLサイトから読み込む -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.1.25/Tone.js"></script>
+  <!-- CSSファイルの定義 -->
+  <style>
+    
+    .piano {
+      width: 550px;
+      height:200px;
+      margin-top:20px;
+      background-color:#FFF;
+      padding-top:20px;
+      
+    }
+
+    .piano .music {
+      width:550px;
+      height:100px;
+      background-color: #F799FF;
+      padding-top:30px;
+      margin-left:30px;
+      margin-top:30px;
+    }
+
+    .piano .tune_name {
+      width:550px;
+      height:100px;
+      background-color: #FF598F;
+      padding-top:30px;
+      margin-left:30px;
+      
+    }
+
+    .tune_name #tune_display {
+      width:98%;
+      text-align:center;
+      font-size:30px;
+      color:#00FF00;
+    }
+
+    .music #display {
+      width:98%;
+      text-align:center;
+      font-size:30px;
+      color:#0031FF;
+      
+    }
+
+    .keyboard {
+      width:550px;
+      height:70px;
+      background-color:#FFF;
+      margin-top:30px;
+      margin-left:30px;
+      display:flex;
+    }
+
+    .keyboard .key {
+      width:calc(100% / 7 - 10px);
+      height:40px;
+      padding-top:10px;
+      margin-left:5px;
+      margin-right:5px;
+      border-radius:2px #00F;
+      background-color:#FAA;
+      text-align: center;
+      font-size:18px;
+    }
+
+    .keyboard .key:hover {
+      background-color:#0F9;
+      color:#F0F
+    }  
+
+    #btn {
+      display: flex;
+      justify-content: center; 
+      
+    }
+
+    #btn div {
+      font-size: 25px;
+      line-height: 1em;
+      background: #8fff0f;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      text-align: center;
+      width: 150px;
+      padding: 10px 10px;
+      display: block;
+      margin-left:30px;
+    }
+
+    .restkey{
+      justify-content: center; 
+      width:80px;
+      margin-top:10px;
+      margin-left:220px;
+    }
+    .restkey #rest {
+      width:calc(80px - 5%);
+      color:#C90;
+      background-color:aquamarine ;
+      font-size:20px;
+      text-align: center;
+
+    }
+
+    .disable-div {
+      pointer-events: none;
+    }
+
+    #buttons {
+        width:550px;
+        height:50px;
+        background-color:#FFF;
+        text-align: center;
+        margin:0 auto;
+        
+    }
+
+    #buttons button {
+        width:65px;
+        background-color:#FAA;
+        text-align: center;
+        margin:auto;
+        margin-left:10px;
+        font-size:18px;
+    }
+
+    #buttons button.noteOn,
+    #buttons button:hover.noteOn {
+      background-color:#0F9;
+      color: white;
+    }
+  </style>
+	</head>
+	<body>
+		<!-- 簡易ピアノ -->
+    <div class="piano">
+      <!-- 曲名表示 -->
+      <div class="tune_name">
+        <h1 id="tune_display"></h1>
+      </div>
+      <!-- 音名表示 -->
+      <div class="music">
+        <h1 id="display"></h1>
+      </div>
+      <!-- キーボード表示 -->
+      <div class="keyboard">
+        <div id="buttons"></div>
+      </div>
+      <!-- 自動演奏ボタン -->
+      <div id="btn">
+        <div id="autoplay1">自動演奏</div>
+        <div id="autostop1">演奏中止</div>
+     </div>
+    </div>    
+    <script>
+      
+      
+      // 自動演奏用 オブジェクトを新しく作成
+      var synth = new Tone.FMSynth().toMaster();
+      // 音階キー配列の定義
+      const keys = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4'];
+      // 音階を格納する配列を定義する
+      const sound_array = ['ド','レ','ミ','ファ','ソ','ラ','シ'];
+      // 周波数を格納する配列を定義する
+      const hz_array = [261,293,329,349,392,440,493];
+            
+      // 自動演奏ボタンの要素を取得する
+      const autoplay1 = document.querySelector('#autoplay1');
+      // 自動演奏ストップボタンの要素を取得する
+      const autostop1 = document.querySelector('#autostop1');
+      // 音階表示エリアのオブジェクトを定義する
+      const display = document.getElementById('display');
+      // 自動演奏時の曲名表示エリアのオブジェクトを定義する
+      const tune_display = document.getElementById('tune_display');
+
+      // タイマー変数の定義
+      var timer;
+      // 音を鳴らす時間の設定
+      const playing_seconds = 1500;
+      // 音階を表示する時間
+      const display_seconds = 1000;
+      // 音を鳴らしている時間
+      let work_time;
+      // 初期ロード時、演奏中止ボタンを非表示にする
+      autostop1.style.display = "none";
+      // ディスプレイタイマー変数
+      var display_timer;  
+      
+
+      //きらきら星
+      const kirakira = [
+                        { 'note': 'C4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'A4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'A4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { 'note': 'C4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'A4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'A4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 }
+      ];
+
+      // チューリップの花
+      const turipu = [
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'D4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'G4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'E4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'G4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'A4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'A4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'G4', 'duration': 0.5 },
+                      { "note": 'E4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'E4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'D4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'D4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 }
+            ];   
+
+    // きらきら星の再生時間の変数定義
+    var kirakira_time;
+    // チューリップの再生時間の変数定義
+    var turipu_time;
+    // 演奏時間の変数定義
+    var playing_time;
+    // 作業用オブジェクトの格納変数
+    var work_data;
+    // TimeOutの変数定義
+    var timeid;
+    // 削除オブジェクト変数
+    const obj = {};  
+    // 自動演奏用音階表示タイムセット変数
+    var auto_tune_work;
+    
+    for(let k = 0; k < keys.length; k++) {
+        const f = hz_array[k];
+        buttons.insertAdjacentHTML('beforeend',
+          `<button id='${keys[k]}' class='key' data-freq='${hz_array[k]}'>${sound_array[k]}</button>`);
+    }
+
+    const noteOn = e => {
+      console.log(e);
+      const freq = e.dataset.freq;
+      if(!freq) return;
+
+      setAudioContext(e);
+    
+    };
+
+
+    // 手動演奏関数
+    const setAudioContext = (e) => {
+      const id = e.id;
+      console.log("id:" + id);
+
+      if(obj[id]) return;
+
+      e.classList.add('noteOn');
+
+      obj[id] = {
+        type : 'sawtooth',
+        freq : e.dataset.freq,
+        gain : 0.2,
+        elem : e,
+      };
+      const o = obj[id];
+
+      o.a = {};
+      const a = o.a;
+      console.log(o);
+      console.log(a);
+
+
+      a.context = new AudioContext();
+      a.osc = a.context.createOscillator();
+      a.osc.type = o.type;
+      a.gain = a.context.createGain();
+      a.osc.connect(a.gain);
+      a.gain.connect(a.context.destination);
+      a.osc.frequency.value = o.freq;
+      a.gain.gain.value = o.gain;
+      a.osc.start();
+      // 1000ミリ秒経過したら音階出力を削除する 
+      one = setTimeout(function() {
+                    display.textContent = "";
+                  },display_seconds);
+
+      if(o.freq == hz_array[0]){
+        display.textContent = sound_array[0];
+      } else if (o.freq == hz_array[1]){
+        display.textContent = sound_array[1];
+      } else if (o.freq == hz_array[2]){
+        display.textContent = sound_array[2];
+      } else if (o.freq == hz_array[3]){
+        display.textContent = sound_array[3];
+      } else if (o.freq == hz_array[4]){
+        display.textContent = sound_array[4];
+      } else if (o.freq == hz_array[5]){
+        display.textContent = sound_array[5];
+      } else if (o.freq == hz_array[6]){
+        display.textContent = sound_array[6];
+      }        
+  };
+
+      function noteOff(e) {
+        for(const e in obj) {
+            stop(obj, e);
+        }
+      };
+     
+      // マウスクリックアップ時の処理
+     function click_up(e){
+      for(const e in obj) {
+            click_stop(obj, e);
+        }
+     };
+     
+    //  マウスクリックアップ時に音を止める。
+     function click_stop(o, id) {
+          clearInterval(timer);
+          o[id].elem.classList.remove('noteOn');
+          o[id].a.osc.stop();
+          o[id].a.osc.disconnect();
+          o[id].a.context.close().then(() => delete o[id]);
+     };
+    
+    //  マウスが鍵盤から離れた時に音を停止し、音階を非表示にする
+     function stop(o, id) {
+          display.textContent = "";
+          o[id].elem.classList.remove('noteOn');
+          clearTimeout(one);
+          clearInterval(timer);
+          o[id].a.osc.stop();
+          o[id].a.osc.disconnect();
+          o[id].a.context.close().then(() => delete o[id]);
+     };
+     
+      
+    // 演奏終了関数
+    function music_stop(){
+        $(document).ready(function() {
+            $(".keyboard").removeClass("disable-div");
+            $(".restkey").removeClass("disable-div");
+
+        });
+        //ボタン表示切替
+        autostop1.style.display = "none";
+        autoplay1.style.display = "block";
+        // 自動演奏表示を消す
+        tune_display.textContent = "";
+        // 音階表示を消す
+        display.textContent = "";
+        //停止実行
+        Tone.Transport.stop();
+        //イベントクリア
+        Tone.Transport.cancel();
+        // setTimeoutのクリア
+        clearTimeout(timeid);
+        // 音階表示のクリア
+        clearTimeout(display_timer);
+    }  
+
+    // 演奏時間取得関数(きらきら星とチューリップの曲の演奏時間を取得する)
+    function get_play_time(){
+        // きらきら星の演奏時間を取得
+        for(let i=0;i<kirakira.length;i++){
+          work_data = kirakira[i];
+          kirakira_time += work_data.duration;
+        }
+
+        work_data = "";
+
+        // チューリップの演奏時間を取得
+        for(let j=0;j<turipu.length;j++){
+          work_data = kirakira[j];
+          turipu_time += work_data.duration;
+        }
+
+    }
+
+    // 自動演奏中の曲名点滅処理(500ミリ秒毎に10回点滅(10秒)させて表示し続ける)
+    function auto_display(){
+      for(let i=1;i<=10;i++){
+        $('#tune_display').fadeIn(500);
+        $('#tune_display').fadeOut(500);
+      }
+      $('#tune_display').fadeIn();  
+    }
+
+    //自動演奏ボタンクリック時の処理 
+    autoplay1.addEventListener('click',async function(){
+
+        var synth = new Tone.AMSynth().toMaster();
+
+        $(document).ready(function() {
+            $(".keyboard").addClass("disable-div");
+            $(".restkey").addClass("disable-div");
+        });
+         //ボタン表示切替
+        autoplay1.style.display = "none";
+        autostop1.style.display = "block";
+        // 演奏時間変数の初期化
+        kirakira_time = 0;
+        turipu_time = 0;
+        playing_time = 0;
+
+
+        // 乱数の定義
+        const random = Math.floor(Math.random() * 2);
+        
+        // 演奏時間関数を呼び出す
+        get_play_time();
+        
+        //演奏する楽譜のセット処理
+        function setPlay(time, note) {
+            synth.triggerAttackRelease(note.note, note.duration, time);
+        }  
+
+        //メロディをセット 
+        if (random == 0){  
+          melody = new Tone.Sequence(setPlay, kirakira);
+          playing_time = kirakira_time;
+          tune_display.textContent = "自動演奏中です：きらきら星";
+          auto_kirakira_disp();
+        } else {
+          melody = new Tone.Sequence(setPlay, turipu);
+          playing_time = turipu_time;
+          tune_display.textContent = "自動演奏中です：チューリップの歌";
+          auto_turipu_disp();
+        } 
+         
+        
+        //メロディ再生
+        melody.start();
+
+        //ループ設定(繰り返し再生しない設定)
+        melody.loop = false;
+  
+        
+        //再生実行
+        Tone.Transport.start();
+
+        auto_display();
+
+        // 演奏終了したらボタンの表示切替と停止処理を行う
+        timeid = setTimeout(function() {
+            music_stop();
+        },playing_time * 1000);
+              
+      });
+
+      // 非同期処理で画面に表示する名前と表示時間設定関数
+    
+    async function auto_kirakira_disp() {
+      await disp("ド",0);
+      await disp("",500);
+      await disp("ド",500);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",500);
+      await disp("ラ",500);
+      await disp("",500);
+      await disp("ラ",500);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",1000);
+      await disp("ファ",1000);
+      await disp("",500);
+      await disp("ファ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("レ",500);
+      await disp("",500);
+      await disp("レ",500);
+      await disp("",500);
+      await disp("ド",500);
+      await disp("",1000);
+      await disp("ソ",1000);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",500);
+      await disp("ファ",500);
+      await disp("",500);
+      await disp("ファ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("レ",500);
+      await disp("",1000);
+      await disp("ソ",1000);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",500);
+      await disp("ファ",500);
+      await disp("",500);
+      await disp("ファ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("レ",500);
+      await disp("",1000);
+      await disp("ド",0);
+      await disp("",500);
+      await disp("ド",500);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",500);
+      await disp("ラ",500);
+      await disp("",500);
+      await disp("ラ",500);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",1000);
+      await disp("ファ",1000);
+      await disp("",500);
+      await disp("ファ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("レ",500);
+      await disp("",500);
+      await disp("レ",500);
+      await disp("",500);
+      await disp("ド",500);
+      await disp("",1000);
+    }
+
+    async function auto_turipu_disp() {
+      await disp("ド",0);
+      await disp("レ",500);
+      await disp("ミ",500);
+      await disp("ド",1000);
+      await disp("レ",500);
+      await disp("ミ",500);
+      await disp("ソ",1000);
+      await disp("ミ",500);
+      await disp("レ",500);
+      await disp("ド",500);
+      await disp("レ",500);
+      await disp("ミ",500);
+      await disp("レ",500);
+      await disp("ド",1000);
+      await disp("レ",500);
+      await disp("ミ",500);
+      await disp("ド",1000);
+      await disp("レ",500);
+      await disp("ミ",500);
+      await disp("ソ",1000);
+      await disp("ミ",500);
+      await disp("レ",500);
+      await disp("ド",500);
+      await disp("レ",500);
+      await disp("ミ",500);
+      await disp("ド",500);
+      await disp("ソ",1000);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("",500);
+      await disp("ラ",500);
+      await disp("",500);
+      await disp("ラ",500);
+      await disp("",500);
+      await disp("ソ",500);
+      await disp("ミ",1000);
+      await disp("",500);
+      await disp("ミ",500);
+      await disp("",500);
+      await disp("レ",500);
+      await disp("",500);
+      await disp("レ",500);
+      await disp("",500);
+      await disp("ド",500);
+      await disp("",1000);
+    }  
+
+    // 非同期処理で画面に表示する音階表示関数
+    disp = (name,time) => {
+      return new Promise(resolve => {
+        display_timer = setTimeout(() => {
+          display.textContent = name;
+          resolve();
+        },time);
+      });
+    }
+      
+    // 演奏中止ボタンをクリックしたときのイベントリスナー
+      autostop1.addEventListener('click',function(){
+        music_stop();
+      });
+
+      // ピアノの音階を左クリックして下に下げた時の処理
+      buttons.addEventListener('mousedown', function(e){
+        noteOn(e.target);
+      },false);  
+
+      
+      
+      // ピアノの音階を停止する(マウスの左クリックが上に上がるとき)
+      buttons.addEventListener('mouseup',function(e) {
+        click_up(e);
+      },false);
+
+      
+      // ピアノの音階を停止する(マウスを要素外に移動したときのイベントリスナー)
+      buttons.addEventListener('mouseout',function(e) {
+        noteOff(e);
+      },false);
+            
+  </script>
+  </body>
+</html>
