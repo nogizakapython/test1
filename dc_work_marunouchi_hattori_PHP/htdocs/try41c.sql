@@ -1,0 +1,1 @@
+ALTER TABLE `product` ADD UNIQUE(`product_name`);
