@@ -7,6 +7,11 @@
     <title>現在日付取得テスト</title>
 </head>
 <body>
+    <div id="out" name="out">
+        <?php
+            print $out; 
+        ?>
+    </div>
     <form method="post" action="hiduketest2.php">
         <input type="text" name="test1">
         <input type="submit" value="送信">
@@ -14,9 +19,14 @@
     <?php
         $date = date("Y-m-d");
         if(isset($_POST['test1'] ) && $_POST['test1'] != ""){
-            print '日付: ' . $date . ' 入力した内容: ' . htmlspecialchars($_POST['test1'],ENT_QUOTES,'UTF-8');
+            $out = '日付: ' . $date . ' 入力した内容: ' . htmlspecialchars($_POST['test1'],ENT_QUOTES,'UTF-8');
+            print $out;
+            
+            
         } else {
-            print "入力されていません";
+            $out = "入力されていません";
+            print $out;
+            // echo $out; 
             exit;
         }
 
