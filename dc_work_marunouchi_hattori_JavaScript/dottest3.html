@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dotinstall3</title>
+</head>
+<body>
+  <script>
+    'use strict';
+    const scores = [80,90,40,70];
+    // 要素の前に配列を追加
+    scores.unshift(46,48);
+    // 配列の要素の1番後ろを削除する
+    scores.pop();
+
+   for(let i=0;i<scores.length;i++){
+    document.write(`<p> Score${i} : ${scores[i]} </p>`);
+   }
+  </script>
+</body>
+</html>
