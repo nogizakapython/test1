@@ -15,6 +15,7 @@
 </head>
 <body>
 <?php  
+      $date = date("Y-m-d");
       $db = new mysqli($host, $login_user, $password, $database);
       if ($db->connect_error){
         echo $db->connect_error;
@@ -49,6 +50,6 @@
     }
 
     ?>
-    <meta http-equiv="refresh" content="10;URL=https://portfolio.dc-itex.com/nagoya/0005/htdocs/work30.php">
+    <meta http-equiv="refresh" content="2;URL=https://portfolio.dc-itex.com/nagoya/0005/htdocs/work30.php">
 </body>
 </html>
