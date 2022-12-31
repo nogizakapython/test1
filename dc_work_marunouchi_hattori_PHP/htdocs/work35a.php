@@ -17,14 +17,17 @@
 </head>
 <body>
   <?php
+      // チーム名を定義する。
       define('TEAM_NAME','really?Madrid');
+      // 加わる人数を定義する
       define('ADD',10);
 
+      // チームに関する関数 
       function echo_team($person){
         echo "<p>チーム名は<span class=test1>" . TEAM_NAME . "</span>です</p>";
         echo "<p>現在所属人数は" . $person . "人で、来月" . ($person + ADD) . "人になります。</p>";
       }
-
+      // 関数の呼び出し
       echo_team(30);
 
   ?>
