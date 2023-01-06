@@ -1,0 +1,114 @@
+/*job.css(求人案件管理システムのCSS)
+作成日付  2021/04/27   新規作成
+
+作成者　　Takao Hattori
+*/
+
+@charset "utf-8";
+body 
+{
+    background-color: wheat;
+}
+h1 { 
+    color:chartreuse 
+}
+h2 {
+    color:coral;
+}
+#entry
+{
+    background-color :azure;
+    border-top: 0;
+    border:2px solid #ddd;
+    
+}
+#entry dl dt {
+    width:13px;
+    float:left;
+    clear:both;
+    font-weight: bold;
+}
+#entry dl dd {
+    margin-left:13px;
+    border-left:1px solid #ddd;
+    
+}
+#entry #company {
+    margin-left:13px;
+    border-left:1px solid #ddd;
+    width:30em;
+    
+}
+
+#entry #address {
+    margin-left:13px;
+    border-left:1px solid #ddd;
+    width:50em;
+    
+}
+
+#entry #job {
+    margin-left:13px;
+    border-left:1px solid #ddd;
+    width:20em;
+    
+}
+
+
+
+
+.must {
+    color: #f00; 
+}
+
+#entry #submit
+{
+    background-color:fuchsia;
+    border: 1px solid #b7a077;
+    padding: 12px 70px;
+    font-size: 16px
+}
+
+.hattori
+{
+    font-size: 12px;
+    color: red;
+        
+}
+.delete
+{
+    background-color:darkorange;
+    border: 1px solid #b7a077;
+    padding: 10px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+
+}
+.menu{
+    display:inline-block;
+    padding:10px 20px 10px 20px;
+    color:white;
+    background-color:darkorange;
+    font-size:18px;
+    font-weight: bold;
+    border:solid 3px pink;
+    border-radius:8px;
+}
+.menu:hover {
+    background-color:dodgerblue;
+}
+
+.ichi{
+    display:inline-block;
+    padding:10px 20px 10px 20px;
+    color:white;
+    background-color:chartreuse;
+    font-size:18px;
+    font-weight: bold;
+    border:solid 3px pink;
+    border-radius:8px;
+}
+.ichi:hover {
+    background-color:dodgerblue;
+}
