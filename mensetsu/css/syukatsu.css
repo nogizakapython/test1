@@ -1,0 +1,134 @@
+/*syukatsu.css(見学管理アプリのCSS)
+作成日付  2023/01/11   新規作成
+
+作成者　　乃木坂好きのITエンジニア
+*/
+
+@charset "utf-8";
+body 
+{
+    background-color:#FFFA3D;
+}
+h1 { 
+    color:black; 
+}
+h2 {
+    color:black;
+}
+#entry
+{
+    background-color :#22C361;
+    border-top: 0;
+    border:2px solid #CFDDD1;
+    
+}
+#entry dl dt {
+    width:16px;
+    float:left;
+    clear:both;
+    font-weight: bold;
+}
+#entry dl dd {
+    margin-left:16px;
+    border-left:1px solid #ddd;
+    
+}
+#entry #name {
+    margin-left:16px;
+    border-left:1px solid #ddd;
+    width:40em;
+    
+}
+
+#entry #address {
+    margin-left:16px;
+    border-left:1px solid #ddd;
+    width:70em;
+    
+}
+
+#entry #div1 {
+    background:yellow;
+    
+}
+
+#entry #eva {
+    background:aqua;
+    
+}
+
+#entry #day {
+    margin-left:16px;
+    border-left:1px solid #ccc;
+    background:#A8F0C1;
+}
+
+#entry #detail {
+    margin-left:16px;
+    border-left:1px solid #ccc;
+    background:#F0EFFF;
+    width:70em;
+    height:10em;
+}
+
+
+.must {
+    color: #22FF11; 
+}
+
+#entry #submit
+{
+    background-color:#2cF9CA;
+    border: 1px solid #b7a077;
+    margin-left: 48px;
+    padding: 16px 72px;
+    font-size: 16px
+}
+
+.hattori
+{
+    font-size: 12px;
+    color: red;
+        
+}
+.delete
+{
+    background-color:darkorange;
+    border: 1px solid #13bb99;
+    padding: 10px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+
+}
+.delete:hover
+{
+    background-color: deeppink;
+}
+.menu{
+    display:inline-block;
+    padding:10px 20px 10px 20px;
+    color:white;
+    background-color:darkorange;
+    font-size:18px;
+    font-weight: bold;
+    border:solid 3px pink;
+    border-radius:8px;
+}
+.menu:hover {
+    background-color:dodgerblue;
+}
+
+.ichi{
+    display:inline-block;
+    padding:10px 20px 10px 20px;
+    color:white;
+    background-color:chartreuse;
+    font-size:18px;
+    font-weight: bold;
+    border:solid 3px pink;
+    border-radius:8px;
+}
+.ichi:hover {
+    background-color:dodgerblue;
+}
