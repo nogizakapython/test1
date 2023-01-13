@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST21</title>
+</head>
+<body>
+  <script>
+          document.write(`<h1>成績一覧</h1>`);
+          const array1 = [ 
+                      { 'name': 'katoshi', 'score': 70 },
+                      { 'name': 'kosakana', 'score': 60 },
+                      { 'name': 'sasaku', 'score': 80 },
+                      { 'name': 'hinano', 'score': 40 },
+                    ];
+
+          for(let i=0;i<array1.length;i++){
+            let a = array1[i]["name"];
+            let b = array1[i]['score'];
+            document.write(`<p>${a}の成績は${b}点です</p>`);
+          }          
+  </script>            
+</body>
+</html>
