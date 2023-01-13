@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST20</title>
+</head>
+<body>
+  <script>
+          const array1 = [ 
+                      { "note": 'D4', 'duration': 0.25 },
+                      { "note": '', 'duration': 0.25 },
+                      { "note": 'C4', 'duration': 0.5 },
+                      { "note": 'C4', 'duration': 0.5 },
+                    ];
+
+          for(let i=0;i<array1.length;i++){
+            let a = array1[i]["note"];
+            let b = array1[i]['duration'];
+            b = b * 1000;
+            document.write(`<p> a = ${a} , b = ${b}</p>`);
+          }          
+  </script>            
+</body>
+</html>
