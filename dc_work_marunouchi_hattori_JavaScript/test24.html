@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST24</title>
+</head>
+<body>
+  <script>
+          
+          function calc(w_time){
+            if(w_time >= 1){
+              w_time = 1000;
+              
+            } else if (w_time == 0.25){
+              w_time = 500;
+            } else {
+              w_time = w_time * 1000;
+            }
+            return w_time;
+          }
+
+          function final_calc(w_time){
+            w_time = w_time * 1000;
+            return w_time;
+          }
+
+          const array1 = [ 
+                        { 'note': 'C4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'A4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'A4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { 'note': 'C4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'A4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'A4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'G4', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'F4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'E4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'D4', 'duration': 0.5 },
+                        { "note": '', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 },
+                        { "note": 'C4', 'duration': 0.5 }
+                    ];
+          const array2 = [];
+          let work_a;
+          let work_b;
+          let result_a;
+          let result_b;
+          let count_fg = 0;
+          for(let i=0;i<array1.length;i++){
+            let a = array1[i]["note"];
+            let b = array1[i]['duration'];
+            if(i == 0){
+              work_a = a;
+              work_b = b;
+              count_fg = 1;
+            } else {
+              if (work_a == a){
+                work_b += b;
+                count_fg += 1;
+                if(count_fg == 2){
+                 work_b = calc(work_b); 
+                 result_a = work_a;
+                 result_b = work_b;
+                 array2.push(result_a + ":" + result_b);
+                }
+              } else {
+                work_b = calc(work_b);
+                if (count_fg >= 3){
+                  result_a = "";
+                  work_b = calc(work_b - 1);
+                  result_b = work_b;
+                  array2.push(result_a + ":" + result_b);  
+                } else if (count_fg == 1){
+                  result_a = work_a;
+                  result_b = work_b;
+                  array2.push(result_a + ":" + result_b);
+                } 
+                count_fg = 1;
+                work_a = a;
+                work_b = b;
+              }
+              
+            }
+            if(i == array1.length-1){
+              work_b = calc(work_b);
+              if(count_fg >= 3 ){
+                result_a = "";
+                work_b = final_calc(work_b - 1);
+                result_b = work_b;
+                array2.push(result_a + ":" + result_b);  
+              } else if (count_fg == 1){
+                result_a = work_a;
+                result_b = work_b;
+                array2.push(result_a + ":" + result_b);
+              }
+            }
+          }
+          array2.forEach((data) => {
+            let work_array = data.split(":");
+            let n = work_array[0];
+            let d = work_array[1];
+            document.write(`<p class=a>${n} ${d}`);
+
+          })          
+  </script>            
+</body>
+</html>
