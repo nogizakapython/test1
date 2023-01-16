@@ -560,21 +560,18 @@
               work_b += b;
               count_fg += 1;
               if(count_fg == 2){
-                work_b = calc(work_b); 
                 result_a = work_a;
-                result_b = work_b;
+                result_b = calc(work_b);
                 work_kirakira.push(result_a + ":" + result_b);
               }
           } else {
-              work_b = calc(work_b);
               if (count_fg >= 3){
                 result_a = "";
-                work_b = calc(work_b - 1);
-                result_b = work_b;
+                result_b = final_calc(work_b - 1);
                 work_kirakira.push(result_a + ":" + result_b);  
               } else if (count_fg == 1){
                 result_a = work_a;
-                result_b = work_b;
+                result_b = calc(work_b);
                 work_kirakira.push(result_a + ":" + result_b);
               } 
               count_fg = 1;
@@ -584,15 +581,14 @@
           
         }        
         if(i == kirakira.length-1){
-          work_b = calc(work_b);
           if(count_fg >= 3 ){
              result_a = "";
-             work_b = final_calc(3);
+             result_b = final_calc(work_b - 1);
              result_b = work_b;
              work_kirakira.push(result_a + ":" + result_b);  
           } else if (count_fg == 1){
             result_a = work_a;
-            result_b = work_b;
+            result_b = calc(work_b);
             work_kirakira.push(result_a + ":" + result_b);
           }
         }
@@ -619,21 +615,19 @@
               work_b += b;
               count_fg += 1;
               if(count_fg == 2){
-                work_b = calc(work_b); 
                 result_a = work_a;
-                result_b = work_b;
+                result_b = calc(work_b);
                 work_turipu.push(result_a + ":" + result_b);
               }
           } else {
-              work_b = calc(work_b);
               if (count_fg >= 3){
                 result_a = "";
-                work_b = calc(work_b - 1);
+                result_b = final_calc(work_b - 1);
                 result_b = work_b;
                 work_turipu.push(result_a + ":" + result_b);  
               } else if (count_fg == 1){
                 result_a = work_a;
-                result_b = work_b;
+                result_b = calc(work_b);
                 work_turipu.push(result_a + ":" + result_b);
               } 
               count_fg = 1;
@@ -646,13 +640,11 @@
           work_b = calc(work_b);
           if(count_fg >= 3 ){
              result_a = "";
-             work_b = final_calc(3);
-             result_b = work_b;
+             result_b = final_calc(work_b - 1);
              work_turipu.push(result_a + ":" + result_b);  
           } else if (count_fg == 1){
             result_a = work_a;
-            work_b = calc(work_b);
-            result_b = work_b;
+            result_b  = calc(work_b);
             work_turipu.push(result_a + ":" + result_b);
           }
         }

@@ -146,21 +146,18 @@
                 work_b += b;
                 count_fg += 1;
                 if(count_fg == 2){
-                 work_b = calc(work_b); 
-                 result_a = work_a;
-                 result_b = work_b;
-                 array2.push(result_a + ":" + result_b);
+                  result_a = work_a;
+                  result_b = calc(work_b);
+                  array2.push(result_a + ":" + result_b);
                 }
               } else {
-                work_b = calc(work_b);
                 if (count_fg >= 3){
                   result_a = "";
-                  work_b = calc(work_b - 1);
-                  result_b = work_b;
+                  result_b = final_calc(work_b - 1);
                   array2.push(result_a + ":" + result_b);  
                 } else if (count_fg == 1){
                   result_a = work_a;
-                  result_b = work_b;
+                  result_b = calc(work_b);
                   array2.push(result_a + ":" + result_b);
                 } 
                 count_fg = 1;
@@ -169,16 +166,14 @@
               }
               
             }
-            if(i == array1.length-1){
-              work_b = calc(work_b);
+            if(i == array1.length - 1){
               if(count_fg >= 3 ){
                 result_a = "";
-                work_b = final_calc(work_b - 1);
-                result_b = work_b;
+                result_b = final_calc(work_b - 1);
                 array2.push(result_a + ":" + result_b);  
               } else if (count_fg == 1){
                 result_a = work_a;
-                result_b = work_b;
+                result_b = calc(work_b);
                 array2.push(result_a + ":" + result_b);
               }
             }
