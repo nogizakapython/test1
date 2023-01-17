@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>配列テスト7(抽出)</title>
+</head>
+<body>
+  <script>
+    'use strict';
+
+    const numbers = [1,4,7,8,10];
+    // const evenNumbers = numbers.filter(number => {
+      // if (number % 2 === 0){
+        // return true;
+      // } else {
+        // return false;
+      // }
+    // });
+
+    const evenNumbers = numbers.filter(number => number % 2 === 0);
+    document.write(evenNumbers);
+  </script>
+</body>
+</html>
