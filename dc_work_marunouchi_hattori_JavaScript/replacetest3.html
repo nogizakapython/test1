@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字列の置換テスト</title>
+  <style>
+
+    body {
+      width:600px;
+    }
+    .test1 {
+      color:#0000c1;
+      font-size:20px;
+      font-weight:bold;
+    }
+    .snow {
+      color:#FFF;
+      background-color:#8c8c8c;
+      font-size:18px;
+     
+    }
+
+    .cloudy {
+      color:#8059F1;
+      background-color:#16F154;
+      font-size:18px;
+      
+    }
+
+    .rain {
+      color:#2881FF;
+      background-color:antiquewhite;
+      font-size:18px;
+     
+    }
+    .fine {
+      color:#F151F1;
+      background-color:#D9E300;
+      font-size:18px;
+     
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <script>
+    // 天気配列
+    const array1 = ["snow","cloudy","rain","fine"];
+    // 乱数表示0から2
+    const num = Math.floor(Math.random()*4);
+    const str = "It is fine!";
+    let ans = "";
+    // 文字の置換
+    ans = str.replace('fine',array1[num]);
+    document.write(`<p class="test1">本日の天気予報です</p>`);
+    if (num == 0){
+      //ブラウザに表示
+      document.write(`<p class="snow"> ${ans} </p>`);
+    } else if (num == 1){
+      document.write(`<p class="cloudy"> ${ans} </p>`);
+    }  else if (num == 2){
+      document.write(`<p class="rain"> ${ans} </p>`);
+    } else if (num == 3){
+      document.write(`<p class="fine"> ${ans} </p>`);
+    }   
+  </script>
+</body>
+</html>
