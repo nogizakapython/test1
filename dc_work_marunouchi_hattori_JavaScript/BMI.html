@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMIWebアプリ</title>
+  <style>
+    #answer {
+      width:200px;
+      margin-top:20px;
+      color:#000;
+      background-color: #FFF;
+    }
+    #res {
+      margin-top:40px;
+      width:500px;
+      color:#F00;
+      background-color: #5EF;
+      font-size:30px;
+      font-weight:bold;
+    }
+    #calc {
+      width:120px;
+      height:40px;
+      color:#3791C4;
+      background-color: #F7C806;
+      border-radius: 1px #000;
+      margin-top:20px;
+
+    }
+
+  </style>
+</head>
+<body>
+  <script>
+    
+    function setcalc(myForm){
+      var w_h = Number(myForm.height.value);
+      var w_w = Number(myForm.weight.value);
+      var result = w_w / Math.pow((w_h / 100),2);
+      return result;
+    }
+  </script>
+  <form name="weight form" id="form1">
+    <label>身長を入力してください。cmで記入</label><br>
+    <input type="text" name="height" id="height"><br>
+    <label>体重を入力してください。kgで記入</label><br>
+    <input type="text" name="weight" id="weight"><br>
+    <input type="button" id="calc" name="calc" value="計算する">
+  </form>
+  
+  <div id="res">
+    判定を表示
+  </div>
+  <script>
+    const height = document.getElementById('height');
+    const weight = document.getElementById('weight');
+    const form1 = document.getElementById('form1');
+    const calc = document.getElementById('calc');
+    const answer = document.getElementById('answer');
+    const res = document.getElementById('res');
+    var value;
+
+    function check(height,weight){
+      const flag = 0;
+      if (!( height >= 100 ) && (height <= 200)){
+        alert("100以上200以下の数字を入力してください");
+        flag += 1;
+        
+      } else {
+        
+      }
+      if (!( weight >= 10 ) && ( weight <= 150)){
+        flag += 1;
+      } else {
+        
+      }
+    }
+
+    
+    function hantei1(value1){
+      if(value1 < 18){
+        res.textContent = "痩せ過ぎです";
+      } else if (value1 < 25){
+        res.textContent = "普通体重です";
+      } else if (value1 < 30){
+        res.textContent = "肥満１度です";
+      } else if (value1 < 35){
+        res.textContent = "肥満２度です";
+      } else if (value1 >= 35){
+        res.textContent = "太りすぎです";
+      }
+    }
+
+    calc.addEventListener('click',function(){
+      let fc = check(height,weight);
+      if (fc >= 1){
+        alert("身長は100以上200以下、体重は10以上150以下の数字を入力してください");
+        exit();
+      }
+      value = setcalc(this.form);
+      hantei1(value);
+    },false);
+
+  </script>
+
+  
+</body>
+</html>
