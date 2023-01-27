@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字列操作</title>
+  <style>
+    body {
+      width:600px;
+
+    }
+    body .test1{
+      color:#2FB18F;
+      font-size:20px;
+      width:80%;
+      background-color:#F8C;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const str = 'hello';
+    const num = str.length;
+    for(let i=0;i<num ;i++){
+      let ans = str.substring(i,i+1);
+      document.write(`<p class="test1"> ${ans} </p>`)
+    }
+  </script>  
+</body>
+</html>
