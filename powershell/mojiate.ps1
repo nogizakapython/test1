@@ -3,30 +3,66 @@
 ####  配列テスト     #####
 ##########################
 
-#　入力の配列を作成する
-$input_array = @()
 
-# 正解の配列を作成する。
-$ans_array = @();
-#　配列数
 $num = 3
-# 整数値
-$ans_num = 0
+$i = 0
+$j = 1
 
-function input1($random) {
-    switch($random){
-        1 { $ans_array += "A" }
-        2 { $ans_array += "B" }
-        3 { $ans_array += "C" }
+####正解文字列を作成する
+
+
+function ans_str {
+    while($true){
+        $random = Get-Random -Minimum 1 -Maximum 4
+        if ($random -eq 1){
+            $msg = $msg + "A"
+        } elseif ($random -eq 2) {
+            $msg = $msg + "B"
+        } elseif ($random -eq 3) {
+            $msg = $msg + "C"
+        }
+        if($i -eq 2){
+            return $msg
+            break
+        }
+        $i += 1
     }
 }
- 
-for($i=0;$i -lt $num;$i++){
-    $random = Get-Random -Minimum 1 -Maximum 3
-    input1($random)
+
+
+#####入力文字列作成処理
+function str_input {
+    while($true){
+        $msg = Read-Host("A,B,Cの3文字を使ったアルファベット3語を入力してください")
+        $flag = $msg -match '[A-C][A-C][A-C]'
+        if($flag -eq "True") {
+            $count = $msg.Length
+            if ($count -eq 3){
+                return $msg
+            } else {
+                Write-Host("3文字にしてください")
+            }
+        } else {
+            Write-Host("A,B,C以外入力しないでください")
+        }
+
+    }
+       
 }
- 
-$ans = Read-Host("AからCまでのアルファベット小文字を入力してください")
- 
- 
+
+
+####################
+#####メイン処理########
+while($true) {
+    $ans_str = ans_str
+    $input = str_input
+    if($ans_str -eq $input){
+        Write-Host("${j}回目で文字列がそろって正解です")
+        break
+    } else {
+        Write-Host("${j}回目、不正解です")
+        $j++
+    }
+}
+
 
