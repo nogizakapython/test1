@@ -1,13 +1,15 @@
 ﻿##########################
 ##########################
-####  文字当てクイズ     #####
-####  新規作成 2023/1/31 ##
+####  文字当てクイズ  #####
+####  新規作成 2023/1/31##
 ####  修正    2023/2/1  ##
 ##########################
 
-
+#文字数の変数定義
 $num = 4
+#正解文字数の文字連結カウント
 $i = 0
+#配列の要素位置変数
 $j = 1
 
 ####正解文字列を作成する
@@ -39,9 +41,11 @@ function ans_str {
 #####入力文字列作成処理
 function str_input {
     while($true){
-        $msg = Read-Host("A,B,C,Dの4文字を使ったアルファベット4語を入力してください")
+        $msg = Read-Host("A,B,C,D(大文字、小文字は区別なし)の4文字を使ったアルファベット4語を入力してください")
+        #文字の中身チェック(正規表現)
         $flag = $msg -match '[A-D][A-D][A-D][A-D]'
         if($flag -eq "True") {
+            #文字の長さが4文字がチェックする
             $count = $msg.Length
             if ($count -eq $num){
                 return $msg
@@ -69,8 +73,11 @@ while($true) {
         break
     } else {
         Write-Host("${j}回目、不正解です")
+        #正解の文字列を配列に格納する
         $ans_array = $ans_str.ToCharArray()
+        #入力した文字列を配列に格納する
         $inp_array = $input_str.ToCharArray()
+        #左から数えて何番目の文字が正解か配列処理でチェックする
         for($k=0;$k -lt $num;$k++){
             if ($ans_array[$k] -eq $inp_array[$k]){
                 $p = $k + 1
@@ -80,4 +87,3 @@ while($true) {
         $j++
     }
 }
-
