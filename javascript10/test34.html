@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!-- ヘッダー部分-->
+<head>
+<meta charset="utf-8">
+<title>プログラム実行テスト</title>
+<!-- ボディー部分-->
+</head>    
+<body>
+    <script>
+        window.onload = function (){
+            var e = document.getElementById('header');
+            e.addEventListener('click', function() {
+                window.alert('イベントが発生しました');
+            }, false);
+            e.addEventListener('click', function() {
+                e.style.color = 'red';
+            }, false);
+        };
+    </script>
+    <h1 id="header">プログラム実行テスト</h1>
+</body>
+</html>
