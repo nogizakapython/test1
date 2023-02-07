@@ -1,0 +1,1 @@
+﻿New-ItemProperty -Path HKLM:\SOFTWARE\Policies\Google\Chrome -Name BackGroundModeEnabled -PropertyType DWORD -Value 0

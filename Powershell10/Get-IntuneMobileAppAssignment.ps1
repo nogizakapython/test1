@@ -1,0 +1,107 @@
+﻿###### Intune Mobileアプリ個別情報取得スクリプト(Hidemaru、IE11)　#####
+###### Create Date   2021/8/26                                    #####
+###### Create Author  T.HATTORI                                   #####
+
+### コレクションをusingする
+using namespace System.Collections.Generic
+
+##dateパラメーター
+$date = Get-date -Format "yyyyMMddHHmmss"
+
+##出力ファイル
+$result_file = "C:\work\20210826\result\Get-IntuneMobileAppAssignment$date.txt"
+#ArrayListの定義
+$AID = [List[String]]@('7a152658-eed2-415f-b4c1-93085270bf71','6ff5f55a-ea71-4ff4-b3cb-ff5dfcd0fc48')
+
+#行数カウント
+$count=0
+
+#出力メッセージ一覧
+$msg1="OK"
+$msg2="NG"
+$msg3="アプリケーション情報ファイルが取得が成功しました"
+$msg4="アプリケーション情報ファイルの取得に失敗しました"
+$msg5="異常終了です"
+$msg6="例外処理発生。ファイルのOPENに失敗しました"
+$msg7="ファイルのOPENに成功しました"
+$msg8="例外処理発生。ファイルのCLOSEに失敗しました"
+$msg9="ファイルのCLOSEに成功しました"
+
+#リターンコード
+$normal_code=0
+$error_code=1
+
+## コマンド実行メソッド
+function command($line) {
+    Get-IntuneMobileAppAssignment -mobileAppID $line | Format-List | Out-File $result_file -Append
+    return_code ($?)
+}
+
+### リターンコード確認メソッド
+function return_code($ans1) {
+    if ($ans1 -eq "True") {
+        Write-Host $msg1
+    } else {
+        Write-Host $msg2
+    }
+}
+### ファイルの存在確認チェックメソッド
+function check_file {
+    $flag = Test-Path $result_file
+    if($flag -eq "True") {
+        Write-Host $msg3
+    } else {
+        Write-Host $msg4
+        $swc="False"
+        critical_error($swc)
+    }
+}
+### 異常終了メソッド
+function critical_error($ans1){
+    if($ans1 -eq "False") {
+        Write-Host $msg5
+        exit $error_code
+    }
+}
+### ファイルの読み込みメソッド
+function file_read {
+    try
+    {
+        $file = New-Object System.IO.StreamReader($result_file)
+    } 
+    catch
+    {
+        Write-Host $msg6
+        $ans = "False"
+        critical_check($ans)
+    }
+
+    Write-Host $msg7
+    while (($line = $file.ReadLine()) -ne $null)
+    {
+        $count += 1
+    }
+
+    try 
+    {
+        $file.Close()
+    }
+    catch
+    {
+        Write-Host $msg8
+        $ans = "False"
+        critical_check($ans)
+    }
+    Write-Host $msg9
+    Write-Host "ファイルの行は"$count"です。"
+}
+ 
+####メイン処理#######
+
+foreach ($data in $AID) {
+    command($data)
+}
+check_file 
+file_read
+
+exit $normal_code
