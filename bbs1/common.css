@@ -1,0 +1,23 @@
+/* 新規作成 2023/2/16 */
+
+@charset 'utf8';
+
+/* エラーメッセージのCSS */
+.errmsg {
+  font-size:20px;
+  color:#D8A125;
+  font-weight:bold;
+}
+
+/* 投稿一覧タグのCSS */
+.ichiran {
+  color:#c10763;
+  font-size:20px;
+}
+
+/* ファイルの書き込み成功、失敗メッセージの定義 */
+.fmsg {
+  color:#0023F7;
+  font-size:20px;
+  font-weight:bold;
+}
