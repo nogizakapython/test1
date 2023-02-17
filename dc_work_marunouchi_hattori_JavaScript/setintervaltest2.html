@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非同期処理2</title>
+</head>
+<body>
+  <script>
+
+    let i = 0;
+    function showname(name){
+
+
+      document.write(name);
+
+
+
+      i++;
+      if(i > 3){
+        clearInterval(intervalId);
+      }
+    }
+
+    const array1 = ['桜井玲香','秋元真夏','若月佑美','中田花奈'];
+    array1.forEach((date) => {
+      showname(date);
+    })
+
+  </script>
+</body>
+</html>
