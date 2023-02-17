@@ -1,5 +1,6 @@
 <!-- 新規作成 2023/2/15 -->
 <!-- 入力チェックを追加 2023/2/16 -->
+<!-- NGワードチェック機能を追加 2023/2/17 -->
 <!-- BBS掲示板cgiプログラム -->
 <!-- 書き込み処理 -->
 <!DOCTYPE html>
@@ -18,6 +19,8 @@
         $msg2 = "内容を入力してください";
         // メッセージ出力配列の定義
         $msg_arr = [];
+        // NGワードリスト配列の定義
+        $list = ["死ね","まんこ","ちんこ","自殺しろ","ガイジ","障害","カタワ"];
 
         // リンク先表示関数
         function out_url() {
@@ -29,6 +32,22 @@
             $str = str_replace(array(" ","　"),"",$str);
             return strlen($str);
         }
+
+        // NGワードチェック処理
+        function ng_word($str){
+            global $list;
+            $ng_count = 0;
+            foreach($list as $word){
+                $w_str = "/" . $word . "/";
+                $a = preg_match($w_str,$str);
+                if ($a == true){
+                  $ng_count += 1;
+                }
+            }
+            return $ng_count;
+
+        }
+
 
         // タイトルを取得する変数
         $title = $_POST["title"];
@@ -56,6 +75,20 @@
             exit();
         }
 
+        $title_check = ng_word($title);
+        if ($title_check >= 1){
+            echo "<p class='ng1'>タイトルにNGワードが含まれています</p>";
+            out_url();
+            exit();
+        }
+
+        $sum_check = ng_word($sum);
+        if ($sum_check >= 1){
+            echo "<p class='ng1'>内容にNGワードが含まれています</p>";
+            out_url();
+            exit();
+        }
+
         // 日付を取得
         $date1 = date("Y年m月d日 H時i分s秒");
         // ミリ秒を取得
@@ -63,6 +96,9 @@
         $w_array = explode('.',$w_time);
         $mtime = $w_array[1];
         $microtime = intval($mtime / 100);
+        if($Microtime < 10){
+            $microtime = "0" . $microtime;
+        }
 
         // ファイルに書き込む内容を変数に代入する。
         $result = "<br>". "日付:" .$date1 . $microtime . "<br>" . "タイトル:" . $title . "<br>" . "内容:" . $sum;

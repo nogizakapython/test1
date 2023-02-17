@@ -9,6 +9,13 @@
   font-weight:bold;
 }
 
+/* NGワードのCSS */
+.ng1 {
+  font-size:20px;
+  color:#F200F6;
+  font-weight:bold;
+}
+
 /* 投稿一覧タグのCSS */
 .ichiran {
   color:#c10763;
