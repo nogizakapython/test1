@@ -1,7 +1,13 @@
 <!-- 掲示板プログラム -->
 <!-- 新規作成 2022/2/15 -->
 <!-- 掲示板書き込みフォームと投稿一覧 -->
-
+<!-- 2023/2/18 textareaの修正、ファイルがない場合はファイル作成処理を追加 -->
+<?php
+    $file_name = "bbs.txt";
+    if(!file_exists($file_name)){
+        touch($file_name);
+    }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -21,8 +27,7 @@
         <br>
         <label>書き込み内容</label>
         <br>
-        <textarea id="sum" name="sum" rows="3" cols="35">
-        </textarea>
+        <textarea id="sum" name="sum" rows="3" cols="35"></textarea>
         <br>
         <input type="submit" value="送信">
         <br>

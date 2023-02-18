@@ -50,20 +50,28 @@
 
 
         // タイトルを取得する変数
-        $title = $_POST["title"];
-        #入力チェック関数
-        $count1 = count_str($title);
-        // 入力チェック確認
-        if($count1 == 0){
-            array_push($msg_arr,$msg1);
+        if(isset($_POST["title"])){
+            $title = $_POST["title"];
+            #入力チェック関数
+            $count1 = count_str($title);
+            // 入力チェック確認
+            if($count1 == 0){
+                array_push($msg_arr,$msg1);
+            }
+        } else {
+            exit();
         }
         // 内容を取得する変数
-        $sum = $_POST["sum"];
-        // 入力チェック関数
-        $count2 = count_str($sum);
-        // 入力チェック確認
-        if($count2 == 0){
-            array_push($msg_arr,$msg2);
+        if(isset($_POST["sum"])){
+            $sum = $_POST["sum"];
+            // 入力チェック関数
+            $count2 = count_str($sum);
+            // 入力チェック確認
+            if($count2 == 0){
+                array_push($msg_arr,$msg2);
+            }
+        } else {
+            exit();
         }
         $num = count($msg_arr);
         #入力されていない項目があれば表示して処理を終了する
@@ -96,12 +104,13 @@
         $w_array = explode('.',$w_time);
         $mtime = $w_array[1];
         $microtime = intval($mtime / 100);
-        if($Microtime < 10){
+        if($microtime < 10){
             $microtime = "0" . $microtime;
         }
 
         // ファイルに書き込む内容を変数に代入する。
-        $result = "<br>". "日付:" .$date1 . $microtime . "<br>" . "タイトル:" . $title . "<br>" . "内容:" . $sum;
+        $result1 = "\n" . "日付:" .$date1 . $microtime . "\n" . "タイトル:" . $title . "\n" . "内容:" . $sum;
+        $result = nl2br(htmlentities($result1, ENT_QUOTES, 'UTF-8'));
 
         // 書き込みモードでファイルを開く
         $write1 = file_put_contents("bbs.txt", $result,FILE_APPEND);
