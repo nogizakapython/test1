@@ -35,6 +35,20 @@ class TestClass8 {
 
 # TestClass10を継承して、testClass11を作成する。
 class TestClass20 : TestClass8 {
+    [int] $ID
+    [String] $Name
+    [String] $Address
+    
+    
+    #コンストラクタ
+    Disp([int] $ID,[String] $Name,[String] $Address,[String] $Station) {
+        $this.Id = $Id
+        $this.Name = $Name
+        $this.Address = $Address
+        
+
+    
+    }
     [String] ToName(){
         $Data = ([Testclass8]$this).ToName()
         $Data += "男性です"
@@ -43,10 +57,12 @@ class TestClass20 : TestClass8 {
     [String] ToAddress(){
         $Adr = ([Testclass8]$this).ToAddress()
         $Adr += "上大岡"
-        $Adr += "に移住予定です"
+        $Adr += "に移住予定です。"
+        $Adr += "京急本線を使います。"
         return $Adr
     }
 
+    
 }
 
 $T1 = New-Object TestClass8
@@ -56,7 +72,7 @@ $T1.ToName()
 $T1.ToAddress()
 
 $T2 = New-Object TestClass20
-$T2.Disp(2,"Jiro","神奈川県横浜市南区")
+$T2.Disp(2,"Jiro","神奈川県横浜市南区","上大岡")
 $T2.ToString()
 $T2.ToName()
 $T2.ToAddress()
