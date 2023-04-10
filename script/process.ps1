@@ -5,7 +5,7 @@
 
 $LIST_DIR = "c:\script\file\"
 $dat = Get-date -Format "yyyyMMdd"
-$str = "slack"
+$str = "chrome"
 
 Test-Path $LIST_DIR$dat.txt
 
