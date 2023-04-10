@@ -1,0 +1,152 @@
+@charset 'utf-8';
+/* 新規作成 2022/7/28 */
+/* 作成者   T.HATTORI */
+
+body {
+    background-color:azure;
+    width:768px;
+    text-align: center;
+}
+
+
+
+h1 {
+    color:darkblue;
+    font-size:40px;
+    
+}
+
+h2 {
+    font-size:30px;
+    
+}
+
+h3 {
+    font-size:25px;
+    
+}
+
+main {
+    padding: 20px 25px;
+}
+
+
+.logo {
+    float:left;
+    background:#5F1;
+    padding: 10px ;
+    width:100px;
+    margin:0;
+    margin-left:0;
+}
+nav {
+   background-color: #5f1 ;
+   width:650px;
+   
+}
+
+nav ul {
+    float:auto;
+    justify-content: center;
+    padding: 0;
+}
+
+#menu1 ul li  {
+    list-style:none;
+    margin: 0;
+    padding: 10px 5px;
+    width:100px;
+    display: inline-block;
+    background-color:#5f1;
+}
+
+#menu1 ul li a  {
+    display: block;
+    text-decoration:none ;
+    color: #000;
+}
+
+
+#menu1 ul li:hover{
+    background-color:#579;
+}
+
+#menu2 ul {
+    float:left;
+    padding: 0;
+}
+
+#menu2 ul li {
+    list-style:none;
+    margin:0;
+    margin-left:0;
+    padding: 5px 5px;
+    display:inline-block;
+    width:120px;
+    background:#DC77A5;
+}
+
+#menu2 ul li a {
+    color:#000;
+    text-decoration: none;
+}
+
+
+#menu2 ul li:hover{ 
+    background-color:#CF88A0 ;
+}
+
+.one {
+    font-size:20px;
+    float: left;
+    color:darkkhaki;
+    width:200px;
+    padding:10px;
+
+}
+
+.two {
+    font-size:20px;
+    float:left;
+    color:darkmagenta;
+    width:200px;
+    padding:10px;
+}
+
+.three {
+    font-size:20px;
+    float: left;
+    color:#ff0108;
+    width:200px;
+    padding:10px;
+}
+
+
+table {
+    color:darkgreen;
+    float:none;
+    text-align: center;
+    table-layout: auto;
+    font-size:20px;
+}
+
+footer {
+    float:none;
+    padding:30px;
+    height:100px;
+    width:200px;
+}
+footer p {
+    color:black;
+    font-size:25px;
+}
+footer a {
+    color:#073f81;
+    font-size:20px;
+    background-color:#f7fff1;
+    height:100px;
+    width:200px;
+    list-style:none;
+}
+
+
