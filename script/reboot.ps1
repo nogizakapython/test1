@@ -1,18 +1,19 @@
-﻿######### 再起動　Powershellスクリプト　　############
-######### 新規作成    2022/9/16          ############
-####################################################
+﻿#################################################
+#################################################
+####     再起動スクリプト                  ###########
+####   Create    2023/6/15  Takao.Hattori  ######
+#################################################
 
-function command() {
-    shutdown /r /t 1
+function reboot() {
+    Restart-Computer -Force
+    return $?
 }
 
-echo "*********START***********"
-
-command
-if ($? -eq "True"){
-    echo "**********Success**********"
+Write-Host  "windows reboot Script START"
+$flag = reboot
+if ($flag -eq $true){
+    Write-Host "Success"
 } else {
-    echo "**********Failure**********"
+    Write-Host "Failed"
 }
-
-echo "*********END*************"
+Write-Host "Windowsを再起動します"
