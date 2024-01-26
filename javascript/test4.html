@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>My Playground</title>
+  <style>
+    .container {
+      margin: 16px auto;
+      width: 500px;
+    }
+    .tabs {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    .tabs li a {
+      display: inline-block;
+      width: 80px;
+      text-align: center;
+      padding: 8px;
+      color: #333;
+      text-decoration: none;
+    }
+    .tabs li a.active {
+      background: #333;
+      color: #fff;
+    }
+    .content.active {
+      background: #333;
+      color: #fff;
+      min-height: 150px;
+      padding: 12px;
+      display: block;
+    }
+    .content {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <ul class="tabs">
+      <li><a href="#" class="active" data-id="p1">商品1</a></li>
+      <li><a href="#" data-id="p2">商品2</a></li>
+      <li><a href="#" data-id="p3">商品3</a></li>
+      <li><a href="#" data-id="p4">商品4</a></li>
+    </ul>
+    <section class="content active" id="p1">
+      商品1の説明です。
+    </section>
+    <section class="content" id="p2">
+      商品2の説明です。
+    </section>
+    <section class="content" id="p3">
+      商品3の説明です。
+    </section>
+    <section class="content" id="p4">
+        商品4の説明です。
+    </section>
+  </div>
+  <script>
+    // タブのリンク要素を取得
+    const tabs = document.querySelectorAll('.tabs li a');
+    // コンテンツの要素を取得
+    const contents = document.querySelectorAll('.content');
+    
+    // すべてのタブ要素に対して処理を実行
+    tabs.forEach(clickedItem => {
+      // タブがクリックされたときの処理
+      clickedItem.addEventListener('click', e => {
+        // リンクによるページ遷移を抑制
+        e.preventDefault();
+        
+        // いったんすべてのタブを非アクティブにする
+        tabs.forEach(item => {
+          item.classList.remove('active');
+        });
+        // クリックされたタブだけアクティブにする
+        clickedItem.classList.add('active');
+
+        // いったんすべてのコンテンツ要素を非アクティブにする
+        contents.forEach(content => {
+          content.classList.remove('active');
+        });
+        // クリックされたタブに対応するコンテンツ要素だけアクティブにする
+        document.getElementById(clickedItem.dataset.id).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
