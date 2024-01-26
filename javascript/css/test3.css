@@ -1,0 +1,29 @@
+/* CSS */
+/* 2024/1/26 */
+
+
+@charset "utf-8";
+    
+body {
+    user-select: none;
+    text-align:center;
+}
+#sample1 {
+    width: 200px;
+    font-size:30px;
+    color:#FF29C1;
+    background-color: #00FFFF;
+    cursor: pointer;
+}
+#test1 {
+    margin-top:10px;
+}
+#test2 {
+    width: 400px;
+    font-size:25px;
+    margin:10px auto;
+    color:#0FC62F;
+    background-color: #F6FFFF;
+    cursor: pointer;
+
+}

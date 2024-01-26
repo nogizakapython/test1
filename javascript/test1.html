@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>My Playground</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+  <style>
+    body {
+      user-select: none;
+    }
+    i {
+      color: red;
+      font-size: 20px;
+      margin-right: 4px;
+      cursor: pointer;
+    }
+    i.large {
+      font-size: 32px;
+    }
+    span {
+      font-size: 20px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <i class="bi bi-heart-fill" id="heart"></i>
+  <span id="counter">0</span>
+
+  <script>
+    // クリック回数を0で初期化
+    let n = 0;
+    // ハートアイコンの要素を取得
+    const heart = document.getElementById('heart');
+    // カウンターの要素を取得
+    const counter = document.getElementById('counter');
+    
+    // ハートアイコンをクリックしたときの処理
+    heart.addEventListener('click', () => {
+      // カウンターを1増やす
+      n++;
+      // カウンターが10を超えた場合、ハートを大きくする
+      if (n > 10) {
+        heart.classList.add('large');
+      }
+      // クリック回数を表示
+      counter.textContent = n;
+    });
+  </script>
+</body>
+</html>
