@@ -1,0 +1,20 @@
+<time class="c_news_list_item_date" datetime="2023-10-02 10:00:01">2023年10月02日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r051001mlit.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">国土交通省辞令（10月1日付）転載 (PDF: 36.3 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-10-02 10:00:00">2023年10月02日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r051001y.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">鉄道建設・運輸施設整備支援機構役員辞令（10月1日付） (PDF: 47.6 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-08-01 10:00:01">2023年08月01日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r050801y.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">国土交通省辞令（8月1日付）転載 (PDF: 39.1 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-08-01 10:00:00">2023年08月01日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r050801.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">鉄道建設・運輸施設整備支援機構辞令（8月1日付） (PDF: 62.3 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-07-04 10:00:01">2023年07月04日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r050704y.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">鉄道建設・運輸施設整備支援機構役員辞令（7月3日付、7月4日付） (PDF: 40.0 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-07-04 10:00:00">2023年07月04日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r050704s.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">鉄道建設・運輸施設整備支援機構辞令（7月4日付） (PDF: 65.0 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-07-01 10:00:00">2023年07月01日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r050701.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">鉄道建設・運輸施設整備支援機構辞令（7月1日付） (PDF: 79.0 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-06-01 10:00:00">2023年06月01日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r050601.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">鉄道建設・運輸施設整備支援機構辞令（６月1日付） (PDF: 55.6 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-04-01 10:00:00">2023年04月01日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r050401mlit.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">国土交通省辞令（4月1日付）転載 (PDF: 54.7 KB)</a>
+<time class="c_news_list_item_date" datetime="2023-04-01 10:00:00">2023年04月01日</time>
+<a href="/corporate/public_relations/pdf/hp_jirei_r050401.pdf" class="c_news_list_item_link u_icon_before u_icon_pdf" target="_blank">鉄道建設・運輸施設整備支援機構辞令（4月1日付） (PDF: 121.0 KB)</a>

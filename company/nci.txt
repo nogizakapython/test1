@@ -1,0 +1,6 @@
+<a href="/news/detail/733/" class="news-parts">
+ <p class="news-date">2023 / 04 / 01</p>
+ <p class="news-ttl"><span class="news-ttl-inner">役員変更のお知らせ</span></p>
+</a>
+<p class="news-date">2023 / 04 / 01</p>
+<span class="news-ttl-inner">役員変更のお知らせ</span>

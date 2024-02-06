@@ -1,0 +1,120 @@
+<a href="https://www.shane.co.jp/news/detail/id=45711" class="newsList01_btn is_new">
+                            <span class="newsList01_label label01_c01 label01_c03">イベント</span>                <p class="newsList01_date">2024.02.01</p>
+                <p class="newsList01_txt">シェーンの新着情報</p>                        
+            </a>
+<p class="newsList01_date">2024.02.01</p>
+<p class="newsList01_txt">シェーンの新着情報</p>
+<a href="https://www.shane.co.jp/news/detail/id=46044" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c05">新校・移転校</span>                <p class="newsList01_date">2024.01.10</p>
+                <p class="newsList01_txt">橋本校が1月10日に新規オープン！</p>                        
+            </a>
+<p class="newsList01_date">2024.01.10</p>
+<p class="newsList01_txt">橋本校が1月10日に新規オープン！</p>
+<a href="https://www.shane.co.jp/news/detail/id=46076" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01">お知らせ</span>                <p class="newsList01_date">2024.01.05</p>
+                <p class="newsList01_txt">【2月3月イベント参加者受付中】バレンタイン・イースター・アフタヌーンティー</p>                        
+            </a>
+<p class="newsList01_date">2024.01.05</p>
+<p class="newsList01_txt">【2月3月イベント参加者受付中】バレンタイン・イースター・アフタヌーンティー</p>
+<a href="https://www.shane.co.jp/news/detail/id=46070" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01">お知らせ</span>                <p class="newsList01_date">2024.01.04</p>
+                <p class="newsList01_txt">2024年 オリコン顧客満足度®ランキング「子ども英語教室 小学生」推奨意向 92.4% を獲得しました</p>                        
+            </a>
+<p class="newsList01_date">2024.01.04</p>
+<p class="newsList01_txt">2024年 オリコン顧客満足度®ランキング「子ども英語教室 小学生」推奨意向 92.4% を獲得しました</p>
+<a href="https://www.shane.co.jp/news/detail/id=46061" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01">お知らせ</span>                <p class="newsList01_date">2023.12.18</p>
+                <p class="newsList01_txt">年末年始の営業について</p>                        
+            </a>
+<p class="newsList01_date">2023.12.18</p>
+<p class="newsList01_txt">年末年始の営業について</p>
+<a href="https://www.shane.co.jp/news/detail/id=46035" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01">お知らせ</span>                <p class="newsList01_date">2023.11.20</p>
+                <p class="newsList01_txt">11月下旬の営業について</p>                        
+            </a>
+<p class="newsList01_date">2023.11.20</p>
+<p class="newsList01_txt">11月下旬の営業について</p>
+<a href="https://www.shane.co.jp/news/detail/id=45992" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c05">新校・移転校</span>                <p class="newsList01_date">2023.11.06</p>
+                <p class="newsList01_txt">新宿本校が11月6日に移転オープン！</p>                        
+            </a>
+<p class="newsList01_date">2023.11.06</p>
+<p class="newsList01_txt">新宿本校が11月6日に移転オープン！</p>
+<a href="https://www.shane.co.jp/news/detail/id=46002" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c09">法人：お知らせ</span>                <p class="newsList01_date">2023.11.01</p>
+                <p class="newsList01_txt">【日本旅行 ✕ Weavee 共同主催】「子育て応援プログラム」の実証実験への参加</p>                        
+            </a>
+<p class="newsList01_date">2023.11.01</p>
+<p class="newsList01_txt">【日本旅行 ✕ Weavee 共同主催】「子育て応援プログラム」の実証実験への参加</p>
+<a href="https://www.shane.co.jp/news/detail/id=45990" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c03">イベント</span>                <p class="newsList01_date">2023.10.10</p>
+                <p class="newsList01_txt">【募集終了】シェーン英会話のクリスマスパーティ</p>                        
+            </a>
+<p class="newsList01_date">2023.10.10</p>
+<p class="newsList01_txt">【募集終了】シェーン英会話のクリスマスパーティ</p>
+<a href="https://www.shane.co.jp/news/detail/id=45942" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c05">新校・移転校</span>                <p class="newsList01_date">2023.09.26</p>
+                <p class="newsList01_txt">松戸校が9月26日に移転オープン！</p>                        
+            </a>
+<p class="newsList01_date">2023.09.26</p>
+<p class="newsList01_txt">松戸校が9月26日に移転オープン！</p>
+<a href="https://www.shane.co.jp/news/detail/id=45922" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c05">新校・移転校</span>                <p class="newsList01_date">2023.09.21</p>
+                <p class="newsList01_txt">浅草ROX校が9月21日に新規オープン！</p>                        
+            </a>
+<p class="newsList01_date">2023.09.21</p>
+<p class="newsList01_txt">浅草ROX校が9月21日に新規オープン！</p>
+<a href="https://www.shane.co.jp/news/detail/id=45973" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01">法人：セミナー</span>                <p class="newsList01_date">2023.09.11</p>
+                <p class="newsList01_txt">【人事・研修担当者向けセミナー】英語への苦手意識をなくす ～接客英語の初歩～</p>                        
+            </a>
+<p class="newsList01_date">2023.09.11</p>
+<p class="newsList01_txt">【人事・研修担当者向けセミナー】英語への苦手意識をなくす ～接客英語の初歩～</p>
+<a href="https://www.shane.co.jp/news/detail/id=45970" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c02">緊急のお知らせ</span>                <p class="newsList01_date">2023.09.09</p>
+                <p class="newsList01_txt">9/9(土)一部スクール休校のお知らせ</p>                        
+            </a>
+<p class="newsList01_date">2023.09.09</p>
+<p class="newsList01_txt">9/9(土)一部スクール休校のお知らせ</p>
+<a href="https://www.shane.co.jp/news/detail/id=45967" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c03">イベント</span>                <p class="newsList01_date">2023.09.06</p>
+                <p class="newsList01_txt">【募集終了】ネイティブ講師と行く 1 Day Trip in 浅草</p>                        
+            </a>
+<p class="newsList01_date">2023.09.06</p>
+<p class="newsList01_txt">【募集終了】ネイティブ講師と行く 1 Day Trip in 浅草</p>
+<a href="https://www.shane.co.jp/news/detail/id=45917" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c05">新校・移転校</span>                <p class="newsList01_date">2023.08.31</p>
+                <p class="newsList01_txt">流山おおたかの森東口校が8月31日に新規オープン！</p>                        
+            </a>
+<p class="newsList01_date">2023.08.31</p>
+<p class="newsList01_txt">流山おおたかの森東口校が8月31日に新規オープン！</p>
+<a href="https://www.shane.co.jp/news/detail/id=45933" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c05">新校・移転校</span>                <p class="newsList01_date">2023.08.07</p>
+                <p class="newsList01_txt">板橋校が8月19日にリニューアル！</p>                        
+            </a>
+<p class="newsList01_date">2023.08.07</p>
+<p class="newsList01_txt">板橋校が8月19日にリニューアル！</p>
+<a href="https://www.shane.co.jp/news/detail/id=45921" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01">お知らせ</span>                <p class="newsList01_date">2023.07.31</p>
+                <p class="newsList01_txt">お盆期間中の営業について</p>                        
+            </a>
+<p class="newsList01_date">2023.07.31</p>
+<p class="newsList01_txt">お盆期間中の営業について</p>
+<a href="https://www.shane.co.jp/news/detail/id=45925" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c03">イベント</span>                <p class="newsList01_date">2023.07.28</p>
+                <p class="newsList01_txt">【募集終了】シェーンの外国人講師と家族でBBQ＆Party in English</p>                        
+            </a>
+<p class="newsList01_date">2023.07.28</p>
+<p class="newsList01_txt">【募集終了】シェーンの外国人講師と家族でBBQ＆Party in English</p>
+<a href="https://www.shane.co.jp/news/detail/id=45926" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c03">イベント</span>                <p class="newsList01_date">2023.07.28</p>
+                <p class="newsList01_txt">【募集終了】ネイティブ講師と行く1dayイベント in 国立科学博物館</p>                        
+            </a>
+<p class="newsList01_date">2023.07.28</p>
+<p class="newsList01_txt">【募集終了】ネイティブ講師と行く1dayイベント in 国立科学博物館</p>
+<a href="https://www.shane.co.jp/news/detail/id=45904" class="newsList01_btn">
+                            <span class="newsList01_label label01_c01 label01_c02">緊急のお知らせ</span>                <p class="newsList01_date">2023.07.07</p>
+                <p class="newsList01_txt">【在校生向け】オンライン教材のURL変更のお知らせ</p>                        
+            </a>
+<p class="newsList01_date">2023.07.07</p>
+<p class="newsList01_txt">【在校生向け】オンライン教材のURL変更のお知らせ</p>

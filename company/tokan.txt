@@ -1,0 +1,357 @@
+                    <h2>ニュース・新着情報</h2>
+                    <ul>
+                                                <li id="9764">
+                            <div>
+                                <time>2024.01.31</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ プレスリリース </li>
+                                </ul>
+                            </div>
+                            <h3>Re-CUP WASHERの販売を開始します</h3>
+                            <p></p><p>東罐興業は、<span>2024</span>年<span>1</span>月より、使用済み飲料カップ・食品用カップを消費者ご自身で洗浄いただけるカップ洗浄機「<span>Re-CUP WASHER</span>（リカップウォッシャー）｣の本機を提供開始いたします。</p>
+<p>「<span>Re-CUP WASHER</span>｣は<span>2022</span>年に開発され、リサイクルに向けた実証実験用として企業や団体にテスト機を貸与してきたほか、各種イベントへの展示等を行ってまいりました。このたび、凰商事株式会社との提携を通じて、本機を販売・レンタル・リースする体制が整いました。同社は、お客様への「<span>Re-CUP WASHER</span>｣の提供のほか、メンテナンスやアフターフォローなどの相談対応を行う総合窓口となります。</p>
+<p><img src="https://www.tokan.co.jp/wp/wp-content/uploads/2024/01/Re-CUPWASHER.png" alt="" width="343" height="295" class="alignnone size-full wp-image-9765"></p>
+<p>【設置場所例】<br>
+・ファストフード、カフェなどの飲食店<br>
+・フードコート<br>
+・スポーツ大会やコンサート、フェスなどのイベント会場、映画館<br>
+・オフィス</p>
+<p></p>
+                            <ul>
+                                                                    <li><a href="https://www.ohtori.com/" target="_blank" class="link">凰商事株式会社</a></li>
+                                                                                                
+                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2024/01/東罐興業がカップ洗浄機「Re-CUP-WASHERリカップウォッシャー」の提供体制を構築.pdf" target="_blank" class="pdf">
+                                            カップ洗浄機「Re-CUP WASHER」の販売開始                                            <span>
+                                            (PDF 224 KB)
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                                                
+                            </ul>
+                        </li>
+                                                <li id="9767">
+                            <div>
+                                <time>2024.01.30</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ プレスリリース </li>
+                                </ul>
+                            </div>
+                            <h3>「京都環境フェスティバル2024」で Re-CUP WASHERを用いた紙コップリサイクルを実施</h3>
+                            <p></p><p>東罐興業は、2024年2月3日(土)に開催される「京都環境フェスティバル2024」※に出展し、使用済み紙コップのリサイクルに向けた分別回収を実施します。本フェスティバル内で使用された紙コップを東罐興業開発のカップ洗浄機「Re-CUP WASHER（リカップウォッシャー）｣で洗浄の上、回収し、製紙会社にて段ボール原紙にリサイクルします。</p>
+<p><span style="font-size: 8pt;">※京都府などが会員として加わる京都環境フェスティバル実行委員会が主催する環境について楽しみながら学び考えることができる参加・体験型のイベント。地球温暖化防止、循環型社会の形成、自然環境の保全等の環境問題に対する府民の理解を深め、環境保全の意識の高揚や環境行動の実践につなげることを目的として1990年度より開催。</span></p>
+<p><img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2024/01/CuptoCup-400x400.jpg" alt="" width="400" height="400" class="alignnone size-medium wp-image-9768" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2024/01/CuptoCup-400x400.jpg 400w, https://www.tokan.co.jp/wp/wp-content/uploads/2024/01/CuptoCup-150x150.jpg 150w, https://www.tokan.co.jp/wp/wp-content/uploads/2024/01/CuptoCup.jpg 557w" sizes="(max-width: 400px) 100vw, 400px"></p>
+<p>東罐興業は、環境先進地である京都で開催される本フェスティバルにおいて、「Re-CUP WASHER｣による使用済み紙コップの分別回収活動のほか、パネル展示を通じて使用済み紙コップのリサイクルについて啓発活動を行います。</p>
+<p>【「京都環境フェスティバル2024」概要】</p>
+<table style="border-collapse: collapse; width: 53.8036%;">
+<tbody>
+<tr>
+<td style="width: 35.7574%;"><span style="font-size: 10pt;">会期</span></td>
+<td style="width: 57.8592%;"><span style="font-size: 10pt;">2024年2月3日（土）</span></td>
+</tr>
+<tr>
+<td style="width: 35.7574%;"><span style="font-size: 10pt;">時間</span></td>
+<td style="width: 57.8592%;"><span style="font-size: 10pt;">9:45　～　16:00</span></td>
+</tr>
+<tr>
+<td style="width: 35.7574%;"><span style="font-size: 10pt;">会場</span></td>
+<td style="width: 57.8592%;"><span style="font-size: 10pt;">京都パルスプラザ</span></td>
+</tr>
+<tr>
+<td style="width: 35.7574%;"><span style="font-size: 10pt;">主催</span></td>
+<td style="width: 57.8592%;"><span style="font-size: 10pt;">京都環境フェスティバル実行委員会</span></td>
+</tr>
+<tr>
+<td style="width: 35.7574%;"><span style="font-size: 10pt;">入場料</span></td>
+<td style="width: 57.8592%;"><span style="font-size: 10pt;">無料</span></td>
+</tr>
+<tr>
+<td style="width: 35.7574%;"><span style="font-size: 10pt;">東罐興業ブースNo</span></td>
+<td style="width: 57.8592%;"><span style="font-size: 10pt;">５６</span></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p></p>
+                            <ul>
+                                                                    <li><a href="http://kyotokankyofes.jp/" target="_blank" class="link">京都環境フェスティバル</a></li>
+                                                                                                
+                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2024/01/東罐興業が「京都環境フェスティバル2024」でカップ洗浄機「Re-CUP-WASHER」を用いた紙コップリサイクルを実施.pdf" target="_blank" class="pdf">
+                                            東罐興業が「京都環境フェスティバル2024」で カップ洗浄機「Re-CUP WASHER」を用いた紙コップリサイクルを実施                                            <span>
+                                            (PDF 149 KB)
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                                                
+                            </ul>
+                        </li>
+                                                <li id="9432">
+                            <div>
+                                <time>2023.11.14</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ </li>
+                                </ul>
+                            </div>
+                            <h3>2023日本パッケージングコンテスト受賞</h3>
+                            <p></p><p>2023日本パッケージングコンテストにて東罐興業の製品2点が菓子包装部門賞を受賞致しました。</p>
+<p>公益社団法人日本包装技術協会が主催する日本パッケージングコンテストは、優れたパッケージとその技術を開発普及することを目的として実施される、我が国の包装分野における最大のコンテストです。</p>
+<p><img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/11/ﾊﾟｲﾝﾄ蓋写真-400x287.jpg" alt="" width="400" height="287" class="alignnone size-medium wp-image-9561" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2023/11/ﾊﾟｲﾝﾄ蓋写真-400x287.jpg 400w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/11/ﾊﾟｲﾝﾄ蓋写真-1024x734.jpg 1024w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/11/ﾊﾟｲﾝﾄ蓋写真-768x550.jpg 768w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/11/ﾊﾟｲﾝﾄ蓋写真.jpg 1537w" sizes="(max-width: 400px) 100vw, 400px"></p>
+<p><span style="font-size: 14pt;">「レディボーデンパイント蓋軽量化＆輸送効率改善」</span>　(株)ロッテ様との共同受賞<br>
+アイスクリーム「レディボーデンパイント」のパッケージにおいて、蓋の厚みを薄くし、蓋重量を約12.9gから約9.9gへと石油由来プラスチックの使用量を約23％削減しました。<br>
+蓋を薄くしても、カップとの嵌合強度が同じになるように蓋嵌合径を微調整しています。</p>
+<p>&nbsp;</p>
+<p><img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/IMG_0652-300x400.jpg" alt="" width="300" height="400" class="alignnone size-medium wp-image-9433" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/IMG_0652-300x400.jpg 300w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/IMG_0652-768x1024.jpg 768w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/IMG_0652-1152x1536.jpg 1152w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/IMG_0652-1536x2048.jpg 1536w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/IMG_0652-scaled.jpg 1920w" sizes="(max-width: 300px) 100vw, 300px"> <img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/入賞作品集決定写真-300x400.jpg" alt="" width="300" height="400" class="alignnone size-medium wp-image-9434" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/入賞作品集決定写真-300x400.jpg 300w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/入賞作品集決定写真-768x1024.jpg 768w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/入賞作品集決定写真-1152x1536.jpg 1152w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/入賞作品集決定写真-1536x2048.jpg 1536w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/09/入賞作品集決定写真-scaled.jpg 1920w" sizes="(max-width: 300px) 100vw, 300px"></p>
+<p><span style="font-size: 14pt;">「和洋菓子向け紙製トレー」</span>　㈱SOPAKかねみつ様との共同受賞</p>
+<p>従来のプラスチックトレーの機能をそのままに、環境配慮に貢献でき、販促効果が期待できる下敷紙製トレーの開発を目指しました。</p>
+<p>プラスチック使用量削減およびCO<sub>2</sub>排出量削減に貢献し、紙製であるためリサイクルが容易です。現行のプラスチックトレーと同等のハンドリング性を持ち、個食向けスイーツトレーとしてご利用頂くことが出来ます。</p>
+<p></p>
+                            <ul>
+                                                                                                
+                                                                                                
+                            </ul>
+                        </li>
+                                                <li id="9245">
+                            <div>
+                                <time>2023.07.07</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ プレスリリース </li>
+                                </ul>
+                            </div>
+                            <h3>紙コップ製品のグラビア印刷に使用する すべてのインキをバイオマスインキに切り替え</h3>
+                            <p></p><p>東罐興業は、<span>2023</span>年<span>7</span>月より、環境負荷低減を目的として、国内で生産する紙コップ製品のグラビア印刷に使用するすべてのインキについて、再生可能な植物由来の原料を一部使用したバイオマスインキ<sup>※１</sup>への切り替えを実施します。</p>
+<p>東罐興業で生産する紙コップにおける印刷製品のうち、グラビア印刷製品は約<span>9</span>割を占めており、今回のバイオマスインキへの切り替えにともない、従来のインキより<span>CO<sub>2</sub></span>排出量を約<span>1</span>割（年間 約<span>40</span>トン‐<span>CO<sub>2</sub></span>）削減するほか、石油等の枯渇資源の使用量を年間 約<span>6.5</span>トン削減<sup>※２</sup>します。</p>
+<p><span style="font-size: 8pt;">※１　バイオマスインキは、従来のグラビア印刷用インキと比べ、CO<sub>2</sub>の削減と持続可能な原料調達による地球環境への負荷低減を実現できるほか、色相・物性・生産性においても従来インキと同等の機能を有しています。</span></p>
+<p><span style="font-size: 8pt;">※２　東罐興業における2021年度インキ使用実績を元に、バイオマスインキへ切り替えた場合のCO<sub>2</sub>および枯渇資源の削減量を算出</span></p>
+<p>&nbsp;</p>
+<p><img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/バイオマスインキ-1-400x267.jpg" alt="" width="400" height="267" class="alignnone size-medium wp-image-9247" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/バイオマスインキ-1-400x267.jpg 400w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/バイオマスインキ-1.jpg 652w" sizes="(max-width: 400px) 100vw, 400px"></p>
+<p>東罐興業では、今回のグラビア印刷製品におけるバイオマスインキへの切り替え対応のほか、「<span>Re-CUP WASHER</span>｣を利用した「<span>CUP TO CUP Recycling System</span>」（紙コップを再資源化してリサイクルカップにつなげるしくみ）の取り組みなど、環境負荷低減を目的とする様々な取り組みを通じて、持続可能な社会の実現を目指していきます。</p>
+<p></p>
+                            <ul>
+                                                                                                
+                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/☆東罐興業が紙コップ製品のグラビア印刷に使用するすべてのインキをバイオマスインキに切り替え20230707.pdf" target="_blank" class="pdf">
+                                            東罐興業が紙コップ製品のグラビア印刷に使用するすべてのインキをバイオマスインキに切り替え                                            <span>
+                                            (PDF 125 KB)
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                                                
+                            </ul>
+                        </li>
+                                                <li id="9241">
+                            <div>
+                                <time>2023.06.16</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ プレスリリース </li>
+                                </ul>
+                            </div>
+                            <h3>アルミカップ「Lumisus」が第47回木下賞受賞</h3>
+                            <p></p><p>東罐興業株式会社および東洋製罐株式会社は、環境配慮型のワンウェイ容器として共同で開発した飲料用アルミカップ「Lumisus」で、公益社団法人日本包装技術協会が主催する第47回木下賞<span style="font-size: 8pt;">※</span>の「新規創出部門」を受賞しました。<br>
+　なお、「Lumisus」は同協会主催の「2022日本パッケージングコンテスト」の「飲料包装部門賞」に続く受賞となります。</p>
+<p><span style="font-size: 8pt;">※木下賞 は、公益社団法人日本包装技術協会の第二代会長である 故木下又三郎氏の包装界に対する多年の功績を記念して創設された表彰事業です。本賞は、毎年その年度において1.包装の研究・開発に顕著な業績をあげたもの2.包装の改善・合理化に顕著な業績をあげたもの3.包装の新規分野創出に顕著な業績をあげたものに対して授与されます。</span></p>
+<p>&nbsp;</p>
+<p>
+受賞製品について<br>
+　アルミカップ「Lumisus」</p>
+<p><img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/ルミサス-400x270.jpg" alt="" width="400" height="270" class="alignnone size-medium wp-image-9242" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/ルミサス-400x270.jpg 400w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/ルミサス.jpg 473w" sizes="(max-width: 400px) 100vw, 400px"><br>
+環境負荷低減を目的として、環境配慮型容器として水平リサイクル可能なアルミニウムを素材に、独自の技術を用いて開発・実用化した、プラスチックカップからのリプレイスとなる飲料用アルミカップです。</p>
+<p></p>
+                            <ul>
+                                                                                                
+                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/Lumisus木下賞.pdf" target="_blank" class="pdf">
+                                            東洋製罐および東罐興業が開発したアルミカップ「Lumisus」が第４７回木下賞を受賞                                            <span>
+                                            (PDF 185 KB)
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2023/07/2022.09-Lumisus.pdf" target="_blank" class="pdf">
+                                            ルミサス「Lumisus」について                                            <span>
+                                            (PDF )
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                
+                            </ul>
+                        </li>
+                                                <li id="9220">
+                            <div>
+                                <time>2023.05.26</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ </li>
+                                </ul>
+                            </div>
+                            <h3>役員人事のお知らせ</h3>
+                            <p></p><p>2023年6月27日付役員人事についてお知らせいたします。</p>
+<p></p>
+                            <ul>
+                                                                                                
+                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2023/05/役員人事のお知らせ.pdf" target="_blank" class="pdf">
+                                            役員人事のお知らせ                                            <span>
+                                            (PDF 29 KB)
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                                                
+                            </ul>
+                        </li>
+                                                <li id="9182">
+                            <div>
+                                <time>2023.05.18</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ プレスリリース </li>
+                                </ul>
+                            </div>
+                            <h3>G7広島サミット国際メディアセンターで紙コップリサイクルを実証実験</h3>
+                            <p></p><p>東罐興業と日本製紙株式会社(以下「日本製紙」)は、G７広島サミットの国際メディアセンター（以下「IMC」、2023年5月18日～22日開設）内において、使用済み紙コップのリサイクルに向けた分別回収の実証実験を行います。<br>
+具体的には、日本製紙が間伐材を原材料に製造した紙コップ原紙をもとに、東罐興業が生産した紙コップ「エコフレンドリーカップ」を試飲用コップとしてIMC内で提供、使用された紙コップを東罐興業開発のカップ洗浄機「Re-CUP WASHER（リカップウォッシャー）｣で洗浄の上、回収し、日本製紙が段ボール原紙にリサイクルします。</p>
+<p>また東罐興業は、IMC内の展示に加え、同センター内の広島県環境ブースおよびクリーン・オーシャン・マテリアル・アライアンス（CLOMA）※のブースにて「CUP TO CUPのしくみ」に関するパネル展示も行います。</p>
+<p>東罐興業は、東洋製罐グループが資源循環社会に向けた目標として掲げる「全ての容器包装製品をリサイクル可能またはリユース可能に」に沿って、これからもサーキュラーエコノミーの実現に貢献していきます。<br>
+<span style="font-size: 8pt;">※クリーン・オーシャン・マテリアル・アライアンス（CLOMA）</span><br>
+<span style="font-size: 8pt;">地球環境の新たな課題である海洋プラスチックごみの問題解決に向け、業種を超えた幅広い関係者の連携を強めイノベーションを加速するためのプラットフォームとして2019年1月に設立された団体。</span></p>
+<p>&nbsp;</p>
+<p></p>
+                            <ul>
+                                                                    <li><a href="https://youtu.be/13YQIaE_NiE" target="_blank" class="link">本取り組みに関する紹介動画（Youtube）</a></li>
+                                                                                                
+                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2023/05/G７広島サミット国際メディアセンター（IMC）で紙コップリサイクルを実証実験.pdf" target="_blank" class="pdf">
+                                            G７広島サミット国際メディアセンターで紙コップリサイクルを実証実験                                            <span>
+                                            (PDF 162 KB)
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                                                
+                            </ul>
+                        </li>
+                                                <li id="9113">
+                            <div>
+                                <time>2023.04.19</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ </li>
+                                </ul>
+                            </div>
+                            <h3>容器文化ミュージアム企画展「紙コップの日展」開催</h3>
+                            <p></p><p>「容器文化ミュージアム」にて、4月24日より紙コップをテーマにした企画展を開催します。<br>
+本企画展は、5月2日が紙コップの日に認定されたことを記念して開催するもので、普段何気なく使っている紙コップのヒミツをご紹介いたします。<br>
+ぜひお立ち寄りいただき、紙コップについて改めて興味を持っていただければ幸いです。</p>
+<p style="padding-left: 40px;">容器文化ミュージアム　第18回容器の小さな企画展　「紙コップの日展」</p>
+<p style="padding-left: 80px;">会　 期　：　2023年4月24日（月）　～　2023年6月30日（金）<br>
+開館時間 ：　9:00　～　17:00　（土・日・祝日休館）<br>
+入館料　：　無料</p>
+<p><img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/04/チラシ抜粋-400x242.jpg" alt="" width="400" height="242" class="alignnone size-medium wp-image-9115" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2023/04/チラシ抜粋-400x242.jpg 400w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/04/チラシ抜粋-768x464.jpg 768w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/04/チラシ抜粋.jpg 775w" sizes="(max-width: 400px) 100vw, 400px"></p>
+<p></p>
+                            <ul>
+                                                                    <li><a href="https://package-museum.jp/" target="_blank" class="link">容器文化ミュージアムWebサイト</a></li>
+                                                                                                
+                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2023/04/容器文化ミュージアム第18回容器の小さな企画展_紙コップの日展.pdf" target="_blank" class="pdf">
+                                            容器文化ミュージアム第18回容器の小さな企画展　紙コップの日展                                            <span>
+                                            (PDF 413 KB)
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                                                
+                            </ul>
+                        </li>
+                                                <li id="9111">
+                            <div>
+                                <time>2023.04.13</time>
+                                <ul>
+                                    <li class="new">NEW</li>                                    <li>お知らせ プレスリリース </li>
+                                </ul>
+                            </div>
+                            <h3>環境広場ほっかいどう2023の紙コップの分別回収リサイクルに協力</h3>
+                            <p></p><p>東罐興業株式会社（東京都品川区、代表取締役社長：笠井 俊哉）と日本製紙株式会社（東京都千代田区、代表取締役社長：野沢 徹）は、共同して「環境広場ほっかいどう2023」フードゾーンにおける紙コップの分別回収リサイクルに協力します。</p>
+<p>「環境広場ほっかいどう2023」は札幌市で開催される「G７札幌 気候・エネルギー・環境大臣会合」を記念して開催されるイベントで、多くの道民・市民の方に楽しみながら環境やSDGsに関心を持って頂くとともに、環境ビジネスの振興等を目的としています。</p>
+<p>＜紙コップの分別回収リサイクルの概要＞<br>
+◆東罐興業は、会場内フードゾーンのドリンクバーで紙コップを提供します。<br>
+◆食事を楽しんだ来場者は、紙コップをフードゾーン内に設置する東罐興業が開発したコップ洗浄機“Re-CUP　WASHER®”を使ってワンプッシュ洗浄した後、専用回収箱に分別投入します。<br>
+◆日本製紙は、収集した紙コップを、草加工場にて段ボール原紙にリサイクルします。</p>
+<p>今回の事業協力は、消費者に使用済み紙容器リサイクルに関する正しい理解を深めて頂くための啓発活動の一環として実施するものです。<br>
+消費者自らが紙コップの洗浄を体験することで新しいリサイクル活動に参加したという実感を持って頂き、使用済み紙容器リサイクルの社会へ普及、定着を目指します。</p>
+<p>&lt;「環境広場ほっかいどう2023」の開催概要&gt;<br>
+開催日時：2023年4月15日（土）～16日（日）　10:00～16:00<br>
+会　場　：札幌ドーム（札幌市豊平区羊ヶ丘1）<br>
+入 場 料　：無料<br>
+主　催　：G7札幌 気候・エネルギー・環境大臣会合実行委員会</p>
+<p><img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/04/eco-hokkaido2023.jpg" alt="" width="212" height="201" class="alignnone size-full wp-image-9109 alignright"></p>
+<p></p>
+                            <ul>
+                                                                                                
+                                                                    <li>
+                                        <a href="https://www.tokan.co.jp/wp/wp-content/uploads/2023/04/環境広場ほっかいどう.pdf" target="_blank" class="pdf">
+                                            環境広場ほっかいどう2023の紙コップの分別回収リサイクルに協力                                            <span>
+                                            (PDF 89 KB)
+                                            </span>
+                                            <img src="https://www.tokan.co.jp/wp/wp-content/themes/tokan1901/common/img/iconDownload.svg">
+                                        </a>
+                                    </li>
+                                                                                                
+                            </ul>
+                        </li>
+                                                <li id="9037">
+                            <div>
+                                <time>2023.03.15</time>
+                                <ul>
+                                                                        <li>お知らせ </li>
+                                </ul>
+                            </div>
+                            <h3>「第26回ファベックス2023」に出展いたします</h3>
+                            <p></p><p>東罐興業は、4月12日（水）から14日（金）まで東京ビックサイトで開催される「第26回 ファベックス2023」に出展いたします。ファベックスは「食品」「機器」「容器」の3分野が一体となって課題解決を提案する、日本最大級の業務用展示会です。<br>
+当社ブースでは、紙とプラスチックの複合容器「HBカップ」と、「Tokan PA-Tray（トーカン　ピーエートレイ）」を中心に、サステナブル社会に向けた中食・惣菜に最適な容器をご提案致します。<br>
+お時間の許すかぎりぜひお立ち寄りくださいますよう、皆さまのご来場を心よりお待ちしております。</p>
+<table style="width: 92.7977%;">
+<tbody>
+<tr>
+<th style="width: 17.7102%;">会期</th>
+<td style="width: 80.8587%;">2023年4月12日（水）～14日（金）</td>
+</tr>
+<tr>
+<th style="width: 17.7102%;">時間</th>
+<td style="width: 80.8587%;">10:00～17:00（3日間共通）</td>
+</tr>
+<tr>
+<th style="width: 17.7102%;">会場</th>
+<td style="width: 80.8587%;">東京ビッグサイト</td>
+</tr>
+<tr>
+<th style="width: 17.7102%;">ブース番号</th>
+<td style="width: 80.8587%;">東4ホール　ブースNO.FF-20</td>
+</tr>
+<tr>
+<th style="width: 17.7102%;">入場料</th>
+<td style="width: 80.8587%;">5,000円（税込）<br>
+　※業界関係者のみ入場可、招待券持参、事前来場登録は無料</td>
+</tr>
+<tr>
+<th style="width: 17.7102%;">ウェブサイト</th>
+<td style="width: 80.8587%;">中食・外食業界の業務用専門展FABEX(事前登録もこちらから)<br>
+<a href="http://www.fabex.jp/" target="_blank" rel="noopener noreferrer">https://www.fabex.jp</a></td>
+</tr>
+</tbody>
+</table>
+<p><img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/MAP-100-400x142.jpg" alt="" width="400" height="142" class="alignnone size-medium wp-image-9050" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/MAP-100-400x142.jpg 400w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/MAP-100-1024x363.jpg 1024w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/MAP-100-768x272.jpg 768w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/MAP-100-1536x544.jpg 1536w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/MAP-100.jpg 1920w" sizes="(max-width: 400px) 100vw, 400px"> &nbsp;<img loading="lazy" src="https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/東罐興業様-400x253.jpg" alt="" width="400" height="253" class="alignnone size-medium wp-image-9049" srcset="https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/東罐興業様-400x253.jpg 400w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/東罐興業様-1024x648.jpg 1024w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/東罐興業様-768x486.jpg 768w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/東罐興業様-1536x972.jpg 1536w, https://www.tokan.co.jp/wp/wp-content/uploads/2023/03/東罐興業様-2048x1296.jpg 2048w" sizes="(max-width: 400px) 100vw, 400px"></p>
+<p></p>
+                            <ul>
+                                                                                                
+                                                                                                
+                            </ul>
+                        </li>
+                                            </ul>
+                </div>
+                <ul class="pager">
+                    <li><span class="current">1</span></li><li><a href="https://www.tokan.co.jp/news/page/2/" class="inactive">2</a></li><li><a href="https://www.tokan.co.jp/news/page/3/" class="inactive">3</a></li><li><a href="https://www.tokan.co.jp/news/page/4/" class="inactive">4</a></li><li><a href="https://www.tokan.co.jp/news/page/5/" class="inactive">5</a></li><li class="next"><a href="https://www.tokan.co.jp/news/page/2/">NEXT</a></li>                </ul>
+            </div>
+        </div>

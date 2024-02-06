@@ -1,0 +1,18 @@
+<a href="https://www.dcr.co.jp/news/240110/"><span class="newsListDate">2024.01.10</span><span class="newsListCat news">ニュース</span><span class="newsListText">令和6年能登半島地震で被災された皆様へお見舞い申し上げます</span></a>
+<a href="https://www.dcr.co.jp/news/230911/"><span class="newsListDate">2023.09.11</span><span class="newsListCat news">ニュース</span><span class="newsListText">日本一番乗り！ORACLE MASTER Platinum DBA 2019実技試験に日本最速で合格</span></a>
+<a href="https://www.dcr.co.jp/news/230720-01/"><span class="newsListDate">2023.07.20</span><span class="newsListCat news">ニュース</span><span class="newsListText">プロギングイベント参加 in 名古屋</span></a>
+<a href="https://www.dcr.co.jp/news/5133/"><span class="newsListDate">2023.04.03</span><span class="newsListCat news">ニュース</span><span class="newsListText">コーポレートサイト リニューアルオープンのお知らせ</span></a>
+<a href="https://www.dcr.co.jp/news/220617-01/"><span class="newsListDate">2022.06.17</span><span class="newsListCat news">ニュース</span><span class="newsListText">役員改選のお知らせ</span></a>
+<a href="https://www.dcr.co.jp/news/20210401/"><span class="newsListDate">2021.04.01</span><span class="newsListCat news">ニュース</span><span class="newsListText">仙台営業所の電話番号、FAX番号の変更</span></a>
+<a href="https://www.dcr.co.jp/news/2020-0410/"><span class="newsListDate">2020.04.10</span><span class="newsListCat news">ニュース</span><span class="newsListText">【重要】新型コロナウイルス感染拡大防止に関する重大なご連絡</span></a>
+<a href="https://www.dcr.co.jp/news/2020-0120/"><span class="newsListDate">2020.01.20</span><span class="newsListCat news">ニュース</span><span class="newsListText">仙台営業所が移転しました。</span></a>
+<a href="https://www.dcr.co.jp/news/2019-0621/"><span class="newsListDate">2019.06.21</span><span class="newsListCat news">ニュース</span><span class="newsListText">役員変更のお知らせ</span></a>
+<a href="https://www.dcr.co.jp/news/2019-0507/"><span class="newsListDate">2019.05.07</span><span class="newsListCat news">ニュース</span><span class="newsListText">福岡営業所が移転しました。</span></a>
+<a href="https://www.dcr.co.jp/it-hojo/" target="_blank"><span class="newsListDate">2018.09.10</span><span class="newsListCat news">ニュース</span><span class="newsListText">IT導入補助金 三次公募開始のお知らせ</span></a>
+<a href="https://www.dcr.co.jp/it-hojo/" target="_blank"><span class="newsListDate">2018.06.20</span><span class="newsListCat news">ニュース</span><span class="newsListText">IT導入補助金 二次公募開始のお知らせ</span></a>
+<a href="https://vssd.dcr.co.jp/seminar/" target="_blank"><span class="newsListDate">2018.06.19</span><span class="newsListCat news">ニュース</span><span class="newsListText">2時間でできる！システム設計ツール 体験セミナー 開催のお知らせ</span></a>
+<a href="https://vssd.dcr.co.jp/seminar/" target="_blank"><span class="newsListDate">2018.05.18</span><span class="newsListCat news">ニュース</span><span class="newsListText">2時間でできる！システム設計ツール 体験セミナー in 大阪 開催のお知らせ</span></a>
+<a href="https://www.dcr.co.jp/it-hojo/" target="_blank"><span class="newsListDate">2018.04.20</span><span class="newsListCat news">ニュース</span><span class="newsListText">2018.04.20 IT導入補助金 一次公募開始のお知らせ</span></a>
+<a href="https://vssd.dcr.co.jp/seminar/" target="_blank"><span class="newsListDate">2018.04.13</span><span class="newsListCat news">ニュース</span><span class="newsListText">2時間でできる！システム設計ツール 体験セミナー in 浜松 開催のお知らせ</span></a>
+<a href="https://www.dcr.co.jp/oracle/data/educ_campaign_201804-09.pdf" target="_blank"><span class="newsListDate">2018.04.04</span><span class="newsListCat news">ニュース</span><span class="newsListText">オラクル認定研修 新キャンペーン「Oracle Master受験チケット付き１５％ＯＦＦキャンペーン」実施中 ※申し込み時に「チケット付き15%OFFキャンペーン適用」とお伝えください。</span></a>
+<a href="https://www.dcr.co.jp/news/20180101/"><span class="newsListDate">2018.01.01</span><span class="newsListCat news">ニュース</span><span class="newsListText">株式会社ディー・オー・シーと株式会社DOTが合併し、株式会社第一コミュニケーショントラストと商号変更</span></a>

@@ -1,0 +1,70 @@
+<a href="https://www.livedo.jp/information/1134/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2024年02月03日</time>
+    <div class="e-tax">インフォメーション</div>
+  </div>
+  <div class="e-lbl">火災発生に関するお知らせ</div>
+</a>
+<a href="https://www.livedo.jp/information/1127/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2024年01月10日</time>
+    <div class="e-tax">インフォメーション</div>
+  </div>
+  <div class="e-lbl">令和6年能登半島地震に対する支援について</div>
+</a>
+<a href="https://www.livedo.jp/information/1120/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2024年01月05日</time>
+    <div class="e-tax">ニュースリリース</div>
+  </div>
+  <div class="e-lbl">社長交代のお知らせ</div>
+</a>
+<a href="https://www.livedo.jp/information/1119/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2024年01月05日</time>
+    <div class="e-tax">インフォメーション</div>
+  </div>
+  <div class="e-lbl">取締役人事に関するお知らせ</div>
+</a>
+<a href="https://www.livedo.jp/information/1104/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2023年12月22日</time>
+    <div class="e-tax">ニュースリリース</div>
+  </div>
+  <div class="e-lbl">リブドゥコーポレーションとメディプロホールディングスグループ 災害時における相互支援に関する対応協定を締結</div>
+</a>
+<a href="https://www.livedo.jp/information/1102/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2023年12月13日</time>
+    <div class="e-tax">インフォメーション</div>
+  </div>
+  <div class="e-lbl">リフレお客様相談室　年末年始休業のお知らせ</div>
+</a>
+<a href="https://www.livedo.jp/information/1100/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2023年12月06日</time>
+    <div class="e-tax">インフォメーション</div>
+  </div>
+  <div class="e-lbl">徳島県三好市のふるさと納税返礼品に「リフレ　はくパンツうす型長時間安心」などが選ばれました</div>
+</a>
+<a href="https://www.livedo.jp/information/1098/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2023年11月15日</time>
+    <div class="e-tax">インフォメーション</div>
+  </div>
+  <div class="e-lbl">令和5年度四国地方発明表彰 四国経済産業局長賞受賞のお知らせ</div>
+</a>
+<a href="https://www.livedo.jp/information/1094/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2023年11月15日</time>
+    <div class="e-tax">ニュースリリース</div>
+  </div>
+  <div class="e-lbl">ブランドメッセージが生まれ変わりました。「リフレ」“ひとつひとつの想いと生きていく”</div>
+</a>
+<a href="https://www.livedo.jp/information/1087/" class="e-item">
+  <div class="e-header">
+    <time class="e-time">2023年10月03日</time>
+    <div class="e-tax">学会情報</div>
+  </div>
+  <div class="e-lbl">第37回日本手術看護学会年次大会 ランチョンセミナー共催のお知らせ</div>
+</a>
