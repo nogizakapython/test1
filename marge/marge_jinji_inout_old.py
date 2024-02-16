@@ -1,8 +1,6 @@
 #######   人事異動、データのマージ処理    ######
 #######   新規作成   2024/1/17         #####################
 #######   作成者     takao.hattori     #####################
-#######   修正       2024/2/16　移動日を右揃えに揃える処理を追加  #####
-#######   修正者     takao.hattori    
 #######   クラスファイルの用途
 #######   人事異動情報のデータを１つのファイルにマージする
 #######
@@ -20,7 +18,6 @@
 
 # ライブラリの呼び出し
 import openpyxl
-from openpyxl.styles.alignment import Alignment
 
 class Marge_jinji_output():
     def __init__(self,work_file_list,export_file,startnum,jinji_max_count):
@@ -75,10 +72,6 @@ class Marge_jinji_output():
                     op.cell(row=self.jinji_max_count,column=12).value = const_url
                     op.cell(row=self.jinji_max_count,column=12).hyperlink = const_url
                     op.cell(row=self.jinji_max_count,column=13).value = appending
-                    # 人事異動日を右揃えにする。
-                    #  2024/2/16 処理を追加
-                    right_alignment = Alignment(horizontal='right')
-                    op.cell(row=self.jinji_max_count,column=4).alignment = right_alignment
                     # 出力先の行数を1加算する。
                     self.jinji_max_count += 1
                 # マージ先エクセルファイルを保存する。    
