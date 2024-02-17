@@ -1,5 +1,4 @@
 input_name = gets.chomp
-array1 = []
 length1 = input_name.size()
 ans = ""
 t_ans = ""
