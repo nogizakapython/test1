@@ -2,7 +2,7 @@
 
 $tsushima_line_data = ["須ヶ口","甚目寺","七宝","木田","青塚","勝幡","藤浪","津島"]
 station_num = $tsushima_line_data.length
-# 名鉄津島線の上り方面の駅名を順に表示(津島から須ヶ口)
+
 start_num = 0
 i = station_num - 1
 
