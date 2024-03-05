@@ -1,5 +1,8 @@
 class Nogizaka
 
+  # attr_accessor :name
+  # setter: name=(value)
+  # getter: name
   def initialize(name)
     @name = name
   end
