@@ -1,0 +1,148 @@
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240306-01.html">
+        <span class="cmp-news-index__item-date">2024-03-06</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">「コスモレポート2023」が「日経統合報告書アワード2023」の優秀賞を受賞</span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240301-02.html">
+        <span class="cmp-news-index__item-date">2024-03-01</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">賀来 賢人さんを起用した<br>新企業広告「聞かせて ココロも満タンに」を開始します</span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240301-01.html">
+        <span class="cmp-news-index__item-date">2024-03-01</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        
+            <span class="cmp-news-index__item-category-name--cosmo-oil-marketing">コスモ石油マーケティング</span>
+        </div>
+        <span class="cmp-news-index__item-description">町田市全小中学校および排水浄化センター等66施設へ再生可能エネルギー電力を導入<br>～コスモエネルギーグループの風力由来の再エネ電力を導入～</span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240227-01.html">
+        <span class="cmp-news-index__item-date">2024-02-27</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        
+            <span class="cmp-news-index__item-category-name--cosmo-oil-marketing">コスモ石油マーケティング</span>
+        </div>
+        <span class="cmp-news-index__item-description">「コスモでんきビジネスグリーン」省庁・自治体・企業への導入が2,000施設を突破<br>～脱炭素に取り組む自治体・企業を、再生可能エネルギー電力の供給で支援～<br></span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240216-01.html">
+        <span class="cmp-news-index__item-date">2024-02-16</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">コスモ アースコンシャス アクト クリーン・キャンペーン inいわきのご案内</span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240215-01.html">
+        <span class="cmp-news-index__item-date">2024-02-15</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">コスモ アースコンシャス アクト クリーン・キャンペーン in堺のご案内</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/ir/financial/presentation/2023/q3/pdf/presen2023_3q.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        
+            <span class="cmp-news-index__item-category-name--settlement">決算</span>
+        </div>
+        <span class="cmp-news-index__item-description">2023年度 第3四半期 決算説明プレゼンテーション資料をアップしました。（PDF形式/2MB）</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/ir/financial/result/2023/q3/pdf/23_3q_all.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        
+            <span class="cmp-news-index__item-category-name--settlement">決算</span>
+        </div>
+        <span class="cmp-news-index__item-description">2023年度 第3四半期 決算短信をアップしました。（PDF形式/224KB）</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-10.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">代表取締役の異動に関するお知らせ</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-01.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">役員の異動に関するお知らせ</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-02.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">人事異動に関するお知らせ(2024年4月1日付)</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-03.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">組織改定のお知らせ(2024年4月1日付)</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-04.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-exploration-and-production">コスモエネルギー開発</span>
+        </div>
+        <span class="cmp-news-index__item-description">人事異動に関するお知らせ(2024年4月1日付)</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-05.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-exploration-and-production">コスモエネルギー開発</span>
+        </div>
+        <span class="cmp-news-index__item-description">組織改定のお知らせ(2024年4月1日付)</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-06.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-oil">コスモ石油</span>
+        </div>
+        <span class="cmp-news-index__item-description">役員の異動に関するお知らせ</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-07.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-oil">コスモ石油</span>
+        </div>
+        <span class="cmp-news-index__item-description">人事異動に関するお知らせ(2024年4月1日付)</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-08.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-oil">コスモ石油</span>
+        </div>
+        <span class="cmp-news-index__item-description">組織改定のお知らせ(2024年4月1日付)</span>
+    </a>
+<a class="cmp-news-index__item-link pdf external" data-cmp-clickable="" target="_blank" href="/content/dam/corp/jp/ja/press/2024/240208-01/240208jp-09.pdf">
+        <span class="cmp-news-index__item-date">2024-02-08</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-oil-marketing">コスモ石油マーケティング</span>
+        </div>
+        <span class="cmp-news-index__item-description">人事異動に関するお知らせ(2024年4月1日付)</span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240131-01.html">
+        <span class="cmp-news-index__item-date">2024-01-31</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">ダボス会議のアフィリエイト プログラム セッションに当社CDOがパネリストとして登壇</span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240130-01.html">
+        <span class="cmp-news-index__item-date">2024-01-30</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        </div>
+        <span class="cmp-news-index__item-description">蓄電ビジネスの実証開始について</span>
+    </a>

@@ -1,0 +1,150 @@
+<a class="news__ListLink" href="/jp/content/100044952.pdf" target="_blank">
+            
+                    <time class="news__Date" datetime="2024-3-1">2024年3月1日</time>
+            
+                  <p class="news__Text news__Text--PDF">自己株式の取得状況に関するお知らせ（124KB）</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240229_2.html">
+            
+                    <time class="news__Date" datetime="2024-2-29">2024年2月29日</time>
+            
+                  <p class="news__Text">廃棄するユニフォームなどをリサイクルした素材で生産するapollostationユニフォームの販売を開始 ～伊藤忠商事の推進する「RENUプロジェクト」に参加し、循環型社会の実現に貢献～</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240229.html">
+            
+                    <time class="news__Date" datetime="2024-2-29">2024年2月29日</time>
+            
+                  <span class="news__Category news__Category--Red" aria-label="省資源・資源循環">省資源・資源循環</span>
+            
+                  <p class="news__Text">商船三井と出光興産が原油タンカー内で発生する使用済みプラスチックの再資源化に向けた実証実験を開始</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240228_2.html">
+            
+                    <time class="news__Date" datetime="2024-2-28">2024年2月28日</time>
+            
+                  <span class="news__Category news__Category--Red" aria-label="スマートよろずや">スマートよろずや</span>
+            
+                  <p class="news__Text">無人貸出機能を採用したレンタカーサービス「カースタレンタカー by idemitsu」展開スタート 多様なモビリティサービスのニーズに対応し、「スマートよろずや構想」を推進</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240228.html">
+            
+                    <time class="news__Date" datetime="2024-2-28">2024年2月28日</time>
+            
+                  <p class="news__Text">愛知事業所がスーパー認定事業所に認定されました ～自主保安の高度化によりエネルギーの安定供給を果たします～</p>
+            
+                </a>
+<a class="news__ListLink" href="/jp/content/100044882.pdf" target="_blank">
+            
+                    <time class="news__Date" datetime="2024-2-27">2024年2月27日</time>
+            
+                  <p class="news__Text news__Text--PDF">キャリアデザイン部・出光社員会の設置について ～人財戦略の推進に向けた体制強化「個の支援」「場の提供」～（307KB）</p>
+            
+                </a>
+<a class="news__ListLink" href="/jp/content/100044881.pdf" target="_blank">
+            
+                    <time class="news__Date" datetime="2024-2-27">2024年2月27日</time>
+            
+                  <p class="news__Text news__Text--PDF">人事異動に関するお知らせ（98KB）</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240227.html">
+            
+                    <time class="news__Date" datetime="2024-2-27">2024年2月27日</time>
+            
+                  <span class="news__Category news__Category--Red" aria-label="一歩先のエネルギー">一歩先のエネルギー</span>
+            
+                  <p class="news__Text">米国レイクチャールズにおけるクリーンアンモニア製造プロジェクト検討について</p>
+            
+                </a>
+<a class="news__ListLink" href="/jp/content/100044858.pdf" target="_blank">
+            
+                    <time class="news__Date" datetime="2024-2-20">2024年2月20日</time>
+            
+                  <p class="news__Text news__Text--PDF">北海道で国内最大規模となるグリーン水素サプライチェーン構築に向けた検討を開始（262KB）</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240216_2.html">
+            
+                    <time class="news__Date" datetime="2024-2-16">2024年2月16日</time>
+            
+                  <p class="news__Text">出光興産「apollostation」でdポイントの利用が可能に！ ～dポイントサービス開始を記念してキャンペーンも開催～</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240216.html">
+            
+                    <time class="news__Date" datetime="2024-2-16">2024年2月16日</time>
+            
+                  <p class="news__Text">周南コンビナートにおけるカーボンニュートラル実現に向けたコンビナート５社による共同行為に対し、公正取引委員会より「独占禁止法上問題がない」旨の回答を受領 －コンビナート一体で、グリーン化・脱炭素社会実現への貢献と産業競争力強化を目指します－</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240215.html">
+            
+                    <time class="news__Date" datetime="2024-2-15">2024年2月15日</time>
+            
+                  <p class="news__Text">国内大学で最大級、3.8MWのソーラーカーポートが宮崎大学で稼働開始 年間約1,400tのCO2排出量削減によりゼロカーボン・キャンパスを推進</p>
+            
+                </a>
+<a class="news__ListLink" href="/jp/content/100044835.pdf" target="_blank">
+            
+                    <time class="news__Date" datetime="2024-2-14">2024年2月14日</time>
+            
+                  <p class="news__Text news__Text--PDF">自己株式の取得結果および取得終了並びに消却株式数に関するお知らせ（170KB）</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240214.html">
+            
+                    <time class="news__Date" datetime="2024-2-14">2024年2月14日</time>
+            
+                  <span class="news__Category news__Category--Red" aria-label="省資源・資源循環">省資源・資源循環</span>
+            
+                  <p class="news__Text">バイオマスSPS樹脂の供給に向けた検討を開始 －サプライチェーンを構築し、バイオマスSPS樹脂製の食器・箸類の製造・販売へ－</p>
+            
+                </a>
+<a class="news__ListLink" href="/jp/content/100044819.pdf" target="_blank">
+            
+                    <time class="news__Date" datetime="2024-2-13">2024年2月13日</time>
+            
+                  <p class="news__Text news__Text--PDF">2024年3月期 第3四半期決算短信〔日本基準〕（連結）（285KB）</p>
+            
+                </a>
+<a class="news__ListLink" href="/jp/content/100044818.pdf" target="_blank">
+            
+                    <time class="news__Date" datetime="2024-2-13">2024年2月13日</time>
+            
+                  <p class="news__Text news__Text--PDF">2023年度第3四半期 決算説明資料（2,274KB）</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240202.html">
+            
+                    <time class="news__Date" datetime="2024-2-2">2024年2月2日</time>
+            
+                  <p class="news__Text">北海道製油所プロダクションセンターのZEB化工事を開始 ～2050年カーボンニュートラルに向け、約3,300世帯分の年間電気使用量相当分の省エネを実現～</p>
+            
+                </a>
+<a class="news__ListLink" href="/jp/content/100044799.pdf" target="_blank">
+            
+                    <time class="news__Date" datetime="2024-2-1">2024年2月1日</time>
+            
+                  <p class="news__Text news__Text--PDF">自己株式の取得状況に関するお知らせ（150KB）</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240131.html">
+            
+                    <time class="news__Date" datetime="2024-1-31">2024年1月31日</time>
+            
+                  <span class="news__Category news__Category--Red" aria-label="省資源・資源循環">省資源・資源循環</span>
+            
+                  <p class="news__Text">JNCエンジニアリングと出光興産が油化ケミカルリサイクル装置建設時に発生する使用済みプラスチックの再資源化に向けた取り組みを開始</p>
+            
+                </a>
+<a class="news__ListLink" href="https://www.idemitsu.com/jp/news/2023/240130.html">
+            
+                    <time class="news__Date" datetime="2024-1-30">2024年1月30日</time>
+            
+                  <p class="news__Text">第32回 出光音楽賞授賞式とガラコンサートを開催しました</p>
+            
+                </a>

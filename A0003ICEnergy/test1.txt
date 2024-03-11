@@ -1,0 +1,41 @@
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240227-01.html">
+        <span class="cmp-news-index__item-date">2024-02-27</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        
+            <span class="cmp-news-index__item-category-name--cosmo-oil-marketing">コスモ石油マーケティング</span>
+        </div>
+        <span class="cmp-news-index__item-description">「コスモでんきビジネスグリーン」省庁・自治体・企業への導入が2,000施設を突破<br>～脱炭素に取り組む自治体・企業を、再生可能エネルギー電力の供給で支援～<br></span>
+    </a>
+<span class="cmp-news-index__item-date">2024-02-27</span>
+<span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+<span class="cmp-news-index__item-category-name--cosmo-oil-marketing">コスモ石油マーケティング</span>
+<span class="cmp-news-index__item-description">「コスモでんきビジネスグリーン」省庁・自治体・企業への導入が2,000施設を突破<br>～脱炭素に取り組む自治体・企業を、再生可能エネルギー電力の供給で支援～<br></span>
+<span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240227-01.html">
+        <span class="cmp-news-index__item-date">2024-02-27</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        
+            <span class="cmp-news-index__item-category-name--cosmo-oil-marketing">コスモ石油マーケティング</span>
+        </div>
+        <span class="cmp-news-index__item-description">「コスモでんきビジネスグリーン」省庁・自治体・企業への導入が2,000施設を突破<br>～脱炭素に取り組む自治体・企業を、再生可能エネルギー電力の供給で支援～<br></span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240227-01.html">
+        <span class="cmp-news-index__item-date">2024-02-27</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        
+            <span class="cmp-news-index__item-category-name--cosmo-oil-marketing">コスモ石油マーケティング</span>
+        </div>
+        <span class="cmp-news-index__item-description">「コスモでんきビジネスグリーン」省庁・自治体・企業への導入が2,000施設を突破<br>～脱炭素に取り組む自治体・企業を、再生可能エネルギー電力の供給で支援～<br></span>
+    </a>
+<a class="cmp-news-index__item-link " data-cmp-clickable="" target="_self" href="/ja/information/press/2024/240227-01.html">
+        <span class="cmp-news-index__item-date">2024-02-27</span>
+        <div class="cmp-news-index__item-category">
+            <span class="cmp-news-index__item-category-name--cosmo-energy-holdings">コスモエネルギーホールディングス</span>
+        
+            <span class="cmp-news-index__item-category-name--cosmo-oil-marketing">コスモ石油マーケティング</span>
+        </div>
+        <span class="cmp-news-index__item-description">「コスモでんきビジネスグリーン」省庁・自治体・企業への導入が2,000施設を突破<br>～脱炭素に取り組む自治体・企業を、再生可能エネルギー電力の供給で支援～<br></span>
+    </a>
