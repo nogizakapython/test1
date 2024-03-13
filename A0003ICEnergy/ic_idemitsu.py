@@ -23,6 +23,7 @@ dt = datetime.now()
 date1 = dt.strftime('%Y%m%d%H%M%S')
 date2 = dt.strftime('%Y')
 date3 = int(date2) - 1
+date4 = dt.strftime('%Y%m%d')
 # 今日の日付を取得
 today1 = dt.strftime('%Y/%m/%d')
 # 今日の曜日を取得
@@ -38,7 +39,7 @@ access_url = 'https://www.idemitsu.com/jp/news/index.html'
 target_url = 'https://www.idemitsu.com/jp/news/index.html'
 max_row = 0
 # base_file = "ICEnergyニュースリリース一覧テンプレート.xlsx"
-export_file = "ICEnergyニュースリリース出力用.xlsx"
+export_file = "ICEnergyニュースリリース出力用" + date4 + ".xlsx"
 
 # 企業名配列の定義
 # company_array = []
@@ -68,13 +69,14 @@ def web_scrapping():
     driver.execute_script('arguments[0].click();',button1)
     sleep(3)
     # 最新20件のニュースリリースを取得 
-    for i in range(1,21):
+    for i in range(1,16):
         try:
             xpath_str1 = '//*[@id="news"]/div[2]/div[1]/ul[1]/li[' + str(i) + ']/a'
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
             print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
         except:
-            str1 = e    
+            if i == 1:
+                print("データがありません",file=codecs.open(file_name,'a','utf-8'))   
         
     # 画面を閉じる
     driver.quit()
@@ -143,6 +145,15 @@ while True:
          w_ymd = w_ymd.replace('年',"/")
          w_ymd = w_ymd.replace('月',"/")
          w_ymd = w_ymd.replace('日',"")
+         ymd_array = w_ymd.split("/")
+         ymd_year = ymd_array[0]
+         ymd_month = int(ymd_array[1])
+         ymd_day = int(ymd_array[2])
+         if ymd_month < 10:
+            ymd_month = "0" + str(ymd_month)
+         if ymd_day < 10:
+            ymd_day = "0" + str(ymd_day)
+         w_ymd = str(ymd_year) + "/" + str(ymd_month) + "/" + str(ymd_day)
         #  print(w_ymd)
     
      if result3:
@@ -156,6 +167,7 @@ while True:
          ws.cell(row=max_row,column=5).value = w_title
          ws.cell(row=max_row,column=5).hyperlink = w_url
          ws.cell(row=max_row,column=6).value = today1
+         ws.cell(row=max_row,column=7).value = w_url
                 
          max_row += 1
          # エクセルファイルの保存

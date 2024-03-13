@@ -22,9 +22,12 @@ from datetime import datetime , timedelta
 dt = datetime.now()
 date1 = dt.strftime('%Y%m%d%H%M%S')
 date2 = dt.strftime('%Y')
+# date2 = 2023
 date3 = int(date2) - 1
+date4 = dt.strftime('%Y%m%d')
 # 今日の日付を取得
 today1 = dt.strftime('%Y/%m/%d')
+# today1 = "2023/04/07"
 # 今日の曜日を取得
 today_day = dt.strftime('%a')
 # 昨日の日付を取得
@@ -36,9 +39,17 @@ out_file = "IC_cosmo.txt"
 base_url = 'https://www.cosmo-energy.co.jp'
 access_url = 'https://www.cosmo-energy.co.jp/ja/about/press.html#'
 target_url = ""
+target_url1 = ""
+target_url2 = ""
+#############################################################################
+#  list id変数定義(年に1回、毎年4月に新年度のデータが入ってきたら変数を更新する)
+#  id_list2の変数にはid_list1の変数を変える。id_list1の変数に新しいid名を定義する
+id_list1 = "list-0c2c1d0398"
+id_list2 = "list-20c35d4fba"
+#############################################################################
 max_row = 0
 base_file = "ICEnergyニュースリリース一覧テンプレート.xlsx"
-export_file = "ICEnergyニュースリリース出力用.xlsx"
+export_file = "ICEnergyニュースリリース出力用" + date4 + ".xlsx"
 
 # 企業名配列の定義
 company_array = []
@@ -60,31 +71,44 @@ def web_scrapping():
     w_day = int(w_ymd_array[2])
     if w_month <= 3 :
         target_url = get_url(date3)
-    elif w_month == 4 and w_day == 1:
-        target_url = get_url(date3)
-    elif w_month == 4 and w_day == 2 and today_day == "Mon":
-        target_url = get_url(date3)
-    elif w_month == 4 and w_day == 3 and today_day == "Mon":
-        target_url = get_url(date3)       
     else:
         target_url = get_url(date2)
 
 
     # Chromeを指定する
     driver = webdriver.Chrome()
+    
 
     # Chromeを開いて企業検索にアクセスする
     driver.get(target_url)
-    sleep(5)
+    sleep(3)
 
-    # 最新20件のニュースリリースを取得 
-    for i in range(1,21):
-        try:
-            xpath_str1 = '//*[@id="list-0c2c1d0398"]/li[' + str(i) + ']/a'
-            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-            print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-        except:
-            str1 = e
+    # 最新15件のニュースリリースを取得
+
+    if w_month == 4 and w_day <= 7:
+        for j in range(2):    
+            for i in range(1,16):
+                try:
+                    if j == 0:
+                        xpath_str1 = '//*[@id="' + id_list1 + '"]/li[' + str(i) + ']/a'
+                    elif j == 1:    
+                        xpath_str1 = '//*[@id="' + id_list2 + '"]/li[' +str(i) + ']/a'
+                        
+                    
+                    element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+                    print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+                except:
+                    if i == 1:
+                        print("データがありません",file=codecs.open(file_name,'a','utf-8')) 
+    else:                      
+        for i in range(1,16):
+            try:
+                xpath_str1 = '//*[@id="' + id_list1 + '"]/li[' + str(i) + ']/a'
+                element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+                print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+            except:
+                if i == 1:
+                    print("データがありません",file=codecs.open(file_name,'a','utf-8'))
 
         
         
@@ -196,7 +220,7 @@ while True:
         ws.cell(row=max_row,column=5).value = w_title
         ws.cell(row=max_row,column=5).hyperlink = w_url
         ws.cell(row=max_row,column=6).value = today1
-                
+        ws.cell(row=max_row,column=7).value = w_url                
         max_row += 1
         # エクセルファイルの保存
         try:

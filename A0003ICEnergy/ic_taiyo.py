@@ -22,9 +22,13 @@ from datetime import datetime , timedelta
 dt = datetime.now()
 date1 = dt.strftime('%Y%m%d%H%M%S')
 date2 = dt.strftime('%Y')
+# date2 = 2024
+date3 = int(date2) - 1
+date4 = dt.strftime('%Y%m%d')
 
 # 今日の日付を取得
 today1 = dt.strftime('%Y/%m/%d')
+# today1 = "2024/01/11"
 # 今日の曜日を取得
 today_day = dt.strftime('%a')
 
@@ -32,10 +36,10 @@ file_name = "IC_taiyo" + date1 + ".txt"
 out_file = "IC_taiyo.txt"
 base_url = 'https://www.taiyooil.net'
 access_url = 'https://www.taiyooil.net/news/release/?year='
-target_url = 'https://www.taiyooil.net/news/release/?year='
+target_url = ""
 max_row = 0
 # base_file = "ICEnergyニュースリリース一覧テンプレート.xlsx"
-export_file = "ICEnergyニュースリリース出力用.xlsx"
+export_file = "ICEnergyニュースリリース出力用" + date4 + ".xlsx"
 
 # 企業名配列の定義
 # company_array = []
@@ -52,25 +56,46 @@ def get_url(year):
 
 # 年度でニュースリリースが変わるので、年度判定処理
 def web_scrapping():
+    w_ymd_array = today1.split('/')
+    w_month = int(w_ymd_array[1])
+    w_day = int(w_ymd_array[2])
     
-    target_url = get_url(date2)
+    if w_month == 1 and w_day < 12:
+        target_url1 = get_url(date2)
+        target_url2 = get_url(date3)
+    else:
+        target_url = get_url(date2)
+    
+    
     # Chromeを指定する
     driver = webdriver.Chrome()
     
-    # Chromeを開いて企業検索にアクセスする
-    driver.get(target_url)
-    sleep(3)
-    # 最新20件のニュースリリースを取得 
-    for i in range(1,21):
-        try:
-            xpath_str1 = '//*[@id="fs-result"]/ul/li[' + str(i) + ']/a'
-            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-            print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-            
-        
-        except:
-            str1 = 1  
-        
+    if w_month == 1 and w_day < 12:
+        for url in [target_url1,target_url2]:
+            # Chromeを開いて企業検索にアクセスする
+            driver.get(url)
+            sleep(3)
+            # 年をまたいで30件のニュースリリースを取得 
+            for i in range(1,16):
+                try:
+                    
+                    xpath_str1 = '//*[@id="fs-result"]/ul/li[' + str(i) + ']/a'
+                    element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+                    print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+                except:
+                    if i == 1:
+                        print("データがありません",file=codecs.open(file_name,'a','utf-8'))  
+    else:
+        driver.get(target_url)
+        sleep(3)
+        for i in range(1,16):
+            try:
+                xpath_str1 = '//*[@id="fs-result"]/ul/li[' + str(i) + ']/a'
+                element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+                print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+            except:
+                if i == 1:
+                   print("データがありません",file=codecs.open(file_name,'a','utf-8'))    
     # 画面を閉じる
     driver.quit()
 
@@ -137,14 +162,14 @@ while True:
          w_title = w_title.replace("</dd>","")
          w_title = w_title.replace('<span class="add-icon" data-add-icon=""',"")
          w_title = w_title.replace('><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">',"")
-         print(w_title)
+        # print(w_title)
  
          ws.cell(row=max_row,column=3).value = company_name
          ws.cell(row=max_row,column=4).value = w_ymd
          ws.cell(row=max_row,column=5).value = w_title
          ws.cell(row=max_row,column=5).hyperlink = w_url
          ws.cell(row=max_row,column=6).value = today1
-                
+         ws.cell(row=max_row,column=7).value = w_url                
          max_row += 1
          # エクセルファイルの保存
          try:
