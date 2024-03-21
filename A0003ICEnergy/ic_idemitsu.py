@@ -64,7 +64,7 @@ def web_scrapping():
     # Chromeを開いて企業検索にアクセスする
     driver.get(target_url)
     sleep(3)
-    button_xpath = '//*[@id="news"]/div[2]/div[2]/button'
+    button_xpath = '/html/body/main/article/div/section[4]/section[2]/a/span[1]'
     button1 = driver.find_element(By.XPATH,button_xpath)
     driver.execute_script('arguments[0].click();',button1)
     sleep(3)
