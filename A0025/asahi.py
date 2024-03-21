@@ -1,4 +1,4 @@
-#######   ANA 決算ニュース情報取得ツール　###########
+#######   asahi 決算ニュース情報取得ツール　###########
 #######   新規作成  2024/03/19  ##########
 #######   Author  takao.hattori ###########
 
@@ -16,7 +16,7 @@ import codecs
 from time import sleep
 import shutil
 import selenium
-import sys
+import sys 
 from openpyxl.styles.fonts import Font
 
 
@@ -27,13 +27,13 @@ date3 = dt.strftime('%Y%m%d')
 w_ymd = dt.strftime('%Y年%m年%d日')
 
 
-input_file = "ana" + date1 + ".txt"
-out_file = "ana.txt"
+input_file = "asahi" + date1 + ".txt"
+out_file = "asahi.txt"
 date_str = ""
 w_title = ""
-base_url = 'https://www.ana.co.jp'
+base_url = 'https://www.asahigroup-holdings.com'
 
-web_url = 'https://www.ana.co.jp/group/investors/irdata/disclosure/'
+target_url = 'https://www.asahigroup-holdings.com/ir/news/'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -41,28 +41,27 @@ row_count = 0
 write_flag = 0
 xpath_str1 = ""
 
-
 # Chromeを指定する
-
-
-
 driver = webdriver.Chrome()
 
-
-target_url = web_url
+# Chromeを開いて企業HPにアクセスする
 try:
     driver.get(target_url)
     sleep(5)
-    for i in range(1,4,2):
+    
+
+    
+    for i in range(1,3):
         for j in range(1,11):
-            
-            xpath_str1 = '//*[@id="divDataArea"]/div[' + str(i) + ']/ul/li[' + str(j) + ']'
+            xpath_str1 = '//*[@id="news"]/div[' + str(i) + ']/dl/dt[' + str(j) + ']'
             try:
                 element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
             except:
-                str1 = "data finish"
                 break
             print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+            xpath_str2 = '//*[@id="news"]/div[' + str(i) + ']/dl/dd[' + str(j) + ']/a'
+            element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
+            print(element_str2.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
 
 except EnvironmentError as e:
     str100 = e     
@@ -86,40 +85,44 @@ while True:
         row_count += 1
     else:
         break   
-    result1 = re.search('<li ',line1)
-  
+    result1 = re.match("<dt",line1)
+    result2 = re.match("<a href",line1)
     
     if result1:
-       w_array1 = line1.split("<")
-       w_ymd = w_array1[1]
-       w_ymd = w_ymd.replace('li class="disclosure">',"")
-    #    print(w_ymd)
+        w_array1 = line1.split(">")
+        w_line = w_array1[1]
+        w_line = w_line.replace('</dt','')
+        w_ymd = w_line.replace('.','/')
+        # print(w_ymd)
 
-       
-       w_ref = w_array1[2]
-       w_array2 = w_ref.split(" ")
-       w_url = w_array2[1]
-       w_url = w_url.replace('href=','')
-       w_url = w_url.replace('"','')
-    #    print(w_url)
+    if result2:
+        w_array2 = line1.split(">")
+        w_urlstr = w_array2[0]
+        w_urlstr = w_urlstr.replace('<a href=','')
+        w_urlstr = w_urlstr.replace('"',"")
+        w_url = base_url + w_urlstr
+        w_url = w_url.replace('target=_blank','')
+        # print(w_url)
         
+        w_title = w_array2[1]
+        w_title = w_title.replace('</a','')
+        # print(w_title)
 
-       w_array3 = line1.split(">")
-       w_title = w_array3[2]
-       w_title = w_title.replace('<span class="pdf"',"")
-       #print(w_title)
-       key_word = r"(決算|株主総会)"
-       title_result = re.search(key_word,w_title)
-       if title_result:
+        key_word = r"(決算|株主総会)"
+        title_result = re.search(key_word,w_title)
+        if title_result:
             wb = op.load_workbook(export_file)
-            sh_name = 'ANA'
+            sh_name = 'ASAHI'
             ws = wb[sh_name]
             ws.cell(row=max_row,column=2).value = w_title
             ws.cell(row=max_row,column=3).value = w_url
             ws.cell(row=max_row,column=4).value = w_ymd
             ws.cell(row=max_row,column=6).value = w_url
             ws.cell(row=max_row,column=6).hyperlink = w_url
-            ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')      
+            ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+                
             max_row += 1
+            # エクセルファイルの保存
             wb.save(export_file)
-            
+
+

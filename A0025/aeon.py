@@ -1,5 +1,5 @@
 #######   イオン 決算ニュース情報取得ツール　###########
-#######   新規作成  2024/03/18  ##########
+#######   新規作成  2024/03/19  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -15,8 +15,7 @@ import openpyxl as op
 import codecs
 from time import sleep
 import shutil
-import selenium
-import sys 
+from openpyxl.styles.fonts import Font
 
 
 dt = datetime.datetime.now()
@@ -40,8 +39,6 @@ row_count = 0
 write_flag = 0
 xpath_str1 = ""
 # Chromeを指定する
-
-shutil.copy(base_file,export_file)
 
 driver = webdriver.Chrome()
 
@@ -108,13 +105,10 @@ while True:
        ws.cell(row=max_row,column=4).value = w_ymd
        ws.cell(row=max_row,column=6).value = w_url
        ws.cell(row=max_row,column=6).hyperlink = w_url
+       ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
        max_row += 1
        # エクセルファイルの保存
-       try:
-           wb.save(export_file)
-       except PermissionError as e:
-           fname = export_file
-           sys.exit()            
-
+       wb.save(export_file)
+          
 

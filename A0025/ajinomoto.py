@@ -1,5 +1,5 @@
 #######   味の素 決算ニュース情報取得ツール　###########
-#######   新規作成  2024/03/18  ##########
+#######   新規作成  2024/03/19  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -15,8 +15,7 @@ import openpyxl as op
 import codecs
 from time import sleep
 import shutil
-import selenium
-import sys 
+from openpyxl.styles.fonts import Font
 
 
 dt = datetime.datetime.now()
@@ -41,9 +40,6 @@ write_flag = 0
 xpath_str1 = ""
 # Chromeを指定する
 
-shutil.copy(base_file,export_file)
-
-
 
 driver = webdriver.Chrome()
 
@@ -52,7 +48,7 @@ target_url = web_url + str(date2) + '_all'
 try:
     driver.get(target_url)
     sleep(5)
-    for j in range(1,31):
+    for j in range(1,61):
         xpath_str1 = '//*[@id="news-list-tabbed-2nd-1"]/ul/li[' + str(j) + ']'
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
@@ -110,21 +106,20 @@ while True:
         w_title = w_title.replace("\n","")
         w_title = w_title.replace("                                ","")
         # print(w_title)
-        wb = op.load_workbook(export_file)
-        sh_name = '味の素'
-        ws = wb[sh_name]
-        ws.cell(row=max_row,column=2).value = w_title
-        ws.cell(row=max_row,column=3).value = w_url
-        ws.cell(row=max_row,column=4).value = w_ymd
-        ws.cell(row=max_row,column=6).value = w_url
-        ws.cell(row=max_row,column=6).hyperlink = w_url
+        key_word = r"(決算|株主総会)"
+        title_result = re.search(key_word,w_title)
+        if title_result:
+            wb = op.load_workbook(export_file)
+            sh_name = '味の素'
+            ws = wb[sh_name]
+            ws.cell(row=max_row,column=2).value = w_title
+            ws.cell(row=max_row,column=3).value = w_url
+            ws.cell(row=max_row,column=4).value = w_ymd
+            ws.cell(row=max_row,column=6).value = w_url
+            ws.cell(row=max_row,column=6).hyperlink = w_url
+            ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
-        max_row += 1
-        # エクセルファイルの保存
-        try:
+            max_row += 1
+            # エクセルファイルの保存
             wb.save(export_file)
-        except PermissionError as e:
-            fname = export_file
-            sys.exit()            
-
-
+        
