@@ -1,5 +1,5 @@
-#######   bridgestone 決算ニュース情報取得ツール　###########
-#######   新規作成  2024/03/21  ##########
+#######   小田急電鉄 中計・決算ニュース情報取得ツール　###########
+#######   新規作成  2024/03/29  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -15,8 +15,6 @@ import openpyxl as op
 import codecs
 from time import sleep
 import shutil
-import selenium
-import sys 
 from openpyxl.styles.fonts import Font
 
 
@@ -25,14 +23,17 @@ date1 = dt.strftime('%Y%m%d%H%M%S')
 date2 = dt.strftime('%Y')
 date3 = dt.strftime('%Y%m%d')
 date4 = dt.strftime('%Y年%m年%d日')
+youbi = dt.strftime('%a')
+date5 = int(date2)
+date6 = date5 - 1
+date7 = dt.strftime('%Y/%m/%d')
 
-
-input_file = "bridgestone" + date1 + ".txt"
-out_file = "bridgestone.txt"
+input_file = "odakyu" + date1 + ".txt"
+out_file = "odakyu.txt"
 date_str = ""
 w_title = ""
-base_url = 'https://www.bridgestone.co.jp'
-web_url = 'https://www.bridgestone.co.jp/ir/notice/'
+base_url = 'https://www.odakyu.jp'
+web_url = 'https://www.odakyu.jp/ir/news/'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -40,32 +41,41 @@ row_count = 0
 write_flag = 0
 xpath_str1 = ""
 w_url = ""
-
+t_year = 0
+year_array=[]
 
 # Chromeを指定する
 driver = webdriver.Chrome()
 
 # Chromeを開いて企業HPにアクセスする
-target_url = web_url
-try:
-    driver.get(target_url)
-    sleep(5)
-    for i in range(1,11):
-        
-        xpath_str1 = '//*[@id="main"]/section/dl[' + str(i) + ']'
-        try:
-            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-        except:
-            if i == 1:
-                print("Not data",file=codecs.open(input_file,'a','utf-8'))
-            break
-        print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
-        
-except EnvironmentError as e:
-    str100 = e     
-except:
-    str100 = ""
 
+
+
+for year in [date5,date6]:
+    if year == date5:
+       target_url = web_url
+    else:
+       target_url = web_url + str(date6) + '.html'         
+    try:
+       driver.get(target_url)
+       sleep(3)
+
+       for i in range(1,21):
+         try:
+                     
+            xpath_str1 = '/html/body/div/main/div/div[2]/div[1]/div/div/div[2]/dl[' + str(i) + ']'
+                         
+         except:
+            break    
+         element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+         print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+          
+       
+    except EnvironmentError as e:
+       str100 = e     
+    except:
+       str100 = 1
+     
 # 画面を閉じる
 driver.quit()
 file_exist = os.path.isfile(out_file)
@@ -77,42 +87,45 @@ shutil.copy2(input_file,out_file)
 
 fileobj = open(out_file,encoding="utf-8")
 while True:
+    w_urlstr = ""
+    w_titlestr = ""
     line1 = fileobj.readline()
-    
     line1 = line1.replace("\n","")
     if line1:
-        row_count += 1
+      row_count += 1
     else:
-        break   
+      break   
 
-    result1 = re.search('<dt>',line1)
-    result2 = re.search("<a href",line1)
-    
+    result1 = re.search('newsList-date',line1)
+    result2 = re.search('newsList-txt',line1)
+
+
     if result1:
        w_array1 = line1.split(">")
-       w_ymd = w_array1[1]
-       w_ymd = w_ymd.replace('</dt','')
-    #    print(w_ymd)
+       w_ymdstr = w_array1[1]
+       w_ymd = w_ymdstr.replace('</dt','')
+      #  print(w_ymd)
 
     if result2:
        w_array2 = line1.split(">")
-       w_urltag = w_array2[1]
-       w_array3 = w_urltag.split(" ")
-       w_urlstr = w_array3[1]
-       w_urlstr = w_urlstr.replace('href=',"")
-       w_urlstr = w_urlstr.replace('"',"")
+       w_urlstr = w_array2[1]
+       url_array = w_urlstr.split("=")
+       w_urlstr = url_array[2]
+       w_urlstr = w_urlstr.replace(' target','')
+       w_urlstr = w_urlstr.replace('"','')
        w_url = base_url + w_urlstr
-    #    print(w_url)
-    
+      #  print(w_url)
+
        w_titlestr = w_array2[2]
-       w_titlestr = w_titlestr.replace("</a","")
-       w_title = w_titlestr
-    #    print(w_title)
-       key_word = r"(決算|株主総会|中期事業計画)"
+       w_title = w_titlestr.replace('</a','')
+      #  print(w_title)    
+
+
+       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画)"
        title_result = re.search(key_word,w_title)
        if title_result:
           wb = op.load_workbook(export_file)
-          sh_name = 'BRIDGESTONE'
+          sh_name = '小田急電鉄'
           ws = wb[sh_name]
           ws.cell(row=max_row,column=2).value = w_title
           ws.cell(row=max_row,column=3).value = w_url
@@ -124,4 +137,3 @@ while True:
           max_row += 1
           # エクセルファイルの保存
           wb.save(export_file)
-

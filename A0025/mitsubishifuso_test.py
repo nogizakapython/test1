@@ -1,5 +1,5 @@
-#######   BAT JAPAN 決算ニュース情報取得ツール　###########
-#######   新規作成  2024/03/21  ##########
+#######   三菱ふそう 決算ニュース情報取得ツール　###########
+#######   新規作成  2024/03/22  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -15,8 +15,6 @@ import openpyxl as op
 import codecs
 from time import sleep
 import shutil
-import selenium
-import sys 
 from openpyxl.styles.fonts import Font
 
 
@@ -27,12 +25,12 @@ date3 = dt.strftime('%Y%m%d')
 date4 = dt.strftime('%Y年%m年%d日')
 
 
-input_file = "bat" + date1 + ".txt"
-out_file = "bat.txt"
+input_file = "matsukiyo" + date1 + ".txt"
+out_file = "matsukiyo.txt"
 date_str = ""
 w_title = ""
-base_url = 'https://www.batj.com/'
-web_url = 'https://www.batj.com/'
+base_url = 'https://www.matsukiyococokara.com'
+web_url = 'https://www.matsukiyococokara.com/ir/library/results/'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -40,31 +38,30 @@ row_count = 0
 write_flag = 0
 xpath_str1 = ""
 w_url = ""
-html_array = ["DOCCTHBQ","DOD3AE63"]
+
 
 # Chromeを指定する
 driver = webdriver.Chrome()
 
-for html_name in html_array:
-    # Chromeを開いて企業HPにアクセスする
+# Chromeを開いて企業HPにアクセスする
     
-    target_url = web_url + html_name + '.html'
-    try:
-        driver.get(target_url)
-        sleep(5)
-        for i in range(2,20):
-            try:
-                xpath_str1 = '//*[@id="pageContent"]/div[2]/div/div[' + str(i) + ']'
-            except:
-                break    
-            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-            print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
-        
-        
-    except EnvironmentError as e:
-        str100 = e     
-    except:
-        str100 = ""
+target_url = web_url
+try:
+    driver.get(target_url)
+    sleep(5)
+    for j in range(1,3):
+        try:
+            xpath_str1 = '//*[@id="top"]/div[1]/div[2]/section/div/div[2]/div[1]/section[' + str(j) + ']'
+        except:
+            break    
+        element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+        print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+      
+       
+except EnvironmentError as e:
+    str100 = e     
+except:
+    str100 = ""
      
 
 # 画面を閉じる
@@ -81,17 +78,18 @@ while True:
     line1 = fileobj.readline()
     line1 = line1.replace("\n","")
     if line1:
-        row_count += 1
+       row_count += 1
     else:
-        break   
-    result1 = re.match('            [2]',line1)
+       break   
+    result1 = re.match(' <time',line1)
     result2 = re.search("<a class=",line1)
-    result3 = re.match('             [^<]',line1)
-    
+    result3 = re.search("s_titleBox_title_link_label",line1)
+        
     if result1:
-       w_ymd = line1
-       w_ymd = w_ymd.replace('-',"")
-       w_ymd = w_ymd.replace(" ","")
+       w_array1 = line1.split(">")
+       w_ymd = w_array1[1]
+       w_ymd = w_ymd.replace('</time',"")
+       w_ymd = w_ymd.replace('.',"/")
     #    print(w_ymd)
 
     if result2:
@@ -99,18 +97,19 @@ while True:
        w_urlstr = w_array2[2]
        w_urlstr = w_urlstr.replace(' target',"")
        w_urlstr = w_urlstr.replace('"',"")
-       w_url = base_url + w_urlstr
+       w_url = w_urlstr
     #    print(w_url)
+    
     if result3:
-       w_titlestr = line1
-       w_titlestr = w_titlestr.replace(" ","")
-       w_title = w_titlestr
+       w_array3 = line1.split(">")
+       w_titlestr = w_array3[1]
+       w_title = w_titlestr.replace("</span","")
     #    print(w_title)
        key_word = r"(決算|株主総会|業績|中期経営計画)"
        title_result = re.search(key_word,w_title)
        if title_result:
            wb = op.load_workbook(export_file)
-           sh_name = 'BATJAPAN'
+           sh_name = 'マツキヨ'
            ws = wb[sh_name]
            ws.cell(row=max_row,column=2).value = w_title
            ws.cell(row=max_row,column=3).value = w_url
