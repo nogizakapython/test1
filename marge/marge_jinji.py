@@ -7,7 +7,7 @@
 from marge_templatecopy import Marge_Copy
 from marge_dirList import Marge_filelist
 from marge_set import Marge_set
-from marge_jinji_inout import Marge_jinji_output
+from marge_jinji_inout_old import Marge_jinji_output
 
 #出力開始行の定義
 start_row = 5

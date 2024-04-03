@@ -1,6 +1,7 @@
 #######   組織改編、データのマージ処理    ###################
 #######   新規作成   2024/1/17         #####################
 #######   作成者     takao.hattori     #####################
+#######   修正       2024/4/3   URLのフォント設定を追加  ####
 #######   クラスファイルの用途
 #######   組織改編情報のデータを１つのファイルにマージする
 #######
@@ -17,6 +18,7 @@
 
 # ライブラリの呼び出し
 import openpyxl
+from openpyxl.styles.fonts import Font
 
 class Marge_soshiki_output():
     #コンストラクタ
@@ -69,6 +71,7 @@ class Marge_soshiki_output():
                     op.cell(row=self.soshiki_max_count,column=8).value = const_sites
                     op.cell(row=self.soshiki_max_count,column=9).value = const_url
                     op.cell(row=self.soshiki_max_count,column=9).hyperlink = const_url
+                    op.cell(row=self.soshiki_max_count,column=9).font = Font(color='0000FF',underline='single')
                     op.cell(row=self.soshiki_max_count,column=10).value = appending
                     # 出力先の行数を1加算する。
                     self.soshiki_max_count += 1

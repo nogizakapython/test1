@@ -2,6 +2,7 @@
 #######   新規作成   2024/1/17         #####################
 #######   作成者     takao.hattori     #####################
 #######   修正       2024/2/16　移動日を右揃えに揃える処理を追加  #####
+#######              2024/4/3   URLのフォント設定を追加
 #######   修正者     takao.hattori    
 #######   クラスファイルの用途
 #######   人事異動情報のデータを１つのファイルにマージする
@@ -21,6 +22,7 @@
 # ライブラリの呼び出し
 import openpyxl
 from openpyxl.styles.alignment import Alignment
+from openpyxl.styles.fonts import Font
 
 class Marge_jinji_output():
     def __init__(self,work_file_list,export_file,startnum,jinji_max_count):
@@ -74,6 +76,7 @@ class Marge_jinji_output():
                     op.cell(row=self.jinji_max_count,column=11).value = const_sites
                     op.cell(row=self.jinji_max_count,column=12).value = const_url
                     op.cell(row=self.jinji_max_count,column=12).hyperlink = const_url
+                    op.cell(row=self.jinji_max_count,column=12).font = Font(color='0000FF',underline='single')
                     op.cell(row=self.jinji_max_count,column=13).value = appending
                     # 人事異動日を右揃えにする。
                     #  2024/2/16 処理を追加
