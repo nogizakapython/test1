@@ -71,7 +71,7 @@ def web_scrapping():
     # 最新20件のニュースリリースを取得 
     for i in range(1,16):
         try:
-            xpath_str1 = '//*[@id="news"]/div[2]/div[1]/ul[1]/li[' + str(i) + ']/a'
+            xpath_str1 = '/html/body/main/article/div/section[4]/section[1]/div[1]/ul/li[' + str(i) + ']'
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
             print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
         except:
@@ -120,28 +120,24 @@ while True:
      line1 = line1.replace("\n","")
      if line1 == "":
          break
-     result1 = re.match("<a class",line1)
-     result2 = re.search("news__Date",line1)
-     result3 = re.search("<p class",line1)
+     result1 = re.match("    <a href",line1)
+     result2 = re.match('            <span class',line1)
+     result3 = re.match('              <p class="typography__inner',line1)
      
 
      if result1:
          w_array1 = line1.split("=")
-         w_soutai_url = w_array1[2]
+         w_soutai_url = w_array1[1]
          w_soutai_url = w_soutai_url.replace('"','')
          w_soutai_url = w_soutai_url.replace(">","")
-         w_soutai_url = w_soutai_url.replace(" target","")
-         url_result = re.match("https",w_soutai_url)
-         if url_result:
-             w_url = w_soutai_url
-         else:
-             w_url = base_url + w_soutai_url    
+         w_soutai_url = w_soutai_url.replace(" class","")
+         w_url = base_url + w_soutai_url    
         #  print(w_url)
     
      if result2:
          w_array2 = line1.split(">")
          w_ymd = w_array2[1]
-         w_ymd = w_ymd.replace('</time',"")
+         w_ymd = w_ymd.replace('</span',"")
          w_ymd = w_ymd.replace('年',"/")
          w_ymd = w_ymd.replace('月',"/")
          w_ymd = w_ymd.replace('日',"")
@@ -171,9 +167,4 @@ while True:
                 
          max_row += 1
          # エクセルファイルの保存
-         try:
-             wb.save(export_file)
-         except PermissionError as e:
-             sys.exit()  
-
-
+         wb.save(export_file)

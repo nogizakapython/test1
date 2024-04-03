@@ -23,8 +23,9 @@ dt = datetime.now()
 date1 = dt.strftime('%Y%m%d%H%M%S')
 date2 = dt.strftime('%Y')
 # date2 = 2023
-date3 = int(date2) - 1
 date4 = dt.strftime('%Y%m%d')
+date5 = int(date2) - 1
+date6 = int(date2) - 2
 # 今日の日付を取得
 today1 = dt.strftime('%Y/%m/%d')
 # today1 = "2023/04/07"
@@ -37,15 +38,16 @@ yesterday1 = yesterday.strftime('%Y/%m/%d')
 file_name = "IC_cosmo" + date1 + ".txt"
 out_file = "IC_cosmo.txt"
 base_url = 'https://www.cosmo-energy.co.jp'
-access_url = 'https://www.cosmo-energy.co.jp/ja/about/press.html#'
-target_url = ""
-target_url1 = ""
+access_url1 = 'https://www.cosmo-energy.co.jp/ja/about/press.html'
+access_url2 = 'https://www.cosmo-energy.co.jp/ja/about/press/'
+
+target_url1 = 'https://www.cosmo-energy.co.jp/ja/about/press.html'
 target_url2 = ""
 #############################################################################
 #  list id変数定義(年に1回、毎年4月に新年度のデータが入ってきたら変数を更新する)
 #  id_list2の変数にはid_list1の変数を変える。id_list1の変数に新しいid名を定義する
-id_list1 = "list-0c2c1d0398"
-id_list2 = "list-20c35d4fba"
+id_list1 = "list-871a216c87"
+id_list2 = "list-44326da321"
 #############################################################################
 max_row = 0
 base_file = "ICEnergyニュースリリース一覧テンプレート.xlsx"
@@ -59,59 +61,43 @@ output_company_name = ""
 # write_flag = 0
 xpath_str1 = ""
 
-# 検索URL取得関数
-def get_url(year):
-    work_url = access_url + str(year)
-    return work_url
 
 # 年度でニュースリリースが変わるので、年度判定処理
 def web_scrapping():
+
     w_ymd_array = today1.split('/')
     w_month = int(w_ymd_array[1])
     w_day = int(w_ymd_array[2])
-    if w_month <= 3 :
-        target_url = get_url(date3)
+    if w_month < 4:
+        target_url2 = access_url2 + str(date6) + '.html'
     else:
-        target_url = get_url(date2)
+        target_url2 = access_url2 + str(date5) + '.html'    
 
-
+        
     # Chromeを指定する
     driver = webdriver.Chrome()
     
+    for url in [target_url1,target_url2]:
+        # Chromeを開いて企業検索にアクセスする
+        driver.get(url)
+        sleep(3)
 
-    # Chromeを開いて企業検索にアクセスする
-    driver.get(target_url)
-    sleep(3)
+        # 最新15件のニュースリリースを取得
 
-    # 最新15件のニュースリリースを取得
-
-    if w_month == 4 and w_day <= 7:
-        for j in range(2):    
-            for i in range(1,16):
-                try:
-                    if j == 0:
-                        xpath_str1 = '//*[@id="' + id_list1 + '"]/li[' + str(i) + ']/a'
-                    elif j == 1:    
-                        xpath_str1 = '//*[@id="' + id_list2 + '"]/li[' +str(i) + ']/a'
-                        
-                    
-                    element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-                    print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-                except:
-                    if i == 1:
-                        print("データがありません",file=codecs.open(file_name,'a','utf-8')) 
-    else:                      
         for i in range(1,16):
             try:
-                xpath_str1 = '//*[@id="' + id_list1 + '"]/li[' + str(i) + ']/a'
+                if url == access_url1:
+                    
+                    xpath_str1 = '//*[@id="' + id_list1 + '"]/li[' + str(i) + ']'
+                else:        
+                    xpath_str1 = '//*[@id="' + id_list2 + '"]/li[' +str(i) + ']'
+                        
+                    
                 element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
                 print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
             except:
                 if i == 1:
-                    print("データがありません",file=codecs.open(file_name,'a','utf-8'))
-
-        
-        
+                    print("データがありません",file=codecs.open(file_name,'a','utf-8')) 
     # 画面を閉じる
     driver.quit()
 
@@ -155,6 +141,7 @@ sh_name = 'コスモ石油'
 ws = wb[sh_name]
 log_lotate()
 max_row = get_max_row()
+
 # ファイルを読み込み、URL、ニュースリリース日、ニュースリリース対象企業、リンクのタイトルを取得
 fileobj = open(out_file,encoding="utf-8")
 while True:
@@ -162,7 +149,7 @@ while True:
     line1 = line1.replace("\n","")
     if line1 == "":
         break
-    result1 = re.match("<a",line1)
+    result1 = re.search("<a",line1)
     result2 = re.search("cmp-news-index__item-date",line1)
     result3 = re.search("cmp-news-index__item-category-name",line1)
     result4 = re.match("        </div>",line1)
@@ -223,10 +210,7 @@ while True:
         ws.cell(row=max_row,column=7).value = w_url                
         max_row += 1
         # エクセルファイルの保存
-        try:
-            wb.save(export_file)
-        except PermissionError as e:
-            sys.exit()  
+        wb.save(export_file)
 
         company_array = [] 
         output_company_name = ""                 
