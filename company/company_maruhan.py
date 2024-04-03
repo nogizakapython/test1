@@ -57,16 +57,13 @@ try:
         
     for i in range(1,51):
         
-        
-        xpath_str1 = '//*[@id="contents"]/div[2]/section/div/article[' + str(i) + ']/p[1]'
+        xpath_str1 = '/html/body/div[2]/section[2]/div/div/div[1]/ul/li[' + str(i) + ']'
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
         except:
             break
         print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-        xpath_str2 = '//*[@id="contents"]/div[2]/section/div/article[' + str(i) + ']/h3/a'
-        element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
-        print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+        
         
 
 except EnvironmentError as e:
@@ -91,39 +88,29 @@ while True:
         row_count += 1
     else:
         break   
-    result1 = re.match("<p",line1)
-    result2 = re.match("<a href",line1)
-#    result3 = re.match("<h2>",line1)
+    result1 = re.search("<a href",line1)
+    result2 = re.search('class="date"',line1)
+    result3 = re.search('span class="inner"',line1)
     if result1:    
-        w_array1 = line1.split(">")
-        w_line = w_array1[1]
-        w_line = w_line.replace("</p","")
-        w_line = w_line.replace("年","/")
-        w_line = w_line.replace("月","/")
-        w_line = w_line.replace("日","")
-        w_array2 = w_line.split("/")
-        w_y = w_array2[0]
-        w_m = w_array2[1]
-        w_d = w_array2[2]
-        w_m1 = int(w_m)
-        w_d1 = int(w_d)
-        if w_m1 < 10:
-            w_m = "0" + w_m
-        if w_d1 < 10:
-            w_d = "0" + w_d
-        w_ymd = w_y + "/" + w_m + "/" + w_d      
-        #print(w_ymd)   
+        w_array1 = line1.split("=")
+        w_urlstr = w_array1[1]
+        w_urlstr = w_urlstr.replace(" class","")
+        w_urlstr = w_urlstr.replace('"',"")
+        w_url = base_url + w_urlstr
+   
+        # print(w_url)   
 
     if result2:
-        w_array3 = line1.split(">")
-        w_url = w_array3[0]
-        w_url = w_url.replace('<a href=',"")
-        w_url = w_url.replace('"',"")
-        w_url = base_url + w_url
-        #print(w_url)
+        w_array2 = line1.split(">")
+        w_ymd = w_array2[1]
+        w_ymd= w_url.replace('</div',"")
+        # print(w_ymd)
+
+    if result3:
+        w_array3 = line1.split(">")   
         w_title = w_array3[1]
-        w_title = w_title.replace("</a","")
-        #print(w_title)
+        w_title = w_title.replace("</span","")
+        # print(w_title)
         key_word = key_word = r"(役員|人事)"
         result4 = re.search(key_word,w_title)
         if result4:

@@ -123,12 +123,9 @@ while True:
         w_url = base_url + w_url
         w_url = w_url.replace('"','')
         w_array2 = line1.split(">")
-        w_title = w_array2[1]
-        w_array3 = w_title.split("=")
-        w_title = w_array3[3]
+        w_title = w_array2[2]
         w_title = w_title.replace("</a","")
-        w_title = w_title.replace(" opens in a new window","")
-        w_title = w_title.replace('"','')
+        
         #print(w_url)
         #print(w_title)
         key_word = r"(人事|異動)"

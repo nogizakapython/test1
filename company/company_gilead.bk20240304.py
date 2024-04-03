@@ -120,29 +120,24 @@ while True:
         w_title = w_title.replace("</a","")
         #print(w_title)
         key_word = key_word = r"(就任|任命)"
-        reject_word = "アンバサダー"
         result3 = re.search(key_word,w_title)
-        result4 = re.search(reject_word,w_title)
         if result3:
-            if result4:
-                continue
-            else:
-                wb = op.load_workbook(export_file)
-                sh_name = 'ギリアド・サイエンシズ'
-                ws = wb[sh_name]
-                ws.cell(row=max_row,column=2).value = w_title
-                ws.cell(row=max_row,column=3).value = w_url
-                ws.cell(row=max_row,column=4).value = w_ymd
-                ws.cell(row=max_row,column=6).value = w_url
-                ws.cell(row=max_row,column=6).hyperlink = w_url
+            wb = op.load_workbook(export_file)
+            sh_name = 'ギリアド・サイエンシズ'
+            ws = wb[sh_name]
+            ws.cell(row=max_row,column=2).value = w_title
+            ws.cell(row=max_row,column=3).value = w_url
+            ws.cell(row=max_row,column=4).value = w_ymd
+            ws.cell(row=max_row,column=6).value = w_url
+            ws.cell(row=max_row,column=6).hyperlink = w_url
                 
-                max_row += 1
-                # エクセルファイルの保存
-                try:
-                    wb.save(export_file)
-                except PermissionError as e:
-                    fname = export_file
-                    openerr = company_fileopenerror.ReadfileError(fname)
-                    openerr.readerror()
-                    sys.exit()               
+            max_row += 1
+            # エクセルファイルの保存
+            try:
+                wb.save(export_file)
+            except PermissionError as e:
+                fname = export_file
+                openerr = company_fileopenerror.ReadfileError(fname)
+                openerr.readerror()
+                sys.exit()               
          
