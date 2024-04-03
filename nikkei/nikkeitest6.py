@@ -3,6 +3,7 @@
 #####  ファイルに出力する処理         ###################
 #####  新規作成 2023/12/6 takao.hattori  ###############
 #####  修正     2023/12/7 takao.hattori 出力結果を現在使用しているフォーマットに修正
+#####  修正     2024/3/1  takao.hattori 日経新聞HP変更に伴う修正
 ########################################################
 
 # ライブラリのインポート
@@ -10,28 +11,19 @@ import os
 import re
 
 
-#検索文字の設定(人事、企業名のタグ)
-pattern1 = '^<a class="m-articleTitle_text_link" href'
-repattern1 = re.compile(pattern1)
+#検索文字の設定(日付)
+pattern1 = '^<time class="dateHeadline_d18sgrke"'
 
-#検索文字の設定(掲載日付)
-patturn2 = '^<div class="col time">'
-repattern2 = re.compile(patturn2)
+#検索文字の設定(掲載時間)
+patturn2 = '^<div class="container_cyywo23">'
 
-# ディレクトリ
-#dir1 = 'C:\\Users\\takao.hattori\\OneDrive - Accenture\\python1\\result\\'
+#検索文字の設定(企業名、URL)
+# patturn3 = 'href'
+
 # input File
 base_file =  "result.txt"
 # Output File
 output_file = "result1.csv"
-# 企業、URLデータの除外文字列
-msg1 = "<a class=\"m-articleTitle_text_link\""
-msg2 = "<span class=\"m-articleTitle_text_main\">"
-msg3 = "</span></a></h3>"
-msg4 = ">"
-# 掲載日付の除外文字列
-msg5 = "<div class=\"col time\"><p class=\"m-articleTitle_pubdate\">"
-msg6 = "</p></div>"
 
 #タグ抽出ファイルを開く
 file_data = open(base_file,"r",encoding="utf-8")
@@ -44,26 +36,33 @@ if result:
 
 # CSVファイルの作成処理
 for line in file_data:
-    result1 = repattern1.match(line)
-    result2 = repattern2.match(line)
+    result1 = re.match(pattern1,line)
+    result2 = re.match(patturn2,line)
+    # result3 = re.search(patturn3,line)
     with open(output_file,mode="a",encoding="SJIS") as f:
-        if result1: 
-            line = line.replace("\n","")
-            content_r = line.replace(msg1,"")
-            content_r = content_r.replace(msg2,"")
-            content_r = content_r.replace(msg3,"")
-            content_r = content_r.replace(msg4,"")
-            array1 = content_r.split("\"")
+        if result1:
+            w_array1 = line.split(">")
+            w_ymd = w_array1[1]
+            w_ymd = w_ymd.replace('</time',"")
+
+            # print(w_ymd)
+
+        if result2:
+            w_array2 = line.split(">")
+            w_hm = w_array2[5]
+            w_hm = w_hm.replace('</time',"")
+            w_ymdhm = w_ymd + " " + w_hm
+            # print(w_ymdhm)
+            w_url = w_array2[10]
+            w_url = w_url.replace('<a class="fauxBlockLink_f1dg9afs" href="',"")
+            w_url = w_url.replace('"',"")
+            # print(w_url)   
             base_url = "https://www.nikkei.com"
-            result_url = base_url + array1[1]
-            result_company = array1[2]
-            #w_msg = result_url + "," + result_company + ","
-            w_msg = result_company + "," + result_url + ","
-            #print(w_msg)
-        elif result2:
-            content_d = line.replace(msg5,"")
-            content_d = content_d.replace(msg6,"")
-            w_msg = w_msg + content_d
+            result_url = base_url + w_url
+            w_company = w_array2[11]
+            w_company = w_company.replace("</a","")
+            # print(w_company)
+            w_msg = w_company + "," + result_url + "," + w_ymdhm + "\n"
             f.write(w_msg)     
 
 
