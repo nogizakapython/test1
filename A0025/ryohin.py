@@ -117,7 +117,7 @@ while True:
         w_titlestr = w_array2[2]
         w_titlestr = w_titlestr.replace('<span class',"")
         w_title = w_titlestr.replace('"_blank">',"")
-        print(w_title)    
+      #   print(w_title)    
 
 
         key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書)"

@@ -43,6 +43,9 @@ import sevenandi
 import shimano
 import shionogi
 import shiseido
+import subaru
+import taisyo
+import takashimaya
 
 
 
@@ -88,6 +91,9 @@ try:
     exec(shimano)
     exec(shionogi)
     exec(shiseido)
+    exec(subaru)
+    exec(taisyo)
+    exec(takashimaya)
 
 
 
