@@ -112,6 +112,7 @@ while True:
         url_array1 = w_urlstr.split(' ')
         w_urlstr = url_array1[2]
         w_urlstr = w_urlstr.replace('href=','')
+        w_urlstr = w_urlstr.replace('"','')
         w_url = base_url + w_urlstr
         # print(w_url)
 

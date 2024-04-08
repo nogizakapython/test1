@@ -41,6 +41,23 @@ row_count = 0
 write_flag = 0
 xpath_str1 = ""
 
+
+# エクセル出力関数 
+def excel_output(w_title,w_url,w_ymd,max_row):
+      wb = op.load_workbook(export_file)
+      sh_name = 'ASAHI'
+      ws = wb[sh_name]
+      ws.cell(row=max_row,column=2).value = w_title
+      ws.cell(row=max_row,column=3).value = w_url
+      ws.cell(row=max_row,column=4).value = w_ymd
+      ws.cell(row=max_row,column=6).value = w_url
+      ws.cell(row=max_row,column=6).hyperlink = w_url
+      ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+      # エクセルファイルの保存
+      wb.save(export_file)
+
+
+
 # Chromeを指定する
 driver = webdriver.Chrome()
 
@@ -51,18 +68,15 @@ try:
     
 
     
-    for i in range(1,3):
-        for j in range(1,11):
-            xpath_str1 = '//*[@id="news"]/div[' + str(i) + ']/dl/dt[' + str(j) + ']'
-            try:
-                element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-            except:
-                break
+    for i in range(1,16):
+               
+        try:
+            xpath_str1 = '//*[@id="pagetop"]/main/div/ul/li[' + str(i) + ']/a'
+            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
             print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
-            xpath_str2 = '//*[@id="news"]/div[' + str(i) + ']/dl/dd[' + str(j) + ']/a'
-            element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
-            print(element_str2.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
-
+        except:
+            break
+        
 except EnvironmentError as e:
     str100 = e     
 except:
@@ -85,44 +99,29 @@ while True:
         row_count += 1
     else:
         break   
-    result1 = re.match("<dt",line1)
-    result2 = re.match("<a href",line1)
+    result1 = re.match("<a href",line1)
     
     if result1:
         w_array1 = line1.split(">")
-        w_line = w_array1[1]
-        w_line = w_line.replace('</dt','')
-        w_ymd = w_line.replace('.','/')
+        w_line = w_array1[0]
+        url_array = w_line.split("=")
+        w_urlstr = url_array[1]
+        w_urlstr = w_urlstr.replace('class','')
+        w_urlstr = w_urlstr.replace('target','')
+        w_url = w_urlstr.replace('"','')
+        # print(w_url)
+
+        w_ymdstr = w_array1[2]        
+        w_ymdstr = w_ymdstr.replace('</time','')
+        w_ymd = w_ymdstr.replace('.','/')
         # print(w_ymd)
 
-    if result2:
-        w_array2 = line1.split(">")
-        w_urlstr = w_array2[0]
-        w_urlstr = w_urlstr.replace('<a href=','')
-        w_urlstr = w_urlstr.replace('"',"")
-        w_url = base_url + w_urlstr
-        w_url = w_url.replace('target=_blank','')
-        # print(w_url)
-        
-        w_title = w_array2[1]
-        w_title = w_title.replace('</a','')
+        w_titlestr = w_array1[7]
+        w_title = w_titlestr.replace('</span','')
         # print(w_title)
 
-        key_word = r"(決算|株主総会)"
+        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
         title_result = re.search(key_word,w_title)
         if title_result:
-            wb = op.load_workbook(export_file)
-            sh_name = 'ASAHI'
-            ws = wb[sh_name]
-            ws.cell(row=max_row,column=2).value = w_title
-            ws.cell(row=max_row,column=3).value = w_url
-            ws.cell(row=max_row,column=4).value = w_ymd
-            ws.cell(row=max_row,column=6).value = w_url
-            ws.cell(row=max_row,column=6).hyperlink = w_url
-            ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
-                
-            max_row += 1
-            # エクセルファイルの保存
-            wb.save(export_file)
-
-
+          excel_output(w_title,w_url,w_ymd,max_row)
+          max_row += 1

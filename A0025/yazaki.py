@@ -1,5 +1,5 @@
-#######   三菱ふそうトラック・バス 中計、決算ニュース情報取得ツール　###########
-#######   新規作成  2024/03/25  ##########
+#######   矢崎総業 中計、決算ニュース情報取得ツール　###########
+#######   新規作成  2024/04/08  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -25,13 +25,13 @@ date3 = dt.strftime('%Y%m%d')
 date4 = dt.strftime('%Y年%m年%d日')
 
 
-input_file = "mitsubishifuso" + date1 + ".txt"
-out_file = "mitsubishifuso.txt"
+input_file = "yazakisogyo" + date1 + ".txt"
+out_file = "yazakisogyo.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://catr.jp'
-web_url = 'https://catr.jp/search?utf8=%E2%9C%93&word=%E4%B8%89%E8%8F%B1%E3%81%B5%E3%81%9D%E3%81%86%E3%83%88%E3%83%A9%E3%83%83%E3%82%AF&commit=%E6%A4%9C%E7%B4%A2'
-target_url = 'https://catr.jp/companies/aa995/1465'
+web_url = 'https://catr.jp/search?utf8=%E2%9C%93&word=%E7%9F%A2%E5%B4%8E%E7%B7%8F%E6%A5%AD%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE&commit=%E6%A4%9C%E7%B4%A2'
+target_url = 'https://catr.jp/companies/36b5f/32204'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -91,18 +91,17 @@ while True:
        w_urlstr = w_urlstr.replace('<a href=',"")
        w_urlstr = w_urlstr.replace('"',"")
        w_url = base_url + w_urlstr
-      #  print(w_url)
+       
        w_title = w_array1[2]
        w_title = w_title.replace('</a','')
+       
        w_ymd = w_title
        w_titleint = int(w_title[:4])
        w_title = str(w_titleint) + "年度決算"
 
 
-      #  print(w_title)
-
        wb = op.load_workbook(export_file)
-       sh_name = '三菱ふそう'
+       sh_name = '矢崎総業'
        ws = wb[sh_name]
        ws.cell(row=max_row,column=2).value = w_title
        ws.cell(row=max_row,column=3).value = w_url
