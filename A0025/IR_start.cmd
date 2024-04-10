@@ -1,4 +1,11 @@
-python IR_start.py 
+::中計、決算50社自動化ツールバッチコマンドファイル
+:: 新規作成  2024/4/8  
+:: Author by takao.hattori
 
-rem echo "エーザイのスクリプト実行後、ブラウザに投資家の方ですか？のメッセージが表示されるので「OK」ボタンを押下してください。"
-rem python eisai.py 
+cd C:\chukei50
+python IR_start.py
+
+echo "If it accesses at eisai IR Web page,you press OK Button under Web page!"
+
+python eisai.py
+

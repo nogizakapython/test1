@@ -49,6 +49,8 @@ import takashimaya
 import takeda
 import toyota
 import toyotabosyoku
+import unicharm
+import yazaki
 
 
 
@@ -100,6 +102,8 @@ try:
     exec(takeda)
     exec(toyota)
     exec(toyotabosyoku)
+    exec(unicharm)
+    exec(yazaki)
 
 
 
