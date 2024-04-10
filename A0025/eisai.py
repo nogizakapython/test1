@@ -53,7 +53,7 @@ driver.get(target_url)
 
 try:
     driver.get(target_url)
-    sleep(3)
+    sleep(10)
     for i in range(1,3):
         for j in range(1,4):
             try:

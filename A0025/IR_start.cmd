@@ -5,7 +5,4 @@
 cd C:\chukei50
 python IR_start.py
 
-echo "If it accesses at eisai IR Web page,you press OK Button under Web page!"
-
-python eisai.py
 
