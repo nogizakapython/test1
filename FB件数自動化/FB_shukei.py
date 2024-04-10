@@ -1,5 +1,7 @@
 ####################################################
-####       FB件数自動化テスト                  ######
+####       原因別FB件数取得スクリプト          ######
+####    新規作成  :  2024/4/10                ######
+####    Create By  takao.hattori              ######
 ####################################################
 # ライブラリ
 import os 
@@ -12,9 +14,10 @@ import datetime
 
 output_file = "filelist.txt"
 fb_reason_count = 3
-fb_data_count = 9
+fb_data_count = 0
 fb_array = []
 fb_count = 0
+fb_data_count = 0
 start_fb_count = fb_data_count
 end_fb_count = 0
 project_name = ""
@@ -68,8 +71,11 @@ with open(output_file,encoding="utf-8",mode="r") as f:
         while True:
             if project_name == "I&D" or project_name == "JPiT myTE":
                 reason_str = wl.cell(row=fb_reason_count,column=12).value
+                fb_data_count = 10
             else:
-                reason_str = wl.cell(row=fb_reason_count,column=11).value    
+                reason_str = wl.cell(row=fb_reason_count,column=11).value
+                fb_data_count = 9
+            start_fb_count = fb_data_count        
             if reason_str == None:
                 break
             else:
@@ -81,10 +87,10 @@ with open(output_file,encoding="utf-8",mode="r") as f:
                 work_name = wf.cell(row=5,column=5).value
                 process_str = wf.cell(row=4,column=5).value
             else:
-                work_name = wf.cell(row=4,column=5).value    
+                work_name = wf.cell(row=4,column=5).value
+                 
             output_file =  project_name + "名前" + work_name + date1 + ".csv"  
             data_str = wf.cell(row=fb_data_count,column=11).value
-            insident_str = wf.cell(row=fb_data_count,column=11).value
             if data_str == None:
                 end_fb_count = fb_data_count
                 break
