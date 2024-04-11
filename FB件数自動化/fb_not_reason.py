@@ -1,4 +1,16 @@
-
+####################################################
+####    工程がない案件のFB原因配列取得クラス   ######
+####    新規作成  :  2024/4/11                ######
+####    Create By  takao.hattori              ######
+####################################################
+####    クラスの使い方
+####    ①インスタンス変数にファイル名を引数に設定して呼び出す
+####    ex
+####    fb_not_reason_list = FB_not_process_Reason(file_name)
+####    ②make_reason_listメソッドを引数無しで呼ぶ
+####    fb_array = fb_not_reason_list.make_reason_list()
+####
+####################################################
 class FB_not_process_Reason():
     
     def __init__(self,file_name):

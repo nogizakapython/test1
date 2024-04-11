@@ -14,7 +14,7 @@
 class Make_FBfilelist():
     
     def __init__(self,fblist_file):
-        self.fblist_file = fblist_file
+        self.__fblist_file__ = fblist_file
 
     # FBシートファイル一覧リストを作成する
     def make_listfile(self,patturn1):
@@ -28,4 +28,4 @@ class Make_FBfilelist():
             file_patturn1 = file + patturn1
             filemsg = glob.glob(file_patturn1)
             for str1 in filemsg:
-                print(str1,file=codecs.open(self.fblist_file,'a','utf-8'))
+                print(str1,file=codecs.open(self.__fblist_file__,'a','utf-8'))
