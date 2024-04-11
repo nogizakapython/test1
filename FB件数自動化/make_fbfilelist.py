@@ -6,9 +6,9 @@
 ####    クラスの使い方
 ####    ①インスタンス変数にファイルリストを引数に渡す
 ####    ex
-####    f = Make_FBfilelist('ichiran.txt')
+####    f = Make_FBfilelist(リストファイル名)
 ####    ②make_listfikeメソッドを呼び出す
-####    f.make_listfile()
+####    f.make_listfile(検索する文字列)
 ####################################################
 
 class Make_FBfilelist():
@@ -17,7 +17,7 @@ class Make_FBfilelist():
         self.fblist_file = fblist_file
 
     # FBシートファイル一覧リストを作成する
-    def make_listfile(self):
+    def make_listfile(self,patturn1):
         # クラスモジュールを読み込む
         import glob
         import codecs 
@@ -25,7 +25,7 @@ class Make_FBfilelist():
         project_array = ["A0048","SN_0025","SN_0031","SN_0052"]
         # FBシートファイル一覧リストを作成する。
         for file in project_array:
-            file_patturn1 = file + "*.xlsx"
-            test1 = glob.glob(file_patturn1)
-            for str1 in test1:
+            file_patturn1 = file + patturn1
+            filemsg = glob.glob(file_patturn1)
+            for str1 in filemsg:
                 print(str1,file=codecs.open(self.fblist_file,'a','utf-8'))
