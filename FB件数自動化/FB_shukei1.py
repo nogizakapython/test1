@@ -12,7 +12,9 @@ import re
 import datetime 
 from make_fbfilelist import Make_FBfilelist
 from get_project_name import Get_Project_Name
-
+from get_begin_fb_row import Get_Begin_fb_row
+from fb_not_reason import FB_not_process_Reason
+from fb_reason import FB_process_Reason 
 
 output_file = "filelist.txt"
 fb_reason_count = 3
@@ -53,25 +55,26 @@ with open(output_file,encoding="utf-8",mode="r") as f:
         # 案件名取得オブジェクトを呼び出し、案件名を取得する。
         proj = Get_Project_Name(file_name)
         project_name = proj.get_project_name()   
-                
+        
+        # 読み込み先エクセルファイルの変数定義 
         wb = op.load_workbook(file_name)
         wl = wb[list_sheetname]
         wf = wb[feedback_sheetname]
-
-        #エクセルファイルからFB要因リストを読み込み、配列に格納する 
-        while True:
-            if project_name == "I&D" or project_name == "JPiT myTE":
-                reason_str = wl.cell(row=fb_reason_count,column=12).value
-                fb_data_count = 10
-            else:
-                reason_str = wl.cell(row=fb_reason_count,column=11).value
-                fb_data_count = 9
-            start_fb_count = fb_data_count        
-            if reason_str == None:
-                break
-            else:
-                fb_array.append(reason_str)
-                fb_reason_count += 1
+        # FBシートからFB指摘開始行を取得するオブジェクトのインスタンス変数
+        begin_row = Get_Begin_fb_row()
+        # 工程がない案件のFB指摘理由配列取得オブジェクトのインスタンス
+        fb_not_reason_list = FB_not_process_Reason(file_name)
+        # 工程がある案件のFB指摘理由配列取得オブジェクトのインスタンス
+        fb_reason_list = FB_process_Reason(file_name)
+        
+        #FB指摘理由配列とFBシートの開始行を取得する。 
+        if project_name == "I&D" or project_name == "JPiT myTE":
+            fb_array = fb_reason_list.make_reason_list()
+            fb_data_count = begin_row.get_begin_process_row_count()
+        else:
+            fb_array = fb_not_reason_list.make_reason_list()
+            fb_data_count = begin_row.get_begin_not_process_row_count()
+        start_fb_count = fb_data_count        
         
         # FBデータを取得する
         while True:

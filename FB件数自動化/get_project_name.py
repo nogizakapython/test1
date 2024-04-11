@@ -14,16 +14,16 @@
 class Get_Project_Name():
     # インスタンス
     def __init__(self,file_name):
-        self.file_name = file_name
+        self.__file_name__ = file_name
     # 案件名取得メソッド
     def get_project_name(self):
         import re
         project_name = ""
         # レビューシートファイル名から案件名を取得する
-        A0048_flag = re.search("A0048",self.file_name)
-        SN_0025_flag = re.search("SN_0025",self.file_name)
-        SN_0031_flag = re.search("SN_0031",self.file_name)
-        SN_0052_flag = re.search("SN_0052",self.file_name)
+        A0048_flag = re.search("A0048",self.__file_name__)
+        SN_0025_flag = re.search("SN_0025",self.__file_name__)
+        SN_0031_flag = re.search("SN_0031",self.__file_name__)
+        SN_0052_flag = re.search("SN_0052",self.__file_name__)
         if A0048_flag:
             project_name = "空調設備サーバールーム"
         if SN_0025_flag:
