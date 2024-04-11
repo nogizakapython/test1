@@ -1,5 +1,6 @@
 #######   IC Energy コスモ石油　###########
 #######   新規作成  2024/2/28  ##########
+#######   修正      2024/4/11 ２社にまたがって同じニュースがある場合は両方出力に変更
 #######   Author  takao.hattori ###########
 
 
@@ -26,6 +27,7 @@ date2 = dt.strftime('%Y')
 date4 = dt.strftime('%Y%m%d')
 date5 = int(date2) - 1
 date6 = int(date2) - 2
+
 # 今日の日付を取得
 today1 = dt.strftime('%Y/%m/%d')
 # today1 = "2023/04/07"
@@ -46,7 +48,7 @@ target_url2 = ""
 #############################################################################
 #  list id変数定義(年に1回、毎年4月に新年度のデータが入ってきたら変数を更新する)
 #  id_list2の変数にはid_list1の変数を変える。id_list1の変数に新しいid名を定義する
-id_list1 = "list-871a216c87"
+id_list1 = "list-125886634c"
 id_list2 = "list-44326da321"
 #############################################################################
 max_row = 0
@@ -89,6 +91,7 @@ def web_scrapping():
                 if url == access_url1:
                     
                     xpath_str1 = '//*[@id="' + id_list1 + '"]/li[' + str(i) + ']'
+                    
                 else:        
                     xpath_str1 = '//*[@id="' + id_list2 + '"]/li[' +str(i) + ']'
                         
@@ -185,13 +188,8 @@ while True:
         company_result2 = "決算" in company_array
         if company_result2 or company_result2:
             company_count = 1
-        if company_count == 2:
-            for c_name in list(company_array):
-                if output_company_name == "":
-                    output_company_name = c_name
-                elif output_company_name == "コスモエネルギーホールディングス" and not c_name == "コスモエネルギーホールディングス":
-                    output_company_name = c_name
-        elif company_count == 1:
+        
+        if company_count == 1:
             output_company_name = company_array[0]
             # print(output_company_name)   
         
@@ -201,16 +199,27 @@ while True:
         w_array3 = line1.split(">")
         w_title = w_array3[1]
         w_title = w_title.replace("</span","")
-        
-        ws.cell(row=max_row,column=3).value = output_company_name
-        ws.cell(row=max_row,column=4).value = w_ymd
-        ws.cell(row=max_row,column=5).value = w_title
-        ws.cell(row=max_row,column=5).hyperlink = w_url
-        ws.cell(row=max_row,column=6).value = today1
-        ws.cell(row=max_row,column=7).value = w_url                
-        max_row += 1
-        # エクセルファイルの保存
-        wb.save(export_file)
+        if company_count == 2:
+            for c_name in list(company_array):
+                ws.cell(row=max_row,column=3).value = c_name
+                ws.cell(row=max_row,column=4).value = w_ymd
+                ws.cell(row=max_row,column=5).value = w_title
+                ws.cell(row=max_row,column=5).hyperlink = w_url
+                ws.cell(row=max_row,column=6).value = today1
+                ws.cell(row=max_row,column=7).value = w_url                
+                max_row += 1
+                # エクセルファイルの保存
+                wb.save(export_file)
+        else:
+            ws.cell(row=max_row,column=3).value = output_company_name
+            ws.cell(row=max_row,column=4).value = w_ymd
+            ws.cell(row=max_row,column=5).value = w_title
+            ws.cell(row=max_row,column=5).hyperlink = w_url
+            ws.cell(row=max_row,column=6).value = today1
+            ws.cell(row=max_row,column=7).value = w_url                
+            max_row += 1
+            # エクセルファイルの保存
+            wb.save(export_file)    
 
         company_array = [] 
         output_company_name = ""                 
