@@ -5,4 +5,3 @@
 cd C:\chukei50
 python eisai.py
 
-
