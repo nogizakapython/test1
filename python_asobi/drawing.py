@@ -1,3 +1,4 @@
+# ライブラリの読み込み
 import openpyxl as op
 import random
 
