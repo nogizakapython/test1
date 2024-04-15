@@ -65,10 +65,10 @@ def main():
             fb_id_reason_list = FB_id_process_Reason(file_name)
             #FB指摘理由配列とFBシートの開始行を取得する。 
             if  project_name == "JPiT myTE":
-                fb_array = fb_myte_reason_list.make_myte_reason_list()
+                fb_array = fb_myte_reason_list.make_reason_list()
                 fb_data_count = begin_row.get_begin_process_row_count()
             elif project_name == "I&D":
-                fb_array = fb_id_reason_list.make_id_reason_list()
+                fb_array = fb_id_reason_list.make_reason_list()
                 fb_data_count = begin_row.get_begin_process_row_count() 
             else:
                 fb_array = fb_not_reason_list.make_reason_list()
@@ -82,7 +82,7 @@ def main():
 
             # 作業者と工程名を取得する。
             if project_name == "I&D" or project_name == "JPiT myTE":
-                worker_and_process_array = get_process_worker.get_process_and_worker()
+                worker_and_process_array = get_process_worker.get_worker()
                 work_name = worker_and_process_array[0]
                 process_name = worker_and_process_array[1]
             else:

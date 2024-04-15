@@ -16,7 +16,7 @@ from fb_not_reason import FB_not_process_Reason
 
 class FB_id_process_Reason(FB_not_process_Reason):
     
-    def make_id_reason_list(self):
+    def make_reason_list(self):
         # ライブラリの読み込み
         import openpyxl as op
         # FB理由が記載されているシート名の取得
