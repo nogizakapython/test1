@@ -1,6 +1,7 @@
 #######   IC Energy コスモ石油　###########
 #######   新規作成  2024/2/28  ##########
 #######   修正      2024/4/11 ２社にまたがって同じニュースがある場合は両方出力に変更
+#######   修正      2024/4/17  URL変更による修正
 #######   Author  takao.hattori ###########
 
 
@@ -40,10 +41,10 @@ yesterday1 = yesterday.strftime('%Y/%m/%d')
 file_name = "IC_cosmo" + date1 + ".txt"
 out_file = "IC_cosmo.txt"
 base_url = 'https://www.cosmo-energy.co.jp'
-access_url1 = 'https://www.cosmo-energy.co.jp/ja/about/press.html'
-access_url2 = 'https://www.cosmo-energy.co.jp/ja/about/press/'
+access_url1 = 'https://www.cosmo-energy.co.jp/ja/press.html'
+access_url2 = 'https://www.cosmo-energy.co.jp/ja/press/'
 
-target_url1 = 'https://www.cosmo-energy.co.jp/ja/about/press.html'
+target_url1 = 'https://www.cosmo-energy.co.jp/ja/press.html'
 target_url2 = ""
 #############################################################################
 #  list id変数定義(年に1回、毎年4月に新年度のデータが入ってきたら変数を更新する)
