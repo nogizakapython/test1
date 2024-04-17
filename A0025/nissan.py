@@ -141,7 +141,7 @@ while True:
                  w_ymd = w_ymd.replace('）','')
                  #  print(w_ymd)   
               
-              keyword = r'(決算短信|決算参考資料)'
+              keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
               title_result2 = re.search(keyword,w_titlework)
               if title_result2:
                  w_titleend = w_titlework.replace('</a>','')

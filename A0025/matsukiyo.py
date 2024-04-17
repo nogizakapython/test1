@@ -105,7 +105,7 @@ while True:
        w_titlestr = w_array3[1]
        w_title = w_titlestr.replace("</span","")
     #    print(w_title)
-       key_word = r"(決算|株主総会|業績|中期経営計画)"
+       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
        title_result = re.search(key_word,w_title)
        if title_result:
            wb = op.load_workbook(export_file)

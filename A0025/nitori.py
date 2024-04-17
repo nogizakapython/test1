@@ -119,8 +119,8 @@ while True:
        w_title = w_titlestr.replace('[','')
       #  print(w_title)    
 
-
-       key_word = r"(決算|株主総会|経営計画|議決権|株主通信)"
+      
+       key_word = r"(決算|株主総会|経営計画|議決権|株主通信|説明会|報告書|レポート)"
        title_result = re.search(key_word,w_title)
        if title_result:
           wb = op.load_workbook(export_file)

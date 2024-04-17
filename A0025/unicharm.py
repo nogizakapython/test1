@@ -29,7 +29,7 @@ date6 = date5 - 1
 date7 = dt.strftime('%Y/%m/%d')
 
 input_file = "unicharm" + date1 + ".txt"
-out_file = "unicharmtxt"
+out_file = "unicharm.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.unicharm.co.jp'
