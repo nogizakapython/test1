@@ -9,6 +9,8 @@ def main():
     import os 
     import openpyxl as op
     import datetime 
+    
+    
     # クラスのインポート
     from make_fbfilelist import Make_FBfilelist
     from get_project_name import Get_Project_Name
@@ -33,7 +35,7 @@ def main():
     patturn_msg = "*.xlsx"
     # 日付変数
     dt = datetime.datetime.now()
-    date1 = dt.strftime('%Y%m%d%H%M%S')
+    date1 = dt.strftime('%Y%m%d%H%M%S%f')
 
     # 前回のファイル一覧リストがあれば削除する
     file_exist = os.path.isfile(output_file)
@@ -46,6 +48,7 @@ def main():
 
     # FBシートファイル一覧リストを読み込んで、作業者別、案件単位でFB件数を集計する。
     with open(output_file,encoding="utf-8",mode="r") as f:
+          
         while True:
             file_name = f.readline()
             file_name = file_name.replace('\n',"")
@@ -89,7 +92,8 @@ def main():
                 work_name = get_not_process_worker.get_worker()
 
             # 出力用CSVファイル名を取得する  
-            result_file =  project_name + " " + work_name + date1 + ".csv"  
+            result_file =  project_name + " " + work_name + date1 + ".csv" 
+             
         
             # FB指摘事項の最終行の行番号を取得する。
             get_final_row = Get_fb_Data(fb_data_count,file_name)
