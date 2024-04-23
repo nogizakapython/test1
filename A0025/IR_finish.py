@@ -31,7 +31,7 @@ for j in list(array1):
 
 
 #作業用ファイルのリスト作成
-del_list2 = glob.glob("【企業個別】検索結果_20*xlsx")
+del_list2 = glob.glob("【IR】検索結果_20*xlsx")
 #作業用リストファイル配列
 array2 = []
 
