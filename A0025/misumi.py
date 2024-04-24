@@ -71,8 +71,8 @@ for year in year_array:
 
        for i in range(1,31):
           try:
-             xpath_str1 = '/html/body/div[1]/div/div/div[2]/div[2]/section/div/ul/li[' + str(i) + ']'
-                   
+             xpath_str1 = '//*[@id="main-content"]/section/div[3]/ul/li[' + str(i) + ']'
+                  
           except:
              if i == 1:
                 print("データ件数0件です",file=codecs.open(input_file,'a','utf-8'))      
@@ -106,31 +106,30 @@ while True:
    else:
      break   
 
-   result1 = re.match('<li>',line1)
-   result2 = re.search('newsList__date',line1) 
-   result3 = re.search('newsList__content',line1) 
+   result1 = re.search('el-news__container',line1)
+   result2 = re.search('el-news__date',line1) 
+   result3 = re.match('        <p>',line1) 
    
    if result1:
-      w_array1  = line1.split(">")
-      w_urlstr = w_array1[1]
-      url_array = w_urlstr.split(" ")
-      w_urlstr = url_array[2]
-      w_urlstr = w_urlstr.replace('href=','')
+      w_array1  = line1.split("=")
+      w_urlstr = w_array1[2]
+      w_urlstr = w_urlstr.replace('target','')
       w_urlstr = w_urlstr.replace('"','')
       w_url = base_url + w_urlstr 
       # print(w_url)
 
    if result2:
-      w_array2 = line1.split(">")
-      w_ymdstr = w_array2[1]
-      w_ymdstr = w_ymdstr.replace('</div','')
-      w_ymd = w_ymdstr.replace('.','/')
+      w_array2 = line1.split("=")
+      w_ymdstr = w_array2[2]
+      w_ymdstr = w_ymdstr.replace('>','')
+      w_ymdstr = w_ymdstr.replace('"','')
+      w_ymd = w_ymdstr.replace('-','/')
       # print(w_ymd)    
 
    if result3:
       w_array3 = line1.split(">")
       w_titlestr = w_array3[1]
-      w_title = w_titlestr.replace('<i class="icon icon-pdf"','')
+      w_title = w_titlestr.replace('</p','')
       # print(w_title)
 
       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
