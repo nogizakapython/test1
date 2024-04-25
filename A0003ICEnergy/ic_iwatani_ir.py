@@ -46,7 +46,7 @@ target_url2 = ""
 id_list1 = "pbBlock274912"
 id_list2 = "pbBlock248499"
 #############################################################################
-max_row = 0
+max_row = 5
 # base_file = "ICEnergyニュースリリース一覧テンプレート.xlsx"
 export_file = "ICEnergyニュースリリース出力用" + date4 + ".xlsx"
 # 入力用ファイルの行数変数
@@ -130,27 +130,13 @@ def log_lotate():
     # 作業用ログファイルをコピー
     shutil.copy2(file_name,out_file)
 
-def get_max_row():
-    w_row_count = 4
-    while True:
-        cell_value = ws.cell(row=w_row_count,column=3).value
-        # print(cell_value)
-        if cell_value == None:
-            break
-        else:
-            w_row_count += 1
-            # print(w_row_count)
-    return w_row_count
-
-
-
 web_scrapping()
 company_name = "岩谷産業IR"
 wb = op.load_workbook(export_file)
 sh_name = '岩谷産業IR'
 ws = wb[sh_name]
 log_lotate()
-max_row = get_max_row()
+
 
 # ファイルを読み込み、URL、ニュースリリース日、ニュースリリース対象企業、リンクのタイトルを取得
 fileobj = open(out_file,encoding="utf-8")

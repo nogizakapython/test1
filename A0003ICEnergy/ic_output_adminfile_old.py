@@ -2,7 +2,6 @@
 ############ 対象データを書き込む処理 ######################################
 ############ 新規作成  2024/3/13      ######################################
 ############ 修正      2024/4/4  シート名配列をソートして管理シートに出力に変更 #####
-############ 修正      2024/4/25 結果ファイルのフォーマット変更。企業別更新日の廃止
 ############ 作成者    takao.hattori  ######################################
 ############################################################################
 
@@ -14,11 +13,11 @@ from datetime import timedelta
 # 日付の定義
 dt = datetime.now()
 date1 = dt.strftime('%Y%m%d')
-date2 = dt - timedelta(1)
-yesterday_ymd = date2.strftime('%Y/%m/%d')
-# 出力用ファイル
-b_result_file = "A0003_ICEnergy石油関連企業_テンプレートファイル.xlsx"
-a_result_file = "A0003_ICEnergy石油関連企業_" + date1 + ".xlsx"
+# 管理ファイルの定義
+admin_file = "SN_IC-Energy_石油関連企業のプレスリリース_日経News情報_20240312_v1.06.xlsx"
+wb1 = op.load_workbook(admin_file)
+sh_name = '管理'
+ws1 = wb1[sh_name]
 w1_row_count = 6
 # 変数の定義
 w_title = ""
@@ -29,13 +28,6 @@ wb2 = op.load_workbook(input_file)
 sheet_array1 = ["コスモ石油","出光","エネオス","岩谷産業","岩谷産業IR","太陽石油","INPEX"]
 # 入力日付の変数定義
 sheet_array2 = sorted(sheet_array1)
-
-# 作業日のICEnergy結果ファイルを作成する
-def copy_result_file():
-    import shutil
-    shutil.copy(b_result_file,a_result_file)
-
-
 # 前回の作業日を入力する関数
 def data_input():
     #　前回の作業入力ルーチン
@@ -67,20 +59,55 @@ def data_input():
             break 
     return ymd        
 
+# 管理用エクセルファイルの書き込み開始行を取得する関数
+def admin_excel_maxcount():
+    admin_row_count = 6
+    while True:
+        value1 = ws1.cell(row=admin_row_count,column=3).value
+        if value1 == None:
+            break
+        else:
+            admin_row_count += 1
+            # print(admin_row_count)
+    return admin_row_count    
 
 # 企業別前回のニュースリリース日を先週分の最終リリース日のセルに書き込む関数
-def write_workday(ymd1,ymd2):
-    ws1.cell(row=2,column=4).value = ymd1
-    ws1.cell(row=3,column=4).value = ymd2
-    wb1.save(a_result_file)
+def admin_before_workday():
+    if sh_name == "コスモ石油":
+        ws1.cell(row=2,column=4).value = ws1.cell(row=3,column=4).value
+    if sh_name == "出光":
+        ws1.cell(row=2,column=5).value = ws1.cell(row=3,column=5).value
+    if sh_name == "エネオス":
+        ws1.cell(row=2,column=6).value = ws1.cell(row=3,column=6).value
+    if sh_name == "岩谷産業":
+        ws1.cell(row=2,column=7).value = ws1.cell(row=3,column=7).value
+    if sh_name == "岩谷産業IR":
+        ws1.cell(row=2,column=8).value = ws1.cell(row=3,column=8).value    
+    if sh_name == "太陽石油":
+        ws1.cell(row=2,column=9).value = ws1.cell(row=3,column=9).value
+    if sh_name == "INPEX":
+        ws1.cell(row=2,column=10).value = ws1.cell(row=3,column=10).value
+    wb1.save(admin_file)
+
+# 最終ニュースリリース日をセルに書き込む関数
+def admin_now_workday(now_workday):
+    if sh_name == "コスモ石油":
+        ws1.cell(row=3,column=4).value = now_workday
+    if sh_name == "出光":
+        ws1.cell(row=3,column=5).value = now_workday    
+    if sh_name == "エネオス":
+        ws1.cell(row=3,column=6).value = now_workday
+    if sh_name == "岩谷産業":
+        ws1.cell(row=3,column=7).value = now_workday
+    if sh_name == "岩谷産業IR":
+        ws1.cell(row=3,column=8).value = now_workday    
+    if sh_name == "太陽石油":
+        ws1.cell(row=3,column=9).value = now_workday
+    if sh_name == "INPEX":
+        ws1.cell(row=3,column=10).value = now_workday 
 
 # メイン処理
-copy_result_file()
 str_ymd = data_input()
-# 結果用エクセルファイルの定義
-wb1 = op.load_workbook(a_result_file)
-sh_name = '管理'
-ws1 = wb1[sh_name]
 
 # 今回の作業日と前回の作業日の日付差を取得し、前回の作業日から今回の作業日の前日まで日付を
 # 配列に格納する。
@@ -88,27 +115,26 @@ ws1 = wb1[sh_name]
 ymd = datetime.strptime(str_ymd, '%Y/%m/%d')
 array1 = []
 dt = datetime.now()
-before_workday = ymd
 day_sabun = dt - ymd
 day_sabun = str(day_sabun)
 sabun_array1 = day_sabun.split(" ")
 day_sa = sabun_array1[0]
 day_sa = int(day_sa)
-
-
 # 前回の作業日から今回の作業前日までを日付配列に格納する。
 for i in range(day_sa):
     w_ymd = ymd.strftime("%Y/%m/%d")
     array1.append(w_ymd)
     ymd = ymd + timedelta(1)
 
-# 結果ファイルを読み込む
-write_workday(before_workday,yesterday_ymd)
+
 # 石油各社6社別シートからスクレイピングデータを読み込む 
 for sh_name in list(sheet_array2):
     ws2 = wb2[sh_name]
     w2_row_count = 5
-    
+    admin_before_workday()
+    # 管理用エクセルファイルの書き込み開始行を取得する
+    w1_row_count = admin_excel_maxcount()
+
     # 各企業別のエクセルシートの最終行を取得する
     while True:
         data_value = ws2.cell(row=w2_row_count,column=5).value
@@ -131,8 +157,9 @@ for sh_name in list(sheet_array2):
                 ws1.cell(row=w1_row_count,column=5).value = ad_title
                 ws1.cell(row=w1_row_count,column=5).hyperlink = ad_url
                 ws1.cell(row=w1_row_count,column=5).font = Font(color='0000FF',underline='single',name='Meiryo UI')
-                ws1.cell(row=w1_row_count,column=6).value = ad_workday
+                ws1.cell(row=w1_row_count,column=6).hyperlink = ad_workday
+                admin_now_workday(ad_ymd)
                 w1_row_count += 1
-                wb1.save(a_result_file)    
+                wb1.save(admin_file)    
     
     
