@@ -58,7 +58,7 @@ for year in [date5,date6]:
        driver.get(target_url)
        sleep(3)
 
-       for i in range(1,26):
+       for i in range(1,31):
           try:
              xpath_str1 = '//*[@id="irp-press-list-archive"]/div[' + str(i) + ']'
              
@@ -99,7 +99,11 @@ while True:
     if result1:
        w_array1 = line1.split(">")
        w_ymdstr = w_array1[3]
-       w_ymd = w_ymdstr.replace('</div','')
+       w_ymdstr = w_ymdstr.replace('</div','')
+       w_ymdstr = w_ymdstr.replace('年','/')
+       w_ymdstr = w_ymdstr.replace('月','/')
+       w_ymd = w_ymdstr.replace('日','')
+       
       #  print(w_ymd)    
 
        w_urlstr = w_array1[7]
@@ -120,9 +124,10 @@ while True:
       #  print(w_title)    
 
 
-       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+       key_word = r"(決算|株主総会|説明会|IR説明会|経営計画|報告書|レポート)"
        title_result = re.search(key_word,w_title)
        if title_result:
+         #  print(w_title)
           wb = op.load_workbook(export_file)
           sh_name = '日本通運'
           ws = wb[sh_name]

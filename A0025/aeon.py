@@ -60,7 +60,7 @@ try:
             element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
             print(element_str2.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))    
         except:
-            print(1)
+            
             break
         
 
@@ -93,7 +93,10 @@ while True:
     if result1:
        w_array1 = line1.split(">")
        w_ymdstr = w_array1[1]
-       w_ymd = w_ymdstr.replace("</span","")
+       w_ymdstr = w_ymdstr.replace("</span","")
+       w_ymdstr = w_ymdstr.replace("年","/")
+       w_ymdstr = w_ymdstr.replace("月","/")
+       w_ymd = w_ymdstr.replace("日","")
     #    print(w_ymd)
 
     if result2:   

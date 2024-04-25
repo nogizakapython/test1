@@ -93,6 +93,9 @@ while True:
        w_array1 = line1.split("<")
        w_ymd = w_array1[1]
        w_ymd = w_ymd.replace('li class="disclosure">',"")
+       w_ymd = w_ymd.replace('年',"/")
+       w_ymd = w_ymd.replace('月',"/")
+       w_ymd = w_ymd.replace('日',"")
     #    print(w_ymd)
 
        

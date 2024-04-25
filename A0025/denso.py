@@ -38,6 +38,7 @@ row_count = 0
 write_flag = 0
 xpath_str1 = ""
 w_url = ""
+w_ymdstr = ""
 
 
 # Chromeを指定する
@@ -104,13 +105,27 @@ while True:
       title_result = re.search('<div class="img-inner js-bg" style="background-image',line1)
       if title_result:
           w_titlestr = w_array1[11]
-          w_ymd = w_array1[16]
+          w_ymdstr = w_array1[16]
       else:
           w_titlestr = w_array1[5]
-          w_ymd = w_array1[10]
+          w_ymdstr = w_array1[10]
       w_title = w_titlestr.replace('</p','')
       # print(w_title)
-      w_ymd = w_ymd.replace('</p','')
+      w_ymdstr = w_ymdstr.replace('</p','')
+      w_ymdstr = w_ymdstr.replace('年','/')
+      w_ymdstr = w_ymdstr.replace('月','/')
+      w_ymdstr = w_ymdstr.replace('日','')
+      ymd_array1 = w_ymdstr.split("/")
+      year1 = ymd_array1[0]
+      month1 = int(ymd_array1[1])
+      day1 = int(ymd_array1[2])
+      if month1 < 10:
+          month1 = "0" + str(month1)
+      if day1 < 10:
+          day1 = "0" + str(day1)
+      
+
+      w_ymd1 = year1 + "/" + str(month1) + "/" + str(day1)    
       # print(w_ymd)
 
       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
@@ -121,7 +136,7 @@ while True:
          ws = wb[sh_name]
          ws.cell(row=max_row,column=2).value = w_title
          ws.cell(row=max_row,column=3).value = w_url
-         ws.cell(row=max_row,column=4).value = w_ymd
+         ws.cell(row=max_row,column=4).value = w_ymd1
          ws.cell(row=max_row,column=6).value = w_url
          ws.cell(row=max_row,column=6).hyperlink = w_url
          ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')

@@ -93,6 +93,9 @@ while True:
         w_array1 = line1.split(">")
         w_ymd = w_array1[2]
         w_ymd = w_ymd.replace('</time','')
+        w_ymd = w_ymd.replace('年','/')
+        w_ymd = w_ymd.replace('月','/')
+        w_ymd = w_ymd.replace('日','')
         # print(w_ymd)
 
     if result2:

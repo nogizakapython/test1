@@ -101,7 +101,23 @@ while True:
      if result1:
         w_array1 = line1.split(">")
         w_ymdstr = w_array1[1]
-        w_ymd = w_ymdstr.replace('</time','')
+        w_ymdstr = w_ymdstr.replace('</time','')
+        w_ymdstr = w_ymdstr.replace('年','/')
+        w_ymdstr = w_ymdstr.replace('月','/')
+        w_ymdstr = w_ymdstr.replace('日','')
+        ymd_array = w_ymdstr.split("/")
+        year1 = ymd_array[0]
+        month1 = int(ymd_array[1])
+        day1 = int(ymd_array[2])
+        if month1 < 10:
+            month1 = "0" + str(month1)
+        else:
+            month1 = str(month1)
+        if day1 < 10:
+            day1 = "0" + str(day1)
+        else:
+            day1 = str(day1)
+        w_ymd = year1 + "/" + month1 + "/" + day1            
       #   print(w_ymd)
 
      if result2:
@@ -118,7 +134,7 @@ while True:
       #   print(w_title)    
 
 
-        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+        key_word = r"(決算|株主総会|説明会|IR説明会|経営計画|報告書|レポート)"
         title_result = re.search(key_word,w_title)
         if title_result:
             wb = op.load_workbook(export_file)

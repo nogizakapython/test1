@@ -122,7 +122,10 @@ while True:
      if result2:
         w_array2 = line1.split(">")
         w_ymdstr = w_array2[1]
-        w_ymd = w_ymdstr.replace('</p','')
+        w_ymdstr = w_ymdstr.replace('</p','')
+        w_ymdstr = w_ymdstr.replace('年','/')
+        w_ymdstr = w_ymdstr.replace('月','/')
+        w_ymd = w_ymdstr.replace('日','')
         # print(w_ymd)
 
      if result3:

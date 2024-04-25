@@ -90,6 +90,9 @@ while True:
        w_ymd = w_ymd.replace('<em class="hd"',"")
        w_ymd = w_ymd.replace(' ','')
        w_ymd = w_ymd.replace('<emclass="bji"','')
+       w_ymd = w_ymd.replace('年','/')
+       w_ymd = w_ymd.replace('月','/')
+       w_ymd = w_ymd.replace('日','')
     #    print(w_ymd)
 
     if result2:

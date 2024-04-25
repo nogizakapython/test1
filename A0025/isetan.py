@@ -115,6 +115,9 @@ while True:
 
    w_ymd = w_array1[3]
    w_ymd = w_ymd.replace('</span','')
+   w_ymd = w_ymd.replace('年','/')
+   w_ymd = w_ymd.replace('月','/')
+   w_ymd = w_ymd.replace('日','')
    # print(w_ymd)
        
    w_titlestr = w_array1[9]

@@ -114,7 +114,26 @@ while True:
       #   print(w_url)
 
         w_ymdstr = w_array1[4]
-        w_ymd = w_ymdstr.replace('</time','')
+        w_ymdstr = w_ymdstr.replace('</time','')
+        w_ymdstr = w_ymdstr.replace('年','/')
+        w_ymdstr = w_ymdstr.replace('月','/')
+        w_ymdstr = w_ymdstr.replace('日','')
+        ymd_array = w_ymdstr.split("/")
+        year1 = ymd_array[0]
+        month1 = int(ymd_array[1])
+        day1 = int(ymd_array[2])
+        if month1 < 10:
+            month1 = "0" + str(month1)
+        else:
+            month1 = str(month1)
+
+        if day1 < 10:
+            day1 = "0" + str(day1)
+        else:
+            day1 = str(day1) 
+
+        w_ymd = year1 + "/" + month1 + "/" + day1      
+
       #   print(w_ymd)
 
         w_titlestr = w_array1[12]

@@ -106,7 +106,23 @@ while True:
       w_array2 = line1.split(">")
       w_ymdstr = w_array2[1]
       w_ymdstr = w_ymdstr.replace('</th','')
-      w_ymd = w_year + w_ymdstr
+      w_ymdstr = w_ymdstr.replace('月','/')
+      w_ymdstr = w_ymdstr.replace('日','')
+      ymd_array = w_ymdstr.split("/")
+      month1 = int(ymd_array[0])
+      day1 = int(ymd_array[1])
+      if month1 < 10:
+         month1 = "0" + str(month1)
+      else:
+         month1 = str(month1)
+      if day1 < 10:
+         day1 = "0" + str(day1)
+      else:
+         day1 = str(day1)
+      w_ymd = w_year + "/" + month1 + "/" + day1 
+      w_ymd = w_ymd.replace("年","")     
+
+      
       # print(w_ymd)    
 
    if result3:

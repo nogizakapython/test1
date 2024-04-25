@@ -96,6 +96,9 @@ while True:
        w_title = w_title.replace('</a','')
        
        w_ymd = w_title
+       w_ymd = w_ymd.replace("年",'/')
+       w_ymd = w_ymd.replace("月",'/')
+       w_ymd = w_ymd.replace("日",'')
        w_titleint = int(w_title[:4])
        w_title = str(w_titleint) + "年度決算"
 

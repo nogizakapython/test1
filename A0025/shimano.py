@@ -107,7 +107,10 @@ while True:
 
         w_ymdstr = w_array1[4]
         w_ymdstr = w_ymdstr.replace('<span class="icon_new xj-list__new"','')
-        w_ymd =  w_ymdstr.replace('</p','')
+        w_ymdstr =  w_ymdstr.replace('</p','')
+        w_ymdstr =  w_ymdstr.replace('年','/')
+        w_ymdstr =  w_ymdstr.replace('月','/')
+        w_ymd =  w_ymdstr.replace('日','')
       #   print(w_ymd) 
 
         key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
