@@ -74,14 +74,17 @@ shutil.copy2(input_file,out_file)
 
 
 fileobj = open(out_file,encoding="utf-8")
-while True:
+while row_count < 270:
     line1 = fileobj.readline()
+    
     
     # line1 = line1.replace("\n","")
     if line1:
         row_count += 1
     else:
+        row_count += 1
         continue
+
 
     if row_count == 270:
         break   
