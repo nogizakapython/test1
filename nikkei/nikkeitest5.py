@@ -14,6 +14,9 @@ import datetime
 import re
 import os
 import requests
+import warnings
+
+warnings.simplefilter('ignore')
 
 #人事データ取得先URL変数の定義
 b_url = "https://www.nikkei.com/news/jinji/hatsurei/?page="
@@ -21,6 +24,8 @@ b_url = "https://www.nikkei.com/news/jinji/hatsurei/?page="
 start_num = 1
 #終了ページ変数の定義
 end_num = 30
+# end_num = 5
+
 # 現在日時の取得
 dt = datetime.datetime.now()
 #　現在日時を年4桁、月2桁、日付2桁、時間、分、秒のフォーマットで取得する
@@ -53,8 +58,11 @@ for i in range(start_num,end_num):
     # r = http.request('GET', url)
 
     # スクレイピング対象の URL にリクエストを送り HTML を取得する
-    r = requests.get(url)
-    soup = BeautifulSoup(r.text, 'html.parser')
+    try:
+        r = requests.get(url,verify=False)
+        soup = BeautifulSoup(r.text, 'html.parser')
+    except:
+        A = 1    
 
     
 
