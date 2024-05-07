@@ -59,7 +59,7 @@ def output_work_file(data_record):
    
 
 # スクレイピング対象の URL にリクエストを送り HTML を取得する
-r = requests.get(url)
+r = requests.get(url,verify=False)
 soup = BeautifulSoup(r.text, 'html.parser')
 print(r.text,file=codecs.open(input_file,'a','utf-8'))
 fileobj1 = open(input_file,encoding='utf-8')

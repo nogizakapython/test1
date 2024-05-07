@@ -110,7 +110,10 @@ while True:
       w_ymdstr = w_ymdstr.replace('日','')
       ymd_array = w_ymdstr.split("/")
       month1 = int(ymd_array[0])
-      day1 = int(ymd_array[1])
+      day1 = ymd_array[1]
+      day1 = day1.replace('<br','')
+
+      day1 = int(day1)
       if month1 < 10:
          month1 = "0" + str(month1)
       else:
