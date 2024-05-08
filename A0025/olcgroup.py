@@ -33,7 +33,7 @@ out_file = "olc.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.olc.co.jp'
-web_url = 'https://www.olc.co.jp/ja/news.html#'
+web_url = 'https://www.olc.co.jp/ja/news.html#' + str(date5) + '_all'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -51,14 +51,13 @@ driver = webdriver.Chrome()
 
 
 
-for year in [date5,date6]:
-    target_url = web_url + str(year) + '_all'
+target_url = web_url
              
-    try:
-       driver.get(target_url)
-       sleep(3)
+try:
+      driver.get(target_url)
+      sleep(3)
 
-       for i in range(1,31):
+      for i in range(1,51):
          try:
                      
             xpath_str1 = '//*[@id="news-list-tabbed-2nd-1"]/ul/li[' + str(i) + ']'
@@ -69,10 +68,10 @@ for year in [date5,date6]:
          print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
           
        
-    except EnvironmentError as e:
-       str100 = e     
-    except:
-       str100 = 1
+except EnvironmentError as e:
+      str100 = e     
+except:
+      str100 = 1
      
 # 画面を閉じる
 driver.quit()
