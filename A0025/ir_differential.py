@@ -110,7 +110,7 @@ day_sa = sabun_array1[0]
 day_sa = int(day_sa)
 
 # 前回の作業日翌日から今回の作業日までを日付配列に格納する。
-for i in range(1,day_sa+1):
+for i in range(0,day_sa):
     w_ymd = ymd + timedelta(i)
     w_ymd = w_ymd.strftime("%Y/%m/%d")
     array1.append(w_ymd)
