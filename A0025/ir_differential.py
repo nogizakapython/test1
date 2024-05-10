@@ -14,6 +14,8 @@ import shutil
 dt = datetime.now()
 date1 = dt.strftime('%Y%m%d')
 date2 = dt.strftime('%Y/%m/%d')
+date3 = datetime.strptime(date2, '%Y/%m/%d')
+date4 = date3 - timedelta(1)
 # 更新ファイルの定義
 base_file = "A0055_中計決算50社_テンプレートファイル.xlsx"
 update_file = "A0055_中計決算50社_" + str(date1) + ".xlsx"
@@ -100,7 +102,7 @@ str_ymd = data_input()
 # 配列に格納する。
 # print(str_ymd)
 ymd = datetime.strptime(str_ymd, '%Y/%m/%d')
-finish_write_day(ymd,date2)
+finish_write_day(ymd,date4)
 array1 = []
 dt1 = datetime.now()
 day_sabun = dt1 - ymd
