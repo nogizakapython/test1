@@ -39,6 +39,7 @@ import omuron
 import nissan
 import ryohin
 import santen
+import santen2
 import sevenandi
 import shimano
 import shionogi
@@ -46,7 +47,7 @@ import shiseido
 import subaru
 import taisyo
 import takashimaya
-import takeda
+# import takeda
 import toyota
 import toyotabosyoku
 import unicharm
@@ -92,6 +93,7 @@ try:
     exec(omuron)
     exec(ryohin)
     exec(santen)
+    exec(santen2)
     exec(sevenandi)
     exec(shimano)
     exec(shionogi)
@@ -99,7 +101,7 @@ try:
     exec(subaru)
     exec(taisyo)
     exec(takashimaya)
-    exec(takeda)
+    # exec(takeda)
     exec(toyota)
     exec(toyotabosyoku)
     exec(unicharm)

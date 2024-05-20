@@ -47,6 +47,23 @@ for l in list(array2):
     delfile = IR_delwork.Delworkfile(dir2,l)
     delfile.delworkfile()
 
+#作業用ファイルのリスト作成
+del_list3 = glob.glob("A0055_中計更新確認結果_2*xlsx")
+#作業用リストファイル配列
+array3 = []
+
+for p in list(del_list3):
+    #文字列から「\\」を消す
+    str3 = p.replace("\\","")
+    #配列に格納する
+    array3.append(str3)
+
+dir3 = os.getcwd()
+
+for l in list(array3):
+    delfile = IR_delwork.Delworkfile(dir3,l)
+    delfile.delworkfile()    
+
 
 shutil.rmtree(".\__pycache__")
 
