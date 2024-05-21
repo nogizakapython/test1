@@ -139,25 +139,41 @@ while True:
                  
                  w_ymd = w_array2[1]
                  w_ymd = w_ymd.replace('）','')
+                 ymd_array = w_ymd.split("/")
+                 w_year = ymd_array[0]
+                 month1 = int(ymd_array[1])
+                 day1 = ymd_array[2]
+                 day1 = day1.replace('<br','')
+
+                 day1 = int(day1)
+                 if month1 < 10:
+                     month1 = "0" + str(month1)
+                 else:
+                     month1 = str(month1)
+                 if day1 < 10:
+                     day1 = "0" + str(day1)
+                 else:
+                     day1 = str(day1)
+                 w_ymd = w_year + "/" + month1 + "/" + day1
                  #  print(w_ymd)   
               
-              keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
-              title_result2 = re.search(keyword,w_titlework)
-              if title_result2:
-                 w_titleend = w_titlework.replace('</a>','')
-                 w_title = w_titlehead + " " + w_titleend
-                #  print(w_title)
+           keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営|経営計画)"
+           title_result2 = re.search(keyword,w_titlework)
+           if title_result2:
+               w_titleend = w_titlework.replace('</a>','')
+               w_title = w_titlehead + " " + w_titleend
+                    #  print(w_title)
      
-                 wb = op.load_workbook(export_file)
-                 sh_name = '日産自動車'
-                 ws = wb[sh_name]
-                 ws.cell(row=max_row,column=2).value = w_title
-                 ws.cell(row=max_row,column=3).value = w_url
-                 ws.cell(row=max_row,column=4).value = w_ymd
-                 ws.cell(row=max_row,column=6).value = w_url
-                 ws.cell(row=max_row,column=6).hyperlink = w_url
-                 ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+               wb = op.load_workbook(export_file)
+               sh_name = '日産自動車'
+               ws = wb[sh_name]
+               ws.cell(row=max_row,column=2).value = w_title
+               ws.cell(row=max_row,column=3).value = w_url
+               ws.cell(row=max_row,column=4).value = w_ymd
+               ws.cell(row=max_row,column=6).value = w_url
+               ws.cell(row=max_row,column=6).hyperlink = w_url
+               ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
-                 max_row += 1
-                 # エクセルファイルの保存
-                 wb.save(export_file)
+               max_row += 1
+               # エクセルファイルの保存
+               wb.save(export_file)

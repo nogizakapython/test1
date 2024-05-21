@@ -30,7 +30,7 @@ out_file = "matsukiyo.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.matsukiyococokara.com'
-web_url = 'https://www.matsukiyococokara.com/ir/library/results/'
+web_url = 'https://www.matsukiyococokara.com/ir/news/'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -49,9 +49,10 @@ target_url = web_url
 try:
     driver.get(target_url)
     sleep(5)
-    for j in range(1,3):
+    for j in range(1,30):
         try:
-            xpath_str1 = '//*[@id="top"]/div[1]/div[2]/section/div/div[2]/div[1]/section[' + str(j) + ']'
+                        
+            xpath_str1 = '//*[@id="top"]/div[1]/div[2]/section/div[1]/div[2]/div[3]/section/ul/li[' + str(j) + ']'
         except:
             break    
         element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
@@ -81,7 +82,7 @@ while True:
        row_count += 1
     else:
        break   
-    result1 = re.match(' <time',line1)
+    result1 = re.match(' <time class',line1)
     result2 = re.search("<a class=",line1)
     result3 = re.search("s_titleBox_title_link_label",line1)
         
@@ -90,7 +91,24 @@ while True:
        w_ymd = w_array1[1]
        w_ymd = w_ymd.replace('</time',"")
        w_ymd = w_ymd.replace('.',"/")
-    #    print(w_ymd)
+       ymd_array = w_ymd.split("/")
+       w_year = ymd_array[0]
+       month1 = int(ymd_array[1])
+       day1 = ymd_array[2]
+       day1 = day1.replace('<br','')
+
+       day1 = int(day1)
+       if month1 < 10:
+          month1 = "0" + str(month1)
+       else:
+          month1 = str(month1)
+       if day1 < 10:
+          day1 = "0" + str(day1)
+       else:
+          day1 = str(day1)
+       w_ymd = w_year + "/" + month1 + "/" + day1
+
+      #  print(w_ymd)
 
     if result2:
        w_array2 = line1.split("=")
@@ -98,14 +116,14 @@ while True:
        w_urlstr = w_urlstr.replace(' target',"")
        w_urlstr = w_urlstr.replace('"',"")
        w_url = w_urlstr
-    #    print(w_url)
+      #  print(w_url)
     
     if result3:
        w_array3 = line1.split(">")
        w_titlestr = w_array3[1]
        w_title = w_titlestr.replace("</span","")
-    #    print(w_title)
-       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+      #  print(w_title)
+       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営)"
        title_result = re.search(key_word,w_title)
        if title_result:
            wb = op.load_workbook(export_file)
