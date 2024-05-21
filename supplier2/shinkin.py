@@ -38,7 +38,7 @@ target_url7 = 'https://www.shinkin.co.jp/tikubetu/kinki.htm'
 target_url8 = 'https://www.shinkin.co.jp/tikubetu/cyugoku.htm'
 target_url9 = 'https://www.shinkin.co.jp/tikubetu/sikoku.htm'
 target_url10 = 'https://www.shinkin.co.jp/tikubetu/kyusyu.htm'
-
+target_array = [target_url1,target_url2,target_url3,target_url4,target_url5,target_url6,target_url7,target_url8,target_url9,target_url10]
 
 max_row = 5
 base_file = "全国信用金協会会員テンプレート.xlsx"
@@ -68,7 +68,7 @@ def outputfile(result_file,bank_name,max_row):
 
 
 
-for target_url in [target_url1,target_url2,target_url3,target_url4,target_url5,target_url6,target_url7,target_url8,target_url9,target_url10]:
+for target_url in target_array:
     # Chromeを開いて企業HPにアクセスする
     try:
         driver.get(target_url)
