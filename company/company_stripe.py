@@ -1,5 +1,6 @@
 #######   企業HP　人事情報取得(Stripe)　###########
 #######   新規作成  2024/01/05  ##########
+#######   修正      2024/6/3 デザイン変更に伴う修正
 #######   Author  takao.hattori ###########
 
 
@@ -56,19 +57,15 @@ try:
 
         
     for i in range(1,21):
-        xpath_str1 = '//*[@id="filtered"]/div[' + str(i) + ']/a'
+        
+        xpath_str1 = '/html/body/div/main/div[2]/div[2]/div[2]/div[' + str(i) + ']'
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
             
         except:
             break
         print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-        xpath_str2 = '//*[@id="filtered"]/div[' + str(i) + ']/a/div/div[2]/p[1]'
-        element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
-        print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))    
-        xpath_str3 = '//*[@id="filtered"]/div[' + str(i) + ']/a/div/div[2]/div/div[1]/span'
-        element_str3 = driver.find_element(by=By.XPATH,value=xpath_str3)
-        print(element_str3.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))  
+          
         
 
         
@@ -94,9 +91,9 @@ while True:
         row_count += 1
     else:
         break   
-    result1 = re.match("<a href",line1)
-    result2 = re.match('<p',line1)
-    result3 = re.match('<span>',line1)
+    result1 = re.match("			<a href",line1)
+    result2 = re.match('						<p class="itemTitle',line1)
+    result3 = re.search('							<div class="itemDate">',line1)
 
     if result1:
         w_array1 = line1.split(" ")
@@ -105,24 +102,24 @@ while True:
         w_url = w_url.replace('"',"")
         w_url = w_url.replace('>',"")
         w_url = base_url + w_url
-        #print(w_url)
+        # print(w_url)
 
     if result2:
         w_array2 = line1.split(">")
         w_line = w_array2[1]
         w_line = w_line.replace("</p","")
         w_title = w_line
-        #print(w_title)
+        # print(w_title)
 
     
     if result3:
         w_array3 = line1.split(">")
-        w_ymd = w_array3[1]
+        w_ymd = w_array3[2]
         w_ymd = w_ymd.replace('</span',"")
         w_ymd = w_ymd.replace('.',"/")
-        #print(w_ymd)  
+        # print(w_ymd)  
 
-        key_word = key_word = r"(異動|変更)"
+        key_word = key_word = r"(異動|変更|選任)"
         result4 = re.search(key_word,w_title)
         if result4:
             wb = op.load_workbook(export_file)
