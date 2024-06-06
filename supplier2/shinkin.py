@@ -23,7 +23,6 @@ date3 = dt.strftime('%Y%m%d')
 w_ymd = dt.strftime('%Y年%m年%d日')
 
 
-input_file = "zenshinkin" + date1 + ".txt"
 out_file = "zenshinkin.txt"
 date_str = ""
 w_title = ""
@@ -50,6 +49,9 @@ xpath_str1 = ""
 
 driver = webdriver.Chrome()
 
+def delete_out_file(file_name):
+    os.remove(file_name)
+
 # テンプレートからエクセルファイルをコピーする関数
 def copyexcelfile():
     shutil.copy(base_file,export_file)
@@ -66,7 +68,9 @@ def outputfile(result_file,bank_name,max_row):
     wb.save(result_file)
     
 
-
+file_check = os.path.isfile(out_file)
+if file_check:
+    delete_out_file(out_file)
 
 for target_url in target_array:
     # Chromeを開いて企業HPにアクセスする
@@ -82,7 +86,7 @@ for target_url in target_array:
                 try:
                     xpath_str1 = '/html/body/div[2]/table[' + str(i) + ']/tbody/tr[' + str(j) + ']'
                     element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-                    print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+                    print(element_str1.get_attribute("outerHTML"),file=codecs.open(out_file,'a','utf-8'))
             
                 except:
             
@@ -96,11 +100,7 @@ for target_url in target_array:
 
 # 画面を閉じる
 driver.quit()
-file_exist = os.path.isfile(out_file)
-if file_exist:
-   os.remove(out_file)
 
-shutil.copy2(input_file,out_file)
 
 copyexcelfile()
 
@@ -119,6 +119,7 @@ while True:
         w_bankname = w_array1[2]
         w_bankname = w_bankname.replace('</a','')
         w_bankname = w_bankname.replace('<br','')
+        w_bankname += "信金"
     
         outputfile(export_file,w_bankname,max_row)                
         max_row += 1

@@ -23,7 +23,7 @@ date3 = dt.strftime('%Y%m%d')
 w_ymd = dt.strftime('%Y年%m年%d日')
 
 
-input_file = "zenginren" + date1 + ".txt"
+
 out_file = "zenginren.txt"
 date_str = ""
 w_title = ""
@@ -38,6 +38,10 @@ xpath_str1 = ""
 # Chromeを指定する
 
 driver = webdriver.Chrome()
+
+
+def delete_out_file(file_name):
+   os.remove(file_name) 
 
 # テンプレートからエクセルファイルをコピーする関数
 def copyexcelfile():
@@ -55,6 +59,9 @@ def outputfile(result_file,bank_name,max_row):
     wb.save(result_file)
     
 
+file_exist = os.path.isfile(out_file)
+if file_exist:
+   delete_out_file(out_file)
 
 
 
@@ -71,7 +78,7 @@ try:
         try:
             xpath_str1 = '//*[@id="c14512"]/div/div/div/ul/li[' + str(i) + ']'
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-            print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+            print(element_str1.get_attribute("outerHTML"),file=codecs.open(out_file,'a','utf-8'))
             
         except:
             
@@ -85,11 +92,7 @@ except:
 
 # 画面を閉じる
 driver.quit()
-file_exist = os.path.isfile(out_file)
-if file_exist:
-   os.remove(out_file)
 
-shutil.copy2(input_file,out_file)
 
 copyexcelfile()
 
@@ -114,6 +117,7 @@ while True:
         w_bankname = w_bankname.replace(' ','')
         
     w_bankname = w_bankname.replace('</a','')
+    w_bankname = w_bankname.replace('銀行','')
     
     outputfile(export_file,w_bankname,max_row)                
     max_row += 1
