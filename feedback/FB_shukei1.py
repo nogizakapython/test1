@@ -11,7 +11,7 @@ from make_fbfilelist import Make_FBfilelist
 from get_project_name import Get_Project_Name
 from get_begin_fb_row import Get_Begin_fb_row
 from fb_not_reason import FB_not_process_Reason
-from fb_reason import FB_process_Reason 
+# from fb_reason import FB_process_Reason 
 from get_fb_data import Get_fb_Data
 from get_worker import Get_worker
 from get_worker_and_process import Get_worker_and_process
@@ -56,11 +56,11 @@ with open(output_file,encoding="utf-8",mode="r") as f:
         # 工程がない案件のFB指摘理由配列取得オブジェクトのインスタンス
         fb_not_reason_list = FB_not_process_Reason(file_name)
         # 工程がある案件のFB指摘理由配列取得オブジェクトのインスタンス
-        fb_reason_list = FB_process_Reason(file_name)
+        # fb_reason_list = FB_process_Reason(file_name)
         
         #FB指摘理由配列とFBシートの開始行を取得する。 
         if project_name == "I&D" or project_name == "JPiT myTE":
-            fb_array = fb_reason_list.make_reason_list()
+            # fb_array = fb_reason_list.make_reason_list()
             fb_data_count = begin_row.get_begin_process_row_count()
         else:
             fb_array = fb_not_reason_list.make_reason_list()
