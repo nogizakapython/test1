@@ -10,6 +10,7 @@ def main():
     import openpyxl as op
     import datetime 
     import warnings
+    import sys
     
     
     # クラスのインポート
@@ -33,7 +34,9 @@ def main():
     project_name = ""
     process_name = ""
     result_file = ""
-    patturn_msg = "*.xlsx"
+    patturn_msg1 = "*.xlsx"
+    patturn_msg2 = "*.xlsm"
+    patturn_list = [patturn_msg1,patturn_msg2]
     # 日付変数
     dt = datetime.datetime.now()
     date1 = dt.strftime('%Y%m%d%H%M%S')
@@ -47,7 +50,15 @@ def main():
 
     # FBシートファイル一覧リスト作成クラスを呼び出して、リストを作成する
     make_listfile = Make_FBfilelist(output_file)
-    make_listfile.make_listfile(patturn_msg)
+    for str in patturn_list:
+        make_listfile.make_listfile(str)
+    # FBファイル確認処理
+    file_check = os.path.isfile(output_file)
+    if file_check == False:
+        print("feedbackフォルダにレビューシートを格納してください")
+        sys.exit()
+        
+
 
     # FBシートファイル一覧リストを読み込んで、作業者別、案件単位でFB件数を集計する。
     with open(output_file,encoding="utf-8",mode="r") as f:

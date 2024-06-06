@@ -1,6 +1,7 @@
 ####################################################
 ####    案件名取得クラス                       ######
 ####    新規作成  :  2024/4/11                ######
+####    修正      :  2024/6/6 中計・決算50社追加 ####
 ####    Create By  takao.hattori              ######
 ####################################################
 ####    クラスの使い方
@@ -24,6 +25,7 @@ class Get_Project_Name():
         SN_0025_flag = re.search("SN_0025",self.__file_name__)
         SN_0031_flag = re.search("SN_0031",self.__file_name__)
         SN_0052_flag = re.search("SN_0052",self.__file_name__)
+        A0055_flag = re.search("A0055",self.__file_name__)
         if A0048_flag:
             project_name = "空調設備サーバールーム"
         if SN_0025_flag:
@@ -31,6 +33,8 @@ class Get_Project_Name():
         if SN_0031_flag:
             project_name = "I&D"
         if SN_0052_flag:
-            project_name = "JPiT myTE"  
+            project_name = "JPiT myTE"
+        if A0055_flag:
+            project_name = "中計・決算50社"      
         # プロジェクト名を返す
         return project_name         

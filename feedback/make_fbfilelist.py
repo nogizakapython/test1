@@ -22,7 +22,7 @@ class Make_FBfilelist():
         import glob
         import codecs 
         # 案件番号配列
-        project_array = ["A0048","SN_0025","*SN_0031","SN_0052"]
+        project_array = ["A0048","SN_0025","*SN_0031","SN_0052","A0055"]
         # FBシートファイル一覧リストを作成する。
         for file in project_array:
             file_patturn1 = file + patturn1
