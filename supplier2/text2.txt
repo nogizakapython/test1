@@ -1,0 +1,3 @@
+乃木坂46の推しメンは、{nogi_oshimen}です。
+櫻坂46の推しメンは、{sakura_oshimen}です。
+日向坂46の推しメンは、{hinata_oshimen}です。
