@@ -43,24 +43,29 @@ def output_text_file(line1,file_name):
     print(line1,file=codecs.open(file_name,'a','utf-8'))
 
 # テンプレートファイルからコピー処理
-def copyexcelfile():
-    import shutil
-    import datetime
-    import sys
-    dt = datetime.datetime.now()
-    date3 = dt.strftime('%Y%m%d')    
-    base_file = "JPiTテンプレート.xlsx"
-    export_file = "JPiTニュース一覧" + date3 + ".xlsx"
-    # Excelファイルを開いていたら、Excelを閉じる
-    try:
-        shutil.copy(base_file,export_file)
+# def copyexcelfile():
+#     import shutil
+#     import datetime
+#     import sys
+#     dt = datetime.datetime.now()
+#     date3 = dt.strftime('%Y%m%d')    
+#     base_file = "JPiTテンプレート.xlsx"
+#     export_file = "JPiTニュース一覧" + date3 + ".xlsx"
+#     # Excelファイルを開いていたら、Excelを閉じる
+#     try:
+#         shutil.copy(base_file,export_file)
 
-    except:
-        print(f"{export_file}を閉じてください") 
-        sys.exit()   
-    return export_file
+#     except:
+#         print(f"{export_file}を閉じてください") 
+#         sys.exit()   
+#     return export_file
 
-
+def ymd_cleansing(str1):
+    ymd_array = str1.split(">")
+    w_ymd = ymd_array[1]
+    w_ymd = w_ymd.replace('</span','')
+    w_ymd = w_ymd.replace('.','/')
+    return w_ymd
 
 # メイン関数
 def main():
@@ -88,7 +93,7 @@ def main():
             output_text_file(url_str[i],output_file)
 
     # 日付データクレンジング処理
-    export_file = copyexcelfile()
+    # export_file = copyexcelfile()
 
     # 抽出したタグファイルを読み込んでエクセルファイルに書き込む
     fileobj = open(output_file,encoding="utf-8")
@@ -101,10 +106,11 @@ def main():
         result1 = re.search('date',line1)
         result2 = re.search('new-title',line1)
         if result1:
-            # w_ymd = data_cleansing(line1) 
+            w_ymd = ymd_cleansing(line1) 
+            print(w_ymd)
             
                     
-            max_row += 1
+            # max_row += 1
 
 
             
