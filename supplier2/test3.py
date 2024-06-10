@@ -1,16 +1,18 @@
-weather_1 =""
-count = 0
+# JSON 表示テスト
+# 新規作成 2024/6/7
 
-with open('text1.txt', encoding='utf-8') as f1:
-    for line in f1:
-        line = line.replace("\n",'')
-        if count == 0:
-            weather_1="fine"
-        elif count == 1:
-            weather_1="rain"
-        else:
-            weather_1="snow"        
-        
-        output = f"""{line.format(weather_1=weather_1)}"""
-        print(output)
-        count += 1
+def main():
+    
+    import json
+    file_name = "text1.json"  
+    # JSONファイルを開く  
+    json_open = open(file_name, 'r')
+    # JSONファイル内のデータをロードする
+    json_load = json.load(json_open)
+
+    print(json_load)
+    print(json_load['section1'])
+    print(json_load['section2'])
+
+if __name__ == "__main__":
+    main()        
