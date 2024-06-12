@@ -54,7 +54,7 @@ with open(input_file) as f1:
         company = array1[0]
         url = array1[1]
         u_date = array1[2]
-        ws["F" + str(max_row)] = "link"
+        # ws["F" + str(max_row)] = "link"
         ws.cell(row=max_row,column=2).value = company
         ws.cell(row=max_row,column=3).value = url
         ws.cell(row=max_row,column=4).value = u_date
