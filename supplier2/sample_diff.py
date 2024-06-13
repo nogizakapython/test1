@@ -118,7 +118,7 @@ def main():
     date2 = dt.strftime('%Y/%m/%d')
     date3 = datetime.strptime(date2, '%Y/%m/%d')
     date4 = date3 - timedelta(1)
-    
+    # 前回作業日と今回作業日前日の日付を更新結果ファイルに出力する。
     update_file = copy_excel_file()
     
     # 読み込み元のファイルの変数定義
