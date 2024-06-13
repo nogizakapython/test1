@@ -20,15 +20,41 @@ def data_input():
         w_year = data1[:4]
         w_month = data1[4:6]
         w_day = data1[6:]
-        if int(w_month) < 1 or int(w_month) > 12:
+        w_year1 = int(w_year)
+        w_month1 = int(w_month)
+        w_day1 = int(w_day)
+        if w_month1 < 1 or w_month1 > 12:
             print("NG")
+            
         else:     
             corect_count += 1
     
-        if int(w_day) < 1 or int(w_day) > 31:
-            print("NG")
-        else:     
-            corect_count += 1
+        if w_month1 == 1 or w_month1 == 3 or w_month1 == 5 or w_month1 == 7 \
+        or w_month1 == 8 or w_month1 == 10 or w_month1 == 12:
+            if w_day1 <= 31:
+                print("OK")
+                corect_count += 1
+            else:    
+                print("NG")
+        elif  w_month1 == 4 or w_month1 == 6 or w_month1 == 9 or w_month1 == 11:
+            if w_day1 <= 30:
+                print("OK")
+                corect_count += 1
+            else:    
+                print("NG")       
+        else:
+            if w_year1 % 4 == 0 or (w_year1 % 4 == 0 and w_year1 % 400 == 0):
+                if w_day1 <= 29:
+                    print("OK")
+                    corect_count += 1
+                else:
+                    print("NG") 
+            else:
+                if w_day1 <= 28:
+                    print("OK")
+                    corect_count += 1                     
+                else:
+                    print("NG")
         if corect_count == 3:
             ymd = w_year + '/' + w_month + '/' + w_day
             break 
@@ -41,8 +67,8 @@ def copy_excel_file():
     dt = datetime.now()
     date1 = dt.strftime('%Y%m%d')
     # 更新ファイルの定義
-    base_file = "A0055_中計決算50社_テンプレートファイル.xlsx"
-    update_file = "A0055_中計更新確認結果_" + str(date1) + ".xlsx"
+    base_file = "スズキ中計更新確認結果_テンプレート.xlsx"
+    update_file = "スズキ中計更新確認結果_" + str(date1) + ".xlsx"
     shutil.copy(base_file,update_file)
     return update_file
 
@@ -107,16 +133,9 @@ def main():
     # w1_row_count = 6
 
     # 書き込み元のファイルの変数定義
-    input_file = "【IR】検索結果_" + date1 + ".xlsx"
+    input_file = "【IR】suzuki検索結果_" + date1 + ".xlsx"
     wb2 = op.load_workbook(input_file)
-    sheet_array1 = ["AEON","味の素","ANA","ASAHI","アステラス製薬","BRIDGESTONE","BRISTOL-MYERS"
-                ,"BATJAPAN","中外製薬","日本コカ・コーラ","マツキヨ","三菱ふそう","大東建託",
-                "DAIWA","DENSO","EISAI","RETAILING","ホンダ","三越伊勢丹ホールディングス",
-                "日本航空","JTB","KAO","KUBOTA","LIXIL","三菱商事","日本ハム","日本通運","NITORI",
-                "日本郵船","小田急電鉄","オリエンタルランド","オムロン","日産自動車","良品計画",
-                "参天製薬","参天製薬2","セブン＆アイ・ホールディングス","シマノ","塩野義製薬","資生堂","SUBARU",
-                "大正製薬","高島屋","武田薬品工業","トヨタ自動車","トヨタ紡織","ユニ・チャーム",
-                "矢崎総業"]
+    sheet_array1 = ["スズキ"]
 
     
     str_ymd = data_input()
