@@ -1,5 +1,5 @@
 ############ 一定期間のデータを抽出する処理(Sample) ###########
-############ 新規作成  2024/6/12      ######################################
+############ 新規作成  2024/6/13      ######################################
 ############ 作成者    takao.hattori  ######################################
 ############################################################################
 
@@ -122,7 +122,7 @@ def main():
     from datetime import datetime
     
     from datetime import timedelta
-    import shutil
+    
     # 日付の定義
     dt = datetime.now()
     date1 = dt.strftime('%Y%m%d')
@@ -132,21 +132,19 @@ def main():
     
     update_file = copy_excel_file()
     
-    # w1_row_count = 6
-
-    # 書き込み元のファイルの変数定義
+    # 読み込み元のファイルの変数定義
     input_file = "【IR】suzuki検索結果_" + date1 + ".xlsx"
     wb2 = op.load_workbook(input_file)
     sheet_array1 = ["スズキ"]
 
-    
+    # 前回自動化ツール実行日入力関数を呼び出す
     str_ymd = data_input()
 
 
-    # 今回の作業日と前回の作業日の日付差を取得し、前回の作業日から今回の作業日の前日まで日付を
-    # 配列に格納する。
+    # 前回の自動化ツール実行日から、今回自動化ツール実行前日までの日付を結果ファイルに出力する
     ymd = datetime.strptime(str_ymd, '%Y/%m/%d')
     finish_write_day(update_file,ymd,date4)
+    # 前回自動化ツール実行日から、今回自動化ツール実行前日までの日付を計算する。
     array1 = []
     dt1 = datetime.now()
     day_sabun = dt1 - ymd
@@ -155,22 +153,22 @@ def main():
     day_sa = sabun_array1[0]
     day_sa = int(day_sa)
 
-    # 前回の作業日から今回の作業日前日までを日付配列に格納する。
+    # 前回の自動化ツール実行日から今回の自動化ツール実行前日までを日付配列に格納する。
     for i in range(0,day_sa):
         w_ymd = ymd + timedelta(i)
         w_ymd = w_ymd.strftime("%Y/%m/%d")
         array1.append(w_ymd)
     
 
-    # 管理用エクセルファイルの書き込み開始行を取得する
+    # 更新結果ファイルの書き込み開始行を取得する
     w1_row_count = update_excel_maxcount(update_file)
 
-    # 中計・決算自動化対象48社別シートからスクレイピングデータを読み込む 
+    # suzuki、IRニュース結果ファイルを読み込む 
     for sh_name in list(sheet_array1):
         ws2 = wb2[sh_name]
         w2_row_count = 5
     
-        # 各企業別のエクセルシートの最終行を取得する
+        # suzuki、IRニュース結果シートの最終行を取得する
         while True:
             data_value = ws2.cell(row=w2_row_count,column=2).value
             if data_value == None:
