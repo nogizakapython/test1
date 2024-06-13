@@ -23,12 +23,13 @@ def data_input():
         w_year1 = int(w_year)
         w_month1 = int(w_month)
         w_day1 = int(w_day)
+        # 月判定
         if w_month1 < 1 or w_month1 > 12:
             print("NG")
             
         else:     
             corect_count += 1
-    
+        # 日判定
         if w_month1 == 1 or w_month1 == 3 or w_month1 == 5 or w_month1 == 7 \
         or w_month1 == 8 or w_month1 == 10 or w_month1 == 12:
             if w_day1 <= 31:
@@ -43,6 +44,7 @@ def data_input():
             else:    
                 print("NG")       
         else:
+            # うるう年判定
             if w_year1 % 4 == 0 or (w_year1 % 4 == 0 and w_year1 % 400 == 0):
                 if w_day1 <= 29:
                     print("OK")
