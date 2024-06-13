@@ -87,19 +87,8 @@ def finish_write_day(file_name,before_ymd,now_ymd):
 
 
 # アップデートエクセルファイルの書き込み開始行を取得する関数
-def update_excel_maxcount(file_name):
-    import openpyxl as op
-    wb = op.load_workbook(file_name)
-    sh_name = '更新データ'
-    ws = wb[sh_name]
+def update_excel_maxcount():
     update_row_count = 6
-    while True:
-        value1 = ws.cell(row=update_row_count,column=3).value
-        if value1 == None:
-            break
-        else:
-            update_row_count += 1
-            # print(admin_row_count)
     return update_row_count    
 
 # 更新結果を更新結果ファイルに出力する関数(Excel)
@@ -161,7 +150,7 @@ def main():
     
 
     # 更新結果ファイルの書き込み開始行を取得する
-    w1_row_count = update_excel_maxcount(update_file)
+    w1_row_count = update_excel_maxcount()
 
     # suzuki、IRニュース結果ファイルを読み込む 
     for sh_name in list(sheet_array1):
