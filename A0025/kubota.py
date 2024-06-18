@@ -56,7 +56,7 @@ for year in [date5,date6]:
          try:
             xpath_str1 = '//*[@id="' + str(year) + '"]/div/ul/li[' + str(i) + ']'
             
-                      
+                     
          except:
             break    
          element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
@@ -87,7 +87,11 @@ while True:
    if line1:
      row_count += 1
    else:
-     break   
+     if row_count < 250:
+         row_count += 1
+         continue
+     else: 
+         break   
 
    result1 = re.match('<div class="NewsList__date">',line1)
    result2 = re.match('<div class="NewsList__text">',line1)  
@@ -100,7 +104,7 @@ while True:
       w_ymdstr = w_ymdstr.replace('月','/')
       w_ymd = w_ymdstr.replace('日','')
       # print(w_ymd)
-
+      
    if result2:
       w_array2 = line1.split(">")
       w_urlstr = w_array2[1]
@@ -116,7 +120,7 @@ while True:
       # print(w_title)
 
   
-      key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+      key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営)"
       title_result = re.search(key_word,w_title)
       if title_result:
          wb = op.load_workbook(export_file)
