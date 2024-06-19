@@ -1,5 +1,6 @@
 #######   Kubota 中計・決算ニュース情報取得ツール　###########
 #######   新規作成  2024/03/26  ##########
+#######   修正      2024/06/19 空白のNone行対応 #############  
 #######   Author  takao.hattori ###########
 
 
@@ -87,7 +88,8 @@ while True:
    if line1:
      row_count += 1
    else:
-     if row_count < 250:
+     # null行によるループ抜け対応(2024/6/19)   
+     if row_count < 180:
          row_count += 1
          continue
      else: 
