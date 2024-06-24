@@ -1,4 +1,3 @@
-# 指定された回数、ループして、Anaconda Promptに表示しよう。
+# Anaconda Promptに数値を出力しよう
 
-for i in range(2):
-    print("python服部")
+print(10)
