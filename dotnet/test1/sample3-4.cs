@@ -10,7 +10,7 @@ namespace Sample303
     {
         static void Main(string[] args)
         {
-            //  キーボードから数値を入力
+            //  1から100までの整数を１ずつチェックし、15で割り切れる数は「FizzBuzz」、3で割り切れる数は「Fizz」、5で割り切れる数は「Buzz」を表示する。
             Console.Write("1から100の整数を1つずつチェックし、FizzBuzz表示する");
             for(int i=1;i<=100;i++){
                 if (i % 3 == 0 && i % 5 == 0){
