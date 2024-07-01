@@ -1,4 +1,12 @@
-# 指定された回数、ループして、Anaconda Promptに表示しよう。
+# if文を使ったプログラミング￥
 
-for i in range(2):
-    print("python服部")
+a = 85
+
+if a >= 80:
+    print("優秀です。")
+elif a >= 70:
+    print("良し")
+elif a >= 60:
+    print("合格です")
+else:
+    print("不合格です")            
