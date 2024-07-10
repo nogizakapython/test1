@@ -77,7 +77,7 @@ while p_count < 10:
         for i in range(degree):
             c_ans_s = c_ans_s + c_array[i]
         c_ans = int(c_ans_s)
-        print("正解は" + str(c_ans) + "です")    
+        print(str(p_count) + "回挑戦")    
 
         print("おめでとうございます。正解です")
         break
@@ -94,6 +94,7 @@ while p_count < 10:
         y_blow = 0
     p_count += 1    
 
+# 10回挑戦し、失敗したとき、正解の3桁の数を表示
 if p_count == 10:
     ans = ""
     for k in list(c_array):
