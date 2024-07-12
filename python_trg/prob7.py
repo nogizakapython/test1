@@ -16,13 +16,13 @@ def main():
             # print(line)
             array1.append(line)
     
-    n = 0
+    n = 1
 
     random.shuffle(array1)
 
     array2 = list(array1)
 
-    output_answer_title(array2,1)
+    output_answer_title(array2,n)
 
 
 if __name__ == "__main__":       
