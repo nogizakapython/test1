@@ -1,5 +1,6 @@
 #######   良品計画 中計・決算ニュース情報取得ツール　###########
 #######   新規作成  2024/04/01  ##########
+#######   モジュール改正  2024/7/17 タイトルにコメントを追加してタイトルを分かりやすくするよう修正　####
 #######   Author  takao.hattori ###########
 
 
@@ -114,13 +115,25 @@ while True:
         w_url = w_urlstr.replace('"',"")
       #   print(w_url)
         w_array3 = line1.split('>')
-        w_titlestr = w_array2[2]
+        w_titlestr = w_array3[2]
         w_titlestr = w_titlestr.replace('<span class',"")
-        w_title = w_titlestr.replace('"_blank">',"")
+      #   w_title = w_titlestr.replace('"_blank">',"")
+        w_titlestr = w_titlestr.replace('"_blank">',"") 
+        w_titlestr = w_titlestr.replace('="title"',"")
+      #   2024/7/17  ここから下8行、コメントタグの中も取得できるように修正
+        w_title = ""
+        result3 = re.search("comment",line1) 
+        if result3:
+           w_comment = w_array3[8]
+           w_comment = w_comment.replace('</div','')
+           w_title = w_titlestr + w_comment
+        else:
+           w_title = w_titlestr   
+           
       #   print(w_title)    
 
 
-        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|計画|ローリング|経営)"
         title_result = re.search(key_word,w_title)
         if title_result:
             wb = op.load_workbook(export_file)
