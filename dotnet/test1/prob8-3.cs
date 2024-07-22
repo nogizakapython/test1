@@ -24,7 +24,7 @@ namespace Problem6_3
                         break;
                     }
                 }    
-                catch( Exception e)
+                catch( FormatException e)
                 {
                     Console.WriteLine("文字列を入力しないでください");  
                     Console.WriteLine(e);
