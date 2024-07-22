@@ -10,12 +10,13 @@ namespace Problem6_3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("1以上の整数を入力してください");
             int num;
             int ans = 1;
             while(true){
+
                 try
                 {
+                    Console.WriteLine("1以上の整数を入力してください");
                     num = int.Parse(Console.ReadLine());
                     if(num < 1) {
                         Console.WriteLine("1以上の整数を入力してください");
@@ -23,9 +24,10 @@ namespace Problem6_3
                         break;
                     }
                 }    
-                catch
+                catch( Exception e)
                 {
-                    Console.WriteLine("文字列を入力しないでください");    
+                    Console.WriteLine("文字列を入力しないでください");  
+                    Console.WriteLine(e);
                 }
             }
             for(int i=num;i>=1;i--){
