@@ -25,7 +25,7 @@ date3 = dt.strftime('%Y%m%d')
 date4 = dt.strftime('%Y年%m年%d日')
 youbi = dt.strftime('%a')
 date5 = int(date2)
-date6 = date5 - 1
+# date6 = date5 - 1
 date7 = dt.strftime('%Y/%m/%d')
 
 input_file = "nissan" + date1 + ".txt"
@@ -33,7 +33,8 @@ out_file = "nissan.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.nissan-global.com'
-web_url = 'https://www.nissan-global.com/JP/IR/LIBRARY/FINANCIAL/'
+# URL修正 (2024/7/24)
+web_url = 'https://www.nissan-global.com/JP/IR/NEWS_EVENT/'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -49,36 +50,26 @@ w_titlehead = ""
 driver = webdriver.Chrome()
 
 # Chromeを開いて企業HPにアクセスする
+target_url = web_url
 
-
-
-for year in [date5,date6]:
-    if year == date6:
-      target_url = web_url + str(year) + '/'
-    else:
-      target_url = web_url   
-             
-    try:
-       driver.get(target_url)
-       sleep(3)
-
-       for i in range(1,31):
-         try:
-                     
-            xpath_str1 = '//*[@id="pbBlock1988999"]/div'
-                          
+try:
+   driver.get(target_url)
+   sleep(3)
+   for i in range(1,31):
+      try:
+            # xpathの修正(2024/7/25)
+            xpath_str1 = '/html/body/div[1]/div[2]/div/div/div/div/div[3]/div/div[1]/div/div[8]/div/div/div/div/table/tbody/tr[' + str(i) + ']'
             
-            
-         except:
+      except:
             break    
-         element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-         print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+      element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+      print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
           
        
-    except EnvironmentError as e:
-       str100 = e     
-    except:
-       str100 = 1
+except EnvironmentError as e:
+   str100 = e     
+except:
+   str100 = 1
      
 # 画面を閉じる
 driver.quit()
@@ -100,80 +91,54 @@ while True:
        row_count += 1
      else:
        break   
+   #   抽出タグの修正(2024/7/25)
+     result0 = re.search('<th>',line1)
+     result1 = re.match('									<a href',line1)
 
-     result0 = re.match('                <a href',line1)
-     result1 = re.match('            ',line1)
-     
      if result0:
-        w_array0 = line1.split('=')
-        w_urlstr = w_array0[1]
-        w_urlstr = w_urlstr.replace('target','')
-        w_urlstr = w_urlstr.replace('"','')
-        url_result = re.match('https',w_urlstr)
-        if url_result:
-           w_url = w_urlstr
-        else:   
-           w_url = base_url + w_urlstr
-        # print(w_url)
+         w_array1 = line1.split('>')
+         w_ymd = w_array1[1]
+         ymd_array = w_ymd.split('/')
+         year1 = ymd_array[0]
+         month1 = ymd_array[1]
+         day_str = ymd_array[2]
+         day1 = day_str.replace('</th','')
+         # print(w_ymd)
         
-
-
-     if result1:
-        tag_result1 = re.search('<a',line1)
-        tag_result2 = re.search('li',line1)
-        if tag_result1 or tag_result2:
-           continue
-        else:
-           w_array1 = line1.split()
-           w_titlework = w_array1[0]
-           if w_titlework == "過去の決算資料":
-              break
-           if w_titlework == "第3四半期</a>" or w_titlework == "上期</a>" or w_titlework == "第1四半期</a>":
-              continue
-           else:
-              title_result1 = re.search('決算発表',w_titlework)
-              
-              if title_result1:
-                 w_array2 = w_titlework.split('（')
-                 w_titlehead = w_array2[0]
-                 
-                 w_ymd = w_array2[1]
-                 w_ymd = w_ymd.replace('）','')
-                 ymd_array = w_ymd.split("/")
-                 w_year = ymd_array[0]
-                 month1 = int(ymd_array[1])
-                 day1 = ymd_array[2]
-                 day1 = day1.replace('<br','')
-
-                 day1 = int(day1)
-                 if month1 < 10:
-                     month1 = "0" + str(month1)
-                 else:
-                     month1 = str(month1)
-                 if day1 < 10:
-                     day1 = "0" + str(day1)
-                 else:
-                     day1 = str(day1)
-                 w_ymd = w_year + "/" + month1 + "/" + day1
-                 #  print(w_ymd)   
-              
-           keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営|経営計画)"
-           title_result2 = re.search(keyword,w_titlework)
-           if title_result2:
-               w_titleend = w_titlework.replace('</a>','')
-               w_title = w_titlehead + " " + w_titleend
-                    #  print(w_title)
      
-               wb = op.load_workbook(export_file)
-               sh_name = '日産自動車'
-               ws = wb[sh_name]
-               ws.cell(row=max_row,column=2).value = w_title
-               ws.cell(row=max_row,column=3).value = w_url
-               ws.cell(row=max_row,column=4).value = w_ymd
-               ws.cell(row=max_row,column=6).value = w_url
-               ws.cell(row=max_row,column=6).hyperlink = w_url
-               ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+     if result1:
+         w_array2 = line1.split('<')
+         w_urlstr = w_array2[1]
+         url_array = w_urlstr.split('>')
+         w_urlstr = url_array[0]
+         w_urlstr = w_urlstr.replace('a href=','')
+         w_urlstr = w_urlstr.replace('"','')
+         url_result = re.match('https',w_urlstr)
+         if url_result:
+            w_url = w_urlstr
+         else:   
+            w_url = base_url + w_urlstr
+         # print(w_url)
+        
+         w_array3 = line1.split('>')
+         w_titlestr = w_array3[1]
+         w_title = w_titlestr.replace('</a','')
+         # print(w_title)   
+              
+         keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営|経営計画)"
+         title_result1 = re.search(keyword,w_title)
+         if title_result1:
+  
+            wb = op.load_workbook(export_file)
+            sh_name = '日産自動車'
+            ws = wb[sh_name]
+            ws.cell(row=max_row,column=2).value = w_title
+            ws.cell(row=max_row,column=3).value = w_url
+            ws.cell(row=max_row,column=4).value = w_ymd
+            ws.cell(row=max_row,column=6).value = w_url
+            ws.cell(row=max_row,column=6).hyperlink = w_url
+            ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
-               max_row += 1
-               # エクセルファイルの保存
-               wb.save(export_file)
+            max_row += 1
+            # エクセルファイルの保存
+            wb.save(export_file)
