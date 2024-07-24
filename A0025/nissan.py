@@ -1,5 +1,6 @@
 #######   日産自動車 中計・決算ニュース情報取得ツール　###########
 #######   新規作成  2024/04/01  ##########
+#######   修正      2024/7/24  URLの変更とデザイン変更による改修
 #######   Author  takao.hattori ###########
 
 
@@ -102,7 +103,9 @@ while True:
          year1 = ymd_array[0]
          month1 = ymd_array[1]
          day_str = ymd_array[2]
-         day1 = day_str.replace('</th','')
+         day_str = day_str.replace('</th','')
+         day1 = day_str.replace('<','')
+         w_ymd = year1 + "/" + month1 + "/" + day1
          # print(w_ymd)
         
      

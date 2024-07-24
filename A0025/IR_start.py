@@ -1,5 +1,7 @@
 ############  IR中期経営計画、決算バッチ　#########
 ############  新規作成   2024/3/25       #########
+############  修正       2024/5/20 takao.hattori 大正製薬を調査対象外 #####
+############  修正       2024/7/24 takao.hattori 日産自動車の中期経営計画の発表用検索自動化ツールを新規組み込み
 ##################################################
 
 
@@ -37,6 +39,7 @@ import odakyu
 import olcgroup
 import omuron
 import nissan
+import nissan2
 import ryohin
 import santen
 import santen2
@@ -45,7 +48,7 @@ import shimano
 import shionogi
 import shiseido
 import subaru
-import taisyo
+# import taisyo
 import takashimaya
 # import takeda
 import toyota
@@ -90,7 +93,7 @@ try:
     exec(olcgroup)
     exec(omuron)
     exec(nissan)
-    exec(omuron)
+    exec(nissan2)
     exec(ryohin)
     exec(santen)
     exec(santen2)
@@ -99,7 +102,7 @@ try:
     exec(shionogi)
     exec(shiseido)
     exec(subaru)
-    exec(taisyo)
+    # exec(taisyo)
     exec(takashimaya)
     # exec(takeda)
     exec(toyota)
