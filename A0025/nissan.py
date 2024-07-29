@@ -77,73 +77,83 @@ except:
 # 画面を閉じる
 driver.quit()
 file_exist = os.path.isfile(out_file)
-# if file_exist:
-#    os.remove(out_file)
+if file_exist:
+   os.remove(out_file)
 
-# shutil.copy2(input_file,out_file)
+shutil.copy2(input_file,out_file)
 
 
-# fileobj = open(out_file,encoding="utf-8")
-# while True:
-#      w_urlstr = ""
-#      w_titlestr = ""
+fileobj = open(out_file,encoding="utf-8")
+while True:
+     w_urlstr = ""
+     w_titlestr = ""
      
-#      line1 = fileobj.readline()
-#      line1 = line1.replace("\n","")
-#      if line1:
-#        row_count += 1
-#      else:
-#        break   
-#    #   抽出タグの修正(2024/7/25)
-#      result0 = re.search('<th>',line1)
-#      result1 = re.match('									<a href',line1)
+     line1 = fileobj.readline()
+     line1 = line1.replace("\n","")
+     if line1:
+       row_count += 1
+     else:
+       break   
+   #   抽出タグの修正(2024/7/25)
+     result0 = re.search('<th>',line1)
+     result1 = re.match('							<td>',line1)
 
-#      if result0:
-#          w_array1 = line1.split('>')
-#          w_ymd = w_array1[1]
-#          ymd_array = w_ymd.split('/')
-#          year1 = ymd_array[0]
-#          month1 = ymd_array[1]
-#          day_str = ymd_array[2]
-#          day_str = day_str.replace('</th','')
-#          day1 = day_str.replace('<','')
-#          w_ymd = year1 + "/" + month1 + "/" + day1
-#          # print(w_ymd)
+     if result0:
+         w_array1 = line1.split('>')
+         w_ymd = w_array1[1]
+         ymd_array = w_ymd.split('/')
+         year1 = ymd_array[0]
+         month1 = int(ymd_array[1])
+         day_str = ymd_array[2]
+         day_str = day_str.replace('<','')
+         day1 = day_str.replace('<','')
+         day1 = int(day_str)
+         if month1 < 10:
+            month1 = "0" + str(month1)
+         else:
+            month1 = str(month1)
+         if day1 < 10:
+            day1 = "0" + str(day1)
+         else:
+            day1 = str(day1)   
+
+             
+         w_ymd = year1 + "/" + month1 + "/" + day1
+         # print(w_ymd)
         
      
-#      if result1:
-#          w_array2 = line1.split('<')
-#          w_urlstr = w_array2[1]
-#          url_array = w_urlstr.split('>')
-#          w_urlstr = url_array[0]
-#          w_urlstr = w_urlstr.replace('a href=','')
-#          w_urlstr = w_urlstr.replace('"','')
-#          url_result = re.match('https',w_urlstr)
-#          if url_result:
-#             w_url = w_urlstr
-#          else:   
-#             w_url = base_url + w_urlstr
-#          # print(w_url)
+     if result1:
+         w_array2 = line1.split('>')
+         w_urlstr = w_array2[1]
+         url_array = w_urlstr.split('=')
+         w_urlstr = url_array[1]
+         w_urlstr = w_urlstr.replace(' target','')
+         w_urlstr = w_urlstr.replace('"','')
+         url_result = re.match('https',w_urlstr)
+         if url_result:
+            w_url = w_urlstr
+         else:   
+            w_url = base_url + w_urlstr
+         # print(w_url)
         
-#          w_array3 = line1.split('>')
-#          w_titlestr = w_array3[1]
-#          w_title = w_titlestr.replace('</a','')
-#          # print(w_title)   
+         w_titlestr = w_array2[2]
+         w_title = w_titlestr.replace('</a','')
+         # print(w_title)   
               
-#          keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営|経営計画)"
-#          title_result1 = re.search(keyword,w_title)
-#          if title_result1:
+         keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営|経営計画)"
+         title_result1 = re.search(keyword,w_title)
+         if title_result1:
   
-#             wb = op.load_workbook(export_file)
-#             sh_name = '日産自動車'
-#             ws = wb[sh_name]
-#             ws.cell(row=max_row,column=2).value = w_title
-#             ws.cell(row=max_row,column=3).value = w_url
-#             ws.cell(row=max_row,column=4).value = w_ymd
-#             ws.cell(row=max_row,column=6).value = w_url
-#             ws.cell(row=max_row,column=6).hyperlink = w_url
-#             ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+            wb = op.load_workbook(export_file)
+            sh_name = '日産自動車'
+            ws = wb[sh_name]
+            ws.cell(row=max_row,column=2).value = w_title
+            ws.cell(row=max_row,column=3).value = w_url
+            ws.cell(row=max_row,column=4).value = w_ymd
+            ws.cell(row=max_row,column=6).value = w_url
+            ws.cell(row=max_row,column=6).hyperlink = w_url
+            ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
-#             max_row += 1
-#             # エクセルファイルの保存
-#             wb.save(export_file)
+            max_row += 1
+            # エクセルファイルの保存
+            wb.save(export_file)
