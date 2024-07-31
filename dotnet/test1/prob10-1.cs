@@ -11,14 +11,14 @@ namespace Prob10_1
         private string str1  = "";
         public Sample() : this("コンストラクタ")
         {
-            
+
         }
         
          
         public Sample(string msg)
         {
-            this.str1 = msg;
-            Console.WriteLine(this.str1);
+           this.str1 = msg;
+           Console.WriteLine(this.str1);
         }
     }
     class Program
