@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Problemex2_1
+namespace Prob12_1
 {
     class Airplane
     {
