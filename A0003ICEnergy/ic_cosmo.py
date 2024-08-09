@@ -2,6 +2,7 @@
 #######   新規作成  2024/2/28  ##########
 #######   修正      2024/4/11 ２社にまたがって同じニュースがある場合は両方出力に変更
 #######   修正      2024/4/17  URL変更による修正
+#######   修正      2024/8/9  タグ修正に伴う修正
 #######   Author  takao.hattori ###########
 
 
@@ -144,7 +145,8 @@ while True:
         break
     result1 = re.search("<a",line1)
     result2 = re.search("cmp-news-index__item-date",line1)
-    result3 = re.search("cmp-news-index__item-category-name",line1)
+    # 2024/8/9 コスモHDなど企業名のみ検索できるように修正
+    result3 = re.search("cmp-news-index__item-category-name--cosmo",line1)
     result4 = re.match("        </div>",line1)
     result5 = re.search("cmp-news-index__item-description",line1)
 
@@ -176,7 +178,7 @@ while True:
             company_count = 1
         
         company_result2 = "決算" in company_array
-        if company_result2 or company_result2:
+        if company_result2:
             company_count = 1
         
         if company_count == 1:
