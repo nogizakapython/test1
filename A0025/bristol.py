@@ -112,7 +112,8 @@ while True:
        w_titlestr = w_titlestr.replace('</sup>',"")
        w_title = w_titlestr
     #    print(w_title)
-       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+        # 検索ワードに「業績」を追加(2024/8/10)
+       key_word = r"(業績|決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|財務目標|経営)"
        title_result = re.search(key_word,w_title)
        if title_result:
            wb = op.load_workbook(export_file)
