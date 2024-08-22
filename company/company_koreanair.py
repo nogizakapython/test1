@@ -50,17 +50,19 @@ sleep(5)
     
 try:    
     for i in range(1,30):
-        xpath_str1 = '/html/body/div[1]/kc-container_1/kc-page-box_1/div/div/div/ul/li[' + str(i) + ']/div[2]/a'
+        # 2024/8/22 デザイン変更に伴うxpathの修正
+        xpath_str1 = '/html/body/div[1]/div[2]/kc-container_1/kc-page-box_1/div/div/div/ul/li[' + str(i) + ']/div[2]/a'
+        
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
         except:
             break
         print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
         
-        xpath_str2 = '/html/body/div[1]/kc-container_1/kc-page-box_1/div/div/div/ul/li[' + str(i) + ']/div[2]/a/strong'
+        xpath_str2 = '/html/body/div[1]/div[2]/kc-container_1/kc-page-box_1/div/div/div/ul/li[' + str(i) + ']/div[2]/a/strong'
         element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
         print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-        xpath_str3 = '/html/body/div[1]/kc-container_1/kc-page-box_1/div/div/div/ul/li[' + str(i) + ']/div[2]/a/span'
+        xpath_str3 = '/html/body/div[1]/div[2]/kc-container_1/kc-page-box_1/div/div/div/ul/li[' + str(i) + ']/div[2]/a/span'
         element_str3 = driver.find_element(by=By.XPATH,value=xpath_str3)
         print(element_str3.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
 
