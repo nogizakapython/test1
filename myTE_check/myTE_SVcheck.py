@@ -1,5 +1,7 @@
 ############ myTE承認、SVレビュー承認済リスト作成処理 ###########
 ############ 新規作成  2024/8/8      ######################################
+############ 修正  2024/8/23  名前のスペース対応      ###################
+############ 修正  2024/9/6  稲葉さんを追加      ###################
 ############ 作成者    takao.hattori  ######################################
 ############################################################################
 
@@ -69,6 +71,7 @@ def main():
 
 
     # Teamsで表示される名前とEIDを紐づける連想配列(メンバーが変わるたびに修正)
+    # 2024/9/6 稲葉さんを追加
     xteam_member = {
                 "Wakabayashi, Eri" : "eri.wakabayashi",
                 "Kimura, Yuichi" : "yuichi.kimura",
@@ -90,7 +93,8 @@ def main():
                 "Muramatsu, Takashi" : "takashi.muramatsu" ,
                 "Nishikawa, Kazuma" : "kazuma.nishikawa" ,
                 "Eto, Shinsuke" : "shinsuke.eto" ,
-                "Anzai, Keita" : "keita.anzai"
+                "Anzai, Keita" : "keita.anzai" ,
+                "Inaba, Ryusei" : "ryusei.inaba"
                 }
 
     # 出力ファイル開始行
@@ -126,7 +130,9 @@ def main():
              if result2:
                  name1 = name1.replace("SVレビュー完了しました。Submitを押してください。","")
                  name1 = name1.replace("SVレビュー完了しました。Submit押してください。","")
+                 name1 = name1.replace('　','')
                  eid = xteam_member[name1]
+                 
                  output_status(output_file,start_num,end_num,eid)           
                             
          file_row_count += 1
