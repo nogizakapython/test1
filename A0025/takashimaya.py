@@ -13,6 +13,7 @@ import requests
 import shutil
 from openpyxl.styles.fonts import Font
 import openpyxl as op
+import warnings
 
 #IRニュース取得先URL変数の定義
 b_url = "https://www.takashimaya.co.jp/corp/topics/index.html?category=IR"
@@ -58,6 +59,8 @@ def output_work_file(data_record):
    print(data_record,file=codecs.open(output_file,'a','utf-8'))
    
 
+
+warnings.simplefilter('ignore')
 # スクレイピング対象の URL にリクエストを送り HTML を取得する
 r = requests.get(url,verify=False)
 soup = BeautifulSoup(r.text, 'html.parser')
@@ -119,7 +122,7 @@ while True:
         w_title = w_titlestr.replace('</a','')
       #   print(w_title)
 
-        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|Financial Results)"
+        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|Financial Results|経営)"
         title_result = re.search(key_word,w_title)
         if title_result:
             wb = op.load_workbook(export_file)
