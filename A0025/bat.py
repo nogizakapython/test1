@@ -31,8 +31,8 @@ input_file = "bat" + date1 + ".txt"
 out_file = "bat.txt"
 date_str = ""
 w_title = ""
-base_url = 'https://www.batj.com/'
-web_url = 'https://www.batj.com/'
+base_url = 'https://www.batj.com'
+web_url = 'https://www.batj.com/media'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -40,11 +40,12 @@ row_count = 0
 write_flag = 0
 xpath_str1 = ""
 w_url = ""
-html_array = ["DOCCTHBQ","DOD3AE63"]
+html_array = ["#corp-tabs-9ee4e0f89c-item-ea1dd66584-tab","#corp-tabs-9ee4e0f89c-item-33996595c0-tab"]
 
 # Chromeを指定する
 driver = webdriver.Chrome()
 
+i = 2
 for html_name in html_array:
     # Chromeを開いて企業HPにアクセスする
     
@@ -52,9 +53,10 @@ for html_name in html_array:
     try:
         driver.get(target_url)
         sleep(5)
-        for i in range(2,20):
+        for j in range(2,20):
             try:
-                xpath_str1 = '//*[@id="pageContent"]/div[2]/div/div[' + str(i) + ']'
+                xpath_str1 = '/html/body/div[1]/div/div[4]/div/div/div[2]/div/div[' + str(i) + ']/div/div/ul/li[' + str(j) + ']/a'
+                
             except:
                 break    
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
@@ -65,7 +67,8 @@ for html_name in html_array:
         str100 = e     
     except:
         str100 = ""
-     
+    i += 1
+
 
 # 画面を閉じる
 driver.quit()
@@ -84,42 +87,44 @@ while True:
         row_count += 1
     else:
         break   
-    result1 = re.match('            [2]',line1)
-    result2 = re.search("<a class=",line1)
-    result3 = re.match('             [^<]',line1)
+    result1 = re.match('<a class',line1)
+    result2 = re.match("          [^<]",line1)
+#     result3 = re.match('             [^<]',line1)
     
     if result1:
-       w_ymd = line1
-       w_ymd = w_ymd.replace('-',"")
-       w_ymd = w_ymd.replace(" ","")
+       w_array1 = line1.split(">")
+       w_ymdstr = w_array1[2]
+       w_ymdstr = w_ymdstr.replace("</span","")
+       w_ymdstr = w_ymdstr.replace('年',"/")
+       w_ymdstr = w_ymdstr.replace('月',"/")
+       w_ymdstr = w_ymdstr.replace('日',"")
+       w_ymd = w_ymdstr.replace(" ","")
     #    print(w_ymd)
-
-    if result2:
        w_array2 = line1.split("=")
        w_urlstr = w_array2[2]
-       w_urlstr = w_urlstr.replace(' target',"")
-       w_urlstr = w_urlstr.replace('"',"")
+       w_urlstr = w_urlstr.replace(" target","")
+       w_urlstr = w_urlstr.replace('"','')
        w_url = base_url + w_urlstr
     #    print(w_url)
-    if result3:
-       w_titlestr = line1
-       w_titlestr = w_titlestr.replace(" ","")
-       w_title = w_titlestr
-    #    print(w_title)
-       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
-       title_result = re.search(key_word,w_title)
-       if title_result:
-           wb = op.load_workbook(export_file)
-           sh_name = 'BATJAPAN'
-           ws = wb[sh_name]
-           ws.cell(row=max_row,column=2).value = w_title
-           ws.cell(row=max_row,column=3).value = w_url
-           ws.cell(row=max_row,column=4).value = w_ymd
-           ws.cell(row=max_row,column=6).value = w_url
-           ws.cell(row=max_row,column=6).hyperlink = w_url
-           ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+
+    if result2:
+        w_titlestr = line1
+        w_title = w_titlestr.replace(" ","")
+        # print(w_title)
+        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営)"
+        title_result = re.search(key_word,w_title)
+        if title_result:
+            wb = op.load_workbook(export_file)
+            sh_name = 'BATJAPAN'
+            ws = wb[sh_name]
+            ws.cell(row=max_row,column=2).value = w_title
+            ws.cell(row=max_row,column=3).value = w_url
+            ws.cell(row=max_row,column=4).value = w_ymd
+            ws.cell(row=max_row,column=6).value = w_url
+            ws.cell(row=max_row,column=6).hyperlink = w_url
+            ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
-           max_row += 1
-           # エクセルファイルの保存
-           wb.save(export_file)
+            max_row += 1
+            # エクセルファイルの保存
+            wb.save(export_file)
 
