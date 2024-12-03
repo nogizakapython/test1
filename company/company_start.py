@@ -1,3 +1,8 @@
+##############################################
+#  企業個別HP検索用人事異動モジュール
+#  修正  2024/12/3 tokanのHPダウンによる修正
+##############################################
+
 import company_abbvie
 import company_bausch
 import company_lendlease
@@ -22,7 +27,7 @@ import company_ritsumeikan
 import company_shane
 import company_socie
 import company_stripe
-import company_tokan 
+# import company_tokan 
 import company_bath
 
 try:
@@ -50,7 +55,7 @@ try:
     exec(company_shane)
     exec(company_socie)
     exec(company_stripe)
-    exec(company_tokan)
+    # exec(company_tokan)
     exec(company_bath)
 except TypeError as e:
     str1 = e

@@ -44,11 +44,10 @@ try:
     driver.get(target_url)
     sleep(5)
         
-    
-    for i in range(1,51):
-        xpath_str1 = '//*[@id="mm-0"]/div[2]/div/div[3]/ul/li[' + str(i) + ']/a'
-        
-        
+    # 修正 2024/12/2 xpath修正 takao.hattori
+    for i in range(1,41):
+        xpath_str1 = '/html/body/div[2]/div[2]/div[2]/div/div[3]/ul/li[' + str(i) + ']/a'
+          
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
         except:
