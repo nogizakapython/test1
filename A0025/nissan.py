@@ -63,6 +63,7 @@ try:
             # xpathの修正(2024/7/29)
             xpath_str1 = '/html/body/div[1]/div[2]/div/div/div/div/div[3]/div/div[1]/div/div[3]/div/div/div/div[2]/table/tbody/tr[' + str(i) + ']'
             
+            
       except:
             break    
       element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
@@ -97,6 +98,7 @@ while True:
    #   抽出タグの修正(2024/7/25)
      result0 = re.search('<th>',line1)
      result1 = re.match('							<td>',line1)
+     result2 = re.match('" target="_blank">',line1)
 
      if result0:
          w_array1 = line1.split('>')
@@ -130,30 +132,57 @@ while True:
          w_urlstr = w_urlstr.replace(' target','')
          w_urlstr = w_urlstr.replace('"','')
          url_result = re.match('https',w_urlstr)
+         next_row_flag = 0
          if url_result:
             w_url = w_urlstr
          else:   
             w_url = base_url + w_urlstr
-         # print(w_url)
-        
-         w_titlestr = w_array2[2]
-         w_title = w_titlestr.replace('</a','')
-         # print(w_title)   
+          # print(w_url)
+         try:
+            w_titlestr = w_array2[2]
+         except IndexError:
+            next_row_flag = 1
+
+         if next_row_flag == 0:
+            w_title = w_titlestr.replace('</a','')
+            # print(w_title)   
               
+            keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営|経営計画)"
+            title_result1 = re.search(keyword,w_title)
+            if title_result1:
+  
+               wb = op.load_workbook(export_file)
+               sh_name = '日産自動車'
+               ws = wb[sh_name]
+               ws.cell(row=max_row,column=2).value = w_title
+               ws.cell(row=max_row,column=3).value = w_url
+               ws.cell(row=max_row,column=4).value = w_ymd
+               ws.cell(row=max_row,column=6).value = w_url
+               ws.cell(row=max_row,column=6).hyperlink = w_url
+               ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+                
+               max_row += 1
+               # エクセルファイルの保存
+               wb.save(export_file)
+     if result2:
+         next_row_flag = 0
+         w_array3 = line1.split('>')
+         w_titlestr = w_array3[1]
+         w_title = w_titlestr.replace('</a','')
          keyword = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営|経営計画)"
          title_result1 = re.search(keyword,w_title)
          if title_result1:
   
-            wb = op.load_workbook(export_file)
-            sh_name = '日産自動車'
-            ws = wb[sh_name]
-            ws.cell(row=max_row,column=2).value = w_title
-            ws.cell(row=max_row,column=3).value = w_url
-            ws.cell(row=max_row,column=4).value = w_ymd
-            ws.cell(row=max_row,column=6).value = w_url
-            ws.cell(row=max_row,column=6).hyperlink = w_url
-            ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+               wb = op.load_workbook(export_file)
+               sh_name = '日産自動車'
+               ws = wb[sh_name]
+               ws.cell(row=max_row,column=2).value = w_title
+               ws.cell(row=max_row,column=3).value = w_url
+               ws.cell(row=max_row,column=4).value = w_ymd
+               ws.cell(row=max_row,column=6).value = w_url
+               ws.cell(row=max_row,column=6).hyperlink = w_url
+               ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
-            max_row += 1
-            # エクセルファイルの保存
-            wb.save(export_file)
+               max_row += 1
+               # エクセルファイルの保存
+               wb.save(export_file)
