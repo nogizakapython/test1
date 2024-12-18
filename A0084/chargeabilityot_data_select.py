@@ -26,7 +26,7 @@ file_list_array = os.listdir(file_path)
 os.remove(file_name)
 # ファイル一覧作成
 for filename in file_list_array:
-    print(filename,file=codecs.open("file_list.txt",'a','utf-8'))
+    print(filename,file=codecs.open(file_name,'a','utf-8'))
 
 # ファイル一覧から、「FlashまたがFinishで始まるファイルをヒットさせる。
 target_file = ""
