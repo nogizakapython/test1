@@ -1,8 +1,9 @@
 #######   IC Energy コスモ石油　###########
 #######   新規作成  2024/2/28  ##########
-#######   修正      2024/4/11 ２社にまたがって同じニュースがある場合は両方出力に変更
+#######   修正      2024/4/11 2社にまたがって同じニュースがある場合は両方出力に変更
 #######   修正      2024/4/17  URL変更による修正
 #######   修正      2024/8/9  タグ修正に伴う修正
+#######   修正      2024/12/19  3社にまたがって同じニュースがある場合は全て出力に変更
 #######   Author  takao.hattori ###########
 
 
@@ -191,7 +192,8 @@ while True:
         w_array3 = line1.split(">")
         w_title = w_array3[1]
         w_title = w_title.replace("</span","")
-        if company_count == 2:
+        # 配列の数が2以上の場合、ループで出力する(2024/12/19 修正)
+        if company_count >= 2:
             for c_name in list(company_array):
                 ws.cell(row=max_row,column=3).value = c_name
                 ws.cell(row=max_row,column=4).value = w_ymd
