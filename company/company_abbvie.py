@@ -1,5 +1,6 @@
 #######   アッビィジャパン　企業HPから人事情報を取得する　###########
 #######   新規作成  2023/12/26  ##########
+#######   修正      2025/1/7(新年のニュースがなくても２年分取得できるように修正)  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -15,12 +16,14 @@ import shutil
 import sys
 import codecs
 import company_fileopenerror
+from datetime import timedelta
 
 
 dt = datetime.datetime.now()
 date1 = dt.strftime('%Y%m%d%H%M%S')
 date2 = dt.strftime('%Y')
 date3 = dt.strftime('%Y%m%d')
+date4 = int(date2) - 1
 
 file_name = "abbvie" + date1 + ".txt"
 out_file = "abbvie.txt"
@@ -37,8 +40,12 @@ length1 = 0
 
 # Chromeを指定する
 driver = webdriver.Chrome()
-# Chromeを開いてMyTIMにアクセスする
-driver.get(target_url)
+# Chromeを開いてAbbvieのニュースリリースサイトにアクセスする
+# 新年のニュースリリースがなくても取得できるように修正(2025/1/7 takao.hattori)
+for i in [date2,date4]:
+    target_url = 'https://www.abbvie.co.jp/press-release/' + str(i)+ '-news-archive.html'
+    driver.get(target_url)
+
 
 
 try:
@@ -52,6 +59,7 @@ except PermissionError as e:
     openerr.readerror()
     sys.exit()
                                     
+
 
 html = driver.page_source
 
