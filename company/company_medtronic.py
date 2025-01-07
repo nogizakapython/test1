@@ -54,13 +54,15 @@ try:
         
     for i in range(1,31):
         
-        xpath_str1 = '/html/body/div[2]/div[5]/div[3]/section/div[1]/div/p[' + str(i) + ']/strong'
+        xpath_str1 = '/html/body/div[2]/div[4]/div/div[5]/div/div/div/div/div/div/div[1]/div/div/div/div/div/p[' + str(i) + ']/b'
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
         except:
             break
         print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-        xpath_str2 = '/html/body/div[2]/div[5]/div[3]/section/div[1]/div/p[' + str(i) + ']/a'
+        xpath_str2 = '/html/body/div[2]/div[4]/div/div[5]/div/div/div/div/div/div/div[1]/div/div/div/div/div/p[' + str(i) + ']/a'
+        
+
         element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
         print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
         
@@ -87,16 +89,16 @@ while True:
         row_count += 1
     else:
         break   
-    result1 = re.match("<strong>",line1)
+    result1 = re.match("<b>",line1)
     result2 = re.match("<a href",line1)
 #    result3 = re.match("<h2>",line1)
     if result1:    
         w_array1 = line1.split(">")
         w_line = w_array1[1]
+        w_line = w_line.replace("</b","")
         w_line = w_line.replace("<br","")
-        w_line = w_line.replace('</strong',"")
         w_ymd = w_line
-        #print(w_ymd)   
+        # print(w_ymd)   
 
     if result2:
         w_array2 = line1.split(">")
@@ -104,10 +106,10 @@ while True:
         w_url = w_url.replace('<a href=',"")
         w_url = w_url.replace('"',"")
         w_url = base_url + w_url
-        #print(w_url)
+        # print(w_url)
         w_title = w_array2[1]
         w_title = w_title.replace("</a","")
-        #print(w_title)
+        # print(w_title)
         key_word = key_word = r"(人事)"
         result4 = re.search(key_word,w_title)
         if result4:
