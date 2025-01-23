@@ -1,5 +1,6 @@
 #######   第一コンピュータリソース人事情報取得　###########
 #######   新規作成  2023/12/27  ##########
+#######   修正  2024/12/13 タグが固定されたことによる修正  ##########
 #######   Author  takao.hattori ###########
 
 # 時間を計るライブラリをインポート
@@ -30,6 +31,7 @@ date_str = ""
 w_title = ""
 base_url = 'https://www.dcr.co.jp'
 target_url = 'https://www.dcr.co.jp/news_list/news/'
+
 max_row = 5
 #base_file = "【企業個別】検索結果_yyyymmdd.xlsx"
 export_file = "【企業個別】検索結果_" + date3 + ".xlsx"
@@ -47,7 +49,11 @@ try:
     # 修正 2024/12/2 xpath修正 takao.hattori
     for i in range(1,41):
         xpath_str1 = '/html/body/div[2]/div[2]/div[2]/div/div[3]/ul/li[' + str(i) + ']/a'
-          
+
+        # xpath_str1 = '/html/body/div[3]/div[2]/div/div[3]/ul/li[' + str(i) + ']/a'
+        
+                
+         
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
         except:
@@ -70,44 +76,44 @@ shutil.copy2(file_name,out_file)
 
 fileobj = open(out_file,encoding="utf-8")
 while True:
-    line1 = fileobj.readline()
-    line1 = line1.replace("\n","")
-    if line1:
-        row_count += 1
-    else:
-        break   
-    w_array1 = line1.split(">")
-    w_url = w_array1[0]
-    w_url = w_url.replace('"',"")
-    w_url = w_url.replace("<a href=","")
-    w_url = w_url.replace(" target=_blank","")
-    #print(w_url)
-    w_ymd = w_array1[2]
-    w_ymd = w_ymd.replace(".","/")
-    w_ymd = w_ymd.replace("</span","")
-    #print(w_ymd)
-    w_title = w_array1[6]
-    w_title = w_title.replace("</span","")
-    #print(w_title)
-    key_word = key_word = r"(役員変更|役員改選)"
-    result1 = re.search(key_word,w_title)
-    if result1:
-       wb = op.load_workbook(export_file)
-       sh_name = '第一コンピュータリソース'
-       ws = wb[sh_name]
-       ws.cell(row=max_row,column=2).value = w_title
-       ws.cell(row=max_row,column=3).value = w_url
-       ws.cell(row=max_row,column=4).value = w_ymd
-       ws.cell(row=max_row,column=6).value = w_url
-       ws.cell(row=max_row,column=6).hyperlink = w_url
+     line1 = fileobj.readline()
+     line1 = line1.replace("\n","")
+     if line1:
+         row_count += 1
+     else:
+         break   
+     w_array1 = line1.split(">")
+     w_url = w_array1[0]
+     w_url = w_url.replace('"',"")
+     w_url = w_url.replace("<a href=","")
+     w_url = w_url.replace(" target=_blank","")
+    #  print(w_url)
+     w_ymd = w_array1[2]
+     w_ymd = w_ymd.replace(".","/")
+     w_ymd = w_ymd.replace("</span","")
+    #  print(w_ymd)
+     w_title = w_array1[6]
+     w_title = w_title.replace("</span","")
+    #  print(w_title)
+     key_word = key_word = r"(役員変更|役員改選)"
+     result1 = re.search(key_word,w_title)
+     if result1:
+        wb = op.load_workbook(export_file)
+        sh_name = '第一コンピュータリソース'
+        ws = wb[sh_name]
+        ws.cell(row=max_row,column=2).value = w_title
+        ws.cell(row=max_row,column=3).value = w_url
+        ws.cell(row=max_row,column=4).value = w_ymd
+        ws.cell(row=max_row,column=6).value = w_url
+        ws.cell(row=max_row,column=6).hyperlink = w_url
                 
-       max_row += 1
-       # エクセルファイルの保存
-       try:
+        max_row += 1
+        # エクセルファイルの保存
+        try:
             wb.save(export_file)
-       except PermissionError as e:
-           fname = export_file
-           openerr = company_fileopenerror.ReadfileError(fname)
-           openerr.readerror()
-           sys.exit()                
+        except PermissionError as e:
+            fname = export_file
+            openerr = company_fileopenerror.ReadfileError(fname)
+            openerr.readerror()
+            sys.exit()                
                                     
