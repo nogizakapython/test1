@@ -1,5 +1,6 @@
 #######   IC Energy 岩谷産業　###########
 #######   新規作成  2024/3/11  ##########
+#######   修正     2025/2/7 xpath修正  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -40,12 +41,6 @@ access_url = 'https://www.iwatani.co.jp/jpn/news/'
 target_url = ""
 target_url1 = ""
 target_url2 = ""
-#############################################################################
-#  list id変数定義(年に1回、毎年1月に新年度のデータが入ってきたら変数を更新する)
-#  id_list2の変数にはid_list1の変数を変える。id_list1の変数に新しいid名を定義する
-id_list1 = "pbBlock274889"
-id_list2 = "pbBlock248469"
-#############################################################################
 max_row = 5
 # base_file = "ICEnergyニュースリリース一覧テンプレート.xlsx"
 export_file = "ICEnergyニュースリリース出力用" + date4 + ".xlsx"
@@ -79,43 +74,36 @@ def web_scrapping():
     # Chromeを指定する
     driver = webdriver.Chrome()
     
-
+    # 1/12以前に自動化ツールを実行した場合、2年分取得
     if w_month == 1 and w_day <= 12:
-        for j in range(2):
-            for url in [target_url1,target_url2]:
-                # Chromeを開いて企業検索にアクセスする
-                driver.get(url)
-                sleep(3)
-                # 年をまたいで30件のニュースリリースを取得 
-                for i in range(1,16):
-                    try:
-                        if j == 0:
-                            xpath_str1 = '//*[@id="' + id_list1 + '"]/div/table/tbody/tr[' + str(i) + ']/td[1]'
-                            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-                            print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-                            xpath_str2 = '//*[@id="' + id_list1 + '"]/div/table/tbody/tr[' + str(i) + ']/td[2]/a'
-                            element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
-                            print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-                        elif j == 1:
-                            xpath_str1 = '//*[@id="' + id_list2 + '"]/div/table/tbody/tr[' + str(i) + ']/td[1]'
-                            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-                            print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-                            xpath_str2 = '//*[@id="' + id_list2 + '"]/div/table/tbody/tr[' + str(i) + ']/td[2]/a'
-                            element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
-                            print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))    
-                    except:
-                        if i == 1:
-                            print("データがありません",file=codecs.open(file_name,'a','utf-8')) 
+        for url in [target_url1,target_url2]:
+            # Chromeを開いて企業検索にアクセスする
+            driver.get(url)
+            sleep(3)
+            # 年をまたいで30件のニュースリリースを取得 
+            for i in range(1,16):
+                try:
+                    # xpathの修正(2025/2/6)
+                    xpath_str1 = '/html/body/div[2]/div[2]/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div/table/tbody/tr[' + str(i) + ']/td[1]'
+                    element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+                    print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+                    xpath_str2 = '/html/body/div[2]/div[2]/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div/table/tbody/tr[' + str(i) + ']/td[2]/a'
+                    element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
+                    print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+                except:
+                    if i == 1:
+                        print("データがありません",file=codecs.open(file_name,'a','utf-8')) 
     else:
         driver.get(target_url)
         sleep(3)
         # 最新15件のニュースリリースを取得 
         for i in range(1,16):
             try:
-                xpath_str1 = '//*[@id="pbBlock274889"]/div/table/tbody/tr[' + str(i) + ']/td[1]'
+                # xpathの修正(2025/2/6)
+                xpath_str1 = '/html/body/div[2]/div[2]/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div/table/tbody/tr[' + str(i) + ']/td[1]'
                 element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
                 print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-                xpath_str2 = '//*[@id="pbBlock274889"]/div/table/tbody/tr[' + str(i) + ']/td[2]/a'
+                xpath_str2 = '/html/body/div[2]/div[2]/div/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div/table/tbody/tr[' + str(i) + ']/td[2]/a'
                 element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
                 print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
             except:
