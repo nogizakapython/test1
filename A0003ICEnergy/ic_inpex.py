@@ -1,5 +1,6 @@
 #######   IC Energy INPEC###########
 #######   新規作成  2024/3/11  ##########
+#######   修正   　 2024/2/27  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -48,6 +49,9 @@ output_company_name = ""
 # write_flag = 0
 xpath_str1 = ""
 
+# カウント変数
+count = 0
+
 # 検索URL取得関数
 def get_url(year):
     work_url = access_url + str(year) + "/"
@@ -76,9 +80,10 @@ def web_scrapping():
         for url in [target_url1,target_url2]:
             driver.get(url)
             sleep(3)
-            for i in range(1,16):
+            for i in range(1,31):
                 try:
-                    xpath_str1 = '//*[@id="mainBody"]/div[3]/div[1]/section/div[2]/article[' + str(i) + ']/a'
+                    # 2025/2/27 xpath変更に伴う修正
+                    xpath_str1 = '/html/body/div/main/div/div/div[2]/div[2]/div[1]/ul/li[' + str(i) + ']'
                     element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
                     print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
                 except:
@@ -88,9 +93,10 @@ def web_scrapping():
     else:
         driver.get(target_url)
         sleep(3)
-        for i in range(1,16):
+        for i in range(1,31):
             try:
-                xpath_str1 = '//*[@id="mainBody"]/div[3]/div[1]/section/div[2]/article[' + str(i) + ']/a'
+                # xpath変更に伴う修正
+                xpath_str1 = '/html/body/div/main/div/div/div[2]/div[2]/div[1]/ul/li[' + str(i) + ']'
                 element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
                 print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
             
@@ -127,15 +133,28 @@ fileobj = open(out_file,encoding="utf-8")
 while True:
      line1 = fileobj.readline()
      line1 = line1.replace("\n","")
-     if line1 == "":
+     count += 1
+     if line1 == "" and count > 201:
          break
-     result1 = re.match("<a href",line1)
-     result2 = re.search('<div class="news_property">',line1)
-     result3 = re.search('news_title',line1)
+    #  2025/2/27 検索条件の変更
+     result1 = re.match('<time class="m-list-news__date"',line1)
+     result2 = re.match('<a class="m-list-news__link"',line1)
+    #  日付データ行がヒットしたら、日付データをクレンジングし、日付フォーマットに合わせる
      if result1:
-         w_array1 = line1.split("=")
-         w_soutai_url = w_array1[1]
-         w_soutai_url = w_soutai_url.replace(" class","")
+         w_array3 = line1.split('>')
+         w_ymd = w_array3[1]
+         w_ymd = w_ymd.replace("</time","")
+         w_ymd = w_ymd.replace("年","/")
+         w_ymd = w_ymd.replace("月","/")
+         w_ymd = w_ymd.replace("日","")
+        #  print(w_ymd)
+
+    # URLとタイトル行がヒットしたら、URL及びタイトルをクレンジングし、Excelに出力する。
+     if result2:
+         w_array1 = line1.split(">")
+         w_soutai_url = w_array1[0]
+         w_array2 = w_soutai_url.split("=")
+         w_soutai_url = w_array2[2]
          w_soutai_url = w_soutai_url.replace('"','')
          zettai_flag = re.match("https",w_soutai_url)
          if zettai_flag:
@@ -143,23 +162,10 @@ while True:
          else:
             w_url = base_url + w_soutai_url    
         #  print(w_url)
-     if result2:
-         w_array2 = line1.split('>')
-         w_ymd = w_array2[2]
-         w_ymd = w_ymd.replace("</span","")
-         w_ymd = w_ymd.replace("年","/")
-         w_ymd = w_ymd.replace("月","/")
-         w_ymd = w_ymd.replace("日","")
-        #  print(w_ymd)
-
-
-     if result3:
-         w_array3 = line1.split(">")
-         w_title = w_array3[1] 
-         w_title = w_title.replace("</h6","")
-         w_title = w_title.replace('<span class="news_size"',"")
+         w_title = w_array1[1]
+         w_title = w_title.replace('</a',"")
+         w_title = w_title.replace('<svg class="m-link__icon" viewBox="0 0 16.5 16.5" role="img"',"")
         #  print(w_title)
- 
          ws.cell(row=max_row,column=3).value = company_name
          ws.cell(row=max_row,column=4).value = w_ymd
          ws.cell(row=max_row,column=5).value = w_title
@@ -169,7 +175,13 @@ while True:
          max_row += 1
          # エクセルファイルの保存
          try:
-            wb.save(export_file)
+           wb.save(export_file)
          except PermissionError as e:
-            sys.exit()  
+           sys.exit()  
 
+
+     
+
+
+     
+    
