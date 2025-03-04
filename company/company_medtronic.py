@@ -50,21 +50,30 @@ try:
     
     
     
-
-        
-    for i in range(1,31):
-        
-        xpath_str1 = '/html/body/div[2]/div[4]/div/div[5]/div/div/div/div/div/div/div[1]/div/div/div/div/div/p[' + str(i) + ']/b'
-        try:
-            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-        except:
-            break
-        print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-        xpath_str2 = '/html/body/div[2]/div[4]/div/div[5]/div/div/div/div/div/div/div[1]/div/div/div/div/div/p[' + str(i) + ']/a'
-        
-
-        element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
-        print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+    # 2025/3/4 タグが2025年と2024年以前で違うので修正
+    for i in range(1,3):    
+        for j in range(1,31):
+            # i=1(2025年の時と2024年以前でタグが違うので修正)
+            if i == 1:
+                xpath_str1 = '/html/body/div[2]/div[4]/div/div[5]/div/div/div/div/div/div/div[' + str(i) + ']/div/div/div/div/div/div/div/p[' + str(j) + ']/strong'
+            else:        
+                xpath_str1 = '/html/body/div[2]/div[4]/div/div[5]/div/div/div/div/div/div/div[' + str(i) + ']/div/div/div/div/div/p[' + str(j) + ']/b'
+            
+            try:
+                element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+            except:
+                break
+            print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+            # i=1(2025年の時と2024年以前でタグが違うので修正)
+            if i == 1:
+                xpath_str2 = '/html/body/div[2]/div[4]/div/div[5]/div/div/div/div/div/div/div[' + str(i) + ']/div/div/div/div/div/div/div/p[' + str(j) + ']/a'
+                              
+                              
+            else:
+                xpath_str2 = '/html/body/div[2]/div[4]/div/div[5]/div/div/div/div/div/div/div[' + str(i) + ']/div/div/div/div/div/p[' + str(j) + ']/a'
+            
+            element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
+            print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
         
 
 except EnvironmentError as e:
@@ -88,17 +97,20 @@ while True:
     if line1:
         row_count += 1
     else:
-        break   
+        break  
+    # 日付のタグが2025年と2024年以前で違うのでresult3を追加(2025/3/4) 
     result1 = re.match("<b>",line1)
+    result3 = re.match('<strong>',line1)
     result2 = re.match("<a href",line1)
 #    result3 = re.match("<h2>",line1)
-    if result1:    
-        w_array1 = line1.split(">")
-        w_line = w_array1[1]
-        w_line = w_line.replace("</b","")
-        w_line = w_line.replace("<br","")
-        w_ymd = w_line
-        # print(w_ymd)   
+    if result1 or result3:    
+         w_array1 = line1.split(">")
+         w_line = w_array1[1]
+         w_line = w_line.replace("</b","")
+         w_line = w_line.replace("</strong","")
+         w_line = w_line.replace("<br","")
+         w_ymd = w_line
+        #  print(w_ymd)   
 
     if result2:
         w_array2 = line1.split(">")
