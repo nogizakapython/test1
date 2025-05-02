@@ -1,4 +1,4 @@
-#######   ドーム　企業HPから人事情報を取得する　###########
+#######   ギリアドサイエンス　企業HPから人事情報を取得する　###########
 #######   新規作成  2023/11/27  ##########
 #######   Author  takao.hattori ###########
 
@@ -52,16 +52,18 @@ file1.close()
 try:
     driver.get(target_url)
     sleep(5)
-    
-    for i in range(2,501):
-        
+    # 取得件数を500→100件に減らす対応 2025/5/2 takao.hattori
+    for i in range(2,101):
+        # xpathの修正 2025/5/2 takao.hattori
         xpath_str1 = '/html/body/div[1]/main/div/section/div[' + str(i) + ']/h4'
-                
+
+                       
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
         except:
             break
         print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
+        # xpathの修正 2025/5/2 takao.hattori
         xpath_str2 = '/html/body/div[1]/main/div/section/div[' + str(i) + ']/a'
         element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
         print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))    
@@ -106,7 +108,7 @@ while True:
         if w_d2 < 10:
             w_d = "0" + w_d
         w_ymd = w_y + "/" + w_m + "/" + w_d        
-        #print(w_ymd)   
+        # print(w_ymd)   
     
     if result2:
         w_array2 = line1.split(" ")
@@ -114,11 +116,11 @@ while True:
         w_url = w_url.replace('href=',"")
         w_url = w_url.replace('"',"")
         w_url = base_url + w_url
-        #print(w_url)
+        # print(w_url)
         w_array3 = line1.split(">")
         w_title = w_array3[1]
         w_title = w_title.replace("</a","")
-        #print(w_title)
+        # print(w_title)
         key_word = key_word = r"(就任|任命)"
         reject_word = "アンバサダー"
         result3 = re.search(key_word,w_title)
@@ -137,7 +139,7 @@ while True:
                 ws.cell(row=max_row,column=6).hyperlink = w_url
                 
                 max_row += 1
-                # エクセルファイルの保存
+#                 # エクセルファイルの保存
                 try:
                     wb.save(export_file)
                 except PermissionError as e:
