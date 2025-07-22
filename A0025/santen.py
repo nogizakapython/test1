@@ -33,7 +33,8 @@ out_file = "santen.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.santen.com'
-web_url = 'https://www.santen.com/ja/ir/document/earnings'
+web_url1 = 'https://www.santen.com/ja/news/ir_news'
+
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -50,29 +51,29 @@ driver = webdriver.Chrome()
 # Chromeを開いて企業HPにアクセスする
 
 
-target_url = web_url
+target_url1 = web_url1
    
 try:
-    driver.get(target_url)
+    driver.get(target_url1)
     sleep(3)
 
-    for i in range(1,3):
-        for j in range(1,4):
-            try:
-                     
-               xpath_str1 = '//*[@id="container-f66f82d609"]/div/div[4]/div/div[1]/section[' + str(i) + ']/div/ul/li[' + str(j) + ']'
-              
-            except:
-               break    
-            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-            print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
-          
+    for i in range(1,16):
+        try:
+                    
+            xpath_str1 = '//*[@id="newslisting-9f95ebde11"]/div/div[3]/div[' + str(i) + ']'
+                    
+        except:
+            break    
+        element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+        print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+        
        
 except EnvironmentError as e:
     str100 = e     
 except:
     str100 = 1
-     
+
+    
 # 画面を閉じる
 driver.quit()
 file_exist = os.path.isfile(out_file)
@@ -94,8 +95,7 @@ while True:
         break   
 
      result1 = re.search('<time class=',line1)
-     result2 = re.search('<a class="eirItem_title_link',line1)
-     result3 = re.match('                                      <span class="s_eirModule_title_label',line1)
+     result2 = re.search('<a href=',line1)
 
 
      if result1:
@@ -121,20 +121,19 @@ while True:
       #   print(w_ymd)
 
      if result2:
-        w_array2 = line1.split("=")
-        w_urlstr = w_array2[2]
-        w_urlstr = w_urlstr.replace(' target',"")
+        w_array2 = line1.split(" ")
+        w_urlstr = w_array2[1]
+        w_urlstr = w_urlstr.replace('href=',"")
         w_url = w_urlstr.replace('"',"")
       #   print(w_url)
-
-     if result3:  
+  
         w_array3 = line1.split('>')
         w_titlestr = w_array3[1]
-        w_title = w_titlestr.replace('</span',"")
+        w_title = w_titlestr.replace('</a',"")
       #   print(w_title)    
 
 
-        key_word = r"(決算|株主総会|説明会|IR説明会|経営計画|報告書|レポート)"
+        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営)"
         title_result = re.search(key_word,w_title)
         if title_result:
             wb = op.load_workbook(export_file)
