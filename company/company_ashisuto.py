@@ -1,5 +1,6 @@
 #######   アシスト 企業HP勤務終了ボタン処理　###########
 #######   新規作成  2023/12/28  ##########
+#######   webサイトリニューアルによる修正  2025/7/25  takao.hattori ##########
 #######   Author  takao.hattori ###########
 
 
@@ -51,14 +52,17 @@ try:
     
     for i in range(1,70):
     
-       
-        xpath_str1 = '//*[@id="content_main"]/div[3]/ul/li[' + str(i) + ']/span[1]'
+    #    xpathの変更 2025/7/25 takao.hattori
+        xpath_str1 = '/html/body/div[1]/main/div/article/div[2]/div[2]/ul/li[' + str(i) + ']/time/span[1]'
+        
+
         try:
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
         except:
             break
         print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-        xpath_str2 = '//*[@id="content_main"]/div[3]/ul/li[' + str(i) + ']/span[3]/a'
+        xpath_str2 = '/html/body/div[1]/main/div/article/div[2]/div[2]/ul/li[' + str(i) + ']/div/a'
+        
         element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
         print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
         
@@ -97,8 +101,9 @@ while True:
         w_line = w_line.replace("年","/")
         w_line = w_line.replace("月","/")
         w_line = w_line.replace("日","")
+        w_line = w_line.replace("</span","")
         w_ymd = w_line       
-        #print(w_ymd)   
+        # print(w_ymd)   
     
     if result2:
         w_array2 = line1.split(">")
@@ -106,10 +111,10 @@ while True:
         w_url = w_url.replace('<a href=',"")
         w_url = w_url.replace('"',"")
         w_url = base_url + w_url
-        #print(w_url)
+        # print(w_url)
         w_title = w_array2[1]
         w_title = w_title.replace("</a","")
-        #print(w_title)
+        # print(w_title)
         key_word = key_word = r"(役員)"
         result3 = re.search(key_word,w_title)
         if result3:
