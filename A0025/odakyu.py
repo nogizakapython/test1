@@ -96,18 +96,19 @@ while True:
     else:
       break   
 
-    result1 = re.search('newsList-date',line1)
+    result1 = re.match('                        2',line1)
     result2 = re.search('newsList-txt',line1)
 
 
     if result1:
-       w_array1 = line1.split(">")
-       w_ymdstr = w_array1[1]
-       w_ymdstr = w_ymdstr.replace('</dt','')
+      #  w_array1 = line1.split(">")
+       w_ymdstr = line1
+       w_ymdstr = w_ymdstr.replace('                        ','')
        w_ymdstr = w_ymdstr.replace('年','/')
        w_ymdstr = w_ymdstr.replace('月','/')
        w_ymdstr = w_ymdstr.replace('日','')
        ymd_array = w_ymdstr.split("/")
+      #  print(ymd_array)
        year1 = ymd_array[0]
        month1 = int(ymd_array[1])
        day1 = int(ymd_array[2])

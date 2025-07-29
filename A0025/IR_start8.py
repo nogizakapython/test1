@@ -37,13 +37,13 @@
 # import nitori
 # import nihonusen
 # import odakyu
-# import olcgroup
-# import omuron
-# import nissan
-# import nissan2
-# import ryohin
-# import santen
-# import santen2
+import olcgroup
+import omuron
+import nissan
+import nissan2
+import ryohin
+import santen
+import santen2
 import sevenandi
 import shimano
 import shionogi
@@ -91,13 +91,13 @@ try:
     # exec(nitori)
     # exec(nihonusen)
     # exec(odakyu)
-    # exec(olcgroup)
-    # exec(omuron)
-    # exec(nissan)
-    # exec(nissan2)
-    # exec(ryohin)
-    # exec(santen)
-    # exec(santen2)
+    exec(olcgroup)
+    exec(omuron)
+    exec(nissan)
+    exec(nissan2)
+    exec(ryohin)
+    exec(santen)
+    exec(santen2)
     exec(sevenandi)
     exec(shimano)
     exec(shionogi)
