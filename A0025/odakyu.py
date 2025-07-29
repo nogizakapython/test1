@@ -96,10 +96,11 @@ while True:
     else:
       break   
 
+    #　2025/7/29 takao.hattori 掲載日付タグ修正に伴う修正 
     result1 = re.match('                        2',line1)
     result2 = re.search('newsList-txt',line1)
 
-
+   # 2025/7/29 takao.hattori 日付タグ変更に伴う修正
     if result1:
       #  w_array1 = line1.split(">")
        w_ymdstr = line1
