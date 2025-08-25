@@ -72,6 +72,7 @@ def main():
 
     # Teamsで表示される名前とEIDを紐づける連想配列(メンバーが変わるたびに修正)
     # 2024/9/6 稲葉さんを追加
+    # 2025/8/25 前島さんを追加
     xteam_member = {
                 "Wakabayashi, Eri" : "eri.wakabayashi",
                 "Kimura, Yuichi" : "yuichi.kimura",
@@ -94,7 +95,8 @@ def main():
                 "Nishikawa, Kazuma" : "kazuma.nishikawa" ,
                 "Eto, Shinsuke" : "shinsuke.eto" ,
                 "Anzai, Keita" : "keita.anzai" ,
-                "Inaba, Ryusei" : "ryusei.inaba"
+                "Inaba, Ryusei" : "ryusei.inaba" ,
+                "Sakaki, Shinra" : "shinra.sakaki"
                 }
 
     # 出力ファイル開始行
@@ -130,6 +132,7 @@ def main():
              if result2:
                  name1 = name1.replace("SVレビュー完了しました。Submitを押してください。","")
                  name1 = name1.replace("SVレビュー完了しました。Submit押してください。","")
+                 name1 = name1.replace("SVレビュー完了しました。指摘事項はありません。","")
                  name1 = name1.replace('　','')
                  eid = xteam_member[name1]
                  
