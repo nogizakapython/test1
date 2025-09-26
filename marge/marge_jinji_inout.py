@@ -80,8 +80,10 @@ class Marge_jinji_output():
                     op.cell(row=self.jinji_max_count,column=13).value = appending
                     # 人事異動日を右揃えにする。
                     #  2024/2/16 処理を追加
-                    right_alignment = Alignment(horizontal='right')
-                    op.cell(row=self.jinji_max_count,column=4).alignment = right_alignment
+                    #  2025/9/26 全左揃えにするためにコメントアウト takumi.kurematsu
+                    
+                    # right_alignment = Alignment(horizontal='right')
+                    # op.cell(row=self.jinji_max_count,column=4).alignment = right_alignment
                     # 出力先の行数を1加算する。
                     self.jinji_max_count += 1
                 # マージ先エクセルファイルを保存する。    
