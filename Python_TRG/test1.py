@@ -1,0 +1,1 @@
+print("nogizaka46")
