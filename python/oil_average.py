@@ -16,92 +16,99 @@ from time import sleep
 target_url = 'https://pps-net.org/statistics/crude-oil'
 # 出力先のExcelファイル変数(マクロ作成時にファイル名を変更)
 export_file = "石油価格値段.xlsx"
-# 出力開始行の変数
-start_row_num = 1
-# 出力先の列数変数
-col_num = 2
-row_num = start_row_num
-
-# メイン関数
-def main():
-    # Chromeを指定する
-    driver = webdriver.Chrome()
-
-    try:
-        driver.get(target_url)
-        sleep(3)
 
 
-        try:
-            xpath_str1 = '/html/body/div[4]/div[1]/div[1]/div/div/table[1]/tbody/tr[1]/th[2]'
-            xpath_str2 = '/html/body/div[4]/div[1]/div[1]/div/div/table[1]/tbody/tr[2]/td[1]'
-            xpath_str3 = '/html/body/div[4]/div[1]/div[1]/div/div/table[1]/tbody/tr[3]/td[1]'
-            xpath_str4 = '/html/body/div[4]/div[1]/div[1]/div/div/table[1]/tbody/tr[4]/td[1]'
-            xpath_str5 = '/html/body/div[4]/div[1]/div[1]/div/div/table[1]/tbody/tr[5]/td[1]' 
-            
-                     
-        except:
-            print(1)
-        
-        element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-        element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
-        element_str3 = driver.find_element(by=By.XPATH,value=xpath_str3)
-        element_str4 = driver.find_element(by=By.XPATH,value=xpath_str4)
-        element_str5 = driver.find_element(by=By.XPATH,value=xpath_str5)
+# xpath取得情報配列の定義
+xpath_array = []
+
+# 取得結果格納配列
+data_array = []
+
+# 出力先のエクセルファイルの変数定義
+wb = op.load_workbook(export_file)
+sh_name = 'Sheet1'
+ws = wb[sh_name]
+
+
+# Excel出力関数
+def output_file(output_data,row_num,col_num):
+    if row_num == 1:
+        ws.cell(row=row_num,column=col_num).value = output_data
+    else:
+        ws.cell(row=row_num,column=col_num).value = float(output_data)    
+    wb.save(export_file)
     
-    except EnvironmentError as e:
-        print("作業対象月の原油価格を取得できませんでした")
-        exit()     
-    
-    ymd = element_str1.get_attribute("outerHTML")
+# 作業対象月のデータクレンジング処理
+def work_month_data_cleansing(ymd):
+    # 余分な文字列を削除
     ymd = ymd.replace("<th>","")
     ymd = ymd.replace("</th>","")
     w_array = ymd.split('/')
     month = w_array[1]
     work_month = ""
-    
+    # 作業対象月が1月の時は西暦を付けてYYYY年MM月に、1月以外はMM月に変換する
     if month == "1":
         work_year = w_array[0]
         work_month = work_year + "年" + month + "月"
     else:
         work_month = month + "月"
+    # 文字列を返す
+    return work_month
 
-    wb = op.load_workbook(export_file)
-    sh_name = 'Sheet1'
-    ws = wb[sh_name]
-    ws.cell(row=row_num,column=col_num).value = work_month
+# 価格データのデータクレンジング処理
+def data_clansing(work_data_accout):
+    work_data_accout = work_data_accout.replace(' $/バレル',"")
+    work_data_accout = work_data_accout.replace('<td>',"")
+    work_data_accout = work_data_accout.replace('</td>',"")
+    # 不要な文字を取り除いたデータを返す
+    return work_data_accout
 
-    row_num += 1
-    dubai_accout = element_str2.get_attribute("outerHTML")
-    dubai_accout = dubai_accout.replace(' $/バレル',"")
-    dubai_accout = dubai_accout.replace('<td>',"")
-    dubai_accout = dubai_accout.replace('</td>',"")
+# メイン関数
+def main():
+    # 出力開始行の変数
+    start_row_num = 1
+    # 出力先の列数変数
+    col_num = 2
+    # 出力先の列数変数
+    col_num = 2
+    row_num = start_row_num
+    # Chromeを指定する
+    driver = webdriver.Chrome()
 
-    ws.cell(row=row_num,column=col_num).value = float(dubai_accout)
+    try:
+        driver.get(target_url)
+        sleep(1)
 
-    row_num += 1
-    blend_accout = element_str3.get_attribute("outerHTML")
-    blend_accout = blend_accout.replace(' $/バレル',"")
-    blend_accout = blend_accout.replace('<td>',"")
-    blend_accout = blend_accout.replace('</td>',"")
+        try:
+            xpath_str1 = '/html/body/div[4]/div[1]/div[1]/div/div/table[1]/tbody/tr[1]/th[2]'
+            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
 
-    ws.cell(row=row_num,column=col_num).value = float(blend_accout)
-
-    row_num += 1
-    wti_accout = element_str4.get_attribute("outerHTML")
-    wti_accout = wti_accout.replace(' $/バレル',"")
-    wti_accout = wti_accout.replace('<td>',"")
-    wti_accout = wti_accout.replace('</td>',"")
-
-    ws.cell(row=row_num,column=col_num).value = float(wti_accout)
-
-    row_num += 1
-    opec_accout = element_str5.get_attribute("outerHTML")
-    opec_accout = opec_accout.replace(' $/バレル',"")
-    opec_accout = opec_accout.replace('<td>',"")
-    opec_accout = opec_accout.replace('</td>',"")
-
-    ws.cell(row=row_num,column=col_num).value = float(opec_accout)
+            for i in range(2,6):
+                xpath_str = '/html/body/div[4]/div[1]/div[1]/div/div/table[1]/tbody/tr[' + str(i) + ']/td[1]'
+                element_str = driver.find_element(by=By.XPATH,value=xpath_str)
+                data1 = element_str.get_attribute("outerHTML")
+                data_array.append(data1)
+                   
+        except:
+            print("配列エラー")
+        
+    except EnvironmentError as e:
+        print("作業対象月の原油価格を取得できませんでした")
+        exit()     
     
-    wb.save(export_file)   
-     
+    
+    ymd = element_str1.get_attribute("outerHTML")
+    work_month = work_month_data_cleansing(ymd)
+    output_file(work_month,row_num,col_num)
+    row_num += 1
+
+    for j in range(0,4):
+        data_accout = data_array[j]
+        data_accout = data_clansing(data_accout)
+        output_file(data_accout,row_num,col_num)
+        row_num += 1
+    
+
+if __name__ == "__main__":
+    main()
+    
