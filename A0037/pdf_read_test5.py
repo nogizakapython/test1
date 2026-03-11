@@ -27,7 +27,7 @@ def main():
         with open(out_file,mode='a',encoding='utf-8') as f:
             print(text,file=f)
     except UnicodeEncodeError:
-        print(f"Please check {out_file}'s encoding")
+        print(f'Please check {out_file}\'s encoding')
 
     print("END PROCEDURE")
 
