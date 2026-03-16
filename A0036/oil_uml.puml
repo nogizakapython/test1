@@ -1,0 +1,195 @@
+@startuml oil_modules
+
+title ICEnergy 石油平均価格推移情報取得ツール - UML図
+
+' =====================
+' クラス図
+' =====================
+
+package "oil_common_data.py" {
+    class Common_data {
+        + data_clear() : void
+        + output_data(output_data, row_num: int, col_num: int) : void
+    }
+
+    note right of Common_data
+        Excelファイル操作の共通クラス
+        対象ファイル: 月別石油価格推移データワークシート.xlsx
+        対象シート: Sheet1
+    end note
+}
+
+package "oil_delete_data.py" {
+    class DeleteData << (S,#FF7700) Script >> {
+        - data_clear : Common_data
+    }
+    note right of DeleteData
+        データ削除スクリプト
+        Common_dataのdata_clearを呼び出す
+    end note
+}
+
+package "oil_input_work_accout.py" {
+    class InputWorkAccout << (S,#77AAFF) Script >> {
+        - target_url : str
+        - data_array : list
+        - genre_array : list
+        + data_clansing(work_data_accout: str) : str
+        + main() : void
+    }
+    note right of InputWorkAccout
+        毎月の石油平均価格を取得
+        取得元: pps-net.org
+        対象: ドバイ / ブレント / WTI / OPECバスケット
+    end note
+}
+
+package "oil_input_workmonth.py" {
+    class InputWorkMonth << (S,#77FF77) Script >> {
+        - target_url : str
+        - data_array : list
+        + work_month_data_cleansing(ymd: str) : str
+        + main() : void
+    }
+    note right of InputWorkMonth
+        年月データを取得
+        取得元: pps-net.org
+        1月の場合はYYYY年MM月形式、
+        それ以外はMM月形式に変換
+    end note
+}
+
+' 依存関係
+DeleteData ..> Common_data : uses
+InputWorkAccout ..> Common_data : uses
+InputWorkMonth ..> Common_data : uses
+
+@enduml
+
+@startuml oil_sequence_workmonth
+
+title oil_input_workmonth.py - 年月取得処理 シーケンス図
+
+actor User
+participant "oil_input_workmonth" as Script
+participant "webdriver.Chrome" as Browser
+participant "pps-net.org" as Website
+participant "Common_data\n(oil_common_data)" as Common
+participant "Excel\n(月別石油価格推移データ.xlsx)" as Excel
+
+User -> Script : main() 実行
+Script -> Browser : webdriver.Chrome() 起動
+Script -> Common : Common_data() インスタンス生成
+Common -> Excel : load_workbook() で開く
+
+Script -> Browser : driver.get(target_url)
+Browser -> Website : HTTP GET
+Website --> Browser : ページ返却
+Browser --> Script : sleep(1) 待機
+
+loop i in range(11, 17, 5) → tr[11], tr[16]
+    loop j in range(2, 14) → 12ヶ月分
+        Script -> Browser : find_element(XPATH: table[2]/tbody/tr[i]/th[j])
+        Browser --> Script : element (outerHTML)
+        Script -> Script : data_array.append(ymd_data)
+    end
+end
+
+loop k in range(0, array_length)
+    Script -> Script : work_month_data_cleansing(ymd_data)
+    note right
+        "<th>YYYY/MM</th>" → "YYYY年M月" or "M月"
+        1月の場合: YYYY年M月
+        それ以外: M月
+    end note
+    Script -> Common : output_data(ymd_data, row_num=1, col_num)
+    Common -> Excel : ws.cell(row=1, col).value = ymd_data
+    Common -> Excel : wb.save()
+    Common -> Excel : wb.close()
+    Script -> Script : col_num += 1
+end
+
+Script --> User : 処理完了
+
+@enduml
+
+@startuml oil_sequence_work_accout
+
+title oil_input_work_accout.py - 月別価格取得処理 シーケンス図
+
+actor User
+participant "oil_input_work_accout" as Script
+participant "webdriver.Chrome" as Browser
+participant "pps-net.org" as Website
+participant "Common_data\n(oil_common_data)" as Common
+participant "Excel\n(月別石油価格推移データ.xlsx)" as Excel
+
+User -> Script : main() 実行
+Script -> Browser : webdriver.Chrome() 起動
+Script -> Common : Common_data() インスタンス生成
+Common -> Excel : load_workbook() で開く
+
+Script -> Browser : driver.get(target_url)
+Browser -> Website : HTTP GET
+Website --> Browser : ページ返却
+Browser --> Script : sleep(1) 待機
+
+loop genre in genre_array\n["ドバイ 12 22", "ブレント 13 23", "WTI 14 24", "OPECバスケット 15 25"]
+    note right of Script
+        start_num, end_num を genre から取得
+        例) ドバイ: tr[12]〜tr[22] を 5行おき
+    end note
+    loop i in range(start_num, end_num, 5)
+        loop j in range(1, 13) → 12ヶ月分
+            Script -> Browser : find_element(XPATH: table[2]/tbody/tr[i]/td[j])
+            Browser --> Script : element (outerHTML)
+            Script -> Script : data_array.append(price_data)
+        end
+    end
+
+    loop k in range(0, array_length)
+        Script -> Script : data_clansing(data_accout)
+        note right
+            " $/バレル" を除去
+            "<td>", "</td>" を除去
+        end note
+        Script -> Common : output_data(data_accout, row_num, col_num)
+        Common -> Excel : ws.cell(row, col).value = float(data)
+        Common -> Excel : wb.save()
+        Common -> Excel : wb.close()
+        Script -> Script : col_num += 1
+    end
+
+    Script -> Script : row_num += 1 / col_num = 2 / data_array.clear()
+end
+
+Script --> User : 処理完了
+
+@enduml
+
+@startuml oil_sequence_delete
+
+title oil_delete_data.py - データ削除処理 シーケンス図
+
+actor User
+participant "oil_delete_data" as Script
+participant "Common_data\n(oil_common_data)" as Common
+participant "Excel\n(月別石油価格推移データ.xlsx)" as Excel
+
+User -> Script : スクリプト実行
+Script -> Common : Common_data() インスタンス生成
+Common -> Excel : load_workbook() で開く
+
+Script -> Common : data_clear() 呼び出し
+
+loop row in range(1, 6) → 行1〜5
+    loop col in range(1, 26) → 列1〜25
+        Common -> Excel : ws.cell(row, col).value = ""
+    end
+end
+
+Common -> Excel : wb.save()
+Common -> Excel : wb.close()
+Script --> User : 処理完了
+
+@enduml
