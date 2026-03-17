@@ -1,5 +1,6 @@
 #######   BAT JAPAN 決算ニュース情報取得ツール　###########
 #######   新規作成  2024/03/21  ##########
+#######   修正  2024/11/4  ##########
 #######   Author  takao.hattori ###########
 
 
@@ -40,34 +41,42 @@ row_count = 0
 write_flag = 0
 xpath_str1 = ""
 w_url = ""
-html_array = ["#corp-tabs-9ee4e0f89c-item-ea1dd66584-tab","#corp-tabs-9ee4e0f89c-item-33996595c0-tab"]
+html_array = ["#corp-tabs-9ee4e0f89c-item-599a779d98-tab","#corp-tabs-9ee4e0f89c-item-ea1dd66584-tab"]
+
+
 
 # Chromeを指定する
 driver = webdriver.Chrome()
 
-i = 2
+
 for html_name in html_array:
     # Chromeを開いて企業HPにアクセスする
-    
+    count = 0
     target_url = web_url + html_name + '.html'
     try:
         driver.get(target_url)
         sleep(5)
-        for j in range(2,20):
+        for i in range(1,30):
             try:
-                xpath_str1 = '/html/body/div[1]/div/div[4]/div/div/div[2]/div/div[' + str(i) + ']/div/div/ul/li[' + str(j) + ']/a'
-                
+                # 2025/11/4 HTML変更に伴うxpathの修正
+                # 2026/3/17 Webページ変更に伴うxpathの修正,2026年と2025年でHTMLのタグが違うので条件分岐処理を追加
+                if count == 0:
+                    xpath_str1 = '/html/body/div[1]/div/div[4]/div/div/div[2]/div/div[2]/div/div/ul/li[' + str(i) + ']/a'
+                else:    
+                    xpath_str1 = '/html/body/div[1]/div/div[4]/div/div/div[2]/div/div[3]/div/div/div/div/div/div/div/div[1]/div/div/div/div/ul/li[' + str(i) + ']/a'
+               
             except:
                 break    
             element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
             print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+            count += 1
         
         
     except EnvironmentError as e:
         str100 = e     
     except:
         str100 = ""
-    i += 1
+    
 
 
 # 画面を閉じる
