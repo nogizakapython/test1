@@ -60,7 +60,7 @@ def main():
                 end_num = int(w_array2[2])
                 for i in range(start_num,end_num,5):
                     for j in range(1,13):
-                        xpath_str = '/html/body/div[4]/div[1]/div[1]/div/div/table[2]/tbody/tr[' + str(i) + ']/td[' + str(j) + ']'
+                        xpath_str = '/html/body/div[4]/div/main/div/div/div/table[2]/tbody/tr[' + str(i) + ']/td[' + str(j) + ']'
                         element_str = driver.find_element(by=By.XPATH,value=xpath_str)
                         w_accout_data = element_str.get_attribute("outerHTML")
                         data_array.append(w_accout_data)
