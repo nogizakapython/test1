@@ -52,7 +52,8 @@ try:
     sleep(5)
     for j in range(1,51):
         try:
-            xpath_str1 = '//*[@id="mvlist__tabpanel03"]/dl[' + str(j) + ']'
+            # 2026/3/24 takao.hattori xpath変更に伴う修正
+            xpath_str1 = '/html/body/main/div[5]/div/div[3]/div[2]/div[' + str(j) + ']'
             
         except:
             break    
@@ -83,23 +84,27 @@ while True:
        row_count += 1
     else:
        break   
-    result1 = re.search('date',line1)
+    # 2026/3/24 takao.hattori ニュースリリース日の検索条件変更に伴う修正
+    result1 = re.search('c-news-day-year',line1)
+    # 2026/3/24 takao.hattori URLタグ変更に伴う検索条件変更に伴う修正
     result2 = re.search("<a href",line1)
+    # 2026/3/24 takao.hattori ニュースリリース検索条件変更に伴う修正
+    result3 = re.search('text-link',line1)
 
         
     if result1:
        w_array1 = line1.split(">")
        w_ymd = w_array1[1]
-       w_ymd = w_ymd.replace('</span',"")
+       w_ymd = w_ymd.replace('</div',"")
        w_ymd = w_ymd.replace('.',"/")
-      #  print(w_ymd)
+    #    print(w_ymd)
 
     if result2:
-       w_array2 = line1.split(">")
+       w_array2 = line1.split("=")
        w_urlstr = w_array2[1]
-       w_urlstr = w_urlstr.replace('<a href=',"")
+       w_urlstr = w_urlstr.replace(' class',"")
        w_urlstr = w_urlstr.replace('"',"")
-      #  print(w_urlstr)
+    #    print(w_urlstr)
        url_result = re.match('/',w_urlstr)
        if url_result:
            w_url = base_url1 + w_urlstr 
@@ -108,15 +113,17 @@ while True:
            w_urlstr = w_urlstr.replace('..','')
            url_array1 = w_urlstr.split("=")
            w_urlstr = url_array1[0]
-           w_urlstr = w_urlstr.replace('onclick','')
+        #    w_urlstr = w_urlstr.replace('onclick','')
            w_url = base_url2 + w_urlstr    
-      #  print(w_url)
-    
-       w_titlestr = w_array2[2]
+    #    print(w_url)
+    # 2026/3/24 takao.hattori ニュースタイトル抽出条件処理を追加
+    if result3:
+       w_array3 = line1.split('>')
+       w_titlestr = w_array3[1]
        w_title = w_titlestr.replace("</span","")
-       w_title = w_titlestr.replace("</a","")
-      #  print(w_title)
-       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+    #    w_title = w_titlestr.replace("</a","")
+    #    print(w_title)
+       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|株主通信|経営)"
        title_result = re.search(key_word,w_title)
        if title_result:
            wb = op.load_workbook(export_file)
