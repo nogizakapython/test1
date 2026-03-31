@@ -33,7 +33,7 @@ out_file = "olc.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.olc.co.jp'
-web_url = 'https://www.olc.co.jp/ja/news.html#' + str(date5) + '_all'
+web_url = 'https://www.olc.co.jp/ja/news.html'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -60,8 +60,10 @@ try:
       for i in range(1,51):
          try:
                      
-            xpath_str1 = '//*[@id="news-list-tabbed-2nd-1"]/ul/li[' + str(i) + ']'
-                        
+            xpath_str1 = '//*[@id="basic-list2-1"]/ul/li[' + str(i) + ']/div/a'
+            
+         
+                                    
          except:
             break    
          element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
@@ -95,7 +97,7 @@ while True:
 
      result1 = re.search('class="date"',line1)
      result2 = re.search('<a href',line1)
-     result3 = re.match('                                [^<]',line1)
+     result3 = re.search('news_tx',line1)
 
 
      if result1:
@@ -113,14 +115,15 @@ while True:
       #   print(w_url)
 
      if result3:
-        w_titlestr = line1
-        w_title = w_titlestr.replace(" ","")
-      #   print(w_title)    
+        w_titlearray = line1.split(">")
+        w_titlestr = w_titlearray[1]
+        w_title = w_titlestr.replace("</span","")
+        print(w_title)    
 
 
-        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
-        title_result = re.search(key_word,w_title)
-        if title_result:
+     key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営)"
+     title_result = re.search(key_word,w_title)
+     if title_result:
            wb = op.load_workbook(export_file)
            sh_name = 'オリエンタルランド'
            ws = wb[sh_name]
