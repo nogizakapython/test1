@@ -33,7 +33,7 @@ out_file = "omuron.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.omron.com'
-web_url = 'https://www.omron.com/jp/ja/ir/press/'
+web_url = 'https://www.omron.com/jp/ja/news/'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -51,31 +51,29 @@ driver = webdriver.Chrome()
 
 
 
-for year in [date5,date6]:
-    if year == date6:
-      target_url = web_url + str(year) + '/'
-    else:
-      target_url = web_url   
+target_url = web_url   
              
-    try:
-       driver.get(target_url)
-       sleep(3)
+try:
+   driver.get(target_url)
+   sleep(3)
 
-       for i in range(1,31):
-         try:
+   for i in range(1,31):
+      try:
                      
-            xpath_str1 = '/html/body/div[1]/div/article/section/div/div[2]/div/article[' + str(i) + ']'
+          xpath_str1 = '/html/body/div[1]/main/div/div/div[2]/div[2]/div/div[1]/div[2]/ul/li/ul/li[' + str(i) + ']/a'
+           
                        
-         except:
-            break    
-         element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-         print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+                       
+      except:
+          break    
+      element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+      print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
           
        
-    except EnvironmentError as e:
-       str100 = e     
-    except:
-       str100 = 1
+except EnvironmentError as e:
+   str100 = e     
+except:
+   str100 = 1
      
 # 画面を閉じる
 driver.quit()
@@ -97,57 +95,42 @@ while True:
      else:
        break   
 
-     result1 = re.search('newsList__date',line1)
-     result2 = re.search('newsList__txt',line1)
+     w_array1 = line1.split(">")
+     w_ymdstr = w_array1[4]
+     w_array2 = w_ymdstr.split("<")
+     w_ymd = w_array2[0]
+     w_ymd = w_ymd.replace('.','/')
+     #print(w_ymd)
 
-
-     if result1:
-        w_array1 = line1.split(">")
-        w_ymdstr = w_array1[1]
-        w_ymd = w_ymdstr.replace('</p','')
-      #   print(w_ymd)
-
-     if result2:
-        w_array2 = line1.split(">")
-        w_urlstr = w_array2[1]
-        url_result1 = re.search('class="js-pdfSize"',w_urlstr)
-        url_result2 = re.search('bookmark',w_urlstr)
-        url_array = w_urlstr.split("=")
-        if url_result1:
-            w_urlstr = url_array[3]
-            url_result3 = re.search('js-pdfSize',w_urlstr)
-            if url_result3:
-               w_urlstr = url_array[2]
-        elif url_result2:
-            w_urlstr = url_array[2]    
-        else:
-            w_urlstr = url_array[1]
-        w_urlstr = w_urlstr.replace('"','')
-        w_urlstr = w_urlstr.replace('target','')
-        w_urlstr = w_urlstr.replace('class','')
-        w_url = base_url + w_urlstr
-      #   print(w_url)
+     w_urlstr = w_array1[0]
+     url_array = w_urlstr.split("=")
         
-        w_titlestr = w_array2[2]
-        w_titlestr = w_titlestr.replace('<span class="js-fileSize"',"")
-        w_titlestr = w_titlestr.replace('</a',"")
-        w_title = w_titlestr.replace('＜PDF',"")
-      #   print(w_title)    
+     w_urlstr = url_array[1]
+     w_urlstr = w_urlstr.replace('"','')
+     w_urlstr = w_urlstr.replace(' class','')
+     w_url = base_url + w_urlstr     #2025/11/7にてHPのリンク文字省略
+     #print(w_url)
+        
+     w_titlestr = w_array1[10]
+     w_titlestr = w_titlestr.replace('<br',"")
+   #   w_titlestr = w_titlestr.replace('<i class="icon-pdf" title="PDFファイル"',"")
+     w_title = w_titlestr
+     #print(w_title)    
 
 
-        key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
-        title_result = re.search(key_word,w_title)
-        if title_result:
-           wb = op.load_workbook(export_file)
-           sh_name = 'オムロン'
-           ws = wb[sh_name]
-           ws.cell(row=max_row,column=2).value = w_title
-           ws.cell(row=max_row,column=3).value = w_url
-           ws.cell(row=max_row,column=4).value = w_ymd
-           ws.cell(row=max_row,column=6).value = w_url
-           ws.cell(row=max_row,column=6).hyperlink = w_url
-           ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+     key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営)"
+     title_result = re.search(key_word,w_title)
+     if title_result:
+         wb = op.load_workbook(export_file)
+         sh_name = 'オムロン'
+         ws = wb[sh_name]
+         ws.cell(row=max_row,column=2).value = w_title
+         ws.cell(row=max_row,column=3).value = w_url
+         ws.cell(row=max_row,column=4).value = w_ymd
+         ws.cell(row=max_row,column=6).value = w_url
+         ws.cell(row=max_row,column=6).hyperlink = w_url
+         ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
-           max_row += 1
-           # エクセルファイルの保存
-           wb.save(export_file)
+         max_row += 1
+         # エクセルファイルの保存
+         wb.save(export_file)
