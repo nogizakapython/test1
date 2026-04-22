@@ -31,8 +31,9 @@ date7 = dt.strftime('%Y/%m/%d')
 input_file = "nissan2" + date1 + ".txt"
 out_file = "nissan2.txt"
 date_str = ""
-base_url = 'https://www.nissan-global.com'
-web_url = 'https://global.nissannews.com/ja-JP/channels/channel-NNG244?selectedTabId=news-releases-releases'
+# 2026/4/22 ニュースリリースの詳細ページのドメイン変更に伴う修正
+base_url = 'https://global.nissannews.com/'
+web_url = 'https://global.nissannews.com/ja-JP/channels/news?selectedTabId=news-releases'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -55,12 +56,14 @@ try:
    driver.get(target_url)
    sleep(3)
    for i in range(1,1001):
-      
+
+         # 2026/4/22 takao.hattori xpath変更に伴う修正
          try:
-            xpath_str1 = '//*[@id="releases-list releases-content"]/div/div[' + str(i) + ']/div/div[1]/date/time'
+            xpath_str1 = '//*[@id="releases-list releases-content"]/div/article[' + str(i) + ']/div/div[1]/date/time'
+            
          except:
              break   
-         xpath_str2 = '//*[@id="releases-list releases-content"]/div/div[' + str(i) + ']/div/div[2]/a'
+         xpath_str2 = '//*[@id="releases-list releases-content"]/div/article[' + str(i) + ']/div/div[2]/a'
          element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
          print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
          element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
@@ -93,35 +96,34 @@ while True:
      if line1:
        row_count += 1
      else:
-       break   
-     result1 = re.search('time',line1)
-     result2 = re.match('      </a>',line1)
-     result3 = re.search('          2',line1)
-     result4 = re.match('<a href',line1)
+       break 
+     #2026/4/22 検索条件変更に伴う修正  
+     result1 = re.search('          2',line1)
+     result2 = re.match('<a href',line1)
+     result3 = re.search('      日産',line1)
      
-     if result1 or result2:
-        continue
-     else:
-        if result3:
+     #2026/4/22 検索条件変更に伴うURL、掲載日時、タイトルの取得処理の修正
+     if result1:
            w_ymdstr = line1
            w_ymd = w_ymdstr.replace(' ','')
          #   print(w_ymd)
-        elif result4:
+     if result2:
            url_array = line1.split("=")
            w_urlstr = url_array[1]
            w_urlstr = w_urlstr.replace('>','')
            w_urlstr = w_urlstr.replace('"','')
-           result5 = re.match('https',w_urlstr)
-           if result5:
+           result4 = re.match('https',w_urlstr)
+           if result4:
               w_url = w_urlstr
            else:
               w_url = base_url + w_urlstr   
          #   print(w_url)
-        else:
+     if result3:
            w_titlestr = line1
            w_title = w_titlestr.replace(" ",'')
          #   print(w_title) 
-           keyword = r"(中期経営計画|報告書|レポート|経営|経営計画)"
+            # 2026/4/22 検索条件の修正
+           keyword = r"(中期経営計画|報告書|レポート|経営|経営計画|決算)"
            title_result1 = re.search(keyword,w_title)
            if title_result1:
   
