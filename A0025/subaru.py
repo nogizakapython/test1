@@ -48,7 +48,7 @@ year_array=[]
 driver = webdriver.Chrome()
 
 def excel_output(w_title,w_url,w_ymd,max_row):
-      key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+      key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営|経営体制)"
       title_result = re.search(key_word,w_title)
       if title_result:
           wb = op.load_workbook(export_file)
@@ -62,7 +62,8 @@ def excel_output(w_title,w_url,w_ymd,max_row):
           ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
           # エクセルファイルの保存
           wb.save(export_file)
-
+          max_row += 1
+      return max_row     
 
 # Chromeを開いて企業HPにアクセスする
 target_url = web_url
@@ -109,54 +110,48 @@ while True:
      else:
         break   
 
+     result1 = re.search('<h3 id',line1)
+     result2 = re.match('						<a href',line1)
+     
+     if result1:
+        w_array1 = line1.split(">")
+        w_ymdstr = w_array1[2]
+        w_ymdstr = w_ymdstr.replace('</span','')
+        w_ymdstr = w_ymdstr.replace('(','')
+        w_ymdstr = w_ymdstr.replace(')','')
+        w_ymdstr = w_ymdstr.replace('年','/')
+        w_ymdstr = w_ymdstr.replace('月','/')
+        w_ymdstr = w_ymdstr.replace('日','')
+        ymd_array = w_ymdstr.split("/")
+        year1 = ymd_array[0]
+        month1 = int(ymd_array[1])
+        day1 = int(ymd_array[2])
+        if month1 < 10:
+            month1 = "0" + str(month1)
+        else:
+            month1 = str(month1)
+        if day1 < 10:
+            day1 = "0" + str(day1)
+        else:
+            day1 = str(day1)
+        w_ymd = year1 + "/" + month1 + "/" + day1        
 
-     w_array1 = line1.split(">")
-     w_ymdstr = w_array1[3]
-     w_ymdstr = w_ymdstr.replace('</span','')
-     w_ymdstr = w_ymdstr.replace('（','')
-     w_ymdstr = w_ymdstr.replace('）','')
-     w_ymdstr = w_ymdstr.replace('年','/')
-     w_ymdstr = w_ymdstr.replace('月','/')
-     w_ymdstr = w_ymdstr.replace('日','')
-     ymd_array = w_ymdstr.split("/")
-     year1 = ymd_array[0]
-     month1 = int(ymd_array[1])
-     day1 = int(ymd_array[2])
-     if month1 < 10:
-         month1 = "0" + str(month1)
-     else:
-         month1 = str(month1)
-     if day1 < 10:
-         day1 = "0" + str(day1)
-     else:
-         day1 = str(day1)
-     w_ymd = year1 + "/" + month1 + "/" + day1        
+        # print(w_ymd)
 
-   #   print(w_ymd)
 
-     w_titlestr1 = w_array1[8]
-     w_title1 = w_titlestr1.replace('</dt',"")
-   #   print(w_title1)
-
-     w_urlstr1 = w_array1[12]
-     url_array1 = w_urlstr1.split("=")
-     w_urlstr1 = url_array1[1]
-     w_urlstr1 = w_urlstr1.replace("target",'')
-     w_url1 = w_urlstr1.replace('"','')
-   #   print(w_url1)
-     excel_output(w_title1,w_url1,w_ymd,max_row)
-     max_row += 1
-
-     w_titlestr2 = w_array1[13]
-     w_title2 = w_titlestr2.replace('<span class="file-info is-pdf"',"")
-   #   print(w_title2)    
-
-     w_urlstr2 = w_array1[18]
-     url_array2 = w_urlstr2.split("=")
-     w_urlstr2 = url_array2[1]
-     w_urlstr2 = w_urlstr2.replace("target",'')
-     w_url2 = w_urlstr2.replace('"','')
-   #   print(w_url2)
-     excel_output(w_title2,w_url2,w_ymd,max_row)
-     max_row += 1
-
+     row_count_flag = 0
+     if result2:
+         w_array2 = line1.split('>')   
+         w_titlestr = w_array2[1]
+         w_title = w_titlestr.replace('<span class="file-info is-pdf"',"")
+         w_title = w_title.replace('</a',"")
+        #  print(w_title)
+         url_array = line1.split("=")
+         w_urlstr = url_array[1]
+         w_urlstr = w_urlstr.replace("target",'')
+         w_url = w_urlstr.replace('"','')
+        #  print(w_url)
+         if w_title != "":
+            max_row = excel_output(w_title,w_url,w_ymd,max_row)
+            
+         
