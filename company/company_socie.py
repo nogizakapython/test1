@@ -55,11 +55,11 @@ try:
     for i in range(1,3):
         
         for k in range(1,32,2):
-            xpath_str1 = '//*[@id="content"]/section[2]/div/div/div[' + str(i) + ']/p[' + str(k) + "]"
+            xpath_str1 = '//*[@id="content"]/section[2]/div/div/div[' + str(i) + ']/div/p[' + str(k) + "]"
             try:
                 element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
                 print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
-                xpath_str2 = '//*[@id="content"]/section[2]/div/div/div[' + str(i) + ']/p[' + str(k+1) + "]/a"
+                xpath_str2 = '//*[@id="content"]/section[2]/div/div/div[' + str(i) + ']/div/p[' + str(k+1) + "]/a"
                 element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
                 print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
             except selenium.common.exceptions.NoSuchElementException as e:
