@@ -99,6 +99,7 @@ while True:
     result2 = re.search("<h5>",line1)
     result3 = re.match('<a target="_blank"',line1)
     # 2025/10/27 HTML掲載日付タグ変更に伴う修正
+    # 2026/6/1   HTML掲載日付タグ変更に伴う修正
     if result1:
         w_array1 = line1.split(">")
         w_y = w_array1[1]
@@ -120,7 +121,7 @@ while True:
         if w_d2 < 10:
             w_d = "0" + w_d
         w_ymd = w_y + "/" + w_m + "/" + w_d       
-        print(w_ymd)
+        # print(w_ymd)
     # 2025/10/27 HTML表題のタグ変更に伴う修正   
     if result2:
         w_array3 = line1.split(">")
@@ -136,7 +137,7 @@ while True:
         w_url = base_url + w_url
         # print(w_url)
         
-        key_word = key_word = r"(就任|任命)"
+        key_word = key_word = r"(就任|任命|交代)"
         reject_word = "アンバサダー"
         result4 = re.search(key_word,w_title)
         result5 = re.search(reject_word,w_title)
