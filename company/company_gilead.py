@@ -30,9 +30,10 @@ out_file = "gilead.txt"
 string1 = '<div id="sideCallouts">'
 date_str = ""
 w_title = ""
-base_url = 'https://www.gilead.co.jp/'
-
-target_url = 'https://www.gilead.co.jp/news-and-press/press-releases'
+# 2025/10/27 baseURL変更に伴う修正 takao.hattori
+base_url = 'https://www.gilead.com'
+# 2025/10/27 URL変更に伴う修正
+target_url = 'https://www.gilead.com/ja-jp/news'
 max_row = 5
 #base_file = "【企業個別】検索結果_yyyymmdd.xlsx"
 export_file = "【企業個別】検索結果_" + date3 + ".xlsx"
@@ -53,9 +54,11 @@ try:
     driver.get(target_url)
     sleep(5)
     # 取得件数を500→100件に減らす対応 2025/5/2 takao.hattori
-    for i in range(2,101):
+    for i in range(1,101):
         # xpathの修正 2025/5/2 takao.hattori
-        xpath_str1 = '/html/body/div[1]/main/div/section/div[' + str(i) + ']/h4'
+        # xpathの修正 2025/10/27 takao.hattori
+        xpath_str1 = '/html/body/div[1]/main/section[3]/div/div/div/div[1]/ul/li[' + str(i) + ']/a'
+        
 
                        
         try:
@@ -64,9 +67,9 @@ try:
             break
         print(element_str1.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))
         # xpathの修正 2025/5/2 takao.hattori
-        xpath_str2 = '/html/body/div[1]/main/div/section/div[' + str(i) + ']/a'
-        element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
-        print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))    
+        # xpath_str2 = '/html/body/div[1]/main/div/section/div[' + str(i) + ']/a'
+        # element_str2 = driver.find_element(by=By.XPATH,value=xpath_str2)
+        # print(element_str2.get_attribute("outerHTML"),file=codecs.open(file_name,'a','utf-8'))    
     
 
 except EnvironmentError as e:
@@ -91,42 +94,54 @@ while True:
         row_count += 1
     else:
         break   
-    result1 = re.match("<h4>",line1)
-    result2 = re.match("<a href",line1)
-
+    # 2025/10/27 HTML変更に伴うタグ検索条件の修正
+    result1 = re.search("gl-notes-date",line1)
+    result2 = re.search("<h5>",line1)
+    result3 = re.match('<a target="_blank"',line1)
+    # 2025/10/27 HTML掲載日付タグ変更に伴う修正
     if result1:
-        w_array1 = line1.split(" ")
-        w_y = w_array1[0]
-        w_y = w_y.replace("<h4>","")
+        w_array1 = line1.split(">")
+        w_y = w_array1[1]
+        w_y = w_y.replace("<strong","")
         w_y = w_y.replace(".","/")
-        w_m =  w_array1[2]
+        w_y = w_y.replace("年","/")
+        w_y = w_y.replace("月","/")
+        w_y = w_y.replace("日","/")
+        w_array2 = w_y.split("/")
+        w_y = w_array2[0]
+        w_m =  w_array2[1]
+        w_d = w_array2[2]
+       
         w_m2 = int(w_m)
         if w_m2 < 10:
             w_m = "0" + w_m
-        w_d =  w_array1[4]
+        
         w_d2 = int(w_d)
         if w_d2 < 10:
             w_d = "0" + w_d
-        w_ymd = w_y + "/" + w_m + "/" + w_d        
-        # print(w_ymd)   
-    
+        w_ymd = w_y + "/" + w_m + "/" + w_d       
+        print(w_ymd)
+    # 2025/10/27 HTML表題のタグ変更に伴う修正   
     if result2:
-        w_array2 = line1.split(" ")
-        w_url = w_array2[1]
-        w_url = w_url.replace('href=',"")
+        w_array3 = line1.split(">")
+        w_title = w_array3[1]
+        w_title = w_title.replace("</h5","")
+        # print(w_title)
+    # 2025/10/27 HTML掲載先のURL変更に伴う修正    
+    if result3:
+        w_array4 = line1.split("=")
+        w_url = w_array4[3]
+        w_url = w_url.replace('">',"")
         w_url = w_url.replace('"',"")
         w_url = base_url + w_url
         # print(w_url)
-        w_array3 = line1.split(">")
-        w_title = w_array3[1]
-        w_title = w_title.replace("</a","")
-        # print(w_title)
+        
         key_word = key_word = r"(就任|任命)"
         reject_word = "アンバサダー"
-        result3 = re.search(key_word,w_title)
-        result4 = re.search(reject_word,w_title)
-        if result3:
-            if result4:
+        result4 = re.search(key_word,w_title)
+        result5 = re.search(reject_word,w_title)
+        if result4:
+            if result5:
                 continue
             else:
                 wb = op.load_workbook(export_file)
