@@ -11,8 +11,8 @@ import os
 import re
 
 
-#検索文字の設定(日付)
-pattern1 = '^<time class="dateHeadline_d18sgrke"'
+#検索文字の設定(日付) 2026/5/22 モジュール変更
+pattern1 = '^<time class="dateHeadline_d14f4bcg"'
 
 #検索文字の設定(掲載時間)
 patturn2 = '^<div class="container_cyywo23">'
@@ -33,13 +33,15 @@ result = os.path.exists(output_file)
 if result:
     os.remove(output_file)
 
+w_ymd = ""
 
 # CSVファイルの作成処理
-for line in file_data:
-    result1 = re.match(pattern1,line)
-    result2 = re.match(patturn2,line)
-    # result3 = re.search(patturn3,line)
-    with open(output_file,mode="a",encoding="SJIS") as f:
+with open(output_file,mode="a",encoding="SJIS") as f:
+    for line in file_data:
+        result1 = re.match(pattern1,line)
+        result2 = re.match(patturn2,line)
+        # result3 = re.search(patturn3,line)
+        
         if result1:
             w_array1 = line.split(">")
             w_ymd = w_array1[1]

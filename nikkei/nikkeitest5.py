@@ -35,8 +35,8 @@ date1 = dt.strftime('%Y%m%d%H%M%S')
 # 格納先ファイル名の定義
 file_name = "result" + date1 + ".txt"
 
-#検索文字の設定(日付タグ)
-patturn1 = '<time class="dateHeadline_d18sgrke'
+#検索文字の設定(日付タグ) 2026/5/22 モジュール変更
+patturn1 = '^<time class="dateHeadline_d14f4bcg"'
 repattern1 = re.compile(patturn1)
 
 #ニュースリリース時間の設定
@@ -46,7 +46,6 @@ repattern2 = re.compile(patturn2)
 #検索文字の設定(人事、企業名のタグ)
 pattern3 = '^<div class="textArea_tn9zus5">'
 repattern3 = re.compile(pattern3)
-
 
 
 # 処理開始メッセージの出力
@@ -67,7 +66,7 @@ for i in range(start_num,end_num):
     
 
     # title タグの文字列を取得する
-    title_text = soup.find_all(class_=["dateHeadline_d18sgrke","container_cyywo23"])
+    title_text = soup.find_all(class_=["dateHeadline_d14f4bcg","container_cyywo23"])
     for i in list(title_text):
         try:
             print(i,file=codecs.open(file_name,'a','utf-8'))    # セクションタグを取得する
@@ -101,6 +100,5 @@ for line in file_data:
 
 file_data.close()
 
-
 #　処理終了メッセージのコンソール出力
-print("日経新聞からの人事情報取得処理終了") 
+print("日経新聞からの人事情報取得処理終了")
