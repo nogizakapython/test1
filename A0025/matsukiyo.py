@@ -52,7 +52,8 @@ try:
     for j in range(1,30):
         try:
                         
-            xpath_str1 = '//*[@id="top"]/div[1]/div[2]/section/div[1]/div[2]/div[3]/section/ul/li[' + str(j) + ']'
+            xpath_str1 = '//*[@id="top"]/div[1]/div[2]/section/div[1]/div[2]/div[3]/section/div/ul/li[' + str(j) + ']'
+            
         except:
             break    
         element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
@@ -82,7 +83,8 @@ while True:
        row_count += 1
     else:
        break   
-    result1 = re.match(' <time class',line1)
+   #  2026/7/14 HTMLタグ変更に伴う、掲載日時の検索条件変更に伴う修正 takao.hattori
+    result1 = re.search('<time class',line1)
     result2 = re.search("<a class=",line1)
     result3 = re.search("s_titleBox_title_link_label",line1)
         
