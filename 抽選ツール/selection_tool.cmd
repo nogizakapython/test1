@@ -21,3 +21,4 @@ if not exist "selection_tool.py" (
 python selection_tool.py
 
 :: 実行結果確認用
+notepad result.txt
