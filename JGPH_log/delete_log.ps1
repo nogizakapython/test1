@@ -12,7 +12,7 @@ $result_csv = "C:\Users\takao.hattori\OneDrive - Accenture\JGPH_log\filelist.csv
 # 削除対象のファイルの拡張子変数の定義
 $file_type = "*.xlsx"
 
-
+# カレントディレクトリに移動する
 cd $logpath
 
 # 基準日（今日から7日前）
