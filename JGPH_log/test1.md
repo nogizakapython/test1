@@ -1,0 +1,40 @@
+```mermaid
+flowchart TD
+    A([🚀 開始]) --> B[変数定義\nlistfile / logpath / result_csv\nfile_type を初期化]
+
+    B --> C["Get-Location の結果を\n$listfile に出力"]
+
+    C --> D["$listfile を1行ずつ読み込む\nforeach ループ"]
+
+    D --> E{"'C:\\' を\n含む行か？"}
+
+    E -->|Yes| F["$logpath に\nその行を代入"]
+    E -->|No| G[次の行へ]
+
+    F --> G
+    G --> D
+
+    D -->|ループ終了| H["cd $logpath\nカレントディレクトリを移動"]
+
+    H --> I["基準日を算出\n今日から7日前 = $Threshold"]
+
+    I --> J["Get-ChildItem で\n$logpath 内の $file_type を取得"]
+
+    J --> K["Where-Object で\nLastWriteTime ≦ $Threshold\nのファイルを絞り込み → $OldLogs"]
+
+    K --> L["$OldLogs のファイル名一覧を\n$result_csv に CSV 出力\nEncoding: UTF8"]
+
+    L --> M["$result_csv を1行ずつ読み込む\nforeach ループ"]
+
+    M --> N{"ヘッダー行か？\n'#TYPE ...' または '\"Name\"'"}
+
+    N -->|"Yes 'ヘッダーのためスキップ'"| O[次の行へ]
+    N -->|"No '削除対象ファイル名'"| P["$line のダブルクォートを除去\n.Replace('\"', '')"]
+
+    P --> Q["Remove-Item $line\nファイルを削除"]
+
+    Q --> O
+    O --> M
+
+    M -->|ループ終了| R([✅ 終了])
+```
