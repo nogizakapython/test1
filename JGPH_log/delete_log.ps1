@@ -5,12 +5,17 @@
 #########################################
 
 # JGPHツールのログファイルのディレクトリの格納先変数の定義
-$logpath = "C:\Users\takao.hattori\OneDrive - Accenture\JGPH_log"
+# $logpath = "C:\Users\takao.hattori\OneDrive - Accenture\JGPH_log"
+$logpath = Get-Location | Select-String "C:\*"
+
 # JGPHツールのログファイルの7日前以前のファイル一覧を出力するファイル名変数の定義
 $result_csv = "C:\Users\takao.hattori\OneDrive - Accenture\JGPH_log\filelist.csv"
 
 # 削除対象のファイルの拡張子変数の定義
 $file_type = "*.xlsx"
+
+echo $logpath
+
 
 # カレントディレクトリに移動する
 cd $logpath
