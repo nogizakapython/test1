@@ -1,8 +1,7 @@
-```mermaid
 flowchart TD
     A([🚀 開始]) --> B[変数定義\nlistfile / logpath / result_csv\nfile_type を初期化]
 
-    B --> C["Get-Location の結果を</br>$listfile に出力"]
+    B --> C["Get-Location の結果を<br/>$listfile に出力"]
 
     C --> D["$listfile を1行ずつ読み込む\nforeach ループ"]
 
@@ -26,16 +25,15 @@ flowchart TD
 
     L --> M["$result_csv を1行ずつ読み込む<br/>foreach ループ"]
 
-    M --> N{"ヘッダー行か？<br/>'#TYPE ...' または '\"Name\"'"}
+    M --> N{"ヘッダー行か？<br/>'#TYPE ...' または 'Name'"}
 
     N -->|Yes ヘッダーのためスキップ| O[次の行へ]
-    N -->|No 削除対象ファイル名| P["$line のダブルクォートを除去<br/>.Replace('\"', '')"]
+    N -->|No 削除対象ファイル名| P["$line<br/>ダブルコーテーションを除去"]
 
-    P --> Q["Remove-Item $line\nファイルを削除"]
+    P --> Q["$line<br/>ファイルを削除"]
     style Q fill:#ffcccc
 
     Q --> O
     O --> M
 
     M -->|ループ終了| R([✅ 終了])
-```
