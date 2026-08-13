@@ -1,0 +1,26 @@
+flowchart TD
+    A([開始]) --> B["G10セルの値をクリアする"]
+
+    B --> C["表の開始行の行番号「3」<br/>をstart_row_num変数に代入する"]
+
+    C --> D["表の最終行の行番号を<br/>last_row_num変数に代入する"]
+
+    D --> E["「0」をtotal_account変数に代入する"]
+
+    E --> F["カウント変数iにstart_row_num変数の値を代入する"]
+    
+    F --> G{"i > last_row_numか?<br/> ループ"}
+
+    G --> |No| H["セルのi行目の4列目のセルの値を<br/>をmen_count変数に代入する"]
+    
+    
+    H --> I["total_account変数にmen_count変数を加算する"] 
+
+    I --> J["カウント変数iの値を1加算する"]
+
+    J --> G
+    
+
+    G -->|ループ終了| L[total_account変数の値をG10セルに出力する。]
+
+    L --> M([終了])
