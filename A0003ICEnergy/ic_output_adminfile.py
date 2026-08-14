@@ -131,6 +131,25 @@ for sh_name in list(sheet_array2):
                 ws1.cell(row=w1_row_count,column=5).value = ad_title
                 ws1.cell(row=w1_row_count,column=5).hyperlink = ad_url
                 ws1.cell(row=w1_row_count,column=5).font = Font(color='0000FF',underline='single',name='Meiryo UI')
+
+                # 2026/8/14 高さ自動調整追加
+                # 1. セルから値（文字列）を取得し、文字数をカウント
+                cell_value = str(ws1.cell(row=w1_row_count, column=5).value or "")
+                text_length = len(cell_value)
+
+                # 2. 文字数に応じて高さを決定
+                if text_length <= 35:
+                    row_height = 15
+                elif text_length <= 70:
+                    row_height = 30
+                elif text_length <= 105:
+                    row_height = 45
+                else:
+                    row_height = 60  # それ以上の場合
+
+                # 3. 行の高さを設定
+                ws1.row_dimensions[w1_row_count].height = row_height
+
                 ws1.cell(row=w1_row_count,column=6).value = ad_workday
                 w1_row_count += 1
                 wb1.save(a_result_file)    
