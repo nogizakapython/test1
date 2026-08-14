@@ -30,7 +30,8 @@ out_file = "isetan.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.imhds.co.jp'
-web_url = 'https://www.imhds.co.jp/ja/ir/ir_news/archive.html?year='
+# 2026/1/6 takao.hattori URL変更
+web_url = 'https://www.imhds.co.jp/corporate/ir/ir-news/index.html'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -45,27 +46,28 @@ w_titlehead = ""
 driver = webdriver.Chrome()
 
 # Chromeを開いて企業HPにアクセスする
-for year in  [date5]:
-   target_url = web_url + str(year) + '.html'
-   try:
+target_url = web_url
+try:
       driver.get(target_url)
       sleep(3)
 
-      for i in range(1,31):
-         try:
-            
-            xpath_str1 = '/html/body/div[1]/div/div[3]/div/div[1]/div/div/div[2]/section[1]/ul/li[' + str(i) + ']'
-            
+      for i in range(1,2):
+         for j in range(1,31):
+            try:
 
-         except:
-            break    
-         element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-         print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+               # 2026/8/14 HTMLのタグ変更に伴う修正(takao.hattori)
+               xpath_str1 = '/html/body/div[2]/div/div[3]/div/div[1]/div/div/div[2]/section[' + str(i) + ']/ul/li[' + str(j) + ']'
+               
+            
+            except:
+               break    
+            element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+            print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
    
-   except selenium.common.exceptions.NoSuchElementException as e:
-      str100 = e
-   except:
-      str100 = "OK"   
+except selenium.common.exceptions.NoSuchElementException as e:
+   str100 = e
+except:
+   str100 = "OK"   
 
      
 
