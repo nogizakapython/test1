@@ -66,8 +66,8 @@ def main():
             for j in range(2,14):
                 try:
                     # 2026/3/19 xpath変更に伴う修正
-                    xpath_str1 = '/html/body/div[4]/div/main/div/div/div/table[2]/tbody/tr[' + str(i) + ']/th[' + str(j) + ']'
-                                  
+                    # 2026/8/17 xpath変更に伴う修正
+                    xpath_str1 = '/html/body/div[4]/div/div/div/main/div[9]/table/tbody/tr[' + str(i) + ']/th[' + str(j) + ']'
                     element_str = driver.find_element(by=By.XPATH,value=xpath_str1)
                     ymd_data = element_str.get_attribute("outerHTML")
                     data_array.append(ymd_data)
