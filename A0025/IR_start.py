@@ -1,7 +1,11 @@
-############  IR中期経営計画、決算バッチ　#########
+﻿############  IR中期経営計画、決算バッチ　#########
 ############  新規作成   2024/3/25       #########
 ############  修正       2024/5/20 takao.hattori 大正製薬を調査対象外 #####
 ############  修正       2024/7/24 takao.hattori 日産自動車の中期経営計画の発表用検索自動化ツールを新規組み込み
+############  修正       2024/11/12 takao.hattori 高島屋のHPからスクレイピング不可のための修正
+############  修正       2025/2/25 takao.hattori 三菱ふそう、矢崎総業を自動から手動へ変更に伴う修正
+############  修正       2025/11/20 takumi.kurematsu 日産自動車の中期経営計画の発表用検索自動化ツールを新規組み込み
+############  修正       2026/8/18 takumi.kurematsu BATのニュースリリースがリンク切れのためコメントアウト
 ##################################################
 
 
@@ -13,11 +17,11 @@ import asahi
 import astellas
 import bridgestone
 import bristol
-import bat
+# import bat
 import chugai
 import cocacola
 import matsukiyo
-import mitsubishifuso
+# import mitsubishifuso
 import daitokentaku
 import daiwahouse
 import denso
@@ -40,6 +44,7 @@ import olcgroup
 import omuron
 import nissan
 import nissan2
+import nissan3
 import ryohin
 import santen
 import santen2
@@ -49,12 +54,12 @@ import shionogi
 import shiseido
 import subaru
 # import taisyo
-import takashimaya
+# import takashimaya
 # import takeda
 import toyota
 import toyotabosyoku
 import unicharm
-import yazaki
+# import yazaki
 
 
 
@@ -67,11 +72,11 @@ try:
     exec(astellas)
     exec(bridgestone)
     exec(bristol)
-    exec(bat)
+    # exec(bat)
     exec(chugai)
     exec(cocacola)
     exec(matsukiyo)
-    exec(mitsubishifuso)
+    # exec(mitsubishifuso)
     exec(daitokentaku)
     exec(daiwahouse)
     exec(denso)
@@ -94,6 +99,7 @@ try:
     exec(omuron)
     exec(nissan)
     exec(nissan2)
+    exec(nissan3)
     exec(ryohin)
     exec(santen)
     exec(santen2)
@@ -103,12 +109,12 @@ try:
     exec(shiseido)
     exec(subaru)
     # exec(taisyo)
-    exec(takashimaya)
+    # exec(takashimaya)
     # exec(takeda)
     exec(toyota)
     exec(toyotabosyoku)
     exec(unicharm)
-    exec(yazaki)
+    # exec(yazaki)
 
 
 
