@@ -11,7 +11,7 @@ $listfile = "example.txt"
 $logpath = ""
 
 # ログファイルの7日前以前のファイル一覧を出力するファイル名変数の定義
-$result_csv = "C:\work\log\filelist.csv"
+$result_csv = "C:\Users\takao.hattori\OneDrive - Accenture\JGPH_log\filelist.csv"
 
 # 削除対象のファイルの拡張子変数の定義
 $file_type = "*.xlsx"
