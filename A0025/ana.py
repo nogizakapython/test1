@@ -53,10 +53,12 @@ target_url = web_url
 try:
     driver.get(target_url)
     sleep(5)
-    for i in range(1,4,2):
-        for j in range(1,11):
+    # 2026/8/25 takao.hattori xpath変更に伴う修正
+    for i in range(1,3):
+        for j in range(1,31):
+            k = 2 * i - 1
+            xpath_str1 = '//*[@id="mainContent"]/div[2]/div/div/div/div[' + str(k) + ']/div[1]/section[1]/div[' + str(i) + ']/ul/li[' + str(j) + ']'
             
-            xpath_str1 = '//*[@id="divDataArea"]/div[' + str(i) + ']/ul/li[' + str(j) + ']'
             try:
                 element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
             except:
@@ -86,32 +88,34 @@ while True:
         row_count += 1
     else:
         break   
-    result1 = re.search('<li ',line1)
+    # 2026/8/25 TAKAO.HATTORI 検索条件変更に伴う修正
+    result1 = re.search('s_eirModule_date_time',line1)
+    result2 = re.search('<a',line1)
+    result3 = re.search('s_titleBox_title_link_label',line1)
   
-    
+    # 2026/8/25 ニュース掲載日付の条件変更の伴う修正
     if result1:
-       w_array1 = line1.split("<")
+       w_array1 = line1.split(">")
        w_ymd = w_array1[1]
-       w_ymd = w_ymd.replace('li class="disclosure">',"")
-       w_ymd = w_ymd.replace('年',"/")
-       w_ymd = w_ymd.replace('月',"/")
-       w_ymd = w_ymd.replace('日',"")
+       w_ymd = w_ymd.replace('</time',"")
+       w_ymd = w_ymd.replace('.',"/")
     #    print(w_ymd)
 
-       
-       w_ref = w_array1[2]
-       w_array2 = w_ref.split(" ")
-       w_url = w_array2[1]
-       w_url = w_url.replace('href=','')
+    # 2026/8/25 URLの条件変更の伴う修正
+    if result2:   
+       w_array2 = line1.split("=")
+       w_url = w_array2[2]
+       w_url = w_url.replace(' target','')
        w_url = w_url.replace('"','')
     #    print(w_url)
-        
 
+    # 2026/8/25 ニュースタイトルの条件変更の伴う修正    
+    if result3:
        w_array3 = line1.split(">")
-       w_title = w_array3[2]
-       w_title = w_title.replace('<span class="pdf"',"")
-       #print(w_title)
-       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
+       w_title = w_array3[1]
+       w_title = w_title.replace('</span',"")
+    #    print(w_title)
+       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営|報告書|レポート|経営)"
        title_result = re.search(key_word,w_title)
        if title_result:
             wb = op.load_workbook(export_file)
