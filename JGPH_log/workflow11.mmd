@@ -1,0 +1,54 @@
+flowchart TD
+    N001(["開始：rad_one_month_to_blog_report"])
+    N002["変数を宣言<br>Workbook、Worksheet、行番号、CSV項目など"]
+    N003["マクロブックを設定<br>macro_wb = ThisWorkbook<br>macro_ws = Sheet1"]
+    N004["ブログシート名を取得<br>blog_sheet_name = macro_ws.Range C6"]
+    N005["キャリアブログレポートファイルを開く"]
+    N006["レポート対象シートを設定<br>report_ws = blog_sheet_name"]
+    N007["検索条件を初期化<br>loop_flag = False<br>search_word = https"]
+    N008["RAD版CSVログファイルを開く"]
+    N009["CSVの最終シートを設定<br>csv_ws = csv_wb.Worksheets 最終シート"]
+    N010["i = 1"]
+    N011{"loop_flag が False か"}
+    N012["CSVの i 行 1 列目を取得<br>csv_first_col_name = csv_ws.Cells i,1"]
+    N013{"csv_first_col_name に<br>https を含むか"}
+    N014["CSVデータ開始行を設定<br>csv_start_row_num = i<br>loop_flag = True"]
+    N015["i = i + 1"]
+    N016["CSV最終行を取得<br>csv_last_row_num = CSV 1列目の最終行"]
+    N017["レポート最終行を取得<br>blog_report_last_row_num = レポート 1列目の最終行"]
+    N018["j = 1"]
+    N019["csv_i = csv_start_row_num"]
+    N020{"csv_i が csv_last_row_num 以下か"}
+    N021["CSVから1行分の値を取得<br>url = 1列目<br>page_view = 2列目<br>visit_count = 3列目<br>unique_visit_count = 4列目<br>active_career_seeker = 5列目<br>engaged = 6列目"]
+    N022["レポートへ転記<br>行 = blog_report_last_row_num + j<br>2列目 = url<br>4列目 = page_view を数値書式で設定<br>5列目 = unique_visit_count を数値書式で設定<br>6列目 = visit_count を数値書式で設定<br>7列目 = active_career_seeker を百分率書式で設定<br>8列目 = engaged を百分率書式で設定"]
+    N023["j = j + 1"]
+    N024["csv_i = csv_i + 1"]
+    N025(["終了"])
+
+    N001 --> N002
+    N002 --> N003
+    N003 --> N004
+    N004 --> N005
+    N005 --> N006
+    N006 --> N007
+    N007 --> N008
+    N008 --> N009
+    N009 --> N010
+    N010 --> N011
+    N011 -- "はい" --> N012
+    N012 --> N013
+    N013 -- "はい" --> N014
+    N014 --> N015
+    N013 -- "いいえ" --> N015
+    N015 --> N011
+    N011 -- "いいえ" --> N016
+    N016 --> N017
+    N017 --> N018
+    N018 --> N019
+    N019 --> N020
+    N020 -- "はい" --> N021
+    N021 --> N022
+    N022 --> N023
+    N023 --> N024
+    N024 --> N020
+    N020 -- "いいえ" --> N025
