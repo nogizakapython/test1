@@ -34,7 +34,7 @@ out_file = "nipponham.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://www.nipponham.co.jp'
-web_url = 'https://www.nipponham.co.jp/ir/news/date='
+web_url = 'https://www.nipponham.co.jp/news/'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
 export_file = "【IR】検索結果_" + date3 + ".xlsx"
@@ -52,26 +52,24 @@ driver = webdriver.Chrome()
 
 
 
-for year in [date5,date6]:
-    target_url = web_url + str(year)
-    try:
-       driver.get(target_url)
-       sleep(3)
+target_url = web_url
+try:
+    driver.get(target_url)
+    sleep(3)
 
-       for i in range(2,32):
-          try:
-             xpath_str1 = '//*[@id="contents"]/div/div/div/div[1]/div[' + str(i) + ']'
-                
-          except:
+    for i in range(1,32):
+       try:
+          xpath_str1 = '//*[@id="newsList"]/div[' + str(i) + ']/div'
+                     
+       except:
              break    
-          element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
-          print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
+       element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
+       print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
       
        
-    except EnvironmentError as e:
-       str100 = e     
-    except:
-       print("データ件数0件です",file=codecs.open(input_file,'a','utf-8'))
+except EnvironmentError as e:
+    str100 = e     
+
      
 # 画面を閉じる
 driver.quit()
@@ -84,72 +82,50 @@ shutil.copy2(input_file,out_file)
 
 fileobj = open(out_file,encoding="utf-8")
 while True:
-    w_urlstr = ""
-    w_titlestr = ""
-    line1 = fileobj.readline()
-    line1 = line1.replace("\n","")
-    if line1:
+   w_urlstr = ""
+   w_titlestr = ""
+   line1 = fileobj.readline()
+   line1 = line1.replace("\n","")
+   if line1:
       row_count += 1
-    else:
+   else:
       break   
 
-    result1 = re.search('mod_txt_bold',line1)
-    result2 = re.match('                                            <a href',line1) 
+   result1 = re.search('time datetime',line1)
+   result2 = re.search('<a href',line1) 
    
-    if result1:
-       w_array1 = line1.split(">")
-       w_ymdstr = w_array1[1]
-       w_ymdstr = w_ymdstr.replace('</p','')
-       w_ymdstr = w_ymdstr.replace('.','/')
-       w_ymdstr = w_ymdstr.replace('年','/')
-       w_ymdstr = w_ymdstr.replace('月','/')
-       w_ymdstr = w_ymdstr.replace('日','')
-       ymd_array = w_ymdstr.split("/")
-       year1 = ymd_array[0]
-       month1 = int(ymd_array[1])
-       day1 = int(ymd_array[2])
-       if month1 < 10:
-          month1 = "0" + str(month1)
-       else:
-          month1 = str(month1)
+   if result1:
+      w_array1 = line1.split(">")
+      w_ymdstr = w_array1[1]
+      w_ymd = w_ymdstr.replace('</time','')
+      # print(w_ymd)    
 
-       if day1 < 10:
-          day1 = "0" + str(day1)
-       else:
-          day1 = str(day1)   
+   if result2:
+      w_array2  = line1.split("=")
+      w_urlstr = w_array2[1]
+      w_url = w_urlstr.replace(' class','')
+      w_url = w_url.replace('"','')
+      # print(w_url)
 
-       w_ymd = year1 + "/" + month1 + "/" + day1 
-       # print(w_ymd)    
-
-    if result2:
-       w_array2  = line1.split(">")
-       w_urlstr = w_array2[0]
-       url_array = w_urlstr.split("=")
-       w_urlstr = url_array[1]
-       w_urlstr = w_urlstr.replace('class','')
-       w_urlstr = w_urlstr.replace('"','')
-       w_url = w_urlstr 
-      #  print(w_url)
-
-       w_titlestr = w_array2[1]
-       w_titlestr = w_titlestr.replace('</a','')
-       w_title = w_titlestr.replace('.','/')
-      #  print(w_title)    
+      w_array3 = line1.split(">")
+      w_titlestr = w_array3[1]
+      w_title = w_titlestr.replace('</a','')
+      # print(w_title)    
 
 
-       key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート)"
-       title_result = re.search(key_word,w_title)
-       if title_result:
-          wb = op.load_workbook(export_file)
-          sh_name = '日本ハム'
-          ws = wb[sh_name]
-          ws.cell(row=max_row,column=2).value = w_title
-          ws.cell(row=max_row,column=3).value = w_url
-          ws.cell(row=max_row,column=4).value = w_ymd
-          ws.cell(row=max_row,column=6).value = w_url
-          ws.cell(row=max_row,column=6).hyperlink = w_url
-          ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
+      key_word = r"(決算|株主総会|説明会|IR説明会|中期経営計画|報告書|レポート|経営)"
+      title_result = re.search(key_word,w_title)
+      if title_result:
+         wb = op.load_workbook(export_file)
+         sh_name = '日本ハム'
+         ws = wb[sh_name]
+         ws.cell(row=max_row,column=2).value = w_title
+         ws.cell(row=max_row,column=3).value = w_url
+         ws.cell(row=max_row,column=4).value = w_ymd
+         ws.cell(row=max_row,column=6).value = w_url
+         ws.cell(row=max_row,column=6).hyperlink = w_url
+         ws.cell(row=max_row,column=6).font = Font(color='0000FF',underline='single')
                 
-          max_row += 1
+         max_row += 1
           # エクセルファイルの保存
-          wb.save(export_file)
+         wb.save(export_file)
