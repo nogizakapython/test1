@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社内ポータル - ログイン</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Meiryo', 'Yu Gothic', sans-serif;
+      background: #f0f2f5;
+      display: flex; justify-content: center; align-items: center; min-height: 100vh;
+    }
+    .login-box {
+      background: white; padding: 40px; border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12); width: 380px;
+    }
+    .logo { text-align: center; margin-bottom: 28px; }
+    .logo h1 { color: #0070b8; font-size: 22px; margin-top: 8px; }
+    .logo .subtitle { color: #666; font-size: 13px; margin-top: 4px; }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-size: 14px; color: #333; margin-bottom: 5px; font-weight: bold; }
+    .field input {
+      width: 100%; padding: 10px 12px; border: 1px solid #ccc;
+      border-radius: 4px; font-size: 15px; font-family: inherit;
+    }
+    .field input:focus { outline: none; border-color: #0070b8; box-shadow: 0 0 0 2px rgba(0,112,184,0.15); }
+    button[type="submit"] {
+      width: 100%; padding: 12px; background: #0070b8; color: white;
+      border: none; border-radius: 4px; font-size: 16px; font-family: inherit;
+      cursor: pointer; margin-top: 4px;
+    }
+    button[type="submit"]:hover { background: #005a94; }
+    .error-message { color: #c00; font-size: 13px; margin-top: 14px; text-align: center; padding: 8px; background: #fff0f0; border-radius: 4px; }
+    .hint { margin-top: 20px; padding: 12px; background: #f8f9fa; border-radius: 4px; font-size: 12px; color: #555; }
+    .hint strong { color: #333; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="logo">
+      <h1>社内ポータル</h1>
+      <div class="subtitle">Internal Portal System</div>
+    </div>
+    <form method="POST" action="/login">
+      <div class="field">
+        <label for="username">ユーザー名</label>
+        <input type="text" id="username" name="username" placeholder="ユーザー名を入力" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="password">パスワード</label>
+        <input type="password" id="password" name="password" placeholder="パスワードを入力" autocomplete="current-password" required>
+      </div>
+      <button type="submit" id="login-btn">ログイン</button>
+      {% if error %}
+      <p class="error-message">{{ error }}</p>
+      {% endif %}
+    </form>
+    <div class="hint">
+      <strong>研修用デモアカウント</strong><br>
+      ユーザー名: <code>demo</code> &nbsp; パスワード: <code>training2024</code>
+    </div>
+  </div>
+</body>
+</html>

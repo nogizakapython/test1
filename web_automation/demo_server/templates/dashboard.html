@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>社内ポータル - ダッシュボード</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Meiryo', 'Yu Gothic', sans-serif; background: #f5f6fa; color: #333; }
+    header {
+      background: #0070b8; color: white; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    header h1 { font-size: 18px; }
+    nav a { color: rgba(255,255,255,0.85); text-decoration: none; margin-left: 20px; font-size: 14px; }
+    nav a:hover { color: white; }
+    .container { max-width: 960px; margin: 32px auto; padding: 0 24px; }
+    .welcome { font-size: 22px; font-weight: bold; margin-bottom: 24px; color: #0070b8; }
+    .cards { display: flex; gap: 20px; margin-bottom: 32px; }
+    .card {
+      background: white; border-radius: 8px; padding: 24px; flex: 1;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .card .num { font-size: 36px; font-weight: bold; color: #0070b8; }
+    .card .label { font-size: 14px; color: #666; margin-top: 4px; }
+    .card.warning .num { color: #e07b00; }
+    .links { background: white; border-radius: 8px; padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    .links h2 { font-size: 16px; margin-bottom: 16px; color: #333; border-bottom: 2px solid #0070b8; padding-bottom: 8px; }
+    .links a { display: inline-block; margin: 6px 12px 6px 0; padding: 8px 18px; background: #0070b8; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; }
+    .links a:hover { background: #005a94; }
+    .links a.secondary { background: #6c757d; }
+    .links a.secondary:hover { background: #545b62; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>社内ポータル</h1>
+    <nav>
+      <a href="/dashboard">ホーム</a>
+      <a href="/reports">レポート一覧</a>
+      <a href="/public/news">お知らせ</a>
+      <a href="/logout">ログアウト（{{ user }}）</a>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="welcome">ようこそ、{{ user }} さん</div>
+    <div class="cards">
+      <div class="card">
+        <div class="num">{{ total }}</div>
+        <div class="label">レポート総件数</div>
+      </div>
+      <div class="card warning">
+        <div class="num">{{ pending }}</div>
+        <div class="label">未承認・ドラフト</div>
+      </div>
+      <div class="card">
+        <div class="num">{{ total - pending }}</div>
+        <div class="label">承認済み</div>
+      </div>
+    </div>
+    <div class="links">
+      <h2>メニュー</h2>
+      <a href="/reports">レポート一覧を表示</a>
+      <a href="/reports?status=レビュー中">レビュー中のみ</a>
+      <a href="/reports?status=ドラフト">ドラフトのみ</a>
+      <a href="/public/news" class="secondary">お知らせ（公開）</a>
+    </div>
+  </div>
+</body>
+</html>

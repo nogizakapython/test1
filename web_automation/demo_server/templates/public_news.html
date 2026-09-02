@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>社内ポータル - お知らせ</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Meiryo', 'Yu Gothic', sans-serif; background: #f5f6fa; color: #333; }
+    header {
+      background: #6c757d; color: white; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    header h1 { font-size: 18px; }
+    .public-badge { background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 12px; font-size: 12px; }
+    nav a { color: rgba(255,255,255,0.85); text-decoration: none; margin-left: 20px; font-size: 14px; }
+    .container { max-width: 800px; margin: 32px auto; padding: 0 24px; }
+    h2 { font-size: 20px; margin-bottom: 20px; color: #333; }
+    .news-list { display: flex; flex-direction: column; gap: 16px; }
+    .news-item {
+      background: white; border-radius: 8px; padding: 20px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .news-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .news-title { font-size: 16px; font-weight: bold; color: #333; flex: 1; }
+    .news-date { font-size: 13px; color: #666; white-space: nowrap; }
+    .news-category { font-size: 12px; padding: 2px 8px; border-radius: 10px; background: #e8f0fe; color: #1a56db; }
+    .news-body { font-size: 14px; color: #555; line-height: 1.7; }
+    .note { margin-top: 24px; padding: 12px 16px; background: #fff3cd; border-radius: 6px; font-size: 13px; color: #664d03; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>社内ポータル <span class="public-badge">公開エリア</span></h1>
+    <nav>
+      <a href="/login">ログイン</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h2>お知らせ一覧</h2>
+    <p class="note">このページはログインなしで閲覧できます（データ収集練習用）</p>
+    <br>
+    <div class="news-list">
+      {% for item in news_items %}
+      <div class="news-item">
+        <div class="news-header">
+          <span class="news-title">{{ item.title }}</span>
+          <span class="news-category">{{ item.category }}</span>
+          <span class="news-date">{{ item.date }}</span>
+        </div>
+        <p class="news-body">{{ item.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
