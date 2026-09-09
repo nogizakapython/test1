@@ -1,5 +1,7 @@
 #######   資生堂 中計・決算ニュース情報取得ツール　###########
 #######   新規作成  2024/04/02  ##########
+#######   修正      2024/6/26  URLの修正、検索タグの修正
+#######   修正      2024/7/10  日付のフォーマット修正
 #######   Author  takao.hattori ###########
 
 
@@ -33,6 +35,7 @@ out_file = "shiseido.txt"
 date_str = ""
 w_title = ""
 base_url = 'https://corp.shiseido.com'
+# URLの修正
 web_url = 'https://corp.shiseido.com/jp/ir/news/'
 max_row = 5
 base_file = "【IR】検索結果_yyyymmdd.xlsx"
@@ -57,7 +60,9 @@ try:
    sleep(3)
    for i in range(1,31):
       try:
-         xpath_str1 = '/html/body/div[1]/div/div[2]/div/div/div[3]/div[1]/ul/li[' + str(i) + ']/div'
+         # 2026/9/9 xpath変更に伴う修正
+         xpath_str1 = '/html/body/div[2]/div/div[2]/div/div/div[3]/div[1]/ul/li[' + str(i) + ']/div'
+                       
          element_str1 = driver.find_element(by=By.XPATH,value=xpath_str1)
          print(element_str1.get_attribute("outerHTML"),file=codecs.open(input_file,'a','utf-8'))
       except:
@@ -89,14 +94,19 @@ while True:
      else:
         break   
      
+     #検索タグの修正(リンク先のURLとタイトルが同一タグでヒットするため、修正)   
      result1 = re.search('<em>',line1)
      result2 = re.search('<a href',line1)
 
+   #   日付表記変更に伴う修正 (2024/7/10)
      if result1:
         w_array1 = line1.split(">")   
         w_ymdstr = w_array1[1]
         w_ymdstr = w_ymdstr.replace('</em','')
-        w_ymd = w_ymdstr.replace('.','/')
+        w_ymdstr = w_ymdstr.replace('.','/')
+        w_ymdstr = w_ymdstr.replace('年',"/")
+        w_ymdstr = w_ymdstr.replace('月',"/")
+        w_ymd = w_ymdstr.replace('日',"")
       #   print(w_ymd)
 
      if result2:
